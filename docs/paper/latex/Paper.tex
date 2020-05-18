@@ -1,0 +1,423 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%   8888888b.                                         888      888
+%   888   Y88b                                        888      888
+%   888    888                                        888      888
+%   888   d88P 888d888 .d88b.   8888b.  88888b.d88b.  88888b.  888  .d88b.
+%   8888888P"  888P"  d8P  Y8b     "88b 888 "888 "88b 888 "88b 888 d8P  Y8b
+%   888        888    88888888 .d888888 888  888  888 888  888 888 88888888
+%   888        888    Y8b.     888  888 888  888  888 888 d88P 888 Y8b.
+%   888        888     "Y8888  "Y888888 888  888  888 88888P"  888  "Y8888
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% vscode extension LaTex-Workshop uses these magic comments to 
+% define which program will be used to build the project or bibliography
+% I do need lualatex to use markdown package. Also, when I use lualatex
+% in need to include `pdfencoding=auto` in hyperref setup.
+% !TEX program = lualatex
+%% !TEX options = -synctex=1 -interaction=nonstopmode -shell-scape "%DOC%"
+% `-shell-scape` argument doesn't work in Windows 10 lualatex
+% !TEX options = -synctex=1 -interaction=nonstopmode "%DOC%"
+% !BIB program = biber
+
+
+\documentclass[11pt,a4paper,dvipsnames,twoside]{article}
+
+% Paper geometry
+\usepackage[a4paper,left=3cm,right=2.5cm,vmargin=2.5cm]{geometry}
+% \usepackage[showframe,a4paper,left=3cm,right=2.5cm,vmargin=2.5cm]{geometry}
+
+% inputenc is ignored when I'm using lualatex as builder
+% \usepackage[utf8]{inputenc}
+
+% To produce a spanish automated output, for instance, TOC is called 'Índice' and
+% References is called 'Referencias'
+\usepackage[english]{babel}
+
+% Modifier for space between lines (=\baselinestretch*\baselineskip)
+% \renewcommand{\baselinestretch}{1.5}
+% Modifies the space between notes in footnotes 
+% IMPORTANT: just the same than paragraphs (parskip package below)
+% \setlength{\footnotesep}{.9\baselineskip}
+
+% It is better to use setspace package
+\usepackage{setspace}
+\setstretch{1.5}
+
+% Modifies the space over footnote line
+\addtolength{\skip\footins}{\baselineskip}
+
+% To convert fonts already installed in the system and using them as main font in the document
+% To check the names that fontspec admits use `otfinfo -i </path/to/font/file/even.ttf>`
+% otfinfo does admit also ttf files! For instance:
+% `otfinfo -i /usr/share/fonts/liberation/LiberationSerif-Regular.ttf`
+\usepackage{fontspec}
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}
+\setmonofont{CourierPrimeCode-Regular} 
+% \setmonofont{Liberation Mono}
+% A different font for titles
+\newfontfamily\headingfont[]{Liberation Sans}
+
+% To allow custom headings
+\usepackage[compact]{titlesec}
+\titleformat*{\section}{\Large\headingfont\bfseries}
+\titleformat*{\subsection}{\large\headingfont\bfseries}
+\titleformat*{\subsubsection}{\normalsize\headingfont\bfseries}
+% To control spacing for sections, I'm not using it, it just an example
+% \titlespacing*{\section}{3em}{0em}{-2em}
+
+
+% To change title font family
+% \usepackage{titling}
+% \renewcommand{\maketitlehooka}{\headingfont}
+
+% To change TOC appearance; see 2.1 section in tocloft.pdf for info about 'titles' option
+% it does not mention fancyhdr package but it do the work to flushright page numbers for 
+% table of contents pages. see: https://tex.stackexchange.com/a/137301/83189
+% \usepackage[titles]{tocloft}
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\headingfont\bfseries}
+\renewcommand{\cftsecpagefont}{\headingfont\bfseries}
+\renewcommand{\cftsubsecfont}{\headingfont}
+\renewcommand{\cftsubsecpagefont}{\headingfont}
+\renewcommand{\cftsubsubsecfont}{\headingfont}
+\renewcommand{\cftsubsubsecpagefont}{\headingfont}
+\tocloftpagestyle{fancy} % However, I find better this way bc 'titles' option does not 
+% produce a compact TOC, it does expand bc probably it uses the same spacing rules in 
+% the TOC than in (subsub)(sub)sections titles at the rest of the text.
+% -------------------
+% Remove the TOC title (it is redundant if you have included a TOC section inside TOC)
+\makeatletter
+\renewcommand{\@cftmaketoctitle}{}
+\makeatother
+% But in the case you still want to print the TOC title, this other one modifies TOC title font
+\renewcommand{\cfttoctitlefont}{\Large\headingfont\bfseries}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%   8888888b.                   888
+%   888   Y88b                  888
+%   888    888                  888
+%   888   d88P 8888b.   .d8888b 888  888  8888b.   .d88b.   .d88b.  .d8888b
+%   8888888P"     "88b d88P"    888 .88P     "88b d88P"88b d8P  Y8b 88K
+%   888       .d888888 888      888888K  .d888888 888  888 88888888 "Y8888b.
+%   888       888  888 Y88b.    888 "88b 888  888 Y88b 888 Y8b.          X88
+%   888       "Y888888  "Y8888P 888  888 "Y888888  "Y88888  "Y8888   88888P'
+%                                                      888
+%                                                 Y8b d88P
+%                                                  "Y88P" 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Basic packages (they don't need extra configurations)
+\usepackage{% `esvect` will not work without texlive-fontsextra
+  amsmath,
+  amsfonts,
+  amssymb,
+  graphicx,
+  multirow,
+  tabularx,
+  mathtools,
+  caption,
+  subcaption,
+  color
+}
+  
+% Extra colors
+\usepackage[x11names,table]{xcolor}
+
+% To cross references and metadata
+\usepackage[]{hyperref}
+\hypersetup{%
+  pdfencoding=auto,
+  pdftitle={Degree Final Project},
+  pdfauthor={Javier Fernández // jfernandil@alumnos.unex.es},
+  pdfsubject={},
+  pdfkeywords={Project, Dendrometry, LoRa, Arduino, IoT},
+  colorlinks = false,
+  linkbordercolor = DarkGoldenrod2,
+  urlbordercolor= DarkGoldenrod2,
+  %linkcolor = black,
+  %urlcolor  = black,
+  breaklinks
+}
+
+% To make the frame around UEx seal
+\usepackage{mdframed}
+
+% To include References and TOC in the TOC
+\usepackage[]{tocbibind}
+
+% To avoid 'underfull box' warning caused because bibliography line-break
+\usepackage{etoolbox}
+\apptocmd{\thebibliography}{\raggedright}{}{}
+
+% To use \begin{markdown}\end{markdown} environment and be able to type markdown mode
+% IMPORTANT: do not use indent inside \begin{markdown}\end{markdown} environment in the code! 
+% if you do lualatex is not translating the markdown code.
+\usepackage{markdown}
+
+% To get proper skips between paragraphs when you left a blank line in the code! (so I don't need to use `\\` 
+% and I'm not getting warnings all the time) 
+% IMPORTANT:
+% here is an interesting article speaking about paragraphs an indentation, there are two types of paragraphs; 
+% - classic: using indentation to distinguish between one and another
+% - modern: dispenses with indents and instead distinguish paragraphs using a blank line between them
+% Commenting/uncommenting the following package you can choose between two types.
+% more info here: https://tex.stackexchange.com/a/196941/83189
+% However this package also has options, which can be
+% `indent` (to enable indentation)
+% `skip=.5\baselineskip` (by default)
+% `parfill` (to impose a minimum space at the end of the last line of a paragraph =30pt by default)
+% \usepackage[skip=\baselineskip]{parskip}
+% Another different option
+% https://tex.stackexchange.com/a/371986/83189
+\parskip=.75\baselineskip
+\parindent=0pt
+
+
+% To make quotes (I need renewcommand for mkbegdispquote and mkenddispquote to enable quote marks at the
+% end and beginning to displayquote environment. More info: https://tex.stackexchange.com/questions/101809/how-to-force-csquotes-to-show-the-quotations-marks-in-block-quotes)
+\usepackage[style=english]{csquotes}
+\renewcommand{\mkbegdispquote}[2]{\openautoquote}
+\renewcommand{\mkenddispquote}[2]{\closeautoquote#1#2}
+\renewcommand{\mkcitation}[1]{ #1}
+
+% To print units
+\usepackage{siunitx}
+
+% Enumerate lists
+\usepackage{enumitem}
+% To fix spaces between paragraphs, items and top or bottom fo enumerate/itemize environments I need the following
+% see page 3 in https://osl.ugr.es/CTAN/macros/latex/contrib/enumitem/enumitem.pdf
+\setlist[itemize]{%
+  parsep=.75\baselineskip,
+  topsep=0pt,
+  partopsep=0pt,
+  itemsep=0pt
+}
+\setlist[enumerate]{%
+  parsep=.75\baselineskip,
+  topsep=0pt,
+  partopsep=0pt,
+  itemsep=0pt
+}
+
+% To backrefs in the footnotes
+\usepackage{footnotebackref}
+
+% To improve headers an footers (I'm using to set page number at right)
+\usepackage{fancyhdr}
+% Turn on the style
+\pagestyle{fancy}
+\fancyhf{} % Start with clearing everything in the header and footer
+\renewcommand{\headrulewidth}{0pt} % Removes the horizontal rule in header by default
+\fancyfoot[R]{\thepage} % Set the right side of the footer to be the page number
+
+% To insert json snippets
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Ejemplo}
+
+% \colorlet{punct}{red!60!black}
+% \definecolor{background}{HTML}{EEEEEE}
+% \definecolor{delim}{RGB}{20,105,176}
+% \colorlet{numb}{magenta!60!black}
+\definecolor{punct}{HTML}{0064d3}
+\colorlet{background}{gray!20}
+\definecolor{delim}{HTML}{ff0000}
+\definecolor{numb}{HTML}{0f9d58}
+
+
+\lstdefinelanguage{json}{
+  % aboveskip=\baselineskip,
+  % xleftmargin=2em,
+  basicstyle=\scriptsize\ttfamily,
+  numbers=left,
+  numberstyle=\scriptsize,
+  stepnumber=1,
+  numbersep=8pt,
+  showstringspaces=false,
+  breaklines=true,
+  frame=lines,
+  backgroundcolor=\color{background},
+  literate=
+   *{0}{{{\color{numb}0}}}{1}
+    {1}{{{\color{numb}1}}}{1}
+    {2}{{{\color{numb}2}}}{1}
+    {3}{{{\color{numb}3}}}{1}
+    {4}{{{\color{numb}4}}}{1}
+    {5}{{{\color{numb}5}}}{1}
+    {6}{{{\color{numb}6}}}{1}
+    {7}{{{\color{numb}7}}}{1}
+    {8}{{{\color{numb}8}}}{1}
+    {9}{{{\color{numb}9}}}{1}
+    {:}{{{\color{punct}{:}}}}{1}
+    {,}{{{\color{punct}{,}}}}{1}
+    {"}{{{\color{punct}{"}}}}{1}
+    {\{}{{{\color{delim}{\{}}}}{1}
+    {\}}{{{\color{delim}{\}}}}}{1}
+    {[}{{{\color{delim}{[}}}}{1}
+    {]}{{{\color{delim}{]}}}}{1},
+}
+
+\newcommand\YAMLcolonstyle{\color{red}\mdseries}
+\newcommand\YAMLkeystyle{\color{black}\mdseries}
+\newcommand\YAMLvaluestyle{\color{blue}\mdseries}
+% here is a macro expanding to the name of the language
+% (handy if you decide to change it further down the road)
+\lstdefinelanguage{yaml}{
+  keywords={true,false,null,y,n},
+  keywordstyle=\color{darkgray}\bfseries,
+  basicstyle=\YAMLkeystyle\scriptsize\ttfamily,
+  numbers=left,
+  numberstyle=\scriptsize,
+  numbersep=8pt,
+  breaklines=true,
+  frame=lines,
+  backgroundcolor=\color{background},
+  sensitive=false,
+  comment=[l]{\#},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\YAMLvaluestyle\ttfamily,
+  moredelim=[l][\color{orange}]{\&},
+  moredelim=[l][\color{magenta}]{*},
+  moredelim=**[il][\YAMLcolonstyle{:}\YAMLvaluestyle]{:},   % switch to value style at :
+  morestring=[b]',
+  morestring=[b]",
+  literate = {---}{{\ProcessThreeDashes}}3
+             {>}{{\textcolor{red}\textgreater}}1     
+             {|}{{\textcolor{red}\textbar}}1 
+             {\ -\ }{{\mdseries\ -\ }}3,
+}
+
+% To highlight text with automated line break or 'Overfull \hbox' messages
+\usepackage{soul}
+\soulregister\enquote7
+
+% biblatex package
+\usepackage[block=ragged,style=ieee]{biblatex}
+\addbibresource{Paper.bib}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%    .d8888b.                                                              888
+%   d88P  Y88b                                                             888
+%   888    888                                                             888
+%   888         .d88b.  88888b.d88b.  88888b.d88b.   8888b.  88888b.   .d88888 .d8888b
+%   888        d88""88b 888 "888 "88b 888 "888 "88b     "88b 888 "88b d88" 888 88K
+%   888    888 888  888 888  888  888 888  888  888 .d888888 888  888 888  888 "Y8888b.
+%   Y88b  d88P Y88..88P 888  888  888 888  888  888 888  888 888  888 Y88b 888      X88
+%    "Y8888P"   "Y88P"  888  888  888 888  888  888 "Y888888 888  888  "Y88888  88888P'
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Provides the \doubt{} command
+\newcommand{\doubt}[1] {\textbf{\color{red}#1}}
+
+% Provides the \cmd{} command; using soul package and previous \letcolor
+% definition for listings package. Read page 3 of soul.pdf or 
+% https://tex.stackexchange.com/a/231647/83189
+% I need that to get a correct and automated line break when the command I want
+% to highlight is too long and is placed at the end of the line.
+\sethlcolor{background}
+\newcommand{\cmd}[1] {\hl{\texttt{#1}}}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%   88888888888 d8b 888    888
+%       888     Y8P 888    888
+%       888         888    888
+%       888     888 888888 888  .d88b.
+%       888     888 888    888 d8P  Y8b
+%       888     888 888    888 88888888
+%       888     888 Y88b.  888 Y8b.
+%       888     888  "Y888 888  "Y8888
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\headingfont%
+  University of Extremadura\\
+  Faculty of Science\\[1cm]
+  \textbf{%
+  	Physics degree\\
+	  Degree Final Project\\[3cm]
+	  \flushleft{\large{About implementation of LoRa-based wireless monitoring systems for tree species dendrometry.}}\\[3cm]
+  }
+}
+
+% I've used that \parbox to flush right the author, but I must have use this package https://osl.ugr.es/CTAN/macros/latex/contrib/titling/titling.pdf
+\author{%
+  \parbox{.9\textwidth}{
+    \begin{flushright}
+      Javier Fernández Aparicio\\
+      % $\blacktriangledown$\\
+      \href{mailto:jfernandil@alumnos.unex.es}{jfernandil@alumnos.unex.es}\\[\dimexpr\baselineskip + 1cm]
+      July 2020
+    \end{flushright}
+  }
+}
+\date{}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%   888888b.                     d8b               8888888b.
+%   888  "88b                    Y8P               888  "Y88b
+%   888  .88P                                      888    888
+%   8888888K.   .d88b.   .d88b.  888 88888b.       888    888  .d88b.   .d8888b
+%   888  "Y88b d8P  Y8b d88P"88b 888 888 "88b      888    888 d88""88b d88P"
+%   888    888 88888888 888  888 888 888  888      888    888 888  888 888
+%   888   d88P Y8b.     Y88b 888 888 888  888      888  .d88P Y88..88P Y88b.
+%   8888888P"   "Y8888   "Y88888 888 888  888      8888888P"   "Y88P"   "Y8888P
+%                            888
+%                       Y8b d88P
+%                        "Y88P"
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% To manage hyphenation (words break at end of the line), in this case is to prevent "Tellink" breakage.
+\hyphenation{Tellink}
+
+\begin{document}
+\noindent % to prevent the indentation before first minipage and be able to expand minipages
+\begin{minipage}[t]{.28\textwidth}
+    \centering
+      \begin{mdframed}[innerbottommargin=490pt, innertopmargin=40pt, linewidth=1pt]
+        \includegraphics[width=\textwidth]{../Pics/Seal/marca-uex-2-color.png}
+      \end{mdframed}
+\end{minipage}
+\hskip 30pt minus 5pt % It is a dynamic space (glue) that starts on 30pt and is 5pt shrinkable
+\begin{minipage}[t]{.6\textwidth}
+  \centering
+  \vspace{1cm}
+  \maketitle
+\end{minipage}
+\thispagestyle{empty}
+\newpage
+\begingroup
+  \thispagestyle{empty}
+  \null%
+\endgroup
+\newpage
+% \pagenumbering{arabic}% Arabic page numbers (and reset to 1)
+\setcounter{page}{1}
+\tableofcontents
+
+\newpage
+
+\section{Abstract}
+This document gives a detailed description of this project, which is focused on researching possibles low-cost alternatives for wireless dendrometry systems. Currently there exist a lot of expensive and professional systems in the market, that's because this project is intended to reduce costs and increase the versatility, scalability and accessibility.
+
+In order to reach these objetives the project will be supported over free software such as FIWARE\cite{Fiware} or free hardware such as Arduino\cite{Arduino} and RaspberryPi\cite{Raspberrypi}.
+
+\printbibliography
+\end{document}

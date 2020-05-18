@@ -1,0 +1,11 @@
+:icons: font
+
+# LoRa-Arduino dendrometer
+
+WARNING: WIP: At this moment I'm working on this project so you may find it incomplete.
+
+
+A provisional scheme for this project might be the following one:
+
+image::docs/schemes/main_scheme.png[]
+

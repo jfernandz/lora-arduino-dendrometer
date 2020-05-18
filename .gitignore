@@ -1,0 +1,9 @@
+docs/paper/latex/*.aux
+docs/paper/latex/*.bbl
+docs/paper/latex/*.bcf
+docs/paper/latex/*.blg
+docs/paper/latex/*.log
+docs/paper/latex/*.out
+docs/paper/latex/*.run.xml
+docs/paper/latex/*.synctex.gz
+docs/paper/latex/*.toc
