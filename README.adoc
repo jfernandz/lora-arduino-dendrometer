@@ -1,11 +1,23 @@
 :icons: font
 
-# LoRa-Arduino dendrometer
+= LoRa-Arduino dendrometer
 
 WARNING: WIP: At this moment I'm working on this project so you may find it incomplete.
 
 
+== Structure 
 A provisional scheme for this project might be the following one:
 
 image::docs/schemes/main_scheme.png[]
 
+== Top-level directory structure
+----
+.
+├── docs                    # Documentation files
+.    ├── LaTex               # LaTex code, .bib file and rendered .pdf for main paper
+.    ├── pictures            # Pictures of interest for documentation redaction
+.    └── schemes             # Drawn schemes using https://draw.io
+├── src                     # Source files
+├── LICENSE
+└── README.adoc
+----
