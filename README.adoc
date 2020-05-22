@@ -20,6 +20,7 @@ image::docs/schemes/main_scheme.png[]
 .    ├── pictures            # Pictures of interest for documentation redaction
 .    └── schemes             # Drawn schemes using https://draw.io
 ├── src                     # Source files
+├── testing                 # Ideas, tests, proofs of concept, etc. 
 ├── LICENSE
 └── README.adoc
 ----
