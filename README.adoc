@@ -4,6 +4,9 @@
 
 WARNING: WIP: At this moment I'm working on this project so you could find it incomplete.
 
+IMPORTANT: You can see relevant notes in link:docs/NOTES.md[NOTES.md]
+
+
 This project is focused on produce a low-cost, scalable, versatile and distributed system for tree species dendrometry. https://lora-alliance.org/[LoRa] is a good candidate in order to get that __distributed__ feature due its long range and low-power consumption. In a similar way, Arduino and RaspberryPi are open source platforms and low-cost/low-power consumption devices.
 
 
