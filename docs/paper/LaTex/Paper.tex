@@ -298,7 +298,9 @@
 \soulregister\enquote7
 
 % biblatex package
-\usepackage[block=ragged,style=ieee]{biblatex}
+% 'block=nbpar' produces a new paragraph for every block (printing the URLs in a new line and preventing breaking short URLs)
+% page 50 in https://osl.ugr.es/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf
+\usepackage[block=nbpar,style=ieee]{biblatex}
 \addbibresource{Paper.bib}
 
 
@@ -422,7 +424,7 @@ This document gives a detailed description of this project, which is focused on 
 In order to reach these objetives the project will be supported over free software such as FIWARE\cite{Fiware} or free hardware such as Arduino\cite{Arduino} and RaspberryPi\cite{Raspberrypi}.
 
 \section{Introduction}
-This project arises itself from a direct interaction with professionals inside forestal sector. The original idea was to give technical coverage for particular necessities which professionals in this sector had to face off with. At this point is easy to notice this solution will need to be a distributed solution, due high samples dispersion. 
+This project arises itself from a direct interaction with professionals inside forestal sector. The original idea was to give technical coverage for particular necessities which professionals in this sector had to face off with. At this point is easy to notice this solution will need to be a distributed solution, due high samples dispersion. \doubt{As it can be seen} there are even remote techniques to predict this sample density/dispersion using remote methods which predicts between $157$-$170$ specimens per hectare\cite{ForestStandVol} (depending on the used model). So according to required resolution it could be needed 
 
 
 \printbibliography
