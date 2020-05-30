@@ -300,7 +300,7 @@
 % biblatex package
 % 'block=nbpar' produces a new paragraph for every block (printing the URLs in a new line and preventing breaking short URLs)
 % page 50 in https://osl.ugr.es/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf
-\usepackage[block=nbpar,style=ieee]{biblatex}
+\usepackage[block=par,style=ieee]{biblatex}
 \addbibresource{Paper.bib}
 
 
@@ -318,7 +318,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Provides the \doubt{} command
-\newcommand{\doubt}[1] {\textbf{\color{red}#1}}
+\newcommand{\doubt}[1] {\textbf{\color{Red3}#1}}
+% Provides \lang{} command to mark language doubts
+\newcommand{\lang}[1] {\textbf{\color{Tomato1}#1}}
 
 % Provides the \cmd{} command; using soul package and previous \letcolor
 % definition for listings package. Read page 3 of soul.pdf or 
@@ -424,7 +426,13 @@ This document gives a detailed description of this project, which is focused on 
 In order to reach these objetives the project will be supported over free software such as FIWARE\cite{Fiware} or free hardware such as Arduino\cite{Arduino} and RaspberryPi\cite{Raspberrypi}.
 
 \section{Introduction}
-This project arises itself from a direct interaction with professionals inside forestal sector. The original idea was to give technical coverage for particular necessities which professionals in this sector had to face off with. At this point is easy to notice this solution will need to be a distributed solution, due high samples dispersion. \doubt{As it can be seen} there are even remote techniques to predict this sample density/dispersion using remote methods which predicts between $157$-$170$ specimens per hectare\cite{ForestStandVol} (depending on the used model). So according to required resolution it could be needed 
+This project arises itself from a direct interaction with professionals inside forestal sector. The original idea was to give technical coverage for particular necessities which professionals in this sector had to face off with. At this point is easy to notice this solution will need to be a distributed solution, due high samples dispersion. \lang{As can be seen}, there are even remote techniques to predict this sample density/dispersion using remote methods which predicts \doubt{between $157$-$170$ specimens per hectare}\cite{ForestStandVol} (depending on the used model). So according to this required resolution it will be needed a big wireless network of distributed devices.
+
+This is more or less, the definition of the IoT (Internet of Things) concept; according to \cite{IoTOverview} IoT concept comes from an earlier concept called M2M (Machine-to-Machine) communications. However, also according to \cite{IoTOverview} there is not an official definition for IoT concept, but
+
+\begin{displayquote}[\cite{IoTObjetives}]
+  based on the traditional information carriers including the Internet, telecommunication  network  and  so  on,  Internet  of Things (IoT) is a network that interconnects ordinary physical  objects  with  the identifiable addresses  so that provides intelligent services.  
+\end{displayquote}
 
 
 \printbibliography
