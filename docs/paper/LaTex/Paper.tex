@@ -21,12 +21,11 @@
 % !TEX options = -synctex=1 -interaction=nonstopmode "%DOC%"
 % !BIB program = biber
 
-
 \documentclass[11pt,a4paper,dvipsnames,twoside]{article}
 
 % Paper geometry
-\usepackage[a4paper,left=3cm,right=2.5cm,vmargin=2.5cm]{geometry}
-% \usepackage[showframe,a4paper,left=3cm,right=2.5cm,vmargin=2.5cm]{geometry}
+% \usepackage[a4paper,left=3cm,right=2.5cm,vmargin=2.5cm]{geometry}
+\usepackage[showframe,a4paper,left=3cm,right=2.5cm,vmargin=2.5cm]{geometry}
 
 % inputenc is ignored when I'm using lualatex as builder
 % \usepackage[utf8]{inputenc}
@@ -68,7 +67,6 @@
 % To control spacing for sections, I'm not using it, it just an example
 % \titlespacing*{\section}{3em}{0em}{-2em}
 
-
 % To change title font family
 % \usepackage{titling}
 % \renewcommand{\maketitlehooka}{\headingfont}
@@ -95,6 +93,7 @@
 % But in the case you still want to print the TOC title, this other one modifies TOC title font
 \renewcommand{\cfttoctitlefont}{\Large\headingfont\bfseries}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %   8888888b.                   888
@@ -111,6 +110,15 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% biblatex package
+% 'block=nbpar' produces a new paragraph for every block (printing the URLs in a new line and preventing breaking short URLs)
+% page 50 in https://osl.ugr.es/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf
+\usepackage[block=par,style=ieee,backend=biber]{biblatex}
+\addbibresource{Paper.bib}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{7000}
+\setcounter{biburlnumpenalty}{7000}
+
 % Basic packages (they don't need extra configurations)
 \usepackage{% `esvect` will not work without texlive-fontsextra
   amsmath,
@@ -122,7 +130,8 @@
   mathtools,
   caption,
   subcaption,
-  color
+  color,
+  url
 }
   
 % Extra colors
@@ -177,7 +186,6 @@
 \parskip=.75\baselineskip
 \parindent=0pt
 
-
 % To make quotes (I need renewcommand for mkbegdispquote and mkenddispquote to enable quote marks at the
 % end and beginning to displayquote environment. More info: https://tex.stackexchange.com/questions/101809/how-to-force-csquotes-to-show-the-quotations-marks-in-block-quotes)
 \usepackage[style=english]{csquotes}
@@ -228,7 +236,6 @@
 \colorlet{background}{gray!20}
 \definecolor{delim}{HTML}{ff0000}
 \definecolor{numb}{HTML}{0f9d58}
-
 
 \lstdefinelanguage{json}{
   % aboveskip=\baselineskip,
@@ -297,12 +304,6 @@
 \usepackage{soul}
 \soulregister\enquote7
 
-% biblatex package
-% 'block=nbpar' produces a new paragraph for every block (printing the URLs in a new line and preventing breaking short URLs)
-% page 50 in https://osl.ugr.es/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf
-\usepackage[block=par,style=ieee]{biblatex}
-\addbibresource{Paper.bib}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -329,8 +330,6 @@
 % to highlight is too long and is placed at the end of the line.
 \sethlcolor{background}
 \newcommand{\cmd}[1] {\hl{\texttt{#1}}}
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -369,8 +368,6 @@
   }
 }
 \date{}
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -426,7 +423,7 @@ This document gives a detailed description of this project, which is focused on 
 In order to reach these objetives the project will be supported over free software such as FIWARE\cite{Fiware} or free hardware such as Arduino\cite{Arduino} and RaspberryPi\cite{Raspberrypi}.
 
 \section{Introduction}
-This project arises itself from a direct interaction with professionals inside forestal sector. The original idea was to give technical coverage for particular necessities which professionals in this sector had to face off with. At this point is easy to notice this solution will need to be a distributed solution, due high samples dispersion. \lang{As can be seen}, there are even remote techniques to predict this sample density/dispersion using remote methods which predicts \doubt{between $157$-$170$ specimens per hectare}\cite{ForestStandVol} (depending on the used model). So according to this required resolution it will be needed a big wireless network of distributed devices.
+This project arises itself from a direct interaction with professionals inside forestal sector. The original idea was to give technical coverage for particular necessities which professionals in this sector had to face off with. At this point is easy to notice this solution will need to be a distributed solution, due high samples dispersion. \lang{As can be seen}, there are even remote techniques to predict this sample density/dispersion using remote methods which predicts \doubt{between $157$-$170$ indviduals per hectare}\cite{ForestStandVol} (depending on the used model). So according to this and sample size determination theories, to get a great resolution could be necessary a big size for samples and the necessity of a big wireless network of distributed devices, since each device will correspond with an individual.
 
 This is more or less, the definition of the IoT (Internet of Things) concept; according to \cite{IoTOverview} IoT concept comes from an earlier concept called M2M (Machine-to-Machine) communications. However, also according to \cite{IoTOverview} there is not an official definition for IoT concept, but
 
@@ -434,6 +431,27 @@ This is more or less, the definition of the IoT (Internet of Things) concept; ac
   based on the traditional information carriers including the Internet, telecommunication  network  and  so  on,  Internet  of Things (IoT) is a network that interconnects ordinary physical  objects  with  the identifiable addresses  so that provides intelligent services.  
 \end{displayquote}
 
+This, at least, covers a little part what this project is intended to do: \enquote{Interconnect ordinary physical objects with the identifiable adresses} to provide intelligent services. These physical objects are in this case ordinary dendrometers.
+
+Over the years there have existed analog and manual dendrometers, thus data acquisition had to follow a manual process in the same way. This could turn out bothering because the big size for this statistical population, \lang{as it was exposed before}. So it was traditionally necessary to go there and as part of the field work, take individual by individual the whole sample data.
+
+
+\subsection{Dendrometry, a formal definition}
+The GEMET (General Multilingual Environmental Thesaurus) adopts the definition for \textit{dendrometry} from \cite{DictNaturalRes}
+
+\begin{displayquote}
+  The measuring of the diameter of standing trees from the ground with a dendrometer that can also be used to measure tree heights.
+\end{displayquote}
+
+This one is a bit wide definition because nowadays most dendrometry researches are focused on stem diameter; however, at this point could be interesting to extend this project to include also a sensor to heights measurement.\footnote{This project is already considered extensive enough.} 
+
+There are a lot of comercial dendrometers in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems, consequently as has been already said, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, because those professional systems are still expensive. So this is intended to get a cheaper system and make it accessible to everyone who wants \lang{to monitorize} one or more trees growth. 
+
+
+\subsection{Arduino, multipurpose microcontroller}
+It's not difficult to justify the use of such an interesting platform as Arduino. The adaptability is one of its strengths, therefore; it is able to acquire and process certain data coming from a set of sensors and manage it to send this via any plugged wireless network interface.
+
+Due circumstances exposed in introduction section is needed an accessible and multipurpose platform \lang{to be the basis for the device design itself}, this is to say the core part of the dendrometer is going to be an Arduino microcontroller.  
 
 \printbibliography
 \end{document}
