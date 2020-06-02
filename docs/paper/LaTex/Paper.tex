@@ -445,13 +445,24 @@ The GEMET (General Multilingual Environmental Thesaurus) adopts the definition f
 
 This one is a bit wide definition because nowadays most dendrometry researches are focused on stem diameter; however, at this point could be interesting to extend this project to include also a sensor to heights measurement.\footnote{This project is already considered extensive enough.} 
 
-There are a lot of comercial dendrometers in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems, consequently as has been already said, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, because those professional systems are still expensive. So this is intended to get a cheaper system and make it accessible to everyone who wants \lang{to monitorize} one or more trees growth. 
+There are a lot of comercial dendrometry systems in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems, consequently \lang{¿like/as?} has been already said, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, because those professional systems are still expensive. So this is intended to get a cheaper system and make it accessible to everyone who wants \lang{to monitorize} one or more trees growth. 
+
+There are plenty types of dendrometers but according to \cite{DendroResearch} \enquote{It is possible to define two broad categories of dendrometer: those that contact the stem and those that do not}. This project is focused on the former kind, so for this project is being developed a \enquote{contact dendrometer} based on a linear potentiometer.
 
 
 \subsection{Arduino, multipurpose microcontroller}
 It's not difficult to justify the use of such an interesting platform as Arduino. The adaptability is one of its strengths, therefore; it is able to acquire and process certain data coming from a set of sensors and manage it to send this via any plugged wireless network interface.
 
-Due circumstances exposed in introduction section is needed an accessible and multipurpose platform \lang{to be the basis for the device design itself}, this is to say the core part of the dendrometer is going to be an Arduino microcontroller.  
+Due circumstances exposed in introduction section is needed an accessible and multipurpose platform \lang{to be the basis for the device design itself}, this is to say the core part of the dendrometer is an Arduino microcontroller.  
+
+Since the idea is to produce a low-cost device in order to distribute a high number of them, it must be a simple design; that's because it consist only of three parts,
+
+\begin{itemize}
+  \item \href{https://es.rs-online.com/web/p/products/0317780/}{\doubt{Linear potentiometer:}} which is the sensor itself due is directly in contact with the stem. In order \doubt{to improve data acquisition it will be necessary to use a High Input Impedance Amplifier.}
+  \item Arduino microcontroller: this is the core part for the device, it will be responsible for acquire linear potentiometer data and send it to a gateway through LoRa interface. 
+  \item LoRa interface: similar to other existing wireless interfaces  
+\end{itemize}
+
 
 \printbibliography
 \end{document}
