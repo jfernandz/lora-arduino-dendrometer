@@ -437,7 +437,7 @@ Over the years there have existed analog and manual dendrometers, thus data acqu
 
 
 \subsection{Dendrometry, a formal definition}
-The GEMET (General Multilingual Environmental Thesaurus) adopts the definition for \textit{dendrometry} from \cite{DictNaturalRes}
+The GEMET (General Multilingual Environmental Thesaurus) adopts the definition for \textit{dendrometry} from \cite{DictNaturalRes}:
 
 \begin{displayquote}
   The measuring of the diameter of standing trees from the ground with a dendrometer that can also be used to measure tree heights.
@@ -445,7 +445,7 @@ The GEMET (General Multilingual Environmental Thesaurus) adopts the definition f
 
 This one is a bit wide definition because nowadays most dendrometry researches are focused on stem diameter; however, at this point could be interesting to extend this project to include also a sensor to heights measurement.\footnote{This project is already considered extensive enough.} 
 
-There are a lot of comercial dendrometry systems in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems, consequently \lang{¿like/as?} has been already said, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, because those professional systems are still expensive. So this is intended to get a cheaper system and make it accessible to everyone who wants \lang{to monitorize} one or more trees growth. 
+A lot of comercial dendrometry systems are available in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems, consequently \lang{¿like/as?} has been already said, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, because those professional systems are still expensive. So this is intended to get a cheaper system and make it accessible to everyone who wants \lang{to monitorize} one or more trees growth. 
 
 There are plenty types of dendrometers but according to \cite{DendroResearch} \enquote{It is possible to define two broad categories of dendrometer: those that contact the stem and those that do not}. This project is focused on the former kind, so for this project is being developed a \enquote{contact dendrometer} based on a linear potentiometer.
 
@@ -460,8 +460,58 @@ Since the idea is to produce a low-cost device in order to distribute a high num
 \begin{itemize}
   \item \href{https://es.rs-online.com/web/p/products/0317780/}{\doubt{Linear potentiometer:}} which is the sensor itself due is directly in contact with the stem. In order \doubt{to improve data acquisition it will be necessary to use a High Input Impedance Amplifier.}
   \item Arduino microcontroller: this is the core part for the device, it will be responsible for acquire linear potentiometer data and send it to a gateway through LoRa interface. 
-  \item LoRa interface: similar to other existing wireless interfaces  
+  \item LoRa interface: similar to other existing wireless interfaces, it is necessary to forward the sensor data to a concentrator (gateway). Usually and due its complexity these kind of interfaces are integrated circuits which are mounted on a PCB in order to obtain a pluggable card/shield. 
 \end{itemize}
+
+
+\subsection{LoRa (Long Range)}
+LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite{LoRaGeneral}. This is because some devices inside IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been pointed. So this low availability along to their tendency to be distributed/scattered causes the necessity for a low-power consumption and a long-range telecommunication.
+
+In a more general sense, there is a wider concept to include all these kind of technologies which fullfil the IoT communication requirements, this is the \enquote{Low-Power Wide Area Networks} (LPWAN)
+
+\begin{displayquote}[\cite{LoRaGeneral}]
+  Colloquially  speaking,  an LPWAN is supposed to be to the IoT what WiFi was to consumer networking: offering radio coverage over a (very) large area by way of base stations and adapting transmission rates, transmission power, modulation, duty cycles, etc., such that end-devices incur a very low energy consumption due to their being connected. 
+\end{displayquote}
+
+It is important to note that \lang{when talking about \enquote{low-power consumption}, in many cases it is actually meaning} battery-powered devices, for example.
+
+By other hand, Lora can commonly refer to two distinct layers; a physical layer (LoRa itself) and a MAC layer protocol (LoRaWAN). The former one (the physical layer), is a proprietary technology developed by Semtech. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \printbibliography
