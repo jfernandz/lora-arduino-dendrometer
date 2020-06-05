@@ -24,8 +24,8 @@
 \documentclass[11pt,a4paper,dvipsnames,twoside]{article}
 
 % Paper geometry
-% \usepackage[a4paper,left=3cm,right=2.5cm,vmargin=2.5cm]{geometry}
-\usepackage[showframe,a4paper,left=3cm,right=2.5cm,vmargin=2.5cm]{geometry}
+\usepackage[a4paper,left=3cm,right=2.5cm,vmargin=2.5cm]{geometry}
+% \usepackage[showframe,a4paper,left=3cm,right=2.5cm,vmargin=2.5cm]{geometry}
 
 % inputenc is ignored when I'm using lualatex as builder
 % \usepackage[utf8]{inputenc}
@@ -479,7 +479,13 @@ By other hand, LoRa can commonly refer to two distinct layers; a physical layer 
 
 
 \subsection{RaspberryPi, a powerful microcomputer}
+As in the case of Arduino, RaspberryPi provides a powerful platform, however in the case of a RaspberryPi this platform is slightly more complex than for an Arduino.\footnote{There are a lot of Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware point of view, RaspberryPi implements a better one than Arduino, this also has an impact on a higher cost; however, this hardware allows a RaspberryPi to support a whole operating system; that's because this devices are usually called \textit{single-board computers}.
 
+A few of interesting hardware specs are for instance, a \textit{Broadcom BCM2837B0, Cortex-A53 (ARMv8) 64-bit SoC @ 1.4GHz} as its CPU, \textit{1GB LPDDR2 SDRAM}, \textit{Gigabit Ethernet over USB 2.0 (maximum throughput 300 Mbps)} or even an \textit{Extended 40-pin GPIO header} among others.\cite{RPiSpecs}
+
+The role for RaspberryPi in this project is to act like a gateway, receiving all the data from different nodes. So in order to perform this task correctly it is necessary to provide a LoRa interface, which is also embebed (as in Arduino) in a separate pluggable shield/card/hat.
+
+\subsection{Dragino shields/hats}
 
 
 
