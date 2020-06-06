@@ -486,7 +486,16 @@ A few of interesting hardware specs are for instance, a \textit{Broadcom BCM2837
 The role for RaspberryPi in this project is to act like a gateway, receiving all the data from different nodes. So in order to perform this task correctly it is necessary to provide a LoRa interface, which is also embebed (as in Arduino) in a separate pluggable shield/card/hat.
 
 \subsection{Dragino shields/hats}
+These shields/expansion cards are necessary because those devices (Arduino and RaspberryPi) have not the ability to comunicate through LoRa physical layer, that's because they need a physical interface in order to manage those LoRa packages. Both shields are based on the SX1276/SX1278 transceiver. However the RaspberryPi hat also has a L80 GPS interface (Base on MTK MT3339), meanwhile Arduino has not.
 
+This project is using the following models: 
+
+\begin{itemize}
+  \item \textit{LoRa GPS HAT for Raspberry Pi,}\cite{DraginoRpiHat} which makes use of the extended 40-pin GPIO header to be plugged\footnote{It is important to note this LoRa HAT is not actually designed to play a gateway role, in fact, this is considered a \enquote{Hack where a node-class radio tries to impersonate a gateway}\cite{RpiHatHack}, so this means this hat is designed to be a node-class radio, not a gateway.}
+  \item \textit{LoRa Shield for Arduino}\cite{DraginoArdShield}, which is plugged through analog and digital pins.
+\end{itemize}
+
+\section{Background}
 
 
 
