@@ -13,7 +13,7 @@ This project is focused on produce a low-cost, scalable, versatile and distribut
 == Conceptual structure 
 A provisional scheme for this project might be the following one:
 
-image::docs/schemes/main_scheme.png[]
+image::docs/schemes/main_scheme_wbg.png[]
 
 == Top-level directory structure
 ----

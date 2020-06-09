@@ -509,14 +509,43 @@ It is defined as \enquote{The Open Source Platform for Our Smart Digital Future}
 
 This \textit{Context data} is just a way to name any kind of data coming from any kind of sensor. \textit{Orion Context Broker} is designed to manage this context data through concepts such as \textit{subscriptions} or \textit{entities}, to name but a few; however, all these \textit{Generics Enablers} communicate with each other using the \textit{FIWARE NGSI RESTful API}\cite{NGSI}.\footnote{\textit{RESTful} term comes from the software architectural style \textit{REST}, which stands for \textit{Representational State Transfer}}
 
+
 \section{Background}
 
 
+\section{Technical description}
+Like in the Introduction the most proper way to present this technical description is differencing between software and hardware parts. However, is still interesting to present a simple and general diagram for whole designed solution:
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=.9\textwidth]{../../schemes/main_scheme_tbg.png}
+  \caption{General view of this solution.}
+  \label{fig:GenView}
+\end{figure}
 
 
 
+\subsection{Hardware}
 
 
+\subsubsection{Nodes}
+Nodes are the parts of the system in direct contact with trees themselves (one node per each tree). Most important features in those devices are: low-cost, low-powered, wireless communication and small size. The following diagram shows a diagram of its most relevant parts:
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=.9\textwidth]{../../schemes/node_tbg.png}
+  \caption{Diagram for a detailed view of a node.}
+  \label{fig:NodeDiag}
+\end{figure}
+
+This diagram shows three different parts: 
+
+\begin{itemize}
+  \item A linear potentiometer, ideally an \href{https://docs.rs-online.com/37bf/0900766b814f0bd0.pdf}{RS Pro Conductive Polymer
+  Potentiometer for AutomotiveApplications}, however, by circumstances is not possible to use it and in order to perform a kind of proof of concept, \doubt{this project will implement a regular rotary potentiometer.}
+  \item \doubt{A signal conditioning stage, which is needed in order to improve the quality of the voltage signal produced by the potentiometer.}
+  \item Arduino + Dragino LoRa Shield; of course it is necessary to schedule data transmission and acquisition, as well as transmit them using the LoRa physical layer and LoRaWAN protocol. For this purpose an Arduino-like microcontroller is perfect.  
+\end{itemize}
 
 
 
