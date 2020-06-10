@@ -309,6 +309,34 @@
 \usepackage{soul}
 \soulregister\enquote7
 
+% To add an extra level in sections
+\usepackage{titlesec}
+\titleclass{\subsubsubsection}{straight}[\subsection]
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -542,14 +570,32 @@ This diagram shows three different parts:
 
 \begin{itemize}
   \item A linear potentiometer, ideally an \href{https://docs.rs-online.com/37bf/0900766b814f0bd0.pdf}{RS Pro Conductive Polymer
-  Potentiometer for AutomotiveApplications}, however, by circumstances is not possible to use it and in order to perform a kind of proof of concept, \doubt{this project will implement a regular rotary potentiometer.}
+  Potentiometer for Automotive Applications}, however, by circumstances is not possible to use it and in order to perform a kind of proof of concept, \doubt{this project will implement a regular rotary potentiometer.}
   \item \doubt{A signal conditioning stage, which is needed in order to improve the quality of the voltage signal produced by the potentiometer.}
   \item Arduino + Dragino LoRa Shield; of course it is necessary to schedule data transmission and acquisition, as well as transmit them using the LoRa physical layer and LoRaWAN protocol. For this purpose an Arduino-like microcontroller is perfect.  
 \end{itemize}
 
+\subsubsubsection{Linear Potentiometer}
+As said, ideally this potentiometer should be a linear potentiometer with $5\ \si{\kilo\ohm}$ of maximum resistance, however, in order to improve its performance, it's recommended to use it as a voltage divider; also it would be convenient to buffer the resulting output with a high impedance amplifier, that's because the figure \ref{fig:NodeDiag} includes a signal conditioning stage, which will be described below.
+
+\subsubsubsection{Signal conditioning}
+This stage is focused on improve the signal acquisition, according to this potentiometer specifications, the best way to achieve this objetive is using a high input amplifier, in fact, a single-supply, rail-to-rail operational amplifier is the best option. \doubt{Here is shown a possible schematics for this stage:}
+
+\begin{figure}[htp]
+  \centering
+    \includegraphics[width=.9\textwidth]{../../schemes/Signal_Conditioning.png}
+  \caption{Signal conditioning stage.}
+  \label{fig:SignalCond}
+\end{figure}
 
 
 
+\subsubsection{gateway}
+Gateways doesn't need actually a diagram or detailed description because there are multiple devices which could play this role. These must be generic devices due LoRaWAN protocol versatility. LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but actually acts as a network layer protocol for managing communication between gateways and nodes, similar to a routing protocol. So it is possible for any device which implements hardware for a LoRa physical layer, to act as a gateway.
+
+Nevertheless, there are important considerations about the said above, 
+
+\subsection{Software}
 
 
 
