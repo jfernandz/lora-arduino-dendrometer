@@ -458,7 +458,7 @@ In order to reach these objetives the project will be supported over free softwa
 \section{Introduction}
 This project arises itself from a direct interaction with professionals inside forestal sector. The original idea was to give technical coverage for particular necessities which professionals in this sector had to face off with. At this point is easy to notice this solution will need to be a distributed solution, due high samples dispersion. \lang{As can be seen}, there are even remote techniques to predict this sample density/dispersion using remote methods which predicts \doubt{between $157$-$170$ indviduals per hectare}\cite{ForestStandVol} (depending on the used model). So according to this and sample size determination theories, to get a great resolution could be necessary a big size for samples and the necessity of a big wireless network of distributed devices, since each device will correspond with an individual.
 
-This is more or less, the definition of the IoT (Internet of Things) concept; according to \cite{IoTOverview} IoT concept comes from an earlier concept called M2M (Machine-to-Machine) communications. However, also according to \cite{IoTOverview} there is not an official definition for IoT concept, but according to \cite{IoTObjetives}
+This is more or less, the definition of the IoT (Internet of Things) concept; according to the abstract in \cite{IoTOverview} IoT concept comes from an earlier concept called M2M (Machine-to-Machine) communications. However, also according to \cite[p.~1(71)]{IoTOverview} there is not an official definition for IoT concept, but according to \cite[p.~2(920)]{IoTObjetives}
 
 \begin{quoting}
   based on the traditional information carriers including the Internet, telecommunication  network  and  so  on,  Internet  of Things (IoT) is a network that interconnects ordinary physical  objects  with  the identifiable addresses  so that provides intelligent services.
@@ -466,7 +466,7 @@ This is more or less, the definition of the IoT (Internet of Things) concept; ac
 
 This, at least, covers a little part what this project is intended to do: \enquote{Interconnect ordinary physical objects with the identifiable adresses} to provide intelligent services. These physical objects are in this case ordinary dendrometers.
 
-Over the years there have existed analog and manual dendrometers, thus data acquisition had to follow a manual process in the same way. This could turn out bothering because the big size for this statistical population, \lang{as it was exposed before}. So it was traditionally necessary to go there and as part of the field work, take individual by individual the whole sample data.
+Over the years there have existed analog and manual dendrometers, thus data acquisition had to follow a manual process in the same way. This could turn out bothering because the big size for this statistical population, \lang{¿as/like? it was exposed ¿before/above?}. So it was traditionally necessary to go there and as part of the field work, take individual by individual the whole sample data.
 
 
 \subsection{Dendrometry, a formal definition}
@@ -500,9 +500,9 @@ Since the idea is to produce a low-cost device in order to distribute a high num
 
 
 \subsubsection{LoRa (Long Range)}
-LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite{LoRaGeneral}. This is because some devices inside IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been pointed. So this low availability along to their tendency to be distributed/scattered causes the necessity for a low-power consumption and a long-range telecommunication.
+LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite[]{LoRaGeneral}. This is because some devices inside IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been pointed. So this low availability along to their tendency to be distributed/scattered causes the necessity for a low-power consumption and a long-range telecommunication.
 
-In a more general sense, there is a wider concept to include all these kind of technologies which fullfil the IoT communication requirements, this is the \enquote{Low-Power Wide Area Networks} (LPWAN), so as claimed by \cite{LoRaGeneral}
+In a more general sense, there is a wider concept to include all these kind of technologies which fullfil the IoT communication requirements, this is the \enquote{Low-Power Wide Area Networks} (LPWAN), so as claimed by \cite[]{LoRaGeneral}
 
 \begin{quoting}
   Colloquially  speaking,  an LPWAN is supposed to be to the IoT what WiFi was to consumer networking: offering radio coverage over a (very) large area by way of base stations and adapting transmission rates, transmission power, modulation, duty cycles, etc., such that end-devices incur a very low energy consumption due to their being connected.
@@ -510,7 +510,7 @@ In a more general sense, there is a wider concept to include all these kind of t
 
 It is important to note that \lang{when talking about \enquote{low-power consumption}, in many cases it is actually meaning} battery-powered devices, for example.
 
-By other hand, LoRa can commonly refer to two distinct layers; a physical layer (LoRa itself) and a MAC layer protocol (LoRaWAN). The former one (the physical layer), is a proprietary technology developed by Semtech. So this does mean this layer is not fully open; LoRaWAN, however, is a protocol built to use LoRa physical layer,  It is intended to sensor networks, wherein those sensors exchange packages with some server with a \enquote{low data rate and relatively long time intervals (one transmission per hour or even days).}\cite{LoRaGeneral}. This particularly means that LoRaWAN protocol is perfect for the purpose of this project.  
+By other hand, LoRa can commonly refer to two distinct layers; a physical layer (LoRa itself) and a MAC layer protocol (LoRaWAN). The former one (the physical layer), is a proprietary technology developed by Semtech. So this does mean this layer is not fully open; LoRaWAN, however, is a protocol built to use LoRa physical layer,  It is intended to sensor networks, wherein those sensors exchange packages with some server with a \enquote{low data rate and relatively long time intervals (one transmission per hour or even days).}\cite[p.~9]{LoRaGeneral}. This particularly means that LoRaWAN protocol is perfect for the purpose of this project.  
 
 
 \subsubsection{RaspberryPi, a powerful microcomputer}
@@ -520,7 +520,7 @@ A few of interesting hardware specs are for instance, a \textit{Broadcom BCM2837
 
 The role for RaspberryPi in this project is to act like a gateway, receiving all the data from different nodes. So in order to perform this task correctly it is necessary to provide a LoRa interface, which is also embebed (as in Arduino) in a separate pluggable shield/card/hat.
 
-\subsubsection{Dragino shields/hats}
+\subsubsection{Dragino shields/hats}\label{sssec:DraginoShields}
 These shields/expansion cards are necessary because those devices (Arduino and RaspberryPi) have not the ability to comunicate through LoRa physical layer, that's because they need a physical interface in order to manage those LoRa packages. Both shields are based on the SX1276/SX1278 transceiver. However the RaspberryPi hat also has a L80 GPS interface (Base on MTK MT3339), meanwhile Arduino has not.
 
 This project is using the following models: 
@@ -590,10 +590,20 @@ This stage is focused on improve the signal acquisition, according to this poten
 
 
 
-\subsubsection{gateway}
+\subsubsection{Gateway}
 Gateways doesn't need actually a diagram or detailed description because there are multiple devices which could play this role. These must be generic devices due LoRaWAN protocol versatility. LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but actually acts as a network layer protocol for managing communication between gateways and nodes, similar to a routing protocol. So it is possible for any device which implements hardware for a LoRa physical layer, to act as a gateway.
 
-Nevertheless, there are important considerations about the said above, 
+Nevertheless, there are important considerations about the said above, for example, nodes are not actually associated with an specific gateway. Instead, data transmitted by a node is typically received by multiple gateways. Each gateway will forward the received packets from the end-node to de cloud-based network server. Besides, this project is using a RaspberryPi 3B+ with a Dragino Hat which mounts a SX1276 LoRa \textbf{transceiver}\cite{SX1276}; this is so important because means, according to Semtech, this transceiver is not intended to play a gateway role, but a end-node role.
+
+A transceiver, by definition, is a device that is able to both, transmit and receive (in fact, the word itself is a mix between both, \textbf{trans}miter and re\textbf{ceiver}) that is what a node must be able to do; i.e. transmit the sensor data (context) and receive data to perform operations with its actuators. 
+
+Nevertheless, LoRaWAN specification varies from region to region \enquote{based on
+the different regional spectrum allocations and regulatory requirements}\cite[p.~12-13]{LoRaWANspec}
+
+
+
+
+
 
 \subsection{Software}
 
