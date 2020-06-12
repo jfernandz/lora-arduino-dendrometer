@@ -498,9 +498,9 @@ Since the idea is to produce a low-cost device in order to distribute a high num
   \item LoRa interface: similar to other existing wireless interfaces, it is necessary to forward the sensor data to a concentrator (gateway). Usually and due its complexity these kind of interfaces are integrated circuits which are mounted on a PCB in order to obtain a pluggable card/shield. 
 \end{itemize}
 
-
-\subsubsection{LoRa (Long Range)}
-LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite[]{LoRaGeneral}. This is because some devices inside IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been pointed. So this low availability along to their tendency to be distributed/scattered causes the necessity for a low-power consumption and a long-range telecommunication.
+% I need to use that \texorpdfstring{}{} for the left-side ToC in PDF viewers, because the ® cannot be rendered in there.
+\subsubsection{\texorpdfstring{LoRa\textsuperscript{\textregistered} (Lo{\normalfont\sffamily ng} Ra{\normalfont\sffamily nge})}{LoRa® (Long Range)}}
+LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite[]{LoRaGeneral}. This is because some devices inside IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been pointed. So this low availability (of resources) along to their tendency to be distributed/scattered causes the necessity for a low-power consumption and a long-range telecommunication.
 
 In a more general sense, there is a wider concept to include all these kind of technologies which fullfil the IoT communication requirements, this is the \enquote{Low-Power Wide Area Networks} (LPWAN), so as claimed by \cite[]{LoRaGeneral}
 
@@ -512,7 +512,15 @@ It is important to note that \lang{when talking about \enquote{low-power consump
 
 By other hand, LoRa can commonly refer to two distinct layers; a physical layer (LoRa itself) and a MAC layer protocol (LoRaWAN). The former one (the physical layer), is a proprietary technology developed by Semtech. So this does mean this layer is not fully open; LoRaWAN, however, is a protocol built to use LoRa physical layer,  It is intended to sensor networks, wherein those sensors exchange packages with some server with a \enquote{low data rate and relatively long time intervals (one transmission per hour or even days).}\cite[p.~9]{LoRaGeneral}. This particularly means that LoRaWAN protocol is perfect for the purpose of this project.  
 
+In comparison with other common telecommunication technologies, LoRa uses lower bandwidth, but it reaches longer distances:
 
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=.9\textwidth]{../../pictures/LoRa_Why_Range.png}
+  \caption{Bandwidth vs range plot for two of the most used telecommunication systems and LoRa.}
+  \label{}
+\end{figure}
+ 
 \subsubsection{RaspberryPi, a powerful microcomputer}
 As in the case of Arduino, RaspberryPi provides a powerful platform, however in the case of a RaspberryPi this platform is slightly more complex than for an Arduino.\footnote{There are a lot of Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware point of view, RaspberryPi implements a better one than Arduino, this also has an impact on a higher cost; however, this hardware allows a RaspberryPi to support a whole operating system; that's because this devices are usually called \textit{single-board computers}.
 
@@ -538,11 +546,12 @@ It is defined as \enquote{The Open Source Platform for Our Smart Digital Future}
 This \textit{Context data} is just a way to name any kind of data coming from any kind of sensor. \textit{Orion Context Broker} is designed to manage this context data through concepts such as \textit{subscriptions} or \textit{entities}, to name but a few; however, all these \textit{Generics Enablers} communicate with each other using the \textit{FIWARE NGSI RESTful API}\cite{NGSI}.\footnote{\textit{RESTful} term comes from the software architectural style \textit{REST}, which stands for \textit{Representational State Transfer}}
 
 
+\newpage
 \section{Background}
 
-
+\newpage
 \section{Technical description}
-Like in the Introduction the most proper way to present this technical description is differencing between software and hardware parts. However, is still interesting to present a simple and general diagram for whole designed solution:
+Like in the Introduction, the most proper way to present this technical description is to difference between software and hardware parts. However, is still interesting to present a simple and general diagram for whole designed solution:
 
 \begin{figure}[htp]
   \centering
@@ -598,8 +607,18 @@ Nevertheless, there are important considerations about the said above, for examp
 A transceiver, by definition, is a device that is able to both, transmit and receive (in fact, the word itself is a mix between both, \textbf{trans}miter and re\textbf{ceiver}) that is what a node must be able to do; i.e. transmit the sensor data (context) and receive data to perform operations with its actuators. 
 
 Nevertheless, LoRaWAN specification varies from region to region \enquote{based on
-the different regional spectrum allocations and regulatory requirements}\cite[p.~12-13]{LoRaWANspec}
+the different regional spectrum allocations and regulatory requirements}\cite[p.~12]{LoRaWANspec}. In fact, for Europe, and again as reported by \cite[p.~13]{LoRaWANspec} 
 
+\begin{quoting}
+LoRaWAN defines ten channels, eight of which are multi data rate from 250bps to
+5.5 kbps, a single high data rate LoRa channel at 11kbps, and a single FSK channel
+at 50kbps.
+\end{quoting}
+
+Here is the important point. This Dragino HAT for the RaspberryPi, mounts an SX1276 transceiver, which is known as node-class transceiver, so in conclusion, \textbf{this Dragino LoRa GPS HAT is not LoRaWAN compliant}. The main reason the SX1276 transceiver is not suitable to work as a gateway is that \doubt{it is actually a single channel transceiver}. Despite all of this, there still exist the possibility of use it as a gateway, because it is technically possible. 
+
+
+Dragino foresees this and provides a \href{https://github.com/dragino/dual_chan_pkt_fwd}{dual channel controller}. The most important thing about this dual channel controller, is not the possibility to use the transceiver in a dual channel mode, but to use it as a gateway in the physical sense. 
 
 
 
