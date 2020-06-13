@@ -129,12 +129,19 @@
   multirow,
   tabularx,
   mathtools,
-  caption,
-  subcaption,
   color,
   url
 }
-  
+
+% Improve captions in figures
+\usepackage[margin=2.5cm]{caption}
+\usepackage{subcaption}
+% \setlength{\textfloatsep}{1\baselineskip plus 2\baselineskip minus 2\baselineskip}
+% \setlength{\intextsep}{1\baselineskip plus 2\baselineskip minus 2\baselineskip}
+% \setlength{\textfloatsep}{1\baselineskip}
+\setlength{\intextsep}{.5\baselineskip}
+
+
 % Extra colors
 \usepackage[x11names,table]{xcolor}
 
@@ -480,7 +487,7 @@ This one is a bit wide definition because nowadays most dendrometry researches a
 
 A lot of comercial dendrometry systems are available in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems, consequently \lang{¿like/as?} has been already said, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, because those professional systems are still expensive. So this is intended to get a cheaper system and make it accessible to everyone who wants \lang{to monitorize} one or more trees growth. 
 
-There are plenty types of dendrometers but according to \cite{DendroResearch} \enquote{It is possible to define two broad categories of dendrometer: those that contact the stem and those that do not}. This project is focused on the former kind, so for this project is being developed a \enquote{contact dendrometer} based on a linear potentiometer.
+There are quite a few types of dendrometers but according to \cite{DendroResearch} \enquote{It is possible to define two broad categories of dendrometer: those that contact the stem and those that do not}. This project is focused on the former kind, so for this project is being developed a \enquote{contact dendrometer} based on a linear potentiometer.
 
 
 \subsection{Hardware}
@@ -518,7 +525,7 @@ In comparison with other common telecommunication technologies, LoRa uses lower 
   \centering
   \includegraphics[width=.9\textwidth]{../../pictures/LoRa_Why_Range.png}
   \caption{Bandwidth vs range plot for two of the most used telecommunication systems and LoRa.}
-  \label{}
+  \label{fig:LoraComparison}
 \end{figure}
  
 \subsubsection{Raspberry Pi, a powerful microcomputer}
@@ -545,7 +552,6 @@ It is defined as \enquote{The Open Source Platform for Our Smart Digital Future}
 
 This \textit{Context data} is just a way to name any kind of data coming from any kind of sensor. \textit{Orion Context Broker} is designed to manage this context data through concepts such as \textit{subscriptions} or \textit{entities}, to name but a few; however, all these \textit{Generics Enablers} communicate with each other using the \textit{FIWARE NGSI RESTful API}\cite{NGSI}.\footnote{\textit{RESTful} term comes from the software architectural style \textit{REST}, which stands for \textit{Representational State Transfer}}
 
-
 \newpage
 \section{Background}
 
@@ -560,10 +566,7 @@ Like in the Introduction, the most proper way to present this technical descript
   \label{fig:GenView}
 \end{figure}
 
-
-
 \subsection{Hardware}
-
 
 \subsubsection{Nodes}
 Nodes are the parts of the system in direct contact with trees themselves (one node per each tree). Most important features in those devices are: low-cost, low-powered, wireless communication and small size. The following diagram shows a diagram of its most relevant parts:
@@ -602,9 +605,24 @@ This stage is focused on improve the signal acquisition, according to this poten
 \subsubsection{Gateway}
 
 \subsubsubsection{Raspberry Pi 3 B+}
-This model of Raspberry Pi is able to run almost every GNU/Linux distribution ported to ARM architecture, Raspberry Pi OS (previously called Raspbian)\cite{RaspberryPiOs} is in fact a Debian port to ARM architecture. After a little researching, it is possible to conclude that there is not other operative system which improves the performance of Raspberry Pi OS in a Raspberry Pi. Due this former argument this project is going to use Raspberry Pi OS. 
+This model of Raspberry Pi is able to run almost every GNU/Linux distribution ported to ARM architecture, Raspberry Pi OS, formerly known as Raspbian,\cite{RaspberryPiOs} is in fact a Debian port to ARM architecture. After a little researching, it is possible to conclude that there is not other operative system which improves the performance of Raspberry Pi OS in a Raspberry Pi. Due this former argument this project is going to use Raspberry Pi OS. 
 
-One of the most interesting features of Raspberry Pi is precisely that OS is installed and run from a microSD card, so the hardware is loading the operative system from this microSD card to the RAM directly, which improves notably the system load times, and increments its portability. 
+One of the most interesting features of Raspberry Pi is precisely that OS is installed and run from a microSD card, so the hardware is loading the operative system from this microSD card to the RAM directly, which improves notably the system load times, and increments its portability.
+
+Raspberry Pi foundation provides the \href{https://www.raspberrypi.org/downloads/noobs/}{\textit{Raspberry Pi Imager}} to perform the installation in a microSD card.\footnote{There are many ways to perform the Raspberry Pi OS installation in a microSD card, this document leaves it to readers to use their preferred method. However, this document also considers the \textit{Raspberry Pi Imager} method as the best one.} This tool allows the reader to choose between three different versions of Raspberry Pi OS. Recommended, Lite and Full version. Lite version is the same than Recommended version but without graphical user interface (GUI or Desktop Environment), meanwhile Full version is the same than Recommended version but with a few extra applications. 
+
+This project is using the Recommended version for Raspberry Pi OS, nevertheless, the project does not require absolutely the desktop environment, so to maximize the available free space in the SD card, is better to install the Lite version instead of the Recommended version. 
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=.7\textwidth]{../../pictures/rpi_imager.png}
+  \caption{Raspberry Pi Imager showing different options to install Raspberry Pi OS in a microSD card.}
+  \label{fig:RpiImager}
+\end{figure}
+
+Even so, independently of the installed version, the reader will be able to disable the graphical environment using the console based \cmd{raspi-conf} application.\cite{RaspiConf} 
+
+
 
 \subsubsubsection{Dragino HAT}
 Gateways doesn't need actually a diagram or detailed description because there are multiple devices which could play this role. These must be generic devices due LoRaWAN protocol versatility. LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but actually acts as a network layer protocol for managing communication between gateways and nodes, similar to a routing protocol. So it is possible for any device which implements hardware for a LoRa physical layer, to act as a gateway.
@@ -654,6 +672,7 @@ Dragino foresees this and provides a \href{https://github.com/dragino/dual_chan_
 
 
 
-
+\phantomsection
+\addcontentsline{toc}{section}{References}
 \printbibliography
 \end{document}
