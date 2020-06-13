@@ -238,7 +238,7 @@
 
 % To insert json snippets
 \usepackage{listings}
-\renewcommand{\lstlistingname}{Ejemplo}
+\renewcommand{\lstlistingname}{Example}
 
 % \colorlet{punct}{red!60!black}
 % \definecolor{background}{HTML}{EEEEEE}
@@ -619,9 +619,46 @@ This project is using the Recommended version for Raspberry Pi OS, nevertheless,
   \label{fig:RpiImager}
 \end{figure}
 
-Even so, independently of the installed version, the reader will be able to disable the graphical environment using the console based \cmd{raspi-conf} application.\cite{RaspiConf} 
+Even so, independently of the installed version, the reader will be able to disable the graphical environment using the console based \cmd{raspi-conf} application \cite{RaspiConf}. 
 
+\doubt{WIFI (COMPLETE)}
 
+Another configuration that must be done is the Secure Shell (\cmd{ssh}) service; which according to Raspberry Pi documentation can be done from terminal using \cmd{systemd} \cite{RaspiSSH}. 
+
+So generating a pair of keys and configuring properly the ssh access; it will probably be necessary to paste the \cmd{*.pub} key content into \cmd{~/.ssh/authorized\_keys} file (located in the local folder in the Raspberry Pi); and give it the right permissions \cmd{700}, after this the reader should be able to connect through ssh service.
+
+\begin{lstlisting}[%
+    % float=thp,
+    language=json,
+    firstnumber=1,
+    caption={Creating a pair of ssh keys.},
+    label=ej:CreateEntity
+    ]
+    $ ssh-keygen
+
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/home/wyre/.ssh/id_rsa): 
+    Enter passphrase (empty for no passphrase): 
+    Enter same passphrase again: 
+    Your identification has been saved in /home/wyre/.ssh/id_rsa
+    Your public key has been saved in /home/wyre/.ssh/id_rsa.pub
+    The key fingerprint is:
+    SHA256:vkNRk/Fo8iGGo0pYlwb2L3vf3TgOfm11MmZW+BipXgQ wyre@DESKTOP-AFG84JJ
+    The key's randomart image is:
+    +---[RSA 3072]----+
+    |  o       .o     |
+    | . o . .  +oE    |
+    |  . = o +.+... o |
+    | o o o o.= .  = .|
+    |. . o . S..  o = |
+    | . . o ..   . O +|
+    |  . . ... .. * +.|
+    |     . ..+ o+oo  |
+    |        o.oo+o.  |
+    +----[SHA256]-----+
+\end{lstlisting}
+
+Once is available the remote control for Raspberry Pi through ssh, is possible to manage it completely from the command line, even upgrade the system and compile the required controller to get properly working the LoRa transceiver. 
 
 \subsubsubsection{Dragino HAT}
 Gateways doesn't need actually a diagram or detailed description because there are multiple devices which could play this role. These must be generic devices due LoRaWAN protocol versatility. LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but actually acts as a network layer protocol for managing communication between gateways and nodes, similar to a routing protocol. So it is possible for any device which implements hardware for a LoRa physical layer, to act as a gateway.
@@ -642,7 +679,7 @@ at 50kbps.
 Here is the important point. This Dragino HAT for the Raspberry Pi, mounts an SX1276 transceiver, which is known as node-class transceiver, so in conclusion, \textbf{this Dragino LoRa GPS HAT is not LoRaWAN compliant}. The main reason the SX1276 transceiver is not suitable to work as a gateway is that \doubt{it is actually a single channel transceiver}. Despite all of this, there still exist the possibility of use it as a gateway, because it is technically possible. 
 
 
-Dragino foresees this and provides a \href{https://github.com/dragino/dual_chan_pkt_fwd}{dual channel controller}. The most important thing about this dual channel controller, is not the possibility to use the transceiver in a dual channel mode, but to use it as a gateway in the physical sense. 
+Dragino foresees this and provides a \href{https://github.com/dragino/dual_chan_pkt_fwd}{dual channel controller}. The most important thing about this dual channel controller, is not the possibility to use the transceiver in a dual channel mode, but to use it as a gateway in the physical sense.\footnote{This of course means Raspberry}
 
 
 
