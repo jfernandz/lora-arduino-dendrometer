@@ -453,7 +453,7 @@
 \addcontentsline{toc}{section}{Abstract}%
 This document gives a detailed description of this project, which is focused on researching possibles low-cost alternatives for wireless dendrometry systems. Currently there exist a lot of expensive and professional systems in the market, that's because this project is intended to reduce costs and increase the versatility, scalability and accessibility.
 
-In order to reach these objetives the project will be supported over free software such as FIWARE\cite{Fiware} or free hardware such as Arduino\cite{Arduino} and RaspberryPi\cite{Raspberrypi}.
+In order to reach these objetives the project will be supported over free software such as FIWARE\cite{Fiware} or free hardware such as Arduino\cite{Arduino} and Raspberry Pi\cite{Raspberrypi}.
 
 \section{Introduction}
 This project arises itself from a direct interaction with professionals inside forestal sector. The original idea was to give technical coverage for particular necessities which professionals in this sector had to face off with. At this point is easy to notice this solution will need to be a distributed solution, due high samples dispersion. \lang{As can be seen}, there are even remote techniques to predict this sample density/dispersion using remote methods which predicts \doubt{between $157$-$170$ indviduals per hectare}\cite{ForestStandVol} (depending on the used model). So according to this and sample size determination theories, to get a great resolution could be necessary a big size for samples and the necessity of a big wireless network of distributed devices, since each device will correspond with an individual.
@@ -521,15 +521,15 @@ In comparison with other common telecommunication technologies, LoRa uses lower 
   \label{}
 \end{figure}
  
-\subsubsection{RaspberryPi, a powerful microcomputer}
-As in the case of Arduino, RaspberryPi provides a powerful platform, however in the case of a RaspberryPi this platform is slightly more complex than for an Arduino.\footnote{There are a lot of Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware point of view, RaspberryPi implements a better one than Arduino, this also has an impact on a higher cost; however, this hardware allows a RaspberryPi to support a whole operating system; that's because this devices are usually called \textit{single-board computers}.
+\subsubsection{Raspberry Pi, a powerful microcomputer}
+As in the case of Arduino, Raspberry Pi provides a powerful platform, however in the case of a Raspberry Pi this platform is slightly more complex than for an Arduino.\footnote{There are a lot of Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware point of view, Raspberry Pi implements a better one than Arduino, this also has an impact on a higher cost; however, this hardware allows a Raspberry Pi to support a whole operating system; that's because this devices are usually called \textit{single-board computers}.
 
 A few of interesting hardware specs are for instance, a \textit{Broadcom BCM2837B0, Cortex-A53 (ARMv8) 64-bit SoC @ 1.4GHz} as its CPU, \textit{1GB LPDDR2 SDRAM}, \textit{Gigabit Ethernet over USB 2.0 (maximum throughput 300 Mbps)} or even an \textit{Extended 40-pin GPIO header} among others.\cite{RPiSpecs}
 
-The role for RaspberryPi in this project is to act like a gateway, receiving all the data from different nodes. So in order to perform this task correctly it is necessary to provide a LoRa interface, which is also embebed (as in Arduino) in a separate pluggable shield/card/hat.
+The role for Raspberry Pi in this project is to act like a gateway, receiving all the data from different nodes. So in order to perform this task correctly it is necessary to provide a LoRa interface, which is also embebed (as in Arduino) in a separate pluggable shield/card/hat.
 
 \subsubsection{Dragino shields/hats}\label{sssec:DraginoShields}
-These shields/expansion cards are necessary because those devices (Arduino and RaspberryPi) have not the ability to comunicate through LoRa physical layer, that's because they need a physical interface in order to manage those LoRa packages. Both shields are based on the SX1276/SX1278 transceiver. However the RaspberryPi hat also has a L80 GPS interface (Base on MTK MT3339), meanwhile Arduino has not.
+These shields/expansion cards are necessary because those devices (Arduino and Raspberry Pi) have not the ability to comunicate through LoRa physical layer, that's because they need a physical interface in order to manage those LoRa packages. Both shields are based on the SX1276/SX1278 transceiver. However the Raspberry Pi hat also has a L80 GPS interface (Base on MTK MT3339), meanwhile Arduino has not.
 
 This project is using the following models: 
 
@@ -600,9 +600,16 @@ This stage is focused on improve the signal acquisition, according to this poten
 
 
 \subsubsection{Gateway}
+
+\subsubsubsection{Raspberry Pi 3 B+}
+This model of Raspberry Pi is able to run almost every GNU/Linux distribution ported to ARM architecture, Raspberry Pi OS (previously called Raspbian)\cite{RaspberryPiOs} is in fact a Debian port to ARM architecture. After a little researching, it is possible to conclude that there is not other operative system which improves the performance of Raspberry Pi OS in a Raspberry Pi. Due this former argument this project is going to use Raspberry Pi OS. 
+
+One of the most interesting features of Raspberry Pi is precisely that OS is installed and run from a microSD card, so the hardware is loading the operative system from this microSD card to the RAM directly, which improves notably the system load times, and increments its portability. 
+
+\subsubsubsection{Dragino HAT}
 Gateways doesn't need actually a diagram or detailed description because there are multiple devices which could play this role. These must be generic devices due LoRaWAN protocol versatility. LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but actually acts as a network layer protocol for managing communication between gateways and nodes, similar to a routing protocol. So it is possible for any device which implements hardware for a LoRa physical layer, to act as a gateway.
 
-Nevertheless, there are important considerations about the said above, for example, nodes are not actually associated with an specific gateway. Instead, data transmitted by a node is typically received by multiple gateways. Each gateway will forward the received packets from the end-node to de cloud-based network server. Besides, this project is using a RaspberryPi 3B+ with a Dragino Hat which mounts a SX1276 LoRa \textbf{transceiver}\cite{SX1276}; this is so important because means, according to Semtech, this transceiver is not intended to play a gateway role, but a end-node role.
+Nevertheless, there are important considerations about the said above, for example, nodes are not actually associated with an specific gateway. Instead, data transmitted by a node is typically received by multiple gateways. Each gateway will forward the received packets from the end-node to de cloud-based network server. Besides, this project is using a Raspberry Pi 3B+ with a Dragino Hat which mounts a SX1276 LoRa \textbf{transceiver}\cite{SX1276}; this is so important because means, according to Semtech, this transceiver is not intended to play a gateway role, but a end-node role.
 
 A transceiver, by definition, is a device that is able to both, transmit and receive (in fact, the word itself is a mix between both, \textbf{trans}miter and re\textbf{ceiver}) that is what a node must be able to do; i.e. transmit the sensor data (context) and receive data to perform operations with its actuators. 
 
@@ -615,7 +622,7 @@ LoRaWAN defines ten channels, eight of which are multi data rate from 250bps to
 at 50kbps.
 \end{quoting}
 
-Here is the important point. This Dragino HAT for the RaspberryPi, mounts an SX1276 transceiver, which is known as node-class transceiver, so in conclusion, \textbf{this Dragino LoRa GPS HAT is not LoRaWAN compliant}. The main reason the SX1276 transceiver is not suitable to work as a gateway is that \doubt{it is actually a single channel transceiver}. Despite all of this, there still exist the possibility of use it as a gateway, because it is technically possible. 
+Here is the important point. This Dragino HAT for the Raspberry Pi, mounts an SX1276 transceiver, which is known as node-class transceiver, so in conclusion, \textbf{this Dragino LoRa GPS HAT is not LoRaWAN compliant}. The main reason the SX1276 transceiver is not suitable to work as a gateway is that \doubt{it is actually a single channel transceiver}. Despite all of this, there still exist the possibility of use it as a gateway, because it is technically possible. 
 
 
 Dragino foresees this and provides a \href{https://github.com/dragino/dual_chan_pkt_fwd}{dual channel controller}. The most important thing about this dual channel controller, is not the possibility to use the transceiver in a dual channel mode, but to use it as a gateway in the physical sense. 
