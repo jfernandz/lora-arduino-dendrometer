@@ -515,7 +515,7 @@ Since the idea is to produce a low-cost device in order to distribute a high num
 
 % I need to use that \texorpdfstring{}{} for the left-side ToC in PDF viewers, because the ® cannot be rendered in there.
 \subsubsection{\texorpdfstring{LoRa\textsuperscript{\textregistered} (Lo{\normalfont\sffamily ng} Ra{\normalfont\sffamily nge})}{LoRa® (Long Range)}}
-LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite[]{LoRaGeneral}. This is because some devices inside IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been pointed. So this low availability (of resources) along to their tendency to be distributed/scattered causes the necessity for a low-power consumption and a long-range telecommunication.
+LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite[]{LoRaGeneral}. This is because some devices inside IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been pointed. So this low availability (of resources) along with their tendency to be distributed/scattered causes the necessity for a low-power consumption and a long-range telecommunication.
 
 In a more general sense, there is a wider concept to include all these kind of technologies which fullfil the IoT communication requirements, this is the \enquote{Low-Power Wide Area Networks} (LPWAN), so as claimed by \cite[]{LoRaGeneral}
 
@@ -632,9 +632,19 @@ Even so, independently of the installed version, the reader will be able to disa
 One of the first and most important configurations is the internet access; this can be done via two different ways, using the ethernet port (which does not require any extra configuration, just tu plug the cable) or using the WiFi interface, which can be configured using also \cmd{raspi-config} \cite{RaspiWIFIcli}. Due to its versatility, there are multiple setup that could fulfil the requirements of this projects:
 
 \begin{itemize}
-  \item \textbf{PoE} (Power-over-Ethernet), this is not actually a suitable option because Raspberry Pi does not support PoE by itself, it needs a \href{https://www.raspberrypi.org/products/poe-hat/}{separate HAT} which is using the GPIO connector, so this prevents using it with the LoRa HAT. Apparently there are hacks to reduce this HAT size, but they also use pins in the GPIO connector \cite{RaspiPoEHack}. Besides, this method only works with up to 100m cables, so it would be necessary to have a power source and internet access point within a 100m radius.
-  \item Simple \textbf{ethernet} and mains electricity, this appears to be the best method among these shown
+  \item \textbf{PoE} (Power-over-Ethernet); this is not actually a suitable option because Raspberry Pi does not support PoE by itself, it needs a \href{https://www.raspberrypi.org/products/poe-hat/}{separate HAT} which is using the GPIO connector, so this makes impossible to use it along the LoRa HAT. Apparently there are hacks to reduce this HAT size, but they also use pins in the GPIO connector \cite{RaspiPoEHack}. Besides, this method only works with up to 100m cables, so it would be necessary to have a power source and internet access point within a 100m radius.
+  \item \textbf{WiFi} and battery powered; this setup implies also the existence of a relatively close power source, because the access point used to provide that wireless network connection should work also with mains power. Probably the WiFi radio is not enough to make it the difference between this setup and the next one suggested.
+  \item Simple \textbf{ethernet} and mains power, this setup is similar to the previous one exposed, but omitting the WiFi limitations/configurations, the access point and the Raspberry Pi should be practically both at the same location.
+  \item \textbf{GSM module} and battery or mains powered; this document consider this the ideal setup. This setup doesn't require a conventional access point because the internet access is granted through a GSM module, in a similar way than a mobile phone. This would be the ideal way because it minimizes the resources needed, which is crucial in an environment where those probably won't be available ---in the middle of the forest.
+  
+  Furthermore, this is apparently possible through two different options:
+    \begin{itemize}
+      \item \href{https://www.itead.cc/wiki/RPI_SIM800_GSM/GPRS_ADD-ON_V2.0}{Itead Raspberry Pi GSM Board (SIM800)}. This is not the most interesting way, because though GPIO pins comes through this does mean the HAT supports stacking, and even if that does, doesn't mean every other HAT would.
+      \item \href{https://tutorials-raspberrypi.com/raspberry-pi-gsm-module-mobile-internet-lte-3g-umts/}{USB GSM module}. This is apparently the most promising option. These kind of GSM modules are in general compliant with GNU/Linux systems and using a regular SIM card, they would be eventually able to provide an internet access point. Of course, this also will to increment the size of the whole device.
+    \end{itemize}
 \end{itemize}
+
+It is important to note the necessity of a stable internet connection; \doubt{COMPLETE}
 
 Another configuration that must be done is the Secure Shell (\cmd{ssh}) service; which according to Raspberry Pi documentation can be done from terminal using \cmd{systemd} \cite{RaspiSSH}. 
 
@@ -648,7 +658,6 @@ So generating a pair of keys and configuring properly the ssh access; it will pr
     label=ej:CreateEntity
     ]
     $ ssh-keygen
-
     Generating public/private rsa key pair.
     Enter file in which to save the key (/home/wyre/.ssh/id_rsa): 
     Enter passphrase (empty for no passphrase): 
