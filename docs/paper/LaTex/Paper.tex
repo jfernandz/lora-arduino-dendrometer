@@ -644,9 +644,9 @@ One of the first and most important configurations is the internet access; this 
     \end{itemize}
 \end{itemize}
 
-It is important to note the necessity of a stable internet connection; \doubt{COMPLETE}
+It is important to note the necessity of a relatively stable internet connection; those gateways will forward the trafic to the cloud server, so they are receiving LoRa packets through its LoRa interface and then forwarding them to the specified server. 
 
-Another configuration that must be done is the Secure Shell (\cmd{ssh}) service; which according to Raspberry Pi documentation can be done from terminal using \cmd{systemd} \cite{RaspiSSH}. 
+Another configuration which must be done is the Secure Shell (\cmd{ssh}) service; which according to Raspberry Pi documentation can be done from terminal using \cmd{systemd} \cite{RaspiSSH}. 
 
 So generating a pair of keys and configuring properly the ssh access; it will probably be necessary to paste the \cmd{*.pub} key content into \cmd{~/.ssh/authorized\_keys} file (located in the local folder in the Raspberry Pi); and give it the right permissions (\cmd{700}), after this the reader should be able to connect through ssh service.
 
@@ -680,10 +680,10 @@ So generating a pair of keys and configuring properly the ssh access; it will pr
     +----[SHA256]-----+
 \end{lstlisting}
 
-Once is available the remote control for Raspberry Pi through ssh, is possible to manage it completely from the command line, even upgrade the system and compile the required controller to get properly working the LoRa transceiver. 
+Once is available the remote control for Raspberry Pi through ssh, is possible to manage it completely from the command line, even upgrade the system and compile the required controller to get properly working the LoRa transceiver. At this point and depending on the type of access point used to provide internet service to the Raspberry, the reader will be able even to remote control the Raspberry over internet. For this purpose could be useful to read the access point documentation in order to perform port forwarding or alternatively \href{http://www.thirdway.ch/En/projects/raspberry_pi_3g/index.php}{a reverse tunnel over ssh.}\footnote{In the case the ISP does not allow ssh when using a GSM module, also the reader may find that IPv6 works but IPv4 does not. Anyway, as said the internet access point could be variable and it is not determined by this project.\\ The most important thing is to work confortably with the Raspberr Pi with no HDMI, keyboard and mouse plugged, and this can be done locally in a LAN to configure it in a frist place.}  
 
-\subsubsubsection{Dragino HAT}
-Gateways doesn't need actually a diagram or detailed description because there are multiple devices which could play this role. These must be generic devices due LoRaWAN protocol versatility. LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but actually acts as a network layer protocol for managing communication between gateways and nodes, similar to a routing protocol. So it is possible for any device which implements hardware for a LoRa physical layer, to act as a gateway.
+\subsubsubsection{Dragino GPS and LoRa HAT}
+Gateways doesn't need actually a diagram or detailed description because there are multiple devices which could play this role. These usually are generic devices due LoRaWAN protocol versatility. LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but actually acts as a network layer protocol for managing communication between gateways and nodes, similar to a routing protocol. So it is possible for any device which implements hardware for a LoRa physical layer, to act as a gateway.
 
 Nevertheless, there are important considerations about the said above, for example, nodes are not actually associated with an specific gateway. Instead, data transmitted by a node is typically received by multiple gateways. Each gateway will forward the received packets from the end-node to de cloud-based network server. Besides, this project is using a Raspberry Pi 3B+ with a Dragino Hat which mounts a SX1276 LoRa \textbf{transceiver}\cite{SX1276}; this is so important because means, according to Semtech, this transceiver is not intended to play a gateway role, but a end-node role.
 
