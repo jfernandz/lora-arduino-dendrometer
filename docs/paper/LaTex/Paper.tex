@@ -239,6 +239,11 @@
 % To insert json snippets
 \usepackage{listings}
 \renewcommand{\lstlistingname}{Example}
+% \lstset{%
+  % aboveskip=1\baselineskip plus 1\baselineskip minus 2\baselineskip,
+  % belowskip=1\baselineskip plus 1\baselineskip minus 2\baselineskip
+% }
+% \lstset{aboveskip=-18pt plus 2pt, belowskip=-18pt plus 2pt}
 
 % \colorlet{punct}{red!60!black}
 % \definecolor{background}{HTML}{EEEEEE}
@@ -249,7 +254,7 @@
 \definecolor{delim}{HTML}{ff0000}
 \definecolor{numb}{HTML}{0f9d58}
 
-\lstdefinelanguage{json}{
+\lstdefinelanguage{json}{%
   % aboveskip=\baselineskip,
   % xleftmargin=2em,
   basicstyle=\scriptsize\ttfamily,
@@ -286,7 +291,7 @@
 \newcommand\YAMLvaluestyle{\color{blue}\mdseries}
 % here is a macro expanding to the name of the language
 % (handy if you decide to change it further down the road)
-\lstdefinelanguage{yaml}{
+\lstdefinelanguage{yaml}{%
   keywords={true,false,null,y,n},
   keywordstyle=\color{darkgray}\bfseries,
   basicstyle=\YAMLkeystyle\scriptsize\ttfamily,
@@ -344,6 +349,9 @@
 \makeatother
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
+
+% To include random paragraphs with \blindtext
+\usepackage{blindtext}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -619,16 +627,21 @@ This project is using the Recommended version for Raspberry Pi OS, nevertheless,
   \label{fig:RpiImager}
 \end{figure}
 
-Even so, independently of the installed version, the reader will be able to disable the graphical environment using the console based \cmd{raspi-conf} application \cite{RaspiConf}. 
+Even so, independently of the installed version, the reader will be able to disable the graphical environment using the console based \cmd{raspi-config} application \cite{RaspiConf}. 
 
-\doubt{WIFI (COMPLETE)}
+One of the first and most important configurations is the internet access; this can be done via two different ways, using the ethernet port (which does not require any extra configuration, just tu plug the cable) or using the WiFi interface, which can be configured using also \cmd{raspi-config} \cite{RaspiWIFIcli}. Due to its versatility, there are multiple setup that could fulfil the requirements of this projects:
+
+\begin{itemize}
+  \item \textbf{PoE} (Power-over-Ethernet), this is not actually a suitable option because Raspberry Pi does not support PoE by itself, it needs a \href{https://www.raspberrypi.org/products/poe-hat/}{separate HAT} which is using the GPIO connector, so this prevents using it with the LoRa HAT. Apparently there are hacks to reduce this HAT size, but they also use pins in the GPIO connector \cite{RaspiPoEHack}. Besides, this method only works with up to 100m cables, so it would be necessary to have a power source and internet access point within a 100m radius.
+  \item Simple \textbf{ethernet} and mains electricity, this appears to be the best method among these shown
+\end{itemize}
 
 Another configuration that must be done is the Secure Shell (\cmd{ssh}) service; which according to Raspberry Pi documentation can be done from terminal using \cmd{systemd} \cite{RaspiSSH}. 
 
-So generating a pair of keys and configuring properly the ssh access; it will probably be necessary to paste the \cmd{*.pub} key content into \cmd{~/.ssh/authorized\_keys} file (located in the local folder in the Raspberry Pi); and give it the right permissions \cmd{700}, after this the reader should be able to connect through ssh service.
+So generating a pair of keys and configuring properly the ssh access; it will probably be necessary to paste the \cmd{*.pub} key content into \cmd{~/.ssh/authorized\_keys} file (located in the local folder in the Raspberry Pi); and give it the right permissions (\cmd{700}), after this the reader should be able to connect through ssh service.
 
 \begin{lstlisting}[%
-    % float=thp,
+    % float=ht,
     language=json,
     firstnumber=1,
     caption={Creating a pair of ssh keys.},
