@@ -233,8 +233,11 @@
 % Turn on the style
 \pagestyle{fancy}
 \fancyhf{} % Start with clearing everything in the header and footer
-\renewcommand{\headrulewidth}{0pt} % Removes the horizontal rule in header by default
+\renewcommand{\headrulewidth}{1pt} % Removes the horizontal rule in header by default
 \fancyfoot[R]{\thepage} % Set the right side of the footer to be the page number
+\fancyhead[R]{\rightmark}
+\setlength{\headheight}{14pt}% ...at least 51.60004pt
+
 
 % To insert json snippets
 \usepackage{listings}
@@ -680,7 +683,9 @@ So generating a pair of keys and configuring properly the ssh access; it will pr
     +----[SHA256]-----+
 \end{lstlisting}
 
-Once is available the remote control for Raspberry Pi through ssh, is possible to manage it completely from the command line, even upgrade the system and compile the required controller to get properly working the LoRa transceiver. At this point and depending on the type of access point used to provide internet service to the Raspberry, the reader will be able even to remote control the Raspberry over internet. For this purpose could be useful to read the access point documentation in order to perform port forwarding or alternatively \href{http://www.thirdway.ch/En/projects/raspberry_pi_3g/index.php}{a reverse tunnel over ssh.}\footnote{In the case the ISP does not allow ssh when using a GSM module, also the reader may find that IPv6 works but IPv4 does not. Anyway, as said the internet access point could be variable and it is not determined by this project.\\ The most important thing is to work comfortably with the Raspberry Pi with no HDMI, keyboard and mouse plugged, and this can be done locally in a LAN to configure it in a first place.}  
+Once is available the remote control for Raspberry Pi through ssh, is possible to manage it completely from the command line, even upgrade the system and compile the required controller to get properly working the LoRa transceiver. 
+
+At this point and depending on the type of access point used to provide internet service to the Raspberry, the reader will be able even to remote control the Raspberry over internet. For this purpose could be useful to read the access point documentation in order to perform port forwarding or alternatively \href{http://www.thirdway.ch/En/projects/raspberry_pi_3g/index.php}{a reverse tunnel over ssh} ---in the case the ISP does not allow ssh when using a GSM module, also the reader may find that IPv6 works but IPv4 does not. Anyway, as said the internet access point could be variable and it is not determined by this project.\footnote{The most important thing is to work comfortably with the Raspberry Pi with no HDMI, keyboard and mouse plugged, and this can be done locally in a LAN to configure it in a first place.}  
 
 \subsubsubsection{Dragino GPS and LoRa HAT}
 Gateways doesn't need actually a diagram or detailed description because there are multiple devices which could play this role. These usually are generic devices due LoRaWAN protocol versatility. LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but actually acts as a network layer protocol for managing communication between gateways and nodes, similar to a routing protocol. So it is possible for any device which implements hardware for a LoRa physical layer, to act as a gateway.
