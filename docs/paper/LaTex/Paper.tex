@@ -632,19 +632,19 @@ Even so, independently of the installed version, the reader will be able to disa
 One of the first and most important configurations is the internet access; this can be done via two different ways, using the ethernet port (which does not require any extra configuration, just tu plug the cable) or using the WiFi interface, which can be configured using also \cmd{raspi-config} \cite{RaspiWIFIcli}. Due to its versatility, there are multiple setup that could fulfil the requirements of this projects:
 
 \begin{itemize}
-  \item \textbf{PoE} (Power-over-Ethernet); this is not actually a suitable option because Raspberry Pi does not support PoE by itself, it needs a \href{https://www.raspberrypi.org/products/poe-hat/}{separate HAT} which is using the GPIO connector, so this makes impossible to use it along the LoRa HAT. Apparently there are hacks to reduce this HAT size, but they also use pins in the GPIO connector \cite{RaspiPoEHack}. Besides, this method only works with up to 100m cables, so it would be necessary to have a power source and internet access point within a 100m radius.
+  \item \textbf{PoE} (Power-over-Ethernet); this is not actually a suitable option because Raspberry Pi does not support PoE by itself, it needs a \href{https://www.raspberrypi.org/products/poe-hat/}{separate HAT} which is using the GPIO connector, so this makes impossible to use it along the LoRa HAT. Apparently there are hacks to reduce this HAT size, but they also use pins in the GPIO connector \cite{RaspiPoEHack}. Besides, this method only works with up to 100m cables, so it would be necessary to have a power source and internet access point within a 100m radius.\footnote{The \href{https://github.com/hallard/LoRasPI}{LoRasPI HAT} is more suitable for this option because does not cover whole GPIO connector, leaving free the GPIO pins used in \cite{RaspiPoEHack}.}
   \item \textbf{WiFi} and battery powered; this setup implies also the existence of a relatively close power source, because the access point used to provide that wireless network connection should work also with mains power. Probably the WiFi radio is not enough to make it the difference between this setup and the next one suggested.
   \item Simple \textbf{ethernet} and mains power, this setup is similar to the previous one exposed, but omitting the WiFi limitations/configurations, the access point and the Raspberry Pi should be practically both at the same location.
   \item \textbf{GSM module} and battery or mains powered; this document consider this the ideal setup. This setup doesn't require a conventional access point because the internet access is granted through a GSM module, in a similar way than a mobile phone. This would be the ideal way because it minimizes the resources needed, which is crucial in an environment where those probably won't be available ---in the middle of the forest.
   
   Furthermore, this is apparently possible through two different options:
     \begin{itemize}
-      \item \href{https://www.itead.cc/wiki/RPI_SIM800_GSM/GPRS_ADD-ON_V2.0}{Itead Raspberry Pi GSM Board (SIM800)}. This is not the most interesting way, because though GPIO pins comes through this does mean the HAT supports stacking, and even if that does, doesn't mean every other HAT would.
+      \item \href{https://www.itead.cc/wiki/RPI_SIM800_GSM/GPRS_ADD-ON_V2.0}{Itead Raspberry Pi GSM Board (SIM800)}. This is not the most interesting way, because though GPIO pins comes through this does mean the HAT supports \href{http://www.pi-in-the-sky.com/index.php?id=stacking-guide}{stacking}, and even if that does, doesn't mean every other HAT would.
       \item \href{https://tutorials-raspberrypi.com/raspberry-pi-gsm-module-mobile-internet-lte-3g-umts/}{USB GSM module}. This is apparently the most promising option. These kind of GSM modules are in general compliant with GNU/Linux systems and using a regular SIM card, they would be eventually able to provide an internet access point. Of course, this also will to increment the size of the whole device.
     \end{itemize}
 \end{itemize}
 
-It is important to note the necessity of a relatively stable internet connection; those gateways will forward the trafic to the cloud server, so they are receiving LoRa packets through its LoRa interface and then forwarding them to the specified server. 
+It is important to note the necessity of a relatively stable internet connection; those gateways will forward the traffic to the cloud server, so they are receiving LoRa packets through its LoRa interface and then forwarding them to the specified server. 
 
 Another configuration which must be done is the Secure Shell (\cmd{ssh}) service; which according to Raspberry Pi documentation can be done from terminal using \cmd{systemd} \cite{RaspiSSH}. 
 
@@ -680,7 +680,7 @@ So generating a pair of keys and configuring properly the ssh access; it will pr
     +----[SHA256]-----+
 \end{lstlisting}
 
-Once is available the remote control for Raspberry Pi through ssh, is possible to manage it completely from the command line, even upgrade the system and compile the required controller to get properly working the LoRa transceiver. At this point and depending on the type of access point used to provide internet service to the Raspberry, the reader will be able even to remote control the Raspberry over internet. For this purpose could be useful to read the access point documentation in order to perform port forwarding or alternatively \href{http://www.thirdway.ch/En/projects/raspberry_pi_3g/index.php}{a reverse tunnel over ssh.}\footnote{In the case the ISP does not allow ssh when using a GSM module, also the reader may find that IPv6 works but IPv4 does not. Anyway, as said the internet access point could be variable and it is not determined by this project.\\ The most important thing is to work confortably with the Raspberr Pi with no HDMI, keyboard and mouse plugged, and this can be done locally in a LAN to configure it in a frist place.}  
+Once is available the remote control for Raspberry Pi through ssh, is possible to manage it completely from the command line, even upgrade the system and compile the required controller to get properly working the LoRa transceiver. At this point and depending on the type of access point used to provide internet service to the Raspberry, the reader will be able even to remote control the Raspberry over internet. For this purpose could be useful to read the access point documentation in order to perform port forwarding or alternatively \href{http://www.thirdway.ch/En/projects/raspberry_pi_3g/index.php}{a reverse tunnel over ssh.}\footnote{In the case the ISP does not allow ssh when using a GSM module, also the reader may find that IPv6 works but IPv4 does not. Anyway, as said the internet access point could be variable and it is not determined by this project.\\ The most important thing is to work comfortably with the Raspberry Pi with no HDMI, keyboard and mouse plugged, and this can be done locally in a LAN to configure it in a first place.}  
 
 \subsubsubsection{Dragino GPS and LoRa HAT}
 Gateways doesn't need actually a diagram or detailed description because there are multiple devices which could play this role. These usually are generic devices due LoRaWAN protocol versatility. LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but actually acts as a network layer protocol for managing communication between gateways and nodes, similar to a routing protocol. So it is possible for any device which implements hardware for a LoRa physical layer, to act as a gateway.
@@ -701,8 +701,77 @@ at 50kbps.
 Here is the important point. This Dragino HAT for the Raspberry Pi, mounts an SX1276 transceiver, which is known as node-class transceiver, so in conclusion, \textbf{this Dragino LoRa GPS HAT is not LoRaWAN compliant}. The main reason the SX1276 transceiver is not suitable to work as a gateway is that \doubt{it is actually a single channel transceiver}. Despite all of this, there still exist the possibility of use it as a gateway, because it is technically possible. 
 
 
-Dragino foresees this and provides a \href{https://github.com/dragino/dual_chan_pkt_fwd}{dual channel controller}. The most important thing about this dual channel controller, is not the possibility to use the transceiver in a dual channel mode, but to use it as a gateway in the physical sense.\footnote{This of course means Raspberry}
+Dragino foresees this and provides a dual channel controller \cite{Dragino_DualChannelController_Rpi}. The most important thing about this dual channel controller, is not the possibility to use the transceiver in a dual channel mode, but to use it as a gateway in the physical sense.
 
+In order to get the HAT operative, the reader will need to enable the SPI (Serial Peripheral Interface). This can be done also with \cmd{raspi-config} 
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../../pictures/SPI_raspi-config.png}
+  \caption{SSH session to enable the SPI kernel module in Raspberry Pi using \cmd{raspi-config}. Inside \enquote{5 Interfacing options}}
+  \label{fig:EnablingSPI}
+\end{figure}
+
+Then it would be necessary to install the GPIO access library from Raspberry repositories, \cmd{sudo apt install wiringpi}. After this, the reader will be in position to clone the controller from the github repo \cite{Dragino_DualChannelController_Rpi}
+
+\begin{lstlisting}[%
+  % float=ht,
+  language=json,
+  firstnumber=1,
+  caption={Instructions to compile and install as a system service},
+  label=ej:compiling_dual_channel_pkg
+  ]
+  cd ~
+  git clone https://github.com/dragino/dual_chan_pkt_fwd
+  cd dual_chan_pkt_fwd
+  make
+\end{lstlisting}
+
+Once the controller is compiled, the reader must check the contents of \cmd{global\_conf.json}, for this projects, due it is using the LoRa GPS HAT Single Channel LoRa \cite{DraginoRpiHat}, the pins configuration in \cmd{global\_conf.json} must be
+
+\begin{lstlisting}[%
+  % float=ht,
+  language=json,
+  firstnumber=1,
+  caption={defined pins in \cmd{global\_config.json}},
+  label=ej:global_configJSON
+  ]
+  "pin_nss": 6,
+  "pin_dio0": 7,
+  "pin_rst": 0
+\end{lstlisting}
+
+I order to obtain the gateway ID the reader will need to perform the following command to run for the first time the \cmd{dual\_chan\_pkt\_fwd} binary, i.e. once the compilation process has produced the \cmd{dual\_chan\_pkt\_fwd} is necessary to run it directly to check the terminal output and find for the gateway ID.
+
+\begin{lstlisting}[%
+  % float=ht,
+  language=json,
+  firstnumber=1,
+  caption={Running for the first time the LoRa HAT controller.},
+  label=ej:Running_DualChann_Controller
+  ]
+  $ sudo ./dual_chan_pkt_fwd
+  server: .address = router.eu.staging.thethings.network; .port = 1700; .enable = 1
+  server: .address = router.eu.thethings.network; .port = 1700; .enable = 0
+  Gateway Configuration
+    your name (a@b.c)
+    Dual channel pkt forwarder
+    Latitude=0.00000000
+    Longitude=0.00000000
+    Altitude=10
+    Interface: eth0
+  Trying to detect module CE0 with NSS=6 DIO0=7 Reset=3 Led1=unused
+  SX1276 detected on CE0, starting.
+  Trying to detect module CE1 with NSS=6 DIO0=7 Reset=3 Led1=unused
+  SX1276 detected on CE1, starting.
+  Gateway ID: b8:27:eb:ff:ff:1b:14:9b
+  Listening at SF7 on 868.100000 Mhz.
+  Listening at SF7 on 868.100000 Mhz.
+  -----------------------------------
+  stat update: 2020-06-15 10:53:04 GMT no packet received yet 
+\end{lstlisting}
+
+After this last instruction (\cmd{sudo make install}) the 
 
 
 
