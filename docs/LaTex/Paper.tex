@@ -24,7 +24,7 @@
 
 \documentclass[11pt,a4paper,dvipsnames,twoside]{article}
 
-% Paper geometry
+% Document geometry
 \usepackage[a4paper,left=3cm,right=2.5cm,vmargin=2.5cm]{geometry}
 % \usepackage[showframe,a4paper,left=3cm,right=2.5cm,vmargin=2.5cm]{geometry}
 
@@ -32,7 +32,7 @@
 % \usepackage[utf8]{inputenc}
 
 % To produce a spanish automated output, for instance, TOC is called 'Índice' and
-% References is called 'Referencias'
+% References is called 'Referencias' (in this case I prefer english)
 \usepackage[english]{babel}
 
 % Modifier for space between lines (=\baselinestretch*\baselineskip)
@@ -717,7 +717,7 @@ In order to get the HAT operative, the reader will need to enable the SPI (Seria
   \label{fig:EnablingSPI}
 \end{figure}
 
-Then it would be necessary to install the GPIO access library from Raspberry repositories, \cmd{sudo apt install wiringpi}. After this, the reader will be in position to clone the controller from the github repo \cite{Dragino_DualChannelController_Rpi}
+Then it would be necessary to install the GPIO access library from Raspberry repositories, \cmd{sudo apt install wiringpi}. After this, the reader will be in position to clone the controller from the github repository \cite{Dragino_DualChannelController_Rpi}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -732,7 +732,7 @@ Then it would be necessary to install the GPIO access library from Raspberry rep
   make
 \end{lstlisting}
 
-Once the controller is compiled, the reader must check the contents of \cmd{global\_conf.json}, for this projects, due it is using the LoRa GPS HAT Single Channel LoRa \cite{DraginoRpiHat}, the pins configuration in \cmd{global\_conf.json} must be
+Once the controller is compiled, the reader must check the contents of \cmd{global\_conf.json}, for this projects, due it is using the LoRa GPS HAT Single Channel LoRa \cite{DraginoRpiHat}, the pins configuration in \cmd{global\_conf.json} must be the following as stated by \cite{Dragino_DualChannelController_Rpi}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -746,7 +746,7 @@ Once the controller is compiled, the reader must check the contents of \cmd{glob
   "pin_rst": 0
 \end{lstlisting}
 
-I order to obtain the gateway ID the reader will need to perform the following command to run for the first time the \cmd{dual\_chan\_pkt\_fwd} binary, i.e. once the compilation process has produced the \cmd{dual\_chan\_pkt\_fwd} is necessary to run it directly to check the terminal output and find for the gateway ID.
+I order to obtain the gateway ID the reader will need to perform the following command to run for the first time the \cmd{dual\_chan\_pkt\_fwd} binary, i.e. once the compilation process has produced the \cmd{dual\_chan\_pkt\_fwd} binary is necessary to run it directly to check the terminal output and find for the gateway ID.
 
 \begin{lstlisting}[%
   % float=ht,
