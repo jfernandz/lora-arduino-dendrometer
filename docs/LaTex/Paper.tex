@@ -484,7 +484,7 @@ This is more or less, the definition of the IoT (Internet of Things) concept; ac
 
 This, at least, covers a little part what this project is intended to do: \enquote{Interconnect ordinary physical objects with the identifiable adresses} to provide intelligent services. These physical objects are in this case ordinary dendrometers.
 
-Over the years there have existed analog and manual dendrometers, thus data acquisition had to follow a manual process in the same way. This could turn out bothering because the big size for this statistical population, \lang{¿as/like? it was exposed ¿before/above?}. So it was traditionally necessary to go there and as part of the field work, take individual by individual the whole sample data.
+Over the years there have existed analog and manual dendrometers, thus data acquisition had to follow a manual process in the same way. This could turn out bothering because the big size for this statistical population, as previously stated. So it was traditionally necessary to go there and as part of the field work, take individual by individual the whole sample data.
 
 
 \subsection{Dendrometry, a formal definition}
@@ -496,17 +496,17 @@ The GEMET (General Multilingual Environmental Thesaurus) adopts the definition f
 
 This one is a bit wide definition because nowadays most dendrometry researches are focused on stem diameter; however, at this point could be interesting to extend this project to include also a sensor to heights measurement.\footnote{This project is already considered extensive enough.} 
 
-A lot of comercial dendrometry systems are available in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems, consequently \lang{¿like/as?} has been already said, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, because those professional systems are still expensive. So this is intended to get a cheaper system and make it accessible to everyone who wants \lang{to monitorize} one or more trees growth. 
+A lot of comercial dendrometry systems are available in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems, consequently as stated, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, because those professional systems are still expensive. So this is intended to get a cheaper system and make it accessible to everyone who wants \lang{to monitorize} one or more trees growth. 
 
 There are quite a few types of dendrometers but according to \cite{DendroResearch} \enquote{It is possible to define two broad categories of dendrometer: those that contact the stem and those that do not}. This project is focused on the former kind, so for this project is being developed a \enquote{contact dendrometer} based on a linear potentiometer.
 
 
-\subsection{Hardware}
+\subsection{Physical Layer}
 
 \subsubsection{Arduino, multipurpose microcontroller}
 It's not difficult to justify the use of such an interesting platform as Arduino. The adaptability is one of its strengths, therefore; it is able to acquire and process certain data coming from a set of sensors and manage it to send this via any plugged wireless network interface.
 
-Due circumstances exposed in introduction section is needed an accessible and multipurpose platform \lang{to be the basis for the device design itself}, this is to say the core part of the dendrometer is an Arduino microcontroller.  
+Due circumstances exposed in introduction section is needed an accessible and multipurpose platform to be the basis for the device design itself, this is to say the core part of the dendrometer is an Arduino microcontroller.  
 
 Since the idea is to produce a low-cost device in order to distribute a high number of them, it must be a simple design; that's because it consist only of three parts,
 
@@ -526,7 +526,7 @@ In a more general sense, there is a wider concept to include all these kind of t
   Colloquially  speaking,  an LPWAN is supposed to be to the IoT what WiFi was to consumer networking: offering radio coverage over a (very) large area by way of base stations and adapting transmission rates, transmission power, modulation, duty cycles, etc., such that end-devices incur a very low energy consumption due to their being connected.
 \end{quoting}
 
-It is important to note that when talking about \enquote{low-power consumption}, in many cases it is actually meaning battery-powered devices, for example.
+It is important to note that when talking about \enquote{low-power consumption}, in many cases it is actually meaning battery-powered devices.
 
 By other hand, LoRa can commonly refer to two distinct layers; a physical layer (LoRa itself) and a MAC layer protocol (LoRaWAN). The former one (the physical layer), is a proprietary technology developed by Semtech. So this does mean this layer is not fully open; LoRaWAN, however, is a protocol built to use LoRa physical layer,  It is intended to sensor networks, wherein those sensors exchange packages with some server with a \enquote{low data rate and relatively long time intervals (one transmission per hour or even days).}\cite[p.~9]{LoRaGeneral}. This particularly means that LoRaWAN protocol is perfect for the purpose of this project.  
 
@@ -556,7 +556,7 @@ This project is using the following models:
   \item \textit{LoRa Shield for Arduino}\cite{DraginoArdShield}, which is plugged through analog and digital pins.
 \end{itemize}
 
-\subsection{Software}
+\subsection{Abstract layer}
 
 \subsubsection{FIWARE}
 It is defined as \enquote{The Open Source Platform for Our Smart Digital Future}\cite{Fiware}; in a deeper sense is \enquote{an open source initiative defending an universal set of standards for context data management}\cite{Fiware}, which basically means that \textit{FIWARE} is an open source platform where develop IoT and smart solutions. The platform provides a number of software modules called \textit{Generic Enablers}; among all those \textit{Generic Enablers} there is one particularly important called \textit{Orion Context Broker}. In fact, for a solution to be considered as \textit{Powered by FIWARE} it must to use the \textit{Orion Context Broker} at least. 
@@ -776,7 +776,34 @@ I order to obtain the gateway ID the reader will need to perform the following c
   stat update: 2020-06-15 10:53:04 GMT no packet received yet 
 \end{lstlisting}
 
-After this last instruction (\cmd{sudo make install}) the 
+So at the line 15 in the previous example \ref{ej:Running_DualChann_Controller}, the reader can see the Gateway ID, which wil be needed to connect this gateway to The Things Network stack. This ID is unique and it depends on the hardware.
+
+After to have obtained the gateway ID (\cmd{b8:27:eb:ff:ff:1b:14:9b} for this Dragino HAT), the reader can proceed then to install the system service by perform \cmd{sudo make install}. As the content of \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/Makefile#L22}{\cmd{Makefile}} shows at the line 22, \cmd{sudo make install} will copy the system service \cmd{dual\_chan\_pkt\_fwd.service} to the path \cmd{/lib/systemd/system/} and it will enable it in order to start the service ---the service will start the controller as the reader can see at line 9 in \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/dual_chan_pkt_fwd.service#L9}{\cmd{dual\_chan\_pkt\_fwd.service}}--- at every system startup.\footnote{These kind of services are the way in which \cmd{systemd} manages the daemons running in background.} 
+
+The reader must be aware of the path where is located the \cmd{dual\_chan\_pkt\_fwd} binary, this is so important because the service \cmd{dual\_chan\_pkt\_fwd.service} is using the absolute path to run the \cmd{dual\_chan\_pkt\_fwd} binary; So this could result in an error if the binary is not properly located or service is not properly modified.
+
+Once the service is installed and all these point have been checked, the reader will be able to manage the service to
+
+\begin{itemize}
+  \item start it with \cmd{sudo systemctl start dual\_chan\_pkt\_fwd.service}
+  \item stop it with \cmd{sudo systemctl stop dual\_chan\_pkt\_fwd.service}
+  \item check its status with \cmd{systemctl status -l dual\_chan\_pkt\_fwd.service}
+  \item check the journal with \cmd{journalctl -u dual\_chan\_pkt\_fwd.service}
+\end{itemize}
+
+These last two instructions show information about service status and \cmd{dual\_chan\_pkt\_fwd} status
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
