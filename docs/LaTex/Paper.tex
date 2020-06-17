@@ -651,7 +651,7 @@ It is important to note the necessity of a relatively stable internet connection
 
 Another configuration which must be done is the Secure Shell (\cmd{ssh}) service; which according to Raspberry Pi documentation can be done from terminal using \cmd{systemd} \cite{RaspiSSH}. 
 
-So generating a pair of keys and configuring properly the ssh access; it will probably be necessary to paste the \cmd{*.pub} key content into \cmd{~/.ssh/authorized\_keys} file (located in the local folder in the Raspberry Pi); and give it the right permissions (\cmd{700}), after this the reader should be able to connect through ssh service.
+So generating a pair of keys and configuring properly the ssh access;\footnote{The reader will probably need to figure out the Raspberry IP in their local network, by other hand, inside a local network will not be necessary specify any port for ssh, though it usually is the 22 by default.} it will probably be necessary to paste the \cmd{*.pub} key content into \cmd{~/.ssh/authorized\_keys} file (located in the local folder in the Raspberry Pi); and give it the right permissions (\cmd{700}), after this the reader should be able to connect through ssh service.
 
 \begin{lstlisting}[%
     % float=ht,
@@ -717,7 +717,7 @@ In order to get the HAT operative, the reader will need to enable the SPI (Seria
   \label{fig:EnablingSPI}
 \end{figure}
 
-Then it would be necessary to install the GPIO access library from Raspberry repositories, \cmd{sudo apt install wiringpi}. After this, the reader will be in position to clone the controller from the github repository \cite{Dragino_DualChannelController_Rpi}
+Then it would be necessary to install the GPIO access library from Raspberry repositories, so performing \cmd{sudo\, apt\, install\, wiringpi}. After this, the reader will be in position to clone the controller from the github repository \cite{Dragino_DualChannelController_Rpi}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -791,11 +791,19 @@ Once the service is installed and all these point have been checked, the reader 
   \item check the journal with \cmd{journalctl -u dual\_chan\_pkt\_fwd.service}
 \end{itemize}
 
-These last two instructions show information about service status and \cmd{dual\_chan\_pkt\_fwd} status
+These last two instructions show information about service status and \cmd{dual\_chan\_pkt\_fwd} status; in the following picture it can be seen the service active (running)
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.82\textwidth]{../pictures/pkt_fwd-service.png}
+  \caption{systemd showing the \cmd{dual\_chan\_pkt\_fwd.service} status; it is active and running.}
+  \label{fig:dual_chan_pkt_fwd-status}
+\end{figure}
+
+As can be seen, this service was modified in order to reach properly the \cmd{dual\_chan\_pkt\_fwd} binary, which is not located in \cmd{/home/pi/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd} (the default location defined for the binary in the \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/dual_chan_pkt_fwd.service#L9}{GitHub repository}); mainly because the user is not called \cmd{pi} anymore but \cmd{wyre}, the path needs to be modified to that path containing the binary (\cmd{/home/wyre/TFG/LoRa/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd})\footnote{This is a personal setup and is completely optional, the reader can choose their own path or even setup as suggested with \cmd{pi} user.}
 
 
-
-
+After this the Raspberry Pi is ready to forward LoRa packets to the \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/global_conf.json#L33}{specified server at line 33 in \cmd{global\_conf.json}}. Besides, the reader will be able to manage the Raspberry Pi through ssh service, so the Raspberry only precises any kind of internet access point and electrical power supply.
 
 
 
