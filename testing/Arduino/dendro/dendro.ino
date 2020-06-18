@@ -46,7 +46,9 @@ void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
+// payload to send to TTN gateway
 static uint8_t mydata[] = "Hello, world!";
+static uint8_t payload[3];
 static osjob_t sendjob;
 
 // Schedule TX every this many seconds (might become longer due to duty
@@ -61,9 +63,8 @@ const lmic_pinmap lmic_pins = {
     .dio = {2, 6, 7},
 };
 
-// Potentiometer pins and led
+// Potentiometer pins
 int potPin = 2;               // Potmeter pin
-int ledPin = LED_BUILTIN;     // Builtin LED pin
 int potVal = 0;               // Potmeter's value (0 by default)
 
 void onEvent (ev_t ev) {
@@ -137,15 +138,33 @@ void do_send(osjob_t* j){
         Serial.println(F("OP_TXRXPEND, not sending"));
     } else {
         // Prepare upstream data transmission at the next possible time.
-        potVal = analogRead(potPin);       // Read the analog value of the potmeter (0-1023)
-        Serial.println(potVal);            // Write the value to the serial monitor
-  
-        //digitalWrite(LED_BUILTIN, HIGH);   // Turn the built-in LED on
-        //delay(potVal);                     // Pause for the length of the potval value (0-1023) milliseconds
-  
-        //digitalWrite(LED_BUILTIN, LOW);    // Turn the built-in LED on
-        //delay(potVal);                     // Pause for the length of the potval value (0-1023) milliseconds
         
+        // Read the analog value of the potmeter (0-1023)
+        potVal = analogRead(potPin);
+        
+        // Write the value to the serial monitor
+        Serial.println(potVal);
+
+        // adjust for the f2sflt16 range (-1 to 1)
+        potVal = potVal / 1023;
+
+        // float -> int
+        // note: this uses the sflt16 datum (https://github.com/mcci-catena/arduino-lmic#sflt16)
+        uint16_t payloadPot = LMIC_f2sflt16(potVal);
+
+        // int -> bytes
+        byte potLow = lowByte(payloadPot);
+        byte potHigh = highByte(payloadPot);
+
+        // place the bytes into the payload
+        payload[0] = potLow;
+        payload[1] = potHigh;
+        
+        // prepare upstream data transmission at the next possible time.
+        // transmit on port 1 (the first parameter); you can use any value from 1 to 223 (others are reserved).
+        // don't request an ack (the last parameter, if not zero, requests an ack from the network).
+        // Remember, acks consume a lot of network resources; don't ask for an ack unless you really need it.
+        //LMIC_setTxData2(1, payload, sizeof(payload)-1, 0);
         LMIC_setTxData2(1, mydata, sizeof(mydata)-1, 0);
         Serial.println(F("Packet queued"));
     }
@@ -155,8 +174,6 @@ void do_send(osjob_t* j){
 void setup() {
     Serial.begin(115200);
     Serial.println(F("Starting"));
-
-    pinMode(ledPin, OUTPUT);    // Set ledPin as output
 
     #ifdef VCC_ENABLE
     // For Pinoccio Scout boards
