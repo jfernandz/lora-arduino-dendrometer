@@ -28,16 +28,16 @@
 // LoRaWAN NwkSKey, network session key
 // This is the default Semtech key, which is used by the prototype TTN
 // network initially.
-static const PROGMEM u1_t NWKSKEY[16] = { 0xA2, 0x29, 0xF3, 0x4F, 0x1F, 0x2C, 0x6D, 0xCB, 0x72, 0xBC, 0xCB, 0xD9, 0xDB, 0x58, 0xC7, 0xEC };
+static const PROGMEM u1_t NWKSKEY[16] = { 0xBD, 0xE7, 0xCC, 0xB4, 0x0C, 0x22, 0x1C, 0x71, 0xFB, 0x9F, 0xD0, 0xD3, 0x3D, 0x32, 0x86, 0x81 };
 
 // LoRaWAN AppSKey, application session key
 // This is the default Semtech key, which is used by the prototype TTN
 // network initially.
-static const u1_t PROGMEM APPSKEY[16] = { 0xB5, 0xF3, 0x23, 0xEC, 0xEB, 0xC4, 0x50, 0x81, 0x82, 0x81, 0x1E, 0xD3, 0x01, 0x0B, 0x29, 0x44 };
+static const u1_t PROGMEM APPSKEY[16] = { 0x7A, 0xF6, 0xB9, 0xA2, 0x9E, 0xAF, 0x89, 0x3F, 0x66, 0xC0, 0xF4, 0x36, 0x0B, 0xA8, 0xDD, 0x5B };
 
 // LoRaWAN end-device address (DevAddr)
 // See http://thethingsnetwork.org/wiki/AddressSpace
-static const u4_t DEVADDR = 0x26011163 ; // <-- Change this address for every node!
+static const u4_t DEVADDR = 0x26011730; // <-- Change this address for every node!
 
 // These callbacks are only used in over-the-air activation, so they are
 // left empty here (we cannot leave them out completely unless
@@ -47,13 +47,12 @@ void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
 // payload to send to TTN gateway
-static uint8_t mydata[] = "Hello, world!";
 static uint8_t payload[3];
 static osjob_t sendjob;
 
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).
-const unsigned TX_INTERVAL = 60;
+const unsigned TX_INTERVAL = 10;
 
 // Pin mapping
 const lmic_pinmap lmic_pins = {
@@ -65,7 +64,7 @@ const lmic_pinmap lmic_pins = {
 
 // Potentiometer pins
 int potPin = 2;               // Potmeter pin
-int potVal = 0;               // Potmeter's value (0 by default)
+double potVal;                // Potmeter's value
 
 void onEvent (ev_t ev) {
     Serial.print(os_getTime());
@@ -146,12 +145,17 @@ void do_send(osjob_t* j){
         Serial.println(potVal);
 
         // adjust for the f2sflt16 range (-1 to 1)
-        potVal = potVal / 1023;
+        potVal = potVal/1023;
+
+        // Write AGAIN the value to the serial monitor
+        Serial.println(potVal);
 
         // float -> int
         // note: this uses the sflt16 datum (https://github.com/mcci-catena/arduino-lmic#sflt16)
         uint16_t payloadPot = LMIC_f2sflt16(potVal);
 
+        Serial.println(payloadPot);
+        
         // int -> bytes
         byte potLow = lowByte(payloadPot);
         byte potHigh = highByte(payloadPot);
@@ -164,8 +168,7 @@ void do_send(osjob_t* j){
         // transmit on port 1 (the first parameter); you can use any value from 1 to 223 (others are reserved).
         // don't request an ack (the last parameter, if not zero, requests an ack from the network).
         // Remember, acks consume a lot of network resources; don't ask for an ack unless you really need it.
-        //LMIC_setTxData2(1, payload, sizeof(payload)-1, 0);
-        LMIC_setTxData2(1, mydata, sizeof(mydata)-1, 0);
+        LMIC_setTxData2(1, payload, sizeof(payload)-1, 0);
         Serial.println(F("Packet queued"));
     }
     // Next TX is scheduled after TX_COMPLETE event.
