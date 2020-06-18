@@ -1,4 +1,4 @@
-// TTN Decoder for TTN ABP Feather EU868 dendrometer
+// TTN Decoder for TTN ABP dendrometer EU868
 // Link: 
 function Decoder(bytes, port) {
     // Decode an uplink message from a buffer
