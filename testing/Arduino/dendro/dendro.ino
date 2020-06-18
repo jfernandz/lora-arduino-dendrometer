@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 Thomas Telkamp and Matthijs Kooijman
+ * Copyright (c) 2015 Thomas Telkamp, Matthijs Kooijman and Javier Fernández
  *
  * Permission is hereby granted, free of charge, to anyone
  * obtaining a copy of this document and accompanying files,
@@ -19,6 +19,10 @@
  *
  * Do not forget to define the radio type correctly in config.h.
  *
+ * Also to be able to use LMIC_setupChannel() is it necessary to uncomment
+ * '#define CFG_eu868 1' and comment '#define CFG_us915 1' in 
+ * '/home/<user>/Arduino/libraries/MCCI_LoRaWAN_LMIC_library/project_config'
+ *  because the library is configure for US region instead of EU
  *******************************************************************************/
 
 #include <lmic.h>
