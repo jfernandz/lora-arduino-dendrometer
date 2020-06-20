@@ -567,7 +567,7 @@ This \textit{Context data} is just a way to name any kind of data coming from an
 % \section{Background}
 \newpage
 \section{Technical description}
-Like in the Introduction, the most proper way to present this technical description is to difference between software and hardware parts. However, is still interesting to present a simple and general diagram for whole designed solution:
+Like in the Introduction, the most proper way to present this technical description is to difference between software and hardware parts. However, is still interesting to present a simple and general diagram for whole designed solution.
 
 \begin{figure}[htp]
   \centering
@@ -579,7 +579,7 @@ Like in the Introduction, the most proper way to present this technical descript
 \subsection{Hardware}
 
 \subsubsection{Nodes}
-Nodes are the parts of the system in direct contact with trees themselves (one node per each tree). Most important features in those devices are: low-cost, low-powered, wireless communication and small size. The following diagram shows a diagram of its most relevant parts:
+Nodes are the parts of the system in direct contact with trees themselves (one node per each tree). Most important features in those devices are: low-cost, low-powered, wireless communication and small size. The figure \ref{fig:NodeDiag} shows a diagram of its most relevant parts:
 
 \begin{figure}[htp]
   \centering
@@ -588,20 +588,20 @@ Nodes are the parts of the system in direct contact with trees themselves (one n
   \label{fig:NodeDiag}
 \end{figure}
 
-This diagram shows three different parts: 
+This diagram shows three different parts:
 
 \begin{itemize}
   \item A linear potentiometer, ideally an \href{https://docs.rs-online.com/37bf/0900766b814f0bd0.pdf}{RS Pro Conductive Polymer
   Potentiometer for Automotive Applications}, however, by circumstances is not possible to use it and in order to perform a kind of proof of concept, \doubt{this project will implement a regular rotary potentiometer.}
   \item \doubt{A signal conditioning stage, which is needed in order to improve the quality of the voltage signal produced by the potentiometer.}
-  \item Arduino + Dragino LoRa Shield; of course it is necessary to schedule data transmission and acquisition, as well as transmit them using the LoRa physical layer and LoRaWAN protocol. For this purpose an Arduino-like microcontroller is perfect.  
+  \item Arduino + Dragino LoRa Shield; of course it is necessary to schedule data transmission and acquisition, as well as transmit them using the LoRa physical layer and LoRaWAN protocol. For this purpose an Arduino-like microcontroller is perfect.
 \end{itemize}
 
 \subsubsubsection{Linear Potentiometer}
 As said, ideally this potentiometer should be a linear potentiometer with $5\ \si{\kilo\ohm}$ of maximum resistance, however, in order to improve its performance, it's recommended to use it as a voltage divider; also it would be convenient to buffer the resulting output with a high impedance amplifier, that's because the figure \ref{fig:NodeDiag} includes a signal conditioning stage, which will be described below.
 
 \subsubsubsection{Signal conditioning}
-This stage is focused on improve the signal acquisition, according to this potentiometer specifications, the best way to achieve this objetive is using a high input amplifier, in fact, a single-supply, rail-to-rail operational amplifier is the best option. \doubt{Here is shown a possible schematics for this stage:}
+This stage is focused on improve the signal acquisition, according to this potentiometer specifications, the best way to achieve this objetive is using a high input amplifier, in fact, a single-supply, rail-to-rail operational amplifier is the best option. \doubt{Figure \ref{fig:SignalCond} shows a possible schematics for this stage}
 
 \begin{figure}[htp]
   \centering
@@ -611,22 +611,28 @@ This stage is focused on improve the signal acquisition, according to this poten
 \end{figure}
 
 \subsubsubsection{Arduino sketch}
-In order to this sketch takes advantage of the plugged LoRa Shield, is required to base it on the LoRaMAC-in-C library \cite{MCCI_lmic} (\cmd{arduino-lmic})\footnote{Dragino has a \href{https://github.com/dragino/arduino-lmic}{fork of this library} but has been considered as less accurate than the MCCI version, which is a fork itself from the first port of LMIC library by \href{https://github.com/matthijskooijman}{Matthijs Kooijman}.} implemented by \href{https://mcci.com/}{MCCI}, whose technical documentation can be found in \cite{MCCI_lmic_docs}
+In a first place, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino}{the sketch} can be found in \cmd{src/dendro/dendro.ino} path.
+
+By other hand, in order to this sketch takes advantage of the plugged LoRa Shield, is required to base it on the LoRaMAC-in-C library \cite{MCCI_lmic} (\cmd{arduino-lmic})\footnote{Dragino has a \href{https://github.com/dragino/arduino-lmic}{fork of this library} but has been considered less upgraded than the MCCI version, which is a fork itself from the first port of LMIC library by \href{https://github.com/matthijskooijman}{Matthijs Kooijman}.} implemented by \href{https://mcci.com/}{MCCI}, whose technical documentation can be found in \cite{MCCI_lmic_docs}. The \cmd{arduino-lmic} library is, as its description in the README.md says, a port from the IBM LoRaWAN MAC in C, but \enquote{slightly modified to run in the Arduino environment allowing using the SX1272, SX1276 transceivers and compatible modules} \cite{MCCI_lmic}.
+
+There is an \textit{Arduino-like wrapper} library called \href{https://github.com/mcci-catena/arduino-lorawan}{\cmd{arduino-lorawan}} also developed by MCCI; this library provides apparently a higher abstraction level and it could be helpful in a future to keep growing this project, however, for now this project is implemented using the mentioned \cmd{arduino-lmic}.
+
+Basically the sketch is based on the \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino}{ttn-abp example}, as the reader can see in the first comment block; that example sends a LoRaWAN valid package with the payload \enquote{Hello World!}. 
 
 \subsubsection{Gateway}
 
 \subsubsubsection{Raspberry Pi 3 B+}
-This model of Raspberry Pi is able to run almost every GNU/Linux distribution ported to ARM architecture, Raspberry Pi OS, formerly known as Raspbian,\cite{RaspberryPiOs} is in fact a Debian port to ARM architecture. After a little researching, it is possible to conclude that there is not other operative system which improves the performance of Raspberry Pi OS in a Raspberry Pi. Due this former argument this project is going to use Raspberry Pi OS. 
+This model of Raspberry Pi is able to run almost every GNU/Linux distribution ported to ARM architecture, Raspberry Pi OS, formerly known as Raspbian,\cite{RaspberryPiOs} is in fact a Debian port to ARM architecture. After a little researching, it is possible to conclude that there is not other operative system which improves the performance of Raspberry Pi OS in a Raspberry Pi. Due this former argument this project is going to use Raspberry Pi OS.
 
 One of the most interesting features of Raspberry Pi is precisely that OS is installed and run from a microSD card, so the hardware is loading the operative system from this microSD card to the RAM directly, which improves notably the system load times, and increments its portability.
 
-Raspberry Pi foundation provides the \href{https://www.raspberrypi.org/downloads/noobs/}{\textit{Raspberry Pi Imager}} to perform the installation in a microSD card.\footnote{There are many ways to perform the Raspberry Pi OS installation in a microSD card, this document leaves it to readers to use their preferred method. However, this document also considers the \textit{Raspberry Pi Imager} method as the best one.} This tool allows the reader to choose between three different versions of Raspberry Pi OS. Recommended, Lite and Full version. Lite version is the same than Recommended version but without graphical user interface (GUI or Desktop Environment), meanwhile Full version is the same than Recommended version but with a few extra applications. 
+Raspberry Pi foundation provides the \href{https://www.raspberrypi.org/downloads/noobs/}{\textit{Raspberry Pi Imager}} to perform the installation in a microSD card.\footnote{There are many ways to perform the Raspberry Pi OS installation in a microSD card, this document leaves it to readers to use their preferred method. However, this document also considers the \textit{Raspberry Pi Imager} method as the best one.} This tool allows the reader to choose between three different versions of Raspberry Pi OS. Recommended, Lite and Full version. Lite version is the same than Recommended version but without graphical user interface (GUI or Desktop Environment), meanwhile Full version is the same than Recommended version but with a few extra applications.
 
-This project is using the Recommended version for Raspberry Pi OS, nevertheless, the project does not require absolutely the desktop environment, so to maximize the available free space in the SD card, is better to install the Lite version instead of the Recommended version. 
+This project is using the Recommended version for Raspberry Pi OS, nevertheless, the project does not require absolutely the desktop environment, so to maximize the available free space in the SD card, is better to install the Lite version instead of the Recommended version.
 
 \begin{figure}[htp]
   \centering
-  \includegraphics[width=.7\textwidth]{../pictures/rpi_imager.png}
+  \includegraphics[width=.9\textwidth]{../pictures/rpi_imager.png}
   \caption{Raspberry Pi Imager showing different options to install Raspberry Pi OS in a microSD card.}
   \label{fig:RpiImager}
 \end{figure}
@@ -709,7 +715,7 @@ Here is the important point. This Dragino HAT for the Raspberry Pi, mounts an SX
 
 Dragino foresees this and provides a dual channel controller \cite{Dragino_DualChannelController_Rpi}. The most important thing about this dual channel controller, is not the possibility to use the transceiver in a dual channel mode, but to use it as a gateway in the physical sense.
 
-In order to get the HAT operative, the reader will need to enable the SPI (Serial Peripheral Interface). This can be done also with \cmd{raspi-config} 
+In order to get the HAT operative, the reader will need to enable the SPI (Serial Peripheral Interface). This can be done also with \cmd{raspi-config} like shows the figure \ref{fig:EnablingSPI} 
 
 \begin{figure}[ht]
   \centering
@@ -792,11 +798,11 @@ Once the service is installed and all these point have been checked, the reader 
   \item check the journal with \cmd{journalctl -u dual\_chan\_pkt\_fwd.service}
 \end{itemize}
 
-These last two instructions show information about service status and \cmd{dual\_chan\_pkt\_fwd} status; in the following picture it can be seen the service active (running)
+These last two instructions show information about service status and \cmd{dual\_chan\_pkt\_fwd} status; in the picture \ref{fig:dual_chan_pkt_fwd-status} it can be seen the service active (running)
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=.82\textwidth]{../pictures/pkt_fwd-service.png}
+  \includegraphics[width=.9\textwidth]{../pictures/pkt_fwd-service.png}
   \caption{systemd showing the \cmd{dual\_chan\_pkt\_fwd.service} status; it is active and running.}
   \label{fig:dual_chan_pkt_fwd-status}
 \end{figure}
