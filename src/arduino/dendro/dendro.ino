@@ -66,8 +66,8 @@ static uint8_t payload[3];
 static osjob_t sendjob;
 
 // Potentiometer pins
-int potPin = 2;               // Potmeter pin
-double potVal;                // Potmeter's value
+int potPin = A2;               // Potmeter pin
+double potVal = 0.00;                // Potmeter's value
 
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).

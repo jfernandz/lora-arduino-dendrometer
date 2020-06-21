@@ -320,6 +320,39 @@
              {\ -\ }{{\mdseries\ -\ }}3,
 }
 
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{dred}{rgb}{0.545,0,0}
+\definecolor{dblue}{rgb}{0,0,0.545}
+% \definecolor{lgrey}{rgb}{0.9,0.9,0.9}
+% \definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\lstdefinelanguage{cpp}{
+      backgroundcolor=\color{background},  
+      basicstyle=\color{black}\mdseries\scriptsize\ttfamily,   
+      % breakatwhitespace=false,       
+      breaklines=true,               
+      % captionpos=b,                   
+      commentstyle=\color{dkgreen},   
+      deletekeywords={...},          
+      escapeinside={\%*}{*)},                  
+      frame=lines,                  
+      language=C++,                
+      keywordstyle=\color{purple},  
+      morekeywords={BRIEFDescriptorConfig,string,TiXmlNode,DetectorDescriptorConfigContainer,istringstream,cerr,exit}, 
+      identifierstyle=\color{black},
+      stringstyle=\color{blue},      
+      numbers=left,                 
+      numbersep=8pt,                  
+      numberstyle=\scriptsize, 
+      rulecolor=\color{black},        
+      showspaces=false,               
+      showstringspaces=false,        
+      showtabs=false,                
+      stepnumber=1,                   
+      tabsize=5,                     
+      title=\lstname,                 
+    }
+
 % To highlight text with automated line break or 'Overfull \hbox' messages
 \usepackage{soul}
 \soulregister\enquote7
@@ -617,9 +650,33 @@ By other hand, in order to this sketch takes advantage of the plugged LoRa Shiel
 
 There is an \textit{Arduino-like wrapper} library called \href{https://github.com/mcci-catena/arduino-lorawan}{\cmd{arduino-lorawan}} also developed by MCCI; this library provides apparently a higher abstraction level and it could be helpful in a future to keep growing this project, however, for now this project is implemented using the mentioned \cmd{arduino-lmic}.
 
-Basically the sketch is based on the \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino}{ttn-abp example}, as the reader can see in the first comment block; that example sends a LoRaWAN valid package with the payload \enquote{Hello World!}. Besides it uses the ABP (Activation-by-personalisation) method ---in opposition to OTAA (Over-the-air-activation) method---, depending on the used method it is necessary to include different security keys provided by The Things Network stack in the code.
+Basically the sketch is based on the \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino}{ttn-abp example}, as the reader can see in the first comment block; that example sends a LoRaWAN valid package with the payload \enquote{Hello World!}. Besides it uses the ABP (Activation-by-personalization) method ---in opposition to OTAA (Over-the-air-activation) method---, depending on the used method it is necessary to include different security keys provided by The Things Network stack in the code. \cite{TTN_Security}
 
-As commented \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino#L29}{lines 29 and 30} point 
+As commented \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino#L29}{lines 29 and 30} point, the most important thing before start working on the sketch is to configure the \cmd{arduino-lmic} library, so after install the library with the library manager ---in the Arduino IDE or any other chosen IDE---, the reader will need to go the library path and locate the \href{https://github.com/mcci-catena/arduino-lmic/blob/master/project_config/lmic_project_config.h}{\cmd{<lib\_path>/project\_config/lmic\_project\_config.h}} file to ensure the line 2 (\cmd{\#define CFG\_eu868 1}) is \textbf{uncommented} and the line 3 (\cmd{\#define CFG\_us915 1}) is \textbf{commented}. This is to enable specific functions in the library to the Europe region (where the radio regulations are slightly different than in other regions); so this \cmd{lmic\_project\_config.h} must looks like in te example \ref{ej:lmic_project_config.h}
+
+\begin{lstlisting}[%
+  % float=ht,
+  language=cpp,
+  firstnumber=1,
+  caption={Configuring lmic library radio.},
+  label=ej:lmic_project_config.h
+  ]
+  // project-specific definitions
+  #define CFG_eu868 1
+  //#define CFG_us915 1
+  //#define CFG_au915 1
+  //#define CFG_as923 1
+  // #define LMIC_COUNTRY_CODE LMIC_COUNTRY_CODE_JP	/* for as923-JP */
+  //#define CFG_kr920 1
+  //#define CFG_in866 1
+  #define CFG_sx1276_radio 1
+  //#define LMIC_USE_INTERRUPTS
+\end{lstlisting}
+
+After this, the sketch may use specific functions to perform radio transmissions in Europe region. This in fact, will has an impact in the \cmd{void setup()\{\}} function ---in the example sketch ttn-abp--- so lines between \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino#L232}{line 232} and line 254 will be executed when the library is configured for Europe region.
+
+Once the library has been properly configured, the second most important thing is set the pin mapping for the chip 
+
 
 \subsubsection{Gateway}
 
