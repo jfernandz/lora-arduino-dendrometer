@@ -704,6 +704,7 @@ The reader can see the LoRa Chip reset pin is \cmd{D9} and as DIO pins ---Digita
 
 By other hand \enquote{Any pins that are not needed should be specified as \cmd{LMIC\_UNUSED\_PIN}} as can be read also in the Pin Mapping section of the library \cmd{README.md}. As the reader can see, the example \ref{ej:pin_mapping} starts at line 76, that is because this is the line where the pin mapping is placed in the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L76}{written sketch}.
 
+Regarding to LoRaWAN and TTN security, as previously indicated, the chosen method is ABP, so are necessary the \cmd{NWKSKEY} (Network Session Key), \cmd{APPSKEY} (Application Session Key) and \cmd{DEVADDR} (End-Device Address); these constants placed at lines \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L45}{45}, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L49}{49} and \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L54}{54} must be obtained from TTN console \doubt{AS WILL BE EXPLAINED IN NEXT SECTIONS}
 
 \subsubsection{Gateway}
 
