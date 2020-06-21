@@ -652,7 +652,7 @@ There is an \textit{Arduino-like wrapper} library called \href{https://github.co
 
 Basically the sketch is based on the \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino}{ttn-abp example}, as the reader can see in the first comment block; that example sends a LoRaWAN valid package with the payload \enquote{Hello World!}. Besides it uses the ABP (Activation-by-personalization) method ---in opposition to OTAA (Over-the-air-activation) method---, depending on the used method it is necessary to include different security keys provided by The Things Network stack in the code. \cite{TTN_Security}
 
-As commented \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino#L29}{lines 29 and 30} point, the most important thing before start working on the sketch is to configure the \cmd{arduino-lmic} library, so after install the library with the library manager ---in the Arduino IDE or any other chosen IDE---, the reader will need to go the library path and locate the \href{https://github.com/mcci-catena/arduino-lmic/blob/master/project_config/lmic_project_config.h}{\cmd{<lib\_path>/project\_config/lmic\_project\_config.h}} file to ensure the line 2 (\cmd{\#define CFG\_eu868 1}) is \textbf{uncommented} and the line 3 (\cmd{\#define CFG\_us915 1}) is \textbf{commented}. This is to enable specific functions in the library to the Europe region (where the radio regulations are slightly different than in other regions); so this \cmd{lmic\_project\_config.h} must looks like in te example \ref{ej:lmic_project_config.h}
+As commented \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino#L29}{lines 29 and 30} point, the most important thing before start working on the sketch is to configure the \cmd{arduino-lmic} library, so after install the library with the library manager ---in the Arduino IDE or any other chosen IDE---, the reader will need to go the library path and locate the \href{https://github.com/mcci-catena/arduino-lmic/blob/master/project_config/lmic_project_config.h}{\cmd{<lib\_path>/project\_config/lmic\_project\_config.h}} file to ensure the line 2 (\cmd{\#define CFG\_eu868 1}) is \textbf{uncommented} and the line 3 (\cmd{\#define CFG\_us915 1}) is \textbf{commented}. This is to enable specific functions in the library for Europe region (where the radio regulations are slightly different than in other regions); so this \cmd{lmic\_project\_config.h} must looks like in te example \ref{ej:lmic_project_config.h}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -675,13 +675,40 @@ As commented \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examp
 
 After this, the sketch may use specific functions to perform radio transmissions in Europe region. This in fact, will has an impact in the \cmd{void setup()\{\}} function ---in the example sketch ttn-abp--- so lines between \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino#L232}{line 232} and line 254 will be executed when the library is configured for Europe region.
 
-Once the library has been properly configured, the second most important thing is set the pin mapping for the chip 
+Once the library has been properly configured, the second most important thing is set the pin mapping for the chip, according to the \href{https://github.com/mcci-catena/arduino-lmic#pin-mapping}{Pin Mapping section} in the \cmd{README.md}, \enquote{a variety of configurations are possible}. Then, the most appropriate way to make the pin mapping is following the Dragino indications, so following the figure \ref{fig:Ard_LoRa_Shield_pin_mapping} ---which can also be found in \href{http://wiki.dragino.com/index.php?title=Lora_Shield#Pin_Mapping_and_Unused_Pins}{Dragino documentation}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/LoRa_Shield_Pin_Mapping.png}
+  \caption{Arduino LoRa Shield pin mapping.}
+  \label{fig:Ard_LoRa_Shield_pin_mapping}
+\end{figure}
+
+The reader can see the LoRa Chip reset pin is \cmd{D9} and as DIO pins ---Digital Input/Output--- the board has assigned \cmd{D2} to DIO0, \cmd{D6} to DIO1, \cmd{D7} to DIO2. Besides, a brand new board will only have loaded the \cmd{R9} resistor, this means the LoRa CS pin will be the \cmd{D10}. This leads to set the pin mapping shown in example \ref{ej:pin_mapping}
+
+\begin{lstlisting}[%
+  % float=ht,
+  language=cpp,
+  firstnumber=76,
+  caption={Pin mapping for this Dragino LoRa Shield.},
+  label=ej:pin_mapping
+  ]
+  // Pin mapping
+  const lmic_pinmap lmic_pins = {
+    .nss = 10,
+    .rxtx = LMIC_UNUSED_PIN,
+    .rst = 9,
+    .dio = {2, 6, 7},
+  };
+\end{lstlisting}
+
+By other hand \enquote{Any pins that are not needed should be specified as \cmd{LMIC\_UNUSED\_PIN}} as can be read also in the Pin Mapping section of the library \cmd{README.md}. As the reader can see, the example \ref{ej:pin_mapping} starts at line 76, that is because this is the line where the pin mapping is placed in the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L76}{written sketch}.
 
 
 \subsubsection{Gateway}
 
 \subsubsubsection{Raspberry Pi 3 B+}
-This model of Raspberry Pi is able to run almost every GNU/Linux distribution ported to ARM architecture, Raspberry Pi OS, formerly known as Raspbian,\cite{RaspberryPiOs} is in fact a Debian port to ARM architecture. After a little researching, it is possible to conclude that there is not other operative system which improves the performance of Raspberry Pi OS in a Raspberry Pi. Due this former argument this project is going to use Raspberry Pi OS.
+This model of Raspberry Pi is able to run almost every GNU/Linux distribution ported to ARM architecture, Raspberry Pi OS, formerly known as Raspbian, \cite{RaspberryPiOs} is in fact a Debian port to ARM architecture. After a little researching, it is possible to conclude that there is not other operative system which improves the performance of Raspberry Pi OS in a Raspberry Pi. Due this former argument this project is going to use Raspberry Pi OS.
 
 One of the most interesting features of Raspberry Pi is precisely that OS is installed and run from a microSD card, so the hardware is loading the operative system from this microSD card to the RAM directly, which improves notably the system load times, and increments its portability.
 
