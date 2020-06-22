@@ -529,7 +529,7 @@ The GEMET (General Multilingual Environmental Thesaurus) adopts the definition f
 
 This one is a bit wide definition because nowadays most dendrometry researches are focused on stem diameter; however, at this point could be interesting to extend this project to include also a sensor to heights measurement.\footnote{This project is already considered extensive enough.} 
 
-A lot of comercial dendrometry systems are available in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems, consequently as stated, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, because those professional systems are still expensive. So this is intended to get a cheaper system and make it accessible to everyone who wants \lang{to monitorize} one or more trees growth. 
+A lot of comercial dendrometry systems are available in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems, consequently as stated, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, because those professional systems are still expensive. So this is intended to get a cheaper system and make it accessible to everyone who wants to monitor one or more trees growth. 
 
 There are quite a few types of dendrometers but according to \cite{DendroResearch} \enquote{It is possible to define two broad categories of dendrometer: those that contact the stem and those that do not}. This project is focused on the former kind, so for this project is being developed a \enquote{contact dendrometer} based on a linear potentiometer.
 
@@ -768,8 +768,45 @@ Finally, the reader can find the core of this sketch inside \cmd{void do\_send(o
   Serial.println(F("Packet queued"));
 \end{lstlisting}
 
-So, as can be seen, in order to prepare the payload, the first is to read the analog pin and store the read value in \cmd{potVal} variable ---which is a \cmd{double} type and this makes no difference with \cmd{float} type in \enquote{On the Uno and other ATMEGA based boards} but it makes \enquote{On the Arduino Due} \cite{Ard_double_type}--- after this, the \cmd{potVal} variable is scaled to a $[0,1.0)$ range, this is due the function \cmd{LMIC\_f2sflt16()} (line 195), which is essentially a kind of encoder to encode floats to 16-bit fields. The working of this function is explained in \cite{MCCI_lmic_16bitencoder}. This encoded 16-bit integer variable is stored in \cmd{uint16\_t payloadPot}, after this the \cmd{pauloadPot} 16-bit integer is split into two bytes. 
+So, as can be seen, in order to prepare the payload, the first is to read the analog pin and store the read value in \cmd{potVal} variable ---which is a \cmd{double} type and this makes no difference with \cmd{float} type in \enquote{On the Uno and other ATMEGA based boards} but it makes \enquote{On the Arduino Due} \cite{Ard_double_type}--- after this, the \cmd{potVal} variable is scaled to a $[0,1.0)$ range, this is due the function \cmd{LMIC\_f2sflt16()} (line 195), which is essentially a kind of encoder to encode floats to 16-bit fields. The working of this function is explained in \cite{MCCI_lmic_16bitencoder}.\footnote{A javascript decoder is also provided by the \href{https://github.com/mcci-catena/arduino-lmic\#uflt16-javascript-decoder}{\cmd{README.md}} but \doubt{it will be described in next sections.}} 
 
+This encoded 16-bit integer variable is stored in \cmd{uint16\_t payloadPot}, after this the \cmd{payloadPot} 16-bit integer is split into two bytes called \cmd{potLow} and \cmd{potHigh} ---using native \cmd{lowByte} and \cmd{highByte} functions. Finally these bytes are stored in the first two elements of initial \cmd{payload[3]} string declared at line 65, as the reader can see in example \ref{ej:potmeter_vars}, and the payload is prepared to send at the next possible time using the function \cmd{LMIC\_setTxData2()}.
+
+It is important to note that, as will be stated in \hyperlink{Raspi_HAT}{2.1.2.2 Dragino GPS and LoRa HAT} subsection, the SX1276 is a single channel chip and only can listen in one channel, so despite inside \cmd{void setup() \{\}} function the channels are setup as shows the example \ref{ej:chan_setup}, the gateway only will be able to listen the channel 0 (868.1 \si{\mega\hertz}), which is the frequency set in \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/global_conf.json}{global\_conf.json} at \cite{Dragino_DualChannelController_Rpi}
+
+\begin{lstlisting}[%
+  % float=ht,
+  language=cpp,
+  firstnumber=262,
+  caption={Channels setup.},
+  label=ej:chan_setup
+  ]
+  LMIC_setupChannel(0, 868100000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);  // g-band
+  LMIC_setupChannel(1, 868300000, DR_RANGE_MAP(DR_SF12, DR_SF7B), BAND_CENTI);  // g-band
+  LMIC_setupChannel(2, 868500000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);  // g-band
+  LMIC_setupChannel(3, 867100000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);  // g-band
+  LMIC_setupChannel(4, 867300000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);  // g-band
+  LMIC_setupChannel(5, 867500000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);  // g-band
+  LMIC_setupChannel(6, 867700000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);  // g-band
+  LMIC_setupChannel(7, 867900000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);  // g-band
+  LMIC_setupChannel(8, 868800000, DR_RANGE_MAP(DR_FSK,  DR_FSK),  BAND_MILLI);  // g2-band
+\end{lstlisting}
+
+Because of explained above, the gateway will just receive one package per each $\approx$10 minutes ---at line 74 in the sketch the transmission interval is set at 60 seconds, so as there are 9 channels but the gateway is just listening the channel 0, the microcontroller is transmitting at this channel once in 9---
+
+\begin{lstlisting}[%
+  % float=ht,
+  language=cpp,
+  firstnumber=72,
+  caption={Transmission interval.},
+  label=ej:tx_interval
+  ]
+  // Schedule TX every this many seconds (might become longer due to duty
+  // cycle limitations).
+  const unsigned TX_INTERVAL = 60;
+\end{lstlisting}
+
+Of course this parameter can be adjusted, but for the final purpose of this project 60 seconds are even too many, in order to monitor changes in stem diameter of a tree, a more appropriate value would be 3600 seconds (1 hour) or even greater.  
 
 \subsubsection{Gateway}
 
@@ -862,7 +899,7 @@ LoRaWAN defines ten channels, eight of which are multi data rate from 250bps to
 at 50kbps.
 \end{quoting}
 
-Here is the important point. This Dragino HAT for the Raspberry Pi, mounts an SX1276 transceiver, which is known as node-class transceiver, so in conclusion, \textbf{this Dragino LoRa GPS HAT is not LoRaWAN compliant}. The main reason the SX1276 transceiver is not suitable to work as a gateway is that \doubt{it is actually a single channel transceiver}. Despite all of this, there still exist the possibility of use it as a gateway, because it is technically possible. 
+\hypertarget{Raspi_HAT}{Here} is the important point. This Dragino HAT for the Raspberry Pi, mounts an SX1276 transceiver, which is known as node-class transceiver, so in conclusion, \textbf{this Dragino LoRa GPS HAT is LoRaWAN compatible but isn't LoRaWAN compliant}. The main reason the SX1276 transceiver is not suitable to work as a gateway is that \textbf{it is actually a single channel transceiver}. Despite all of this, there still exist the possibility of use it as a gateway, because it is technically possible.
 
 
 Dragino foresees this and provides a dual channel controller \cite{Dragino_DualChannelController_Rpi}. The most important thing about this dual channel controller, is not the possibility to use the transceiver in a dual channel mode, but to use it as a gateway in the physical sense.
@@ -997,7 +1034,7 @@ After this the Raspberry Pi is ready to forward LoRa packets to the \href{https:
 
 
 
-
+\newpage
 \phantomsection
 \addcontentsline{toc}{section}{References}
 \printbibliography
