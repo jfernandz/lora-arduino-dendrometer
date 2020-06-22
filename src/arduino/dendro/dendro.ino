@@ -67,11 +67,11 @@ static osjob_t sendjob;
 
 // Potentiometer pins
 int potPin = A2;               // Potmeter pin
-double potVal = 0.00;                // Potmeter's value
+double potVal = 0;             // Potmeter value
 
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).
-const unsigned TX_INTERVAL = 6.66;
+const unsigned TX_INTERVAL = 10;
 
 // Pin mapping
 const lmic_pinmap lmic_pins = {
@@ -177,8 +177,7 @@ void do_send(osjob_t* j){
     if (LMIC.opmode & OP_TXRXPEND) {
         Serial.println(F("OP_TXRXPEND, not sending"));
     } else {
-        // Prepare upstream data transmission at the next possible time.
-        
+        // Prepare upstream data transmission at the next possible time.        
         // Read the analog value of the potmeter (0-1023)
         potVal = analogRead(potPin);
         
