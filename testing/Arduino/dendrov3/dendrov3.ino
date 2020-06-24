@@ -65,8 +65,6 @@ void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
-// payload to send to TTN gateway
-static uint8_t payload[3];
 static osjob_t sendjob;
 
 // Potentiometer pins
@@ -75,7 +73,7 @@ double potVal = 0;             // Potmeter value
 
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).
-const unsigned TX_INTERVAL = 60;
+const unsigned TX_INTERVAL = 6;
 
 // Pin mapping
 const lmic_pinmap lmic_pins = {
@@ -196,7 +194,6 @@ void do_send(osjob_t* j){
         
         lpp.reset();
         lpp.addAnalogInput(1, potVal);
-
 
         LMIC_setTxData2(1, lpp.getBuffer(), lpp.getSize(), 0);
         Serial.println(F("Packet queued"));
