@@ -1,5 +1,4 @@
 // TTN Decoder for TTN ABP dendrometer EU868
-// Link: 
 function Decoder(bytes, port) {
     // Decode an uplink message from a buffer
     // (array) of bytes to an object of fields.
@@ -7,7 +6,9 @@ function Decoder(bytes, port) {
     
     // Potmeter
     rawPot = bytes[0] + bytes[1] * 256;
-    decoded.potVal = sflt162f(rawPot) * 1023;
+    //decoded.potVal = sflt162f(rawPot) * 1023;
+    //decoded.potVal = parseFloat((sflt162f(rawPot) * 1023).toPrecision(2));
+    decoded.potVal = parseFloat((sflt162f(rawPot) * 1023).toFixed(2));
     
     return decoded;
   }
@@ -53,4 +54,3 @@ function Decoder(bytes, port) {
   
       return f_unscaled;
       }
-  
