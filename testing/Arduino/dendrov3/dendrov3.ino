@@ -186,14 +186,16 @@ void do_send(osjob_t* j){
         // Write the value to the serial monitor
         Serial.println(potVal);
                
+        // Reset CayenneLPP buffer
+        lpp.reset();
+
+        // Add the measured value to CayenneLPP buffer
+        lpp.addAnalogInput(1, potVal);
+
         // prepare upstream data transmission at the next possible time.
         // transmit on port 1 (the first parameter); you can use any value from 1 to 223 (others are reserved).
         // don't request an ack (the last parameter, if not zero, requests an ack from the network).
         // Remember, acks consume a lot of network resources; don't ask for an ack unless you really need it.
-        
-        lpp.reset();
-        lpp.addAnalogInput(1, potVal);
-
         LMIC_setTxData2(1, lpp.getBuffer(), lpp.getSize(), 0);
         Serial.println(F("Packet queued"));
     }
