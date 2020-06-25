@@ -38,7 +38,10 @@
 #include <lmic.h>
 #include <hal/hal.h>
 #include <SPI.h>
+#include <CayenneLPP.h>
 
+// CayenneLPP maximum payload size. (51 in this case)
+CayenneLPP lpp(51);
 
 // LoRaWAN NwkSKey, network session key
 // This should be in big-endian (aka msb).
@@ -61,8 +64,6 @@ void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
-// payload to send to TTN gateway
-static uint8_t payload[3];
 static osjob_t sendjob;
 
 // Potentiometer pins
@@ -71,7 +72,7 @@ double potVal = 0;             // Potmeter value
 
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).
-const unsigned TX_INTERVAL = 60;
+const unsigned TX_INTERVAL = 6;
 
 // Pin mapping
 const lmic_pinmap lmic_pins = {
@@ -177,38 +178,25 @@ void do_send(osjob_t* j){
     if (LMIC.opmode & OP_TXRXPEND) {
         Serial.println(F("OP_TXRXPEND, not sending"));
     } else {
-        // Prepare upstream data transmission at the next possible time.        
+        // Prepare upstream data transmission at the next possible time.
+        
         // Read the analog value of the potmeter (0-1023)
         potVal = analogRead(potPin);
         
         // Write the value to the serial monitor
         Serial.println(potVal);
+               
+        // Reset CayenneLPP buffer
+        lpp.reset();
 
-        // adjust for the f2sflt16 range (-1 to 1)
-        potVal = potVal/1023;
+        // Add the measured value to CayenneLPP buffer
+        lpp.addAnalogInput(1, potVal);
 
-        // Write AGAIN the value to the serial monitor
-        Serial.println(potVal);
-
-        // float -> int
-        // note: this uses the sflt16 datum (https://github.com/mcci-catena/arduino-lmic#sflt16)
-        uint16_t payloadPot = LMIC_f2sflt16(potVal);
-
-        Serial.println(payloadPot);
-        
-        // int -> bytes
-        byte potLow = lowByte(payloadPot);
-        byte potHigh = highByte(payloadPot);
-
-        // place the bytes into the payload
-        payload[0] = potLow;
-        payload[1] = potHigh;
-        
         // prepare upstream data transmission at the next possible time.
         // transmit on port 1 (the first parameter); you can use any value from 1 to 223 (others are reserved).
         // don't request an ack (the last parameter, if not zero, requests an ack from the network).
         // Remember, acks consume a lot of network resources; don't ask for an ack unless you really need it.
-        LMIC_setTxData2(1, payload, sizeof(payload)-1, 0);
+        LMIC_setTxData2(1, lpp.getBuffer(), lpp.getSize(), 0);
         Serial.println(F("Packet queued"));
     }
     // Next TX is scheduled after TX_COMPLETE event.
