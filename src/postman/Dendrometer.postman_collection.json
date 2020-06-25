@@ -1,0 +1,415 @@
+{
+	"info": {
+		"_postman_id": "2c35ae35-0767-4153-ab99-e6cbf88a3a13",
+		"name": "Dendrometer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "OrionCB version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1026/version",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IoT Agent Version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4061/iot/about",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4061",
+					"path": [
+						"iot",
+						"about"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quantum Leap version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8668/v2/version",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8668",
+					"path": [
+						"v2",
+						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OrionCB entities",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "fiware-service",
+						"value": "{{fiware-service}}",
+						"type": "text"
+					},
+					{
+						"key": "fiware-servicepath",
+						"value": "{{fiware-servicepath}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{Orion_CB}}/v2/entities",
+					"host": [
+						"{{Orion_CB}}"
+					],
+					"path": [
+						"v2",
+						"entities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OrionCB subscriptions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "fiware-service",
+						"type": "text",
+						"value": "{{fiware-service}}"
+					},
+					{
+						"key": "fiware-servicepath",
+						"type": "text",
+						"value": "{{fiware-servicepath}}"
+					}
+				],
+				"url": {
+					"raw": "{{Orion_CB}}/v2/subscriptions",
+					"host": [
+						"{{Orion_CB}}"
+					],
+					"path": [
+						"v2",
+						"subscriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IoT Devices",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "fiware-service",
+						"value": "{{fiware-service}}",
+						"type": "text"
+					},
+					{
+						"key": "fiware-servicepath",
+						"value": "{{fiware-servicepath}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{IoT_agent}}/iot/devices",
+					"host": [
+						"{{IoT_agent}}"
+					],
+					"path": [
+						"iot",
+						"devices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Specific IoT Device",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "fiware-service",
+						"type": "text",
+						"value": "{{fiware-service}}"
+					},
+					{
+						"key": "fiware-servicepath",
+						"type": "text",
+						"value": "{{fiware-servicepath}}"
+					}
+				],
+				"url": {
+					"raw": "{{IoT_agent}}/iot/devices/{{node}}",
+					"host": [
+						"{{IoT_agent}}"
+					],
+					"path": [
+						"iot",
+						"devices",
+						"{{node}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create IoT Device",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "fiware-service",
+						"type": "text",
+						"value": "{{fiware-service}}"
+					},
+					{
+						"key": "fiware-servicepath",
+						"type": "text",
+						"value": "{{fiware-servicepath}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"devices\": [\n    {\n      \"device_id\": \"{{node}}\",\n      \"entity_name\": \"LORA-N-0\",\n      \"entity_type\": \"LoraDevice\",\n      \"timezone\": \"Europe/Madrid\",\n      \"attributes\": [\n        {\n          \"object_id\": \"analog_in_1\",\n          \"name\": \"analog_in_1\",\n          \"type\": \"Number\"\n        }\n      ],\n      \"internal_attributes\": {\n        \"lorawan\": {\n          \"application_server\": {\n            \"host\": \"eu.thethings.network\",\n            \"username\": \"{{TTN_app_id}}\",\n            \"password\": \"{{TTN_app_pw}}\",\n            \"provider\": \"TTN\"\n          },\n          \"dev_eui\": \"{{TTN_dev_eui}}\",\n          \"app_eui\": \"{{TTN_app_eui}}\",\n          \"application_id\": \"{{TTN_app_id}}\",\n          \"application_key\": \"{{TTN_app_skey}}\"\n        }\n      }\n    }\n  ]\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{IoT_agent}}/iot/devices",
+					"host": [
+						"{{IoT_agent}}"
+					],
+					"path": [
+						"iot",
+						"devices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create OrionCB subscription",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "fiware-service",
+						"value": "{{fiware-service}}",
+						"type": "text"
+					},
+					{
+						"key": "fiware-servicepath",
+						"value": "{{fiware-servicepath}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"description\": \"A subscription to get info about LORA-N-0\",\n  \"subject\": {\n    \"entities\": [\n      {\n        \"id\": \"LORA-N-0\",\n        \"type\": \"LoraDevice\"\n      }\n    ],\n    \"condition\": {\n      \"attrs\": [\n        \"analog_in_1\"\n      ]\n    }\n  },\n  \"notification\": {\n    \"http\": {\n      \"url\": \"http://quantumleap:8668/v2/notify\"\n    },\n    \"attrs\": [\n      \"analog_in_1\"\n    ],\n    \"metadata\": [\"dateCreated\", \"dateModified\"]\n  },\n  \"throttling\": 5\n}"
+				},
+				"url": {
+					"raw": "{{Orion_CB}}/v2/subscriptions",
+					"host": [
+						"{{Orion_CB}}"
+					],
+					"path": [
+						"v2",
+						"subscriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete OrionCB subscription",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "fiware-service",
+						"value": "{{fiware-service}}",
+						"type": "text"
+					},
+					{
+						"key": "fiware-servicepath",
+						"value": "{{fiware-servicepath}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{Orion_CB}}/v2/subscriptions/USE_SUBSCRIPTION_ID",
+					"host": [
+						"{{Orion_CB}}"
+					],
+					"path": [
+						"v2",
+						"subscriptions",
+						"USE_SUBSCRIPTION_ID"
+					]
+				},
+				"description": "IMPORTANT!! -> Does need the susbscription ID which is not the same than entity ID, the subscription ID is a code generated by OrionCB when subscription is created (kind of \"5ef4694065f9321800983069\") You can get that ID making a GET request to http://localhost:1026/v2/subscriptions"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete IoT Device",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "fiware-service",
+						"type": "text",
+						"value": "{{fiware-service}}"
+					},
+					{
+						"key": "fiware-servicepath",
+						"type": "text",
+						"value": "{{fiware-servicepath}}"
+					}
+				],
+				"url": {
+					"raw": "{{IoT_agent}}/iot/devices/{{node}}",
+					"host": [
+						"{{IoT_agent}}"
+					],
+					"path": [
+						"iot",
+						"devices",
+						"{{node}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete OrionCB Entity",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "fiware-service",
+						"type": "text",
+						"value": "{{fiware-service}}"
+					},
+					{
+						"key": "fiware-servicepath",
+						"type": "text",
+						"value": "{{fiware-servicepath}}"
+					}
+				],
+				"url": {
+					"raw": "{{Orion_CB}}/v2/entities/LORA-N-0",
+					"host": [
+						"{{Orion_CB}}"
+					],
+					"path": [
+						"v2",
+						"entities",
+						"LORA-N-0"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
