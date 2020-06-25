@@ -1,4 +1,4 @@
-version: "3.1"
+version: "3"
 
 services:
     iot-agent:
@@ -31,7 +31,7 @@ services:
         ports:
             - "27017:27017"
         volumes:
-            - mongo-db:/data
+            - mongo-db:/data/db
 
     orion:
         image: fiware/orion
@@ -43,10 +43,15 @@ services:
             - "1026"
         ports:
             - "1026:1026"
-        command: -dbhost mongo-db -port 1026 -logLevel DEBUG
+        command: -dbhost mongo-db -noCache -port 1026 -logLevel DEBUG
+        healthcheck:
+          test: ["CMD", "curl", "-f", "http://0.0.0.0:1026/version"]
+          interval: 1m
+          timeout: 10s
+          retries: 3
 
     quantumleap:
-        image: smartsdk/quantumleap:0.5
+        image: smartsdk/quantumleap:0.7.5
         ports:
           - "8668:8668"
         depends_on:
@@ -60,30 +65,35 @@ services:
           - REDIS_PORT=6379
     
     crate:
-        image: crate
+        image: crate:3.3.5
+        command: crate -Cauth.host_based.enabled=false
+          -Ccluster.name=democluster -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
         ports:
+          # Admin UI
           - "4200:4200"
+          # Transpor protocol
           - "4300:4300"
-        environment:
-          - CRATE_HEAP_SIZE=2g
         volumes:
           - cratedata:/data
     
     grafana:
-        image: grafana/grafana:latest
+        image: grafana/grafana
         ports:
           - "3000:3000"
         depends_on:
           - crate
     
     redis:
-        image: redis:latest
+        image: redis
         ports:
           - "6379:6379"
         volumes:
           - redisdata:/data
 
 volumes:
-    mongo-db: ~
-    cratedata: ~
-    redisdata: ~
+    mongo-db:
+    cratedata:
+    redisdata:
+
+networks:
+    default:

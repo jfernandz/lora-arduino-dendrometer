@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "FIWARE version",
+			"name": "OrionCB version",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -65,6 +65,64 @@
 			"response": []
 		},
 		{
+			"name": "OrionCB entities",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "fiware-service",
+						"value": "{{fiware-service}}",
+						"type": "text"
+					},
+					{
+						"key": "fiware-servicepath",
+						"value": "{{fiware-servicepath}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{Orion_CB}}/v2/entities",
+					"host": [
+						"{{Orion_CB}}"
+					],
+					"path": [
+						"v2",
+						"entities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OrionCB subscriptions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "fiware-service",
+						"type": "text",
+						"value": "{{fiware-service}}"
+					},
+					{
+						"key": "fiware-servicepath",
+						"type": "text",
+						"value": "{{fiware-servicepath}}"
+					}
+				],
+				"url": {
+					"raw": "{{Orion_CB}}/v2/subscriptions",
+					"host": [
+						"{{Orion_CB}}"
+					],
+					"path": [
+						"v2",
+						"subscriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "IoT Devices",
 			"request": {
 				"method": "GET",
@@ -76,22 +134,20 @@
 					},
 					{
 						"key": "fiware-service",
-						"value": "smartgondor",
+						"value": "{{fiware-service}}",
 						"type": "text"
 					},
 					{
 						"key": "fiware-servicepath",
-						"value": "/gardens",
+						"value": "{{fiware-servicepath}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:4061/iot/devices",
-					"protocol": "http",
+					"raw": "{{IoT_agent}}/iot/devices",
 					"host": [
-						"localhost"
+						"{{IoT_agent}}"
 					],
-					"port": "4061",
 					"path": [
 						"iot",
 						"devices"
@@ -101,7 +157,42 @@
 			"response": []
 		},
 		{
-			"name": "Post IoT Device",
+			"name": "Specific IoT Device",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "fiware-service",
+						"type": "text",
+						"value": "{{fiware-service}}"
+					},
+					{
+						"key": "fiware-servicepath",
+						"type": "text",
+						"value": "{{fiware-servicepath}}"
+					}
+				],
+				"url": {
+					"raw": "{{IoT_agent}}/iot/devices/{{node}}",
+					"host": [
+						"{{IoT_agent}}"
+					],
+					"path": [
+						"iot",
+						"devices",
+						"{{node}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create IoT Device",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {
 					"content-type": true,
@@ -124,33 +215,105 @@
 					{
 						"key": "fiware-service",
 						"type": "text",
-						"value": "smartgondor"
+						"value": "{{fiware-service}}"
 					},
 					{
 						"key": "fiware-servicepath",
 						"type": "text",
-						"value": "/gardens"
+						"value": "{{fiware-servicepath}}"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"devices\": [\n    {\n      \"device_id\": \"node_0\",\n      \"entity_name\": \"LORA-N-0\",\n      \"entity_type\": \"LoraDevice\",\n      \"timezone\": \"Europe/Madrid\",\n      \"attributes\": [\n        {\n          \"object_id\": \"potVal\",\n          \"name\": \"Pot_Value\",\n          \"type\": \"Number\"\n        }\n      ],\n      \"internal_attributes\": {\n        \"lorawan\": {\n          \"application_server\": {\n            \"host\": \"eu.thethings.network\",\n            \"username\": \"dendrometer\",\n            \"password\": \"ttn-account-v2.173lH8wwDiIRC8E2JgM9ScXyuNRlPpMefpazS0TIhnU\",\n            \"provider\": \"TTN\"\n          },\n          \"dev_eui\": \"00EC51D264A6F8FD\",\n          \"app_eui\": \"70B3D57ED0030B5D\",\n          \"application_id\": \"dendrometer\",\n          \"application_key\": \"7AF6B9A29EAF893F66C0F4360BA8DD5B\"\n        }\n      }\n    }\n  ]\n}",
+					"raw": "{\n  \"devices\": [\n    {\n      \"device_id\": \"{{node}}\",\n      \"entity_name\": \"LORA-N-0\",\n      \"entity_type\": \"LoraDevice\",\n      \"timezone\": \"Europe/Madrid\",\n      \"attributes\": [\n        {\n          \"object_id\": \"analog_in_1\",\n          \"name\": \"analog_in_1\",\n          \"type\": \"Number\"\n        }\n      ],\n      \"internal_attributes\": {\n        \"lorawan\": {\n          \"application_server\": {\n            \"host\": \"eu.thethings.network\",\n            \"username\": \"{{TTN_app_id}}\",\n            \"password\": \"{{TTN_app_pw}}\",\n            \"provider\": \"TTN\"\n          },\n          \"dev_eui\": \"{{TTN_dev_eui}}\",\n          \"app_eui\": \"{{TTN_app_eui}}\",\n          \"application_id\": \"{{TTN_app_id}}\",\n          \"application_key\": \"{{TTN_app_skey}}\"\n        }\n      }\n    }\n  ]\n}",
 					"options": {
 						"raw": {}
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4061/iot/devices",
-					"protocol": "http",
+					"raw": "{{IoT_agent}}/iot/devices",
 					"host": [
-						"localhost"
+						"{{IoT_agent}}"
 					],
-					"port": "4061",
 					"path": [
 						"iot",
 						"devices"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create OrionCB subscription",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "fiware-service",
+						"value": "{{fiware-service}}",
+						"type": "text"
+					},
+					{
+						"key": "fiware-servicepath",
+						"value": "{{fiware-servicepath}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"description\": \"A subscription to get info about LORA-N-0\",\n  \"subject\": {\n    \"entities\": [\n      {\n        \"id\": \"LORA-N-0\",\n        \"type\": \"LoraDevice\"\n      }\n    ],\n    \"condition\": {\n      \"attrs\": [\n        \"analog_in_1\"\n      ]\n    }\n  },\n  \"notification\": {\n    \"http\": {\n      \"url\": \"http://quantumleap:8668/v2/notify\"\n    },\n    \"attrs\": [\n      \"analog_in_1\"\n    ],\n    \"metadata\": [\"dateCreated\", \"dateModified\"]\n  },\n  \"throttling\": 5\n}"
+				},
+				"url": {
+					"raw": "{{Orion_CB}}/v2/subscriptions",
+					"host": [
+						"{{Orion_CB}}"
+					],
+					"path": [
+						"v2",
+						"subscriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete OrionCB subscription",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "fiware-service",
+						"value": "{{fiware-service}}",
+						"type": "text"
+					},
+					{
+						"key": "fiware-servicepath",
+						"value": "{{fiware-servicepath}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{Orion_CB}}/v2/subscriptions/USE_SUBSCRIPTION_ID",
+					"host": [
+						"{{Orion_CB}}"
+					],
+					"path": [
+						"v2",
+						"subscriptions",
+						"USE_SUBSCRIPTION_ID"
+					]
+				},
+				"description": "IMPORTANT!! -> Does need the susbscription ID which is not the same than entity ID, the subscription ID is a code generated by OrionCB when subscription is created (kind of \"5ef4694065f9321800983069\") You can get that ID making a GET request to http://localhost:1026/v2/subscriptions"
 			},
 			"response": []
 		},
@@ -178,56 +341,70 @@
 					{
 						"key": "fiware-service",
 						"type": "text",
-						"value": "smartgondor"
+						"value": "{{fiware-service}}"
 					},
 					{
 						"key": "fiware-servicepath",
 						"type": "text",
-						"value": "/gardens"
+						"value": "{{fiware-servicepath}}"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:4061/iot/devices/node_0",
-					"protocol": "http",
+					"raw": "{{IoT_agent}}/iot/devices/{{node}}",
 					"host": [
-						"localhost"
+						"{{IoT_agent}}"
 					],
-					"port": "4061",
 					"path": [
 						"iot",
 						"devices",
-						"node_0"
+						"{{node}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "FIWARE entities",
+			"name": "Delete OrionCB Entity",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"content-type": true
+				}
+			},
 			"request": {
-				"method": "GET",
+				"method": "DELETE",
 				"header": [
 					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
 						"key": "fiware-service",
-						"value": "atosioe",
-						"type": "text"
+						"type": "text",
+						"value": "{{fiware-service}}"
 					},
 					{
 						"key": "fiware-servicepath",
-						"value": "/lorattn",
-						"type": "text"
+						"type": "text",
+						"value": "{{fiware-servicepath}}"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:1026/v2/entities",
-					"protocol": "http",
+					"raw": "{{Orion_CB}}/v2/entities/LORA-N-0",
 					"host": [
-						"localhost"
+						"{{Orion_CB}}"
 					],
-					"port": "1026",
 					"path": [
 						"v2",
-						"entities"
+						"entities",
+						"LORA-N-0"
 					]
 				}
 			},

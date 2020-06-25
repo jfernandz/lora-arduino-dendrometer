@@ -43,7 +43,6 @@
 // CayenneLPP maximum payload size. (51 in this case)
 CayenneLPP lpp(51);
 
-
 // LoRaWAN NwkSKey, network session key
 // This should be in big-endian (aka msb).
 static const PROGMEM u1_t NWKSKEY[16] = { 0xBD, 0xE7, 0xCC, 0xB4, 0x0C, 0x22, 0x1C, 0x71, 0xFB, 0x9F, 0xD0, 0xD3, 0x3D, 0x32, 0x86, 0x81 };

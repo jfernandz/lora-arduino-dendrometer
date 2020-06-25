@@ -689,7 +689,7 @@ The reader can see the LoRa Chip reset pin is \cmd{D9} and as DIO pins ---Digita
 \begin{lstlisting}[%
   % float=ht,
   language=cpp,
-  firstnumber=76,
+  firstnumber=77,
   caption={Pin mapping for this Dragino LoRa Shield.},
   label=ej:pin_mapping
   ]
@@ -711,14 +711,10 @@ The sketch also sets analog pin \cmd{A2} to acquire the sensor signal as can be 
 \begin{lstlisting}[%
   % float=ht,
   language=cpp,
-  firstnumber=64,
+  firstnumber=69,
   caption={Variables for the potentiometer signal acquisition.},
   label=ej:potmeter_vars
   ]
-  // payload to send to TTN gateway
-  static uint8_t payload[3];
-  static osjob_t sendjob;
-
   // Potentiometer pins
   int potPin = A2;               // Potmeter pin
   double potVal = 0;             // Potmeter value
@@ -729,46 +725,32 @@ Finally, the reader can find the core of this sketch inside \cmd{void do\_send(o
 \begin{lstlisting}[%
   % float=ht,
   language=cpp,
-  firstnumber=180,
+  firstnumber=181,
   caption={Prpareing the payload.},
   label=ej:prep_payload
   ]
-  // Prepare upstream data transmission at the next possible time.        
+  // Prepare upstream data transmission at the next possible time.
+        
   // Read the analog value of the potmeter (0-1023)
   potVal = analogRead(potPin);
   
   // Write the value to the serial monitor
   Serial.println(potVal);
-
-  // adjust for the f2sflt16 range (-1 to 1)
-  potVal = potVal/1023;
-
-  // Write AGAIN the value to the serial monitor
-  Serial.println(potVal);
-
-  // float -> int
-  // note: this uses the sflt16 datum (https://github.com/mcci-catena/arduino-lmic#sflt16)
-  uint16_t payloadPot = LMIC_f2sflt16(potVal);
-
-  Serial.println(payloadPot);
-  
-  // int -> bytes
-  byte potLow = lowByte(payloadPot);
-  byte potHigh = highByte(payloadPot);
-
-  // place the bytes into the payload
-  payload[0] = potLow;
-  payload[1] = potHigh;
-  
+         
   // prepare upstream data transmission at the next possible time.
   // transmit on port 1 (the first parameter); you can use any value from 1 to 223 (others are reserved).
   // don't request an ack (the last parameter, if not zero, requests an ack from the network).
   // Remember, acks consume a lot of network resources; don't ask for an ack unless you really need it.
-  LMIC_setTxData2(1, payload, sizeof(payload)-1, 0);
+  
+  lpp.reset();
+  lpp.addAnalogInput(1, potVal);
+
+  LMIC_setTxData2(1, lpp.getBuffer(), lpp.getSize(), 0);
   Serial.println(F("Packet queued"));
 \end{lstlisting}
 
-So, as can be seen, in order to prepare the payload, the first is to read the analog pin and store the read value in \cmd{potVal} variable ---which is a \cmd{double} type and this makes no difference with \cmd{float} type in \enquote{On the Uno and other ATMEGA based boards} but it makes \enquote{On the Arduino Due} \cite{Ard_double_type}--- after this, the \cmd{potVal} variable is scaled to a $[0,1.0)$ range, this is due the function \cmd{LMIC\_f2sflt16()} (line 195), which is essentially a kind of encoder to encode floats to 16-bit fields. The working of this function is explained in \cite{MCCI_lmic_16bitencoder}.\footnote{A javascript decoder is also provided by the \href{https://github.com/mcci-catena/arduino-lmic\#uflt16-javascript-decoder}{\cmd{README.md}} but \doubt{it will be described in next sections.}} 
+So, as can be seen, in order to prepare the payload firstly the analog pin is stored in \cmd{potVal} variable, after this the function \cmd{lpp.reset()} is ued to reset the CayenneLPP buffer, then the measure \cmd{potVal} is added to the CayenneLPP buffer in the first channel using the function \cmd{lpp.addAnalogInput()}, finally the  \doubt{REDO}
+%So, as can be seen, in order to prepare the payload, the first is to read the analog pin and store the read value in \cmd{potVal} variable ---which is a \cmd{double} type and this makes no difference with \cmd{float} type in \enquote{On the Uno and other ATMEGA based boards} but it makes \enquote{On the Arduino Due} \cite{Ard_double_type}--- after this, the \cmd{potVal} variable is scaled to a $[0,1.0)$ range, this is due the function \cmd{LMIC\_f2sflt16()} (line 195), which is essentially a kind of encoder to encode floats to 16-bit fields. The working of this function is explained in \cite{MCCI_lmic_16bitencoder}.\footnote{A javascript decoder is also provided by the \href{https://github.com/mcci-catena/arduino-lmic\#uflt16-javascript-decoder}{\cmd{README.md}} but \doubt{it will be described in next sections.}} 
 
 This encoded 16-bit integer variable is stored in \cmd{uint16\_t payloadPot}, after this the \cmd{payloadPot} 16-bit integer is split into two bytes called \cmd{potLow} and \cmd{potHigh} ---using native \cmd{lowByte} and \cmd{highByte} functions. Finally these bytes are stored in the first two elements of initial \cmd{payload[3]} string declared at line 65, as the reader can see in example \ref{ej:potmeter_vars}, and the payload is prepared to send at the next possible time using the function \cmd{LMIC\_setTxData2()}.
 
@@ -777,7 +759,7 @@ It is important to note that, as will be stated in \hyperlink{Raspi_HAT}{2.1.2.2
 \begin{lstlisting}[%
   % float=ht,
   language=cpp,
-  firstnumber=262,
+  firstnumber=248,
   caption={Channels setup.},
   label=ej:chan_setup
   ]
@@ -797,7 +779,7 @@ Because of explained above, the gateway will just receive one package per each $
 \begin{lstlisting}[%
   % float=ht,
   language=cpp,
-  firstnumber=72,
+  firstnumber=73,
   caption={Transmission interval.},
   label=ej:tx_interval
   ]
