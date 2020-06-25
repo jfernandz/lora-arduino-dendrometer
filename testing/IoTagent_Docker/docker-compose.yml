@@ -23,14 +23,13 @@ services:
             - "IOTA_LOG_LEVEL=DEBUG" # The log level of the IoT Agent
 
     mongo-db:
-        image: mongo:3.6
+        image: mongo:latest
         hostname: mongo-db
         container_name: db-mongo
         expose:
             - "27017"
         ports:
             - "27017:27017"
-        command: --bind_ip_all --smallfiles
         volumes:
             - mongo-db:/data
 
@@ -44,7 +43,7 @@ services:
             - "1026"
         ports:
             - "1026:1026"
-        command: -dbhost mongo-db
+        command: -dbhost mongo-db -port 1026 -logLevel DEBUG
 
     quantumleap:
         image: smartsdk/quantumleap:0.5
@@ -61,18 +60,9 @@ services:
           - REDIS_PORT=6379
     
     crate:
-    #    image: crate:3.0.5
         image: crate
-    #    command: >
-    #      crate -Clicense.enterprise=false 
-    #      -Cauth.host_based.enabled=false
-    #      -Ccluster.name=democluster 
-    #      -Chttp.cors.enabled=true 
-    #      -Chttp.cors.allow-origin="*"
         ports:
-          # Admin UI
           - "4200:4200"
-          # Transport protocol
           - "4300:4300"
         environment:
           - CRATE_HEAP_SIZE=2g
@@ -80,17 +70,13 @@ services:
           - cratedata:/data
     
     grafana:
-      #image: grafana/grafana:5.4.2
         image: grafana/grafana:latest
         ports:
           - "3000:3000"
-    #    environment:
-    #      - GF_INSTALL_PLUGINS=crate-datasource,grafana-clock-panel,grafana-worldmap-panel
         depends_on:
           - crate
     
     redis:
-      #image: redis:5.0.3
         image: redis:latest
         ports:
           - "6379:6379"
