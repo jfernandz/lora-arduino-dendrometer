@@ -723,7 +723,7 @@ The reader can see the LoRa Chip reset pin is \cmd{D9} and as DIO pins ---Digita
 
 By other hand \enquote{Any pins that are not needed should be specified as \cmd{LMIC\_UNUSED\_PIN}} as can be also read in the \href{https://github.com/mcci-catena/arduino-lmic#pin-mapping}{Pin Mapping section} of the library \cmd{README.md}. As the reader can see, the example \ref{ej:pin_mapping} starts at line 76, that is because this is the line where the pin mapping is placed in the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L76}{written sketch}.
 
-Regarding to LoRaWAN and TTN security, as previously indicated, the chosen method is ABP, so are necessary the \cmd{NWKSKEY} (Network Session Key), \cmd{APPSKEY} (Application Session Key) and \cmd{DEVADDR} (End-Device Address); these constants placed at lines \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L48}{48}, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L52}{52} and \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L57}{57} must be obtained from TTN console \doubt{AS WILL BE EXPLAINED IN NEXT SECTIONS}. The sketch also sets analog pin \cmd{A2} to acquire the sensor signal as can be seen in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L70}{70}.% as well as the payload to send through LoRa interface in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L65}{65}
+Regarding to LoRaWAN and TTN security, as previously indicated, the chosen method is ABP, so are necessary the \cmd{NWKSKEY} (Network Session Key), \cmd{APPSKEY} (Application Session Key) and \cmd{DEVADDR} (End-Device Address); these constants placed at lines \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L48}{48}, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L52}{52} and \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L57}{57} must be obtained from TTN console as will be explained in \hyperref[sssec:TTN_Stack]{The Things Network Stack} subsection, so \textbf{pleas, refer to that subsection for further details}. The sketch also sets analog pin \cmd{A2} to acquire the sensor signal as can be seen in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L70}{70}.% as well as the payload to send through LoRa interface in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L65}{65}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -1014,8 +1014,20 @@ The core of the software part is deployed using Docker containers \cite{Docker_c
 
 \begin{itemize}
   \item \textbf{IoTagent-LoRaWAN}, which is in charge of forward the traffic from TTN stack to Orion Context Broker.
-  \item \textbf{Orion Context Broker}, this is the \myuline{core generic enabler}, in fact as indicated, this is the only one required component to the solution can be considered as \enquote{powered by FIWARE}. Besides this generic enabler requires a \textbf{Mongo database}.
-  \item \textbf{QuantumLeap}, in order to make the context data persistent, this generic enabler is needed. Orion Context Broker works mainly with two elements; entities and subscriptions, however, for any created entity the context data does not persist in Mongo database, instead the information will be replaced/updated; so creating a subscription which notifies to QuantumLeap, this generic enabler will store the context data in a \textbf{Crate database} to make it persistent.
+  \item \textbf{Orion Context Broker}, this is the \myuline{core generic enabler}, in fact as indicated, this is the only one required component to the solution can be considered as \enquote{powered by FIWARE}. Besides this generic enabler requires a \textbf{Mongo database} to store entities and subscriptions among other things. 
+  \item \textbf{QuantumLeap}, in order to make the context data persistent, this generic enabler is needed. Orion Context Broker works mainly with two elements; entities and subscriptions, however, for any created entity the context data does not persist in Mongo database, instead the context data will be replaced/updated; so creating a subscription which notifies to QuantumLeap, this generic enabler will store the context data in a \textbf{Crate database} to make it persistent. Also a \textbf{Redis database} is used for geocoding purposes, however this project will not deal with it ---this is because of this database is not even being included in the figure \ref{fig:GenView}.
+  \item \textbf{Grafana}, this container is intended to provide a web interface to visualize and manage the retrieved context data. It stores its configuration and customization values in an embebed sqlite3 database; so there is not necessity for a separate container. 
+\end{itemize}
+
+These bold highlighted are the deployed containers that will be detailed later, many of them are not even part of FIWARE platform, though. First this document will expose how to setup the gateway, create an application and add devices inside The Things Network stack. 
+
+\subsubsection{The Things Network Stack}\label{sssec:TTN_Stack}
+This is a platform for the LoRaWAN protocol where is possible to manage gateways, devices and applications. It provides a centralized way to manage these kind of things regard in security too, generating several keys to tight the end-devices to the chosen server cloud solution (FIWARE in this case). There are three fundamental process the reader must follow to include nodes and gateways in the platform, those are luckily pretty well documented. 
+
+\begin{itemize}
+  \item Register a gateway; this is the process where \cmd{Gateway ID} shown in example \ref{ej:Running_DualChann_Controller} is needed; this process is, as indicated, well documented in \cite{Gateway_reg}.
+  \item Add an application; this application will provide a set of security keys as well as a zone where manage different devices (these are basically the end-nodes i.e. the arduino microcontrollers). Is also documented in \cite{Add_application}.
+  \item Register a device within added application; these devices will be ultimately the microcontrollers. Again the reader can find the relative documents in \cite{Device_reg}. 
 \end{itemize}
 
 
@@ -1026,10 +1038,8 @@ The core of the software part is deployed using Docker containers \cite{Docker_c
 
 
 
-
-
-
-
+\newpage
+\section{Conclusions}
 
 
 
