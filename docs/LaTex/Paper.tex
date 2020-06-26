@@ -359,8 +359,10 @@
 
 % Improves underline creating the command \myuline{}
 % https://alexwlchan.net/2017/10/latex-underlines/
+% `normalem` option is to prevent underlines for book,
+% articles, etc. titles in references.
 \usepackage{contour}
-\usepackage{ulem}
+\usepackage[normalem]{ulem}
 \renewcommand{\ULdepth}{1.8pt}
 \contourlength{0.8pt}
 \newcommand{\myuline}[1]{%
