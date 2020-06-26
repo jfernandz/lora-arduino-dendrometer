@@ -357,6 +357,17 @@
 \usepackage{soul}
 \soulregister\enquote7
 
+% Improves underline creating the command \myuline{}
+% https://alexwlchan.net/2017/10/latex-underlines/
+\usepackage{contour}
+\usepackage{ulem}
+\renewcommand{\ULdepth}{1.8pt}
+\contourlength{0.8pt}
+\newcommand{\myuline}[1]{%
+  \uline{\phantom{#1}}%
+  \llap{\contour{white}{#1}}%
+}
+
 % To add an extra level in sections
 \usepackage{titlesec}
 \titleclass{\subsubsubsection}{straight}[\subsection]
@@ -756,15 +767,15 @@ Finally, the reader can find the core of this sketch inside \cmd{void do\_send(o
   Serial.println(F("Packet queued"));
 \end{lstlisting}
 
-So, as can be seen, in order to prepare the payload firstly the sketch reads the analog pin and stores the read value in \cmd{potVal} variable ---which is a \cmd{double} type and this makes no difference with \cmd{float} type \enquote{On the Uno and other ATMEGA based boards} but it makes \enquote{On the Arduino Due} \cite{Ard_double_type}; after this the function \cmd{lpp.reset()} is used to reset the CayenneLPP buffer, then the measure \cmd{potVal} is added to the CayenneLPP buffer in the first channel using the function \cmd{lpp.addAnalogInput()}, finally the buffer content is prepared to be transmitted at the next possible time.
+So, as can be seen, in order to prepare the payload firstly the sketch reads the analog pin and stores the read value in \cmd{potVal} variable ---which is a \cmd{double} type and this makes no difference with \cmd{float} type \enquote{On the Uno and other ATMEGA based boards} but it makes \enquote{On the Arduino Due} \cite{Ard_double_type}; after this the function \cmd{lpp.reset()} is used to reset the CayenneLPP buffer, then the measure \cmd{potVal} is added to the CayenneLPP buffer in the first channel using the function \cmd{lpp.addAnalogInput()}, finally the buffer content is prepared to be transmitted at the next possible time using the function \cmd{LMIC\_setTxData2()}. 
 %So, as can be seen, in order to prepare the payload, the first is to read the analog pin and store the read value in \cmd{potVal} variable ---which is a \cmd{double} type and this makes no difference with \cmd{float} type in \enquote{On the Uno and other ATMEGA based boards} but it makes \enquote{On the Arduino Due} \cite{Ard_double_type}--- after this, the \cmd{potVal} variable is scaled to a $[0,1.0)$ range, this is due the function \cmd{LMIC\_f2sflt16()} (line 195), which is essentially a kind of encoder to encode floats to 16-bit fields. The working of this function is explained in \cite{MCCI_lmic_16bitencoder}.\footnote{A javascript decoder is also provided by the \href{https://github.com/mcci-catena/arduino-lmic\#uflt16-javascript-decoder}{\cmd{README.md}} but \doubt{it will be described in next sections.}} 
 
-These \cmd{lpp.*()} functions are part of the CayenneLPP library, in particular, the \cmd{lpp.addAnalogInput()} function encodes the raw value as a number encoded in 2 bytes (16 bits signed) with a unit of 0.01, in 16 bits signed is possible to represent numbers from -32768 until 32767, so with a unit of 0.01, that amounts to a range from -327.68 to +327.67; that is because the sketch includes the line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L185}{185}, where the raw value \cmd{potVal} is scaled to a [0, 100.0] range. This range will fit in the range that can be encoded in CayenneLPP. 
+These \cmd{lpp.*()} functions are part of the CayenneLPP library \cite{CayenneLPP_lib} ---which is also dependent of ArduinoJson library \cite{ArduinoJson_lib}; in particular, the \cmd{lpp.addAnalogInput()} function encodes the raw value as a number encoded in 2 bytes (16 bits signed) with a unit of 0.01. In 16 bits signed is possible to represent numbers from -32768 until 32767, so with a unit of 0.01, that amounts to a range from -327.68 to +327.67; that is because the sketch includes the line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L185}{185}, where the raw value \cmd{potVal} is scaled to a [0, 100.0] range. This range will fit in the range that can be encoded in CayenneLPP. 
 %This encoded 16-bit integer variable is stored in \cmd{uint16\_t payloadPot}, after this the \cmd{payloadPot} 16-bit integer is split into two bytes called \cmd{potLow} and \cmd{potHigh} ---using native \cmd{lowByte} and \cmd{highByte} functions. Finally these bytes are stored in the first two elements of initial \cmd{payload[3]} string declared at line 65, as the reader can see in example \ref{ej:potmeter_vars}, and the payload is prepared to send at the next possible time using the function \cmd{LMIC\_setTxData2()}.
 
-CayenneLPP is so importante because FIWARE will work with this data model, so any other third party encoding will not be admitted/decoded by the FIWARE LoRaWAN agent.
+CayenneLPP is so important because FIWARE will work with this data model, so any other third party encoding will not be admitted/decoded by the FIWARE LoRaWAN agent.
 
-It is also important to note that, as will be stated in \hyperlink{Raspi_HAT}{2.1.2.2 Dragino GPS and LoRa HAT} subsection, the SX1276 is a single channel chip and only can listen in one channel, so despite inside \cmd{void setup() \{\}} function the channels are setup as shows the example \ref{ej:chan_setup}, the gateway only will be able to listen the channel 0 (868.1 \si{\mega\hertz}), which is the frequency set in \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/global_conf.json}{global\_conf.json} at \cite{Dragino_DualChannelController_Rpi}
+It is also important to note that, as will be stated in \hyperlink{Raspi_HAT}{2.1.2.2 Dragino GPS and LoRa HAT} subsection, the SX1276 is a single channel chip and only can listen in one channel, so despite inside \cmd{void setup()} function the channels are setup as shows the example \ref{ej:chan_setup}, the gateway only will be able to listen the channel 0 (868.1 \si{\mega\hertz}), which is the frequency set in \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/global_conf.json}{global\_conf.json} at \cite{Dragino_DualChannelController_Rpi}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -1001,8 +1012,8 @@ The core of the software part is deployed using Docker containers \cite{Docker_c
 
 \begin{itemize}
   \item \textbf{IoTagent-LoRaWAN}, which is in charge of forward the traffic from TTN stack to Orion Context Broker.
-  \item \textbf{Orion Context Broker}, this is the \textbf{core generic enabler}, in fact as indicated, this is the only one required component to the solution be considered as \enquote{powered by FIWARE}. Besides this generic enabler requires a \textbf{Mongo database}.
-  \item \textbf{QuantumLeap}, in order to make the context data persisting, this generic enabler is needed. Orion Context Broker works mainly with two elements; entities and subscriptions, however, for any created entity the context data does not persist in Mongo database, instead the information will be replaced/updated; so creating a subscription which notifies to QuantumLeap, this generic enabler will store the context data in a \textbf{Crate database} to make it persisting.
+  \item \textbf{Orion Context Broker}, this is the \myuline{core generic enabler}, in fact as indicated, this is the only one required component to the solution can be considered as \enquote{powered by FIWARE}. Besides this generic enabler requires a \textbf{Mongo database}.
+  \item \textbf{QuantumLeap}, in order to make the context data persistent, this generic enabler is needed. Orion Context Broker works mainly with two elements; entities and subscriptions, however, for any created entity the context data does not persist in Mongo database, instead the information will be replaced/updated; so creating a subscription which notifies to QuantumLeap, this generic enabler will store the context data in a \textbf{Crate database} to make it persistent.
 \end{itemize}
 
 
