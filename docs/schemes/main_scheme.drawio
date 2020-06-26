@@ -1,13 +1,13 @@
-<mxfile host="" modified="2020-06-26T12:44:08.540Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) code-oss/1.46.1 Chrome/78.0.3904.130 Electron/7.1.14 Safari/537.36" etag="Yf43CyBiY1NH-E6F__gw" version="13.1.3">
+<mxfile host="" modified="2020-06-26T14:58:56.297Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) code-oss/1.46.1 Chrome/78.0.3904.130 Electron/7.1.14 Safari/537.36" etag="tUJYNOCVkZCBnmvdFI6E" version="13.1.3">
     <diagram id="zpk1kd1FeEkqvfZzUYW5" name="Page-1">
-        <mxGraphModel dx="2438" dy="2108" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+        <mxGraphModel dx="3146" dy="2017" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="55" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="-85.5" y="-57.5" width="999" height="1257" as="geometry"/>
                 </mxCell>
-                <mxCell id="37" value="Fiware" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;strokeWidth=1;fontColor=#000000;fillColor=none;labelPosition=left;verticalLabelPosition=top;align=right;verticalAlign=bottom;spacingBottom=50;spacingTop=0;spacing=-110;fontSize=30;" parent="1" vertex="1">
+                <mxCell id="37" value="FIWARE" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;strokeWidth=1;fontColor=#000000;fillColor=none;labelPosition=left;verticalLabelPosition=top;align=right;verticalAlign=bottom;spacingBottom=65;spacingTop=0;spacing=-120;fontSize=30;spacingLeft=0;spacingRight=-20;" parent="1" vertex="1">
                     <mxGeometry x="164" y="542.5" width="468" height="427" as="geometry"/>
                 </mxCell>
                 <mxCell id="30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;endArrow=none;endFill=0;fontColor=#000000;fillColor=#f5f5f5;strokeColor=#000000;" parent="1" source="2" target="5" edge="1">
