@@ -72,7 +72,7 @@ double potVal = 0;             // Potmeter value
 
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).
-const unsigned TX_INTERVAL = 6;
+const unsigned TX_INTERVAL = 60;
 
 // Pin mapping
 const lmic_pinmap lmic_pins = {
@@ -182,6 +182,7 @@ void do_send(osjob_t* j){
         
         // Read the analog value of the potmeter (0-1023)
         potVal = analogRead(potPin);
+        potVal = 100.0 * potVal / 1023;
         
         // Write the value to the serial monitor
         Serial.println(potVal);

@@ -600,11 +600,15 @@ This \textit{Context data} is just a way to name any kind of data coming from an
 % \section{Background}
 \newpage
 \section{Technical description}
-Like in the Introduction, the most proper way to present this technical description is to difference between software and hardware parts. However, is still interesting to present a simple and general diagram for whole designed solution.
+Like in the Introduction, the most proper way to present this technical description is to difference between software and hardware parts. However, is still interesting to present a simple and general diagram for whole designed solution. So as the reader can see in the figure \ref{fig:GenView} is shown the general diagram. 
+
+Firstly the TTN stack send through MQTT protocol the payload to FIWARE IoTagent-LoRaWAN generic enabler. Secondly, FIWARE generic enablers process that payload and store the contained information (also called \textit{context data}) along with a timestamp in the persisting data base (CrateDB), after this, the context data can be visualized in a web view provided by Grafena. 
+
+At this moment this solution requires to send manually the HTTP requests in order to communicate with FIWARE generic enablers manually. The ideal situation would be to develop a desktop or web application capable of provide any kind of graphical user interface to easily setup the two most important requirements to get the solution working as intended ---Create a new device using the IoTagent-LoRaWAN, create a subscription in Orion Context Broker which sends notifications to QuantumLeap.
 
 \begin{figure}[htp]
   \centering
-  \includegraphics[width=.73\textwidth]{../schemes/main_scheme_tbg.png}
+  \includegraphics[width=\textwidth]{../schemes/main_scheme_tbg.png}
   \caption{General view of this solution.}
   \label{fig:GenView}
 \end{figure}
@@ -634,7 +638,9 @@ This diagram shows three different parts:
 As said, ideally this potentiometer should be a linear potentiometer with $5\ \si{\kilo\ohm}$ of maximum resistance, however, in order to improve its performance, it's recommended to use it as a voltage divider; also it would be convenient to buffer the resulting output with a high impedance amplifier, that's because the figure \ref{fig:NodeDiag} includes a signal conditioning stage, which will be described below.
 
 \subsubsubsection{Signal conditioning}
-This stage is focused on improve the signal acquisition, according to this potentiometer specifications, the best way to achieve this objetive is using a high input amplifier, in fact, a single-supply, rail-to-rail operational amplifier is the best option. \doubt{Figure \ref{fig:SignalCond} shows a possible schematics for this stage}
+This stage is focused on improve the signal acquisition, according to this potentiometer specifications, the best way to achieve this objetive is using a high input amplifier, in fact, a single-supply, rail-to-rail operational amplifier is the best option. \doubt{Figure \ref{fig:SignalCond} shows a possible schematics for this stage.}
+
+It is also recommended by the manufacturer to use the potentiometer as a voltage divider instead a variable resistor, this is because taking advantage of the Arduino power source, particularly the 5 \si{\volt} and GND pins.
 
 \begin{figure}[htp]
   \centering
@@ -702,7 +708,7 @@ The reader can see the LoRa Chip reset pin is \cmd{D9} and as DIO pins ---Digita
   };
 \end{lstlisting}
 
-By other hand \enquote{Any pins that are not needed should be specified as \cmd{LMIC\_UNUSED\_PIN}} as can be read also in the Pin Mapping section of the library \cmd{README.md}. As the reader can see, the example \ref{ej:pin_mapping} starts at line 76, that is because this is the line where the pin mapping is placed in the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L76}{written sketch}.
+By other hand \enquote{Any pins that are not needed should be specified as \cmd{LMIC\_UNUSED\_PIN}} as can be also read in the \href{https://github.com/mcci-catena/arduino-lmic#pin-mapping}{Pin Mapping section} of the library \cmd{README.md}. As the reader can see, the example \ref{ej:pin_mapping} starts at line 76, that is because this is the line where the pin mapping is placed in the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L76}{written sketch}.
 
 Regarding to LoRaWAN and TTN security, as previously indicated, the chosen method is ABP, so are necessary the \cmd{NWKSKEY} (Network Session Key), \cmd{APPSKEY} (Application Session Key) and \cmd{DEVADDR} (End-Device Address); these constants placed at lines \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L48}{48}, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L52}{52} and \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L57}{57} must be obtained from TTN console \doubt{AS WILL BE EXPLAINED IN NEXT SECTIONS}. The sketch also sets analog pin \cmd{A2} to acquire the sensor signal as can be seen in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L70}{70}.% as well as the payload to send through LoRa interface in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L65}{65}
 
@@ -731,6 +737,7 @@ Finally, the reader can find the core of this sketch inside \cmd{void do\_send(o
         
   // Read the analog value of the potmeter (0-1023)
   potVal = analogRead(potPin);
+  potVal = 100.0 * potVal / 1023;
   
   // Write the value to the serial monitor
   Serial.println(potVal);
@@ -749,18 +756,20 @@ Finally, the reader can find the core of this sketch inside \cmd{void do\_send(o
   Serial.println(F("Packet queued"));
 \end{lstlisting}
 
-So, as can be seen, in order to prepare the payload firstly the analog pin is stored in \cmd{potVal} variable, after this the function \cmd{lpp.reset()} is ued to reset the CayenneLPP buffer, then the measure \cmd{potVal} is added to the CayenneLPP buffer in the first channel using the function \cmd{lpp.addAnalogInput()}, finally the buffer content is prepared to be transmitted at the next possible time.
+So, as can be seen, in order to prepare the payload firstly the sketch reads the analog pin and stores the read value in \cmd{potVal} variable ---which is a \cmd{double} type and this makes no difference with \cmd{float} type \enquote{On the Uno and other ATMEGA based boards} but it makes \enquote{On the Arduino Due} \cite{Ard_double_type}; after this the function \cmd{lpp.reset()} is used to reset the CayenneLPP buffer, then the measure \cmd{potVal} is added to the CayenneLPP buffer in the first channel using the function \cmd{lpp.addAnalogInput()}, finally the buffer content is prepared to be transmitted at the next possible time.
 %So, as can be seen, in order to prepare the payload, the first is to read the analog pin and store the read value in \cmd{potVal} variable ---which is a \cmd{double} type and this makes no difference with \cmd{float} type in \enquote{On the Uno and other ATMEGA based boards} but it makes \enquote{On the Arduino Due} \cite{Ard_double_type}--- after this, the \cmd{potVal} variable is scaled to a $[0,1.0)$ range, this is due the function \cmd{LMIC\_f2sflt16()} (line 195), which is essentially a kind of encoder to encode floats to 16-bit fields. The working of this function is explained in \cite{MCCI_lmic_16bitencoder}.\footnote{A javascript decoder is also provided by the \href{https://github.com/mcci-catena/arduino-lmic\#uflt16-javascript-decoder}{\cmd{README.md}} but \doubt{it will be described in next sections.}} 
 
-These \cmd{lpp.*()} functions are part of the CayenneLPP library, which is included at line 
+These \cmd{lpp.*()} functions are part of the CayenneLPP library, in particular, the \cmd{lpp.addAnalogInput()} function encodes the raw value as a number encoded in 2 bytes (16 bits signed) with a unit of 0.01, in 16 bits signed is possible to represent numbers from -32768 until 32767, so with a unit of 0.01, that amounts to a range from -327.68 to +327.67; that is because the sketch includes the line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L185}{185}, where the raw value \cmd{potVal} is scaled to a [0, 100.0] range. This range will fit in the range that can be encoded in CayenneLPP. 
 %This encoded 16-bit integer variable is stored in \cmd{uint16\_t payloadPot}, after this the \cmd{payloadPot} 16-bit integer is split into two bytes called \cmd{potLow} and \cmd{potHigh} ---using native \cmd{lowByte} and \cmd{highByte} functions. Finally these bytes are stored in the first two elements of initial \cmd{payload[3]} string declared at line 65, as the reader can see in example \ref{ej:potmeter_vars}, and the payload is prepared to send at the next possible time using the function \cmd{LMIC\_setTxData2()}.
 
-It is important to note that, as will be stated in \hyperlink{Raspi_HAT}{2.1.2.2 Dragino GPS and LoRa HAT} subsection, the SX1276 is a single channel chip and only can listen in one channel, so despite inside \cmd{void setup() \{\}} function the channels are setup as shows the example \ref{ej:chan_setup}, the gateway only will be able to listen the channel 0 (868.1 \si{\mega\hertz}), which is the frequency set in \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/global_conf.json}{global\_conf.json} at \cite{Dragino_DualChannelController_Rpi}
+CayenneLPP is so importante because FIWARE will work with this data model, so any other third party encoding will not be admitted/decoded by the FIWARE LoRaWAN agent.
+
+It is also important to note that, as will be stated in \hyperlink{Raspi_HAT}{2.1.2.2 Dragino GPS and LoRa HAT} subsection, the SX1276 is a single channel chip and only can listen in one channel, so despite inside \cmd{void setup() \{\}} function the channels are setup as shows the example \ref{ej:chan_setup}, the gateway only will be able to listen the channel 0 (868.1 \si{\mega\hertz}), which is the frequency set in \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/global_conf.json}{global\_conf.json} at \cite{Dragino_DualChannelController_Rpi}
 
 \begin{lstlisting}[%
   % float=ht,
   language=cpp,
-  firstnumber=250,
+  firstnumber=251,
   caption={Channels setup.},
   label=ej:chan_setup
   ]
@@ -896,8 +905,10 @@ In order to get the HAT operative, the reader will need to enable the SPI (Seria
   \label{fig:EnablingSPI}
 \end{figure}
 
-Then it would be necessary to install the GPIO access library from Raspberry repositories, so performing \cmd{sudo\, apt\, install\, wiringpi}. After this, the reader will be in position to clone the controller from the github repository \cite{Dragino_DualChannelController_Rpi}
+Then it would be necessary to install the GPIO access library from Raspberry repositories, so performing \cmd{sudo\, apt\, install\, wiringpi} the package manager should install \cmd{wiringpi} providing all necessary libraries.
 
+After this, the reader will be in position to clone the controller from the github repository \cite{Dragino_DualChannelController_Rpi} and compile it performing the command shown in example \ref{ej:compiling_dual_channel_pkg} ---Like will be explained below, it is also important to note where \cmd{git} will clone the repository and where the reader will compile it, because the location of the \cmd{dual\_chan\_pkt\_fwd} binary is so critical for that systemd service (also included in the GitHub repository) \cmd{dual\_chan\_pkt\_fwd.service} works properly.
+ 
 \begin{lstlisting}[%
   % float=ht,
   language=json,
@@ -986,6 +997,13 @@ After this the Raspberry Pi is ready to forward LoRa packets to the \href{https:
 
 \subsection{Software}
 
+The core of the software part is deployed using Docker containers \cite{Docker_container}. These docker containers are deploying essentially the following components
+
+\begin{itemize}
+  \item \textbf{IoTagent-LoRaWAN}, which is in charge of forward the traffic from TTN stack to Orion Context Broker.
+  \item \textbf{Orion Context Broker}, this is the \textbf{core generic enabler}, in fact as indicated, this is the only one required component to the solution be considered as \enquote{powered by FIWARE}. Besides this generic enabler requires a \textbf{Mongo database}.
+  \item \textbf{QuantumLeap}, in order to make the context data persisting, this generic enabler is needed. Orion Context Broker works mainly with two elements; entities and subscriptions, however, for any created entity the context data does not persist in Mongo database, instead the information will be replaced/updated; so creating a subscription which notifies to QuantumLeap, this generic enabler will store the context data in a \textbf{Crate database} to make it persisting.
+\end{itemize}
 
 
 
