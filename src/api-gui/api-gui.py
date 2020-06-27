@@ -6,21 +6,24 @@ import json
 def use_api(url, method=requests.get, header=None, body=None):
     body = json.dumps(body) if body else None
 
-    respuesta = method(url, headers=header, data=body)
-    print(url, method, respuesta.status_code, respuesta.text)
+    response = method(url, headers=header, data=body)
+    print(url, method, response.status_code, response.text)
 
-    return respuesta
+    return response
 
 
-# meter en env
+# These are customizable patterns, actually
 fiware_service = 'atosioe'
 fiware_servicepath = '/lorattn'
+
+# These are application unique
 TTN_app_id = 'dendrometer'
 TTN_app_pw = 'ttn-account-v2.173lH8wwDiIRC8E2JgM9ScXyuNRlPpMefpazS0TIhnU'
-TTN_dev_eui = '00EC51D264A6F8FD'
 TTN_app_eui = '70B3D57ED0030B5D'
-TTN_app_skey = '7AF6B9A29EAF893F66C0F4360BA8DD5B'
 
+# These are device unique
+TTN_app_skey = '7AF6B9A29EAF893F66C0F4360BA8DD5B'
+TTN_dev_eui = '00EC51D264A6F8FD'
 
 header_iot_device = {
     "Content-Type": "application/json",
@@ -30,8 +33,8 @@ header_iot_device = {
 }
 
 header_orion = {
-        "fiware-service": f"{fiware_service}",
-        "fiware-servicepath": f"{fiware_servicepath}"
+    "fiware-service": f"{fiware_service}",
+    "fiware-servicepath": f"{fiware_servicepath}"
 }
 
 
@@ -48,7 +51,7 @@ class Application(tk.Frame):
         self.gui = tk.Tk()
         self.gui.title('Fiware Client')
         super().__init__(self.gui)
-        self.gui.geometry("350x400")
+        self.gui.geometry("640x480")
         self.pack()
         main_frame = tk.Frame(self.gui)
         main_frame.pack(fill=tk.BOTH, expand=tk.YES)
@@ -59,7 +62,7 @@ class Application(tk.Frame):
                                       .json()['libVersion'])
         self.label_quantumleap_ver = tk.Label(main_frame,
                                               text='QuantumLeap version: ' +
-                                                    use_api('http://localhost:8668/v2/version').json()['version'])
+                                                   use_api('http://localhost:8668/v2/version').json()['version'])
 
         self.label_orion_ver.place(x=10, y=10)
         self.label_iot_ver.place(x=10, y=30)
@@ -128,30 +131,30 @@ class Application(tk.Frame):
         # creates the subscription
         entity = Application.entities[-1]
         body = {
-          "description": f"A subscription to get info about {entity}",
-          "subject": {
-            "entities": [
-              {
-                "id": f"{entity}",
-                "type": "LoraDevice"
-              }
-            ],
-            "condition": {
-              "attrs": [
-                "analog_in_1"
-              ]
-            }
-          },
-          "notification": {
-            "http": {
-              "url": "http://quantumleap:8668/v2/notify"
+            "description": f"A subscription to get info about {entity}",
+            "subject": {
+                "entities": [
+                    {
+                        "id": f"{entity}",
+                        "type": "LoraDevice"
+                    }
+                ],
+                "condition": {
+                    "attrs": [
+                        "analog_in_1"
+                    ]
+                }
             },
-            "attrs": [
-              "analog_in_1"
-            ],
-            "metadata": ["dateCreated", "dateModified"]
-          },
-          "throttling": 5
+            "notification": {
+                "http": {
+                    "url": "http://quantumleap:8668/v2/notify"
+                },
+                "attrs": [
+                    "analog_in_1"
+                ],
+                "metadata": ["dateCreated", "dateModified"]
+            },
+            "throttling": 5
         }
         use_api('http://localhost:1026/v2/subscriptions', method=requests.post, header=header_iot_device, body=body)
         self.api_get_devices_and_entities()
@@ -177,14 +180,14 @@ class Application(tk.Frame):
         else:
             last_device = Application.devices[-1]
             last_id = int(last_device.split('_')[-1])
-            device = last_device.split('_')[0] + '_' + str(last_id+1)
+            device = last_device.split('_')[0] + '_' + str(last_id + 1)
 
         if len(Application.entities) == 0:
             entity = Application.default_entity
         else:
             last_entity = Application.entities[-1]
             last_id = int(last_entity.split('-')[-1])
-            entity = '-'.join(last_entity.split('-')[:-1]) + '-' + str(last_id+1)
+            entity = '-'.join(last_entity.split('-')[:-1]) + '-' + str(last_id + 1)
 
         return {
             "devices": [

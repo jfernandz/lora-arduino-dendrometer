@@ -8,3 +8,4 @@ docs/LaTex/*.out
 docs/LaTex/*.run.xml
 docs/LaTex/*.synctex.gz
 docs/LaTex/*.toc
+testing/api-gui/.idea/*
