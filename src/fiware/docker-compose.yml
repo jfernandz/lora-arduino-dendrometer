@@ -15,7 +15,7 @@ services:
             - "IOTA_CB_HOST=orion"
             - "IOTA_CB_PORT=1026"
             - "IOTA_NORTH_PORT=4061"
-            - "IOTA_REGISTRY_TYPE=mongo-db"
+            - "IOTA_REGISTRY_TYPE=mongodb"
             - "IOTA_MONGO_HOST=mongo-db"
             - "IOTA_MONGO_PORT=27017"
             - "IOTA_MONGO_DB=iotagent-lorawan"
