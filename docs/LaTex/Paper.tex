@@ -1039,7 +1039,7 @@ Once these steps are completed, the TTN web interface will provide an overview w
   \label{fig:dev_overview}
 \end{figure}
 
-Another important consideration inside TTN platform is to check which decoder is chosen for the received payloads, this can be checked by clicking on \cmd{Payload Formats} tab inside Application Overview. As can be seen in figure \ref{fig:CayenneLPP_decoder}, it is so importan to choose the \cmd{CayenneLPP} decoder, because as indicated, the payload is being encoded in the end-nodes using the CayenneLPP standard. 
+Another important consideration inside TTN platform is to check which decoder is chosen for the received payloads, this can be checked by clicking on \cmd{Payload Formats} tab inside Application Overview. As can be seen in figure \ref{fig:CayenneLPP_decoder}, it is so importan to choose the \cmd{CayenneLPP} decoder, because as indicated, \myuline{the payload is being encoded in the end-nodes using the CayenneLPP standard}. 
 
 \begin{figure}[ht]
   \centering
@@ -1068,10 +1068,64 @@ However this process does not happen out of the box, i.e. it is necessary to pro
 
 Anyway and after of this little introduction, the most important thing is to deploy all FIWARE generic enablers and its dependencies in a secure and stable way. This is because this project uses \cmd{docker} and \cmd{docker-compose} in order to ensure these modules deployment and execution. Again this project provides the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/fiware/docker-compose.yml}{\cmd{docker-compose.yml}} file to ensure a correct deployment. 
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/docker_containers_deployed.png}  
+  \caption{\cmd{tmux} showing docker containers status and logs.}
+  \label{fig:docker_containers}
+\end{figure}
+
+So cloning the project and navigating to \cmd{src/fiware/} folder in the terminal the reader will must perform \cmd{docker-compose up -d} to deploy all containers and keep detached from the logs output. Once this has been done, performing \cmd{docker ps -a} will show the status of deployed containers, as figure \ref{fig:docker_containers} shows. In a similar way, to check the logs the reader could perform \cmd{docker-compose logs -f <NAME>} where the argument \cmd{<NAME>} is optional and when is not provided \cmd{docker-compose} will show logs for all containers; this is also shown in picture \ref{fig:docker_containers}.
+
+When these containers are properly deployed, it should be possible to send the HTTP requests, however, these must follow a precise order; 
 
 
 \begin{itemize}
-  \item In a first place the reader will need to create a new device for the \textbf{IoTagent-LoRaWAN}, this
+  \item In a first place the reader will need to create a new device for the \textbf{IoTagent-LoRaWAN}, this can be done performing a \cmd{POST} HTTP request whose body will include the necessary data to retrieve the TTN stack context data.
+  
+  \begin{lstlisting}[%
+    % float=ht,
+    language=json,
+    firstnumber=1,
+    caption={Device provisioning for IoTagent-LoRaWAN},
+    label=ej:provisioning_devices
+    ]
+    curl localhost:4061/iot/devices -s -S -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'fiware-service: atosioe' -H 'fiware-servicepath: /lorattn' -d @- <<EOF
+    {
+      "devices": [
+        {
+          "device_id": "node_2",
+          "entity_name": "LORA-N-2",
+          "entity_type": "LoraDevice",
+          "timezone": "Europe/Madrid",
+          "attributes": [
+            {
+              "object_id": "analog_in_1",
+              "name": "analog_in_1",
+              "type": "Number"
+            }
+          ],
+          "internal_attributes": {
+            "lorawan": {
+              "application_server": {
+                "host": "eu.thethings.network",
+                "username": "dendrometer",
+                "password": "ttn-account-v2.173lH8wwDiIRC8E2JgM9ScXyuNRlPpMefpazS0TIhnU",
+                "provider": "TTN"
+              },
+              "dev_eui": "00EC51D264A6F8FD",
+              "app_eui": "70B3D57ED0030B5D",
+              "application_id": "dendrometer",
+              "application_key": "3736B21218C4443F639FAF4114B723A1"
+            }
+          }
+        }
+      ]
+    }
+    EOF
+
+    EOF
+  \end{lstlisting}
 \end{itemize}
 
 
