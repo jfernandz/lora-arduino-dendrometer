@@ -617,7 +617,7 @@ Like in the Introduction, the most proper way to present this technical descript
 
 Firstly the TTN stack send through MQTT protocol the payload to FIWARE IoTagent-LoRaWAN generic enabler. Secondly, FIWARE generic enablers process that payload and store the contained information (also called \textit{context data}) along with a timestamp in the persisting data base (CrateDB), after this, the context data can be visualized in a web view provided by Grafena. 
 
-At this moment this solution requires to send manually the HTTP requests in order to communicate with FIWARE generic enablers manually. The ideal situation would be to develop a desktop or web application capable of provide any kind of graphical user interface to easily setup the two most important requirements to get the solution working as intended ---Create a new device using the IoTagent-LoRaWAN, create a subscription in Orion Context Broker which sends notifications to QuantumLeap.
+At this moment this solution requires to send manually the HTTP requests in order to communicate with FIWARE generic enablers manually. The ideal situation would be to develop a desktop or web application capable of provide any kind of graphical user interface to easily set up the two most important requirements to get the solution working as intended ---Create a new device using the IoTagent-LoRaWAN, create a subscription in Orion Context Broker which sends notifications to QuantumLeap.
 
 \begin{figure}[htp]
   \centering
@@ -777,7 +777,7 @@ These \cmd{lpp.*()} functions are part of the CayenneLPP library \cite{CayenneLP
 
 CayenneLPP is so important because FIWARE will work with this data model, so any other third party encoding will not be admitted/decoded by the FIWARE LoRaWAN agent.
 
-It is also important to note that, as will be stated in \hyperlink{Raspi_HAT}{2.1.2.2 Dragino GPS and LoRa HAT} subsection, the SX1276 is a single channel chip and only can listen in one channel, so despite inside \cmd{void setup()} function the channels are setup as shows the example \ref{ej:chan_setup}, the gateway only will be able to listen the channel 0 (868.1 \si{\mega\hertz}), which is the frequency set in \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/global_conf.json}{global\_conf.json} at \cite{Dragino_DualChannelController_Rpi}
+It is also important to note that, as will be stated in \hyperlink{Raspi_HAT}{2.1.2.2 Dragino GPS and LoRa HAT} subsection, the SX1276 is a single channel chip and only can listen in one channel, so despite inside \cmd{void setup()} function the channels are set up as shows the example \ref{ej:chan_setup}, the gateway only will be able to listen the channel 0 (868.1 \si{\mega\hertz}), which is the frequency set in \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/global_conf.json}{global\_conf.json} at \cite{Dragino_DualChannelController_Rpi}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -839,7 +839,7 @@ One of the first and most important configurations is the internet access; this 
   \item \textbf{PoE} (Power-over-Ethernet); this is not actually a suitable option because Raspberry Pi does not support PoE by itself, it needs a \href{https://www.raspberrypi.org/products/poe-hat/}{separate HAT} which is using the GPIO connector, so this makes impossible to use it along the LoRa HAT. Apparently there are hacks to reduce this HAT size, but they also use pins in the GPIO connector \cite{RaspiPoEHack}. Besides, this method only works with up to 100m cables, so it would be necessary to have a power source and internet access point within a 100m radius.\footnote{The \href{https://github.com/hallard/LoRasPI}{LoRasPI HAT} is more suitable for this option because does not cover whole GPIO connector, leaving free the GPIO pins used in \cite{RaspiPoEHack}.}
   \item \textbf{WiFi} and battery powered; this setup implies also the existence of a relatively close power source, because the access point used to provide that wireless network connection should work also with mains power. Probably the WiFi radio is not enough to make it the difference between this setup and the next one suggested.
   \item Simple \textbf{ethernet} and mains power, this setup is similar to the previous one exposed, but omitting the WiFi limitations/configurations, the access point and the Raspberry Pi should be practically both at the same location.
-  \item \textbf{GSM module} and battery or mains powered; this document consider this the ideal setup. This setup doesn't require a conventional access point because the internet access is granted through a GSM module, in a similar way than a mobile phone. This would be the ideal way because it minimizes the resources needed, which is crucial in an environment where those probably won't be available ---in the middle of the forest.
+  \item \textbf{GSM module} and battery or mains powered; this document consider this as the ideal setup. This setup doesn't require a conventional access point because the internet access is granted through a GSM module, in a similar way than a mobile phone. This would be the ideal way because it minimizes the resources needed, which is crucial in an environment where those probably won't be available ---in the middle of the forest.
   
   Furthermore, this is apparently possible through two different options:
     \begin{itemize}
@@ -1003,7 +1003,7 @@ These last two instructions show information about service status and \cmd{dual\
   \label{fig:dual_chan_pkt_fwd-status}
 \end{figure}
 
-As can be seen, this service was modified in order to reach properly the \cmd{dual\_chan\_pkt\_fwd} binary, which is not located in \cmd{/home/pi/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd} (the default location defined for the binary in the \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/dual_chan_pkt_fwd.service#L9}{GitHub repository}); mainly because the user is not called \cmd{pi} anymore but \cmd{wyre}, the path needs to be modified to that path containing the binary (\cmd{/home/wyre/TFG/LoRa/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd})\footnote{This is a personal setup and is completely optional, the reader can choose their own path or even setup as suggested with \cmd{pi} user.}
+As can be seen, this service was modified in order to reach properly the \cmd{dual\_chan\_pkt\_fwd} binary, which is not located in \cmd{/home/pi/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd} (the default location defined for the binary in the \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/dual_chan_pkt_fwd.service#L9}{GitHub repository}); mainly because the user is not called \cmd{pi} anymore but \cmd{wyre}, the path needs to be modified to that path containing the binary (\cmd{/home/wyre/TFG/LoRa/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd})\footnote{This is a personal setup and is completely optional, the reader can choose their own path or even set up as suggested with \cmd{pi} user.}
 
 
 After this the Raspberry Pi is ready to forward LoRa packets to the \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/global_conf.json#L33}{specified server at line 33 in \cmd{global\_conf.json}}. Besides, the reader will be able to manage the Raspberry Pi through ssh service, so the Raspberry only precises any kind of internet access point and electrical power supply.
@@ -1019,7 +1019,7 @@ The core of the software part is deployed using Docker containers \cite{Docker_c
   \item \textbf{Grafana}, this container is intended to provide a web interface to visualize and manage the retrieved context data. It stores its configuration and customization values in an embebed sqlite3 database; so there is not necessity for a separate container. 
 \end{itemize}
 
-These bold highlighted are the deployed containers that will be detailed later, many of them are not even part of FIWARE platform, though. First this document will expose how to setup the gateway, create an application and add devices inside The Things Network stack. 
+These bold highlighted are the deployed containers that will be detailed later, many of them are not even part of FIWARE platform, though. First this document will expose how to set up the gateway, create an application and add devices inside The Things Network stack. 
 
 \subsubsection{The Things Network Stack}\label{sssec:TTN_Stack}
 This is a platform for the LoRaWAN protocol where is possible to manage gateways, devices and applications. It provides a centralized way to manage these kind of things regard in security too, generating several keys to tight the end-devices to the chosen server cloud solution (FIWARE in this case). There are three fundamental process the reader must follow to include nodes and gateways in the platform, those are luckily pretty well documented. 
@@ -1064,7 +1064,7 @@ As shown in figure \ref{fig:GenView}, this solution is being implemented using p
 
 The workflow is like picture \ref{fig:GenView} shows, first the IoTagent receives the context data from TTN, this IoTagent sends this context data to the Orion Context Broker and this latter notifies QuantumLeap the variations on the context data, thus QuantumLeap can proceed to store them into Crate database.
 
-However this process does not happen out of the box, i.e. it is necessary to properly setup these generic enablers to get this workflow. This can be done following the FIWARE API documentation. These configuration can be donde using HTTP requests due FIWARE essentially provides a RESTful API \cite{FIWARE_RESTful}, these HTTP requests can be performed using multiple clients like \cmd{curl} or \cmd{Postman} among others. This project in fact also provides a \href{https://github.com/WyRe/lora-arduino-dendrometer/tree/master/src/postman}{\cmd{Postman} collection and environment} that can be imported to manage them using a confortable graphical interface.
+However this process does not happen out of the box, i.e. it is necessary to properly set up these generic enablers to get this workflow. This can be done following the FIWARE API documentation. These configuration can be donde using HTTP requests due FIWARE essentially provides a RESTful API \cite{FIWARE_RESTful}, these HTTP requests can be performed using multiple clients like \cmd{curl} or \cmd{Postman} among others. This project in fact also provides a \href{https://github.com/WyRe/lora-arduino-dendrometer/tree/master/src/postman}{\cmd{Postman} collection and environment} that can be imported to manage them using a confortable graphical interface.
 
 Anyway and after of this little introduction, the most important thing is to deploy all FIWARE generic enablers and its dependencies in a secure and stable way. This is because this project uses \cmd{docker} and \cmd{docker-compose} in order to ensure these modules deployment and execution. Again this project provides the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/fiware/docker-compose.yml}{\cmd{docker-compose.yml}} file to ensure a correct deployment. 
 
@@ -1207,7 +1207,7 @@ When these containers are properly deployed, it should be possible to send the H
     EOF
   \end{lstlisting}
 
-  As the reader can see, for this subscription has been setup the \cmd{"url": "http://quantumleap:8668/v2/notify"} i.e. QuantumLeap will be notified at any change in the entity with \cmd{"id": "LORA-N-0"}; also it's a good practice to check that all went as expected, so sending a \cmd{GET} request the response should be like example \ref{ej:OrionCB_subscriptions_get} 
+  As the reader can see, for this subscription has been set up the \cmd{"url": "http://quantumleap:8668/v2/notify"} i.e. QuantumLeap will be notified at any change in the entity with \cmd{"id": "LORA-N-0"}; also it's a good practice to check that all went as expected, so sending a \cmd{GET} request the response should be like example \ref{ej:OrionCB_subscriptions_get} 
 
   \begin{lstlisting}[%
     % float=ht,
@@ -1269,18 +1269,62 @@ When these containers are properly deployed, it should be possible to send the H
 Once these two steps have been performed successfully, the context data should be routed to the Crate database where will be persistent. 
 
 \subsubsection{Grafana}
-Grafana is a powerful dashboard used at many scenarios in the software industry, It allows to monitor almost everything; due it's actually capable to acquire the data from multiple sources. In this project will be used in order to monitor the context data along the time
+Grafana is a powerful dashboard used at many scenarios in the software industry, it allows to monitor almost everything the reader can imagine; due it's actually capable to acquire the data from multiple sources. In this project will be used in order to monitor the context data along the time.
 
+This web application can be accessed via \cmd{http://localhost:3000} in the web browser ---the file \cmd{docker-compose.yml} is already setup to expose that port and allow the user to connect Grafana in that way. The default credentials for the first access are \cmd{username: admin} and \cmd{password: admin}. Once the reader has accessed for a first time is possible to modify those credentials or even create new users with different privileges.
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/Grafana_home.png}
+  \caption{Grafana home view.}
+  \label{fig:grafana_home}
+\end{figure}
 
+AS the central panel in the home view indicates, there are two fundamental task that must be performed to get a detailed view of our context data; these are to add a data source and set up a new dashboard. 
 
+To add a new data source the reader can use the left sidebar or click where says \enquote{Add your first dada source} in the home view. CrateDB is PostgreSQL compatible, so it must be chosen a PostgreSQL database and fill the form with the data shown in figure \ref{fig:Grafana_add_datasource}
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/Grafana_add_datasource.png}
+  \caption{Adding CrateDB as the data source}
+  \label{fig:Grafana_add_datasource}
+\end{figure}
 
+\enquote{Host} must be \cmd{crate:5432} because is the tcp port that grafana uses to queries, this can be seen also in figure \ref{fig:docker_containers} another important credential is the \enquote{User} that must be \cmd{crate} with no password because CrateDB does not set anyone by default, \enquote{Database} can be set arbitrarily, and finally the \enquote{SSL} has to be disabled. 
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/Grafana_panel_setup.png}
+  \caption{Setting up a panel.}
+  \label{fig:panel_setup}
+\end{figure}
 
+To get the panel drawing the CrateDB stored context data, the reader must specify a query to retrieve the data from the database. This can be done in the \enquote{Query} tab below the graph shown in picture \ref{fig:panel_setup}, here the user could use the graphical interface or write the query manually by clicking on the pencil button at the right, so essentially the query should looks as follows in example \ref{ej:CrateDB_query}
 
+\begin{lstlisting}[%
+  % float=ht,
+  language=json,
+  firstnumber=1,
+  caption={Query to retrieve the stored context data.},
+  label=ej:CrateDB_query
+  ]
+    SELECT
+    time_index AS "time",
+    entity_id,
+    analog_in_1
+  FROM mtatosioe.etloradevice
+  ORDER BY 1
+\end{lstlisting}
 
+The table name \cmd{mtatosioe.etloradevice} can be found inside CrateDB admin panel, which can be accessed in \cmd{http://localhost:4200/\#!/tables} from the web browser. So after clicking on \enquote{Apply} button on top right corner the reader should have something similar to figure \ref{fig:final_panel}
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/Grafana_final_panel.png}
+  \caption{Dendrometers panel}
+  \label{fig:final_panel}
+\end{figure}
 
 
 \newpage
