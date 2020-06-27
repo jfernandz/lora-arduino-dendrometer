@@ -563,7 +563,7 @@ Since the idea is to produce a low-cost device in order to distribute a high num
 \end{itemize}
 
 % I need to use that \texorpdfstring{}{} for the left-side ToC in PDF viewers, because the ® cannot be rendered in there.
-\subsubsection{\texorpdfstring{LoRa\textsuperscript{\textregistered} (Lo{\normalfont\sffamily ng} Ra{\normalfont\sffamily nge})}{LoRa® (Long Range)}}
+\subsubsection{\texorpdfstring{LoRa\textsuperscript{\textregistered} (Lo{\normalfont\sffamily ng} Ra{\normalfont\sffamily nge})}{LoRa (Long Range)}}
 LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite[]{LoRaGeneral}. This is because some devices inside IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been pointed. So this low availability (of resources) along with their tendency to be distributed/scattered causes the necessity for a low-power consumption and a long-range telecommunication.
 
 In a more general sense, there is a wider concept to include all these kind of technologies which fullfil the IoT communication requirements, this is the \enquote{Low-Power Wide Area Networks} (LPWAN), so as claimed by \cite[]{LoRaGeneral}
@@ -1025,9 +1025,9 @@ These bold highlighted are the deployed containers that will be detailed later, 
 This is a platform for the LoRaWAN protocol where is possible to manage gateways, devices and applications. It provides a centralized way to manage these kind of things regard in security too, generating several keys to tight the end-devices to the chosen server cloud solution (FIWARE in this case). There are three fundamental process the reader must follow to include nodes and gateways in the platform, those are luckily pretty well documented. 
 
 \begin{itemize}
-  \item Register a gateway; this is the process where \cmd{Gateway ID} shown in example \ref{ej:Running_DualChann_Controller} is needed; this process is, as indicated, well documented in \cite{Gateway_reg}.
-  \item Add an application; this application will provide a set of security keys as well as a zone where manage different devices (these are basically the end-nodes i.e. the arduino microcontrollers). Is also documented in \cite{Add_application}.
-  \item Register a device within added application; these devices will be ultimately the microcontrollers. Again the reader can find the relative documents in \cite{Device_reg}. 
+  \item \textbf{Register a gateway}; this is the process where \cmd{Gateway ID} shown in example \ref{ej:Running_DualChann_Controller} is needed; this process is, as indicated, well documented in \cite{Gateway_reg}.
+  \item \textbf{Add an application}; this application will provide a set of security keys as well as a zone where manage different devices (these are basically the end-nodes i.e. the arduino microcontrollers). Is also documented in \cite{Add_application}.
+  \item \textbf{Register a device} within added application; these devices will be ultimately the microcontrollers. Again the reader can find the relative documents in \cite{Device_reg}. 
 \end{itemize}
 
 Once these steps are completed, the TTN web interface will provide an overview with all data regarding to the device like figure \ref{fig:dev_overview} shows. 
@@ -1039,7 +1039,51 @@ Once these steps are completed, the TTN web interface will provide an overview w
   \label{fig:dev_overview}
 \end{figure}
 
-Another important consideration inside TTN platform is to check which decoder is chosen for the receives payloads, this can be check in 
+Another important consideration inside TTN platform is to check which decoder is chosen for the received payloads, this can be checked by clicking on \cmd{Payload Formats} tab inside Application Overview. As can be seen in figure \ref{fig:CayenneLPP_decoder}, it is so importan to choose the \cmd{CayenneLPP} decoder, because as indicated, the payload is being encoded in the end-nodes using the CayenneLPP standard. 
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/TTN_Payload_Formats.png}
+  \caption{Choosing CayenneLPP as payload decoder}
+  \label{fig:CayenneLPP_decoder}
+\end{figure}
+
+Once this has been done, the microcontrollers has also been programmed and the gateway configured, the reader should be able to read the sensor data in the \cmd{Data} tab like figure \ref{fig:sens_data_TTN}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/TTN_sensors_data.png}
+  \caption{Following sensors data in TTN.}
+  \label{fig:sens_data_TTN}
+\end{figure}
+
+Then it should be possible to retrieve this data using the FIWARE IoTagent-LoRaWAN. The setup of this different FIWARE generic enablers will be explained in the next subsection, but essentially this IoTagent will use, as indicated previously, all those application and devices identifiers in order to manage the incoming context data from different microcontrollers (also called devices or end-nodes). 
+
+\subsubsection{FIWARE}
+As shown in figure \ref{fig:GenView}, this solution is being implemented using particularly three FIWARE generic enablers, the most important one, of course, \textbf{Orion Context Broker}, also a LoRaWAN agent called \textbf{IoTagent-LoRaWAN} and finally to make data persistent, \textbf{QuantumLeap}.
+
+The workflow is like picture \ref{fig:GenView} shows, first the IoTagent receives the context data from TTN, this IoTagent sends this context data to the Orion Context Broker and this latter notifies QuantumLeap the variations on the context data, thus QuantumLeap can proceed to store them into Crate database.
+
+However this process does not happen out of the box, i.e. it is necessary to properly setup these generic enablers to get this workflow. This can be done following the FIWARE API documentation. These configuration can be donde using HTTP requests due FIWARE essentially provides a RESTful API \cite{FIWARE_RESTful}, these HTTP requests can be performed using multiple clients like \cmd{curl} or \cmd{Postman} among others. This project in fact also provides a \href{https://github.com/WyRe/lora-arduino-dendrometer/tree/master/src/postman}{\cmd{Postman} collection and environment} that can be imported to manage them using a confortable graphical interface.
+
+Anyway and after of this little introduction, the most important thing is to deploy all FIWARE generic enablers and its dependencies in a secure and stable way. This is because this project uses \cmd{docker} and \cmd{docker-compose} in order to ensure these modules deployment and execution. Again this project provides the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/fiware/docker-compose.yml}{\cmd{docker-compose.yml}} file to ensure a correct deployment. 
+
+
+
+\begin{itemize}
+  \item In a first place the reader will need to create a new device for the \textbf{IoTagent-LoRaWAN}, this
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

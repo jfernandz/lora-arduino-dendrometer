@@ -45,16 +45,16 @@ CayenneLPP lpp(51);
 
 // LoRaWAN NwkSKey, network session key
 // This should be in big-endian (aka msb).
-static const PROGMEM u1_t NWKSKEY[16] = { 0xBD, 0xE7, 0xCC, 0xB4, 0x0C, 0x22, 0x1C, 0x71, 0xFB, 0x9F, 0xD0, 0xD3, 0x3D, 0x32, 0x86, 0x81 };
+static const PROGMEM u1_t NWKSKEY[16] = { 0x6E, 0x32, 0x9F, 0xD3, 0xC2, 0x39, 0x7C, 0x34, 0x4C, 0xCD, 0x58, 0x11, 0xC4, 0xFE, 0xEF, 0x77 };
 
 // LoRaWAN AppSKey, application session key
 // This should also be in big-endian (aka msb).
-static const u1_t PROGMEM APPSKEY[16] = { 0x7A, 0xF6, 0xB9, 0xA2, 0x9E, 0xAF, 0x89, 0x3F, 0x66, 0xC0, 0xF4, 0x36, 0x0B, 0xA8, 0xDD, 0x5B };
+static const u1_t PROGMEM APPSKEY[16] = { 0x37, 0x36, 0xB2, 0x12, 0x18, 0xC4, 0x44, 0x3F, 0x63, 0x9F, 0xAF, 0x41, 0x14, 0xB7, 0x23, 0xA1 };
 
 // LoRaWAN end-device address (DevAddr)
 // See http://thethingsnetwork.org/wiki/AddressSpace
 // The library converts the address to network byte order as needed, so this should be in big-endian (aka msb) too.
-static const u4_t DEVADDR = 0x26011730 ; // <-- Change this address for every node!
+static const u4_t DEVADDR = 0x26011DF0 ; // <-- Change this address for every node!
 
 // These callbacks are only used in over-the-air activation, so they are
 // left empty here (we cannot leave them out completely unless
@@ -72,7 +72,7 @@ double potVal = 0;             // Potmeter value
 
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).
-const unsigned TX_INTERVAL = 60;
+const unsigned TX_INTERVAL = 6;
 
 // Pin mapping
 const lmic_pinmap lmic_pins = {
