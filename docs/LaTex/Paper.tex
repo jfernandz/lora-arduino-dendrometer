@@ -1081,7 +1081,7 @@ When these containers are properly deployed, it should be possible to send the H
 
 
 \begin{itemize}
-  \item In a first place the reader will need to create a new device for the \textbf{IoTagent-LoRaWAN}, this can be done performing a \cmd{POST} HTTP request whose body will include the necessary data to retrieve the TTN stack context data.
+  \item In a first place the reader will need to provision a new device for the \textbf{IoTagent-LoRaWAN}, this can be done performing a \cmd{POST} HTTP request whose body will include the necessary data to retrieve the TTN stack context data.
   
   \begin{lstlisting}[%
     % float=ht,
@@ -1090,7 +1090,7 @@ When these containers are properly deployed, it should be possible to send the H
     caption={Device provisioning for IoTagent-LoRaWAN},
     label=ej:provisioning_devices
     ]
-    curl localhost:4061/iot/devices -s -S -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'fiware-service: atosioe' -H 'fiware-servicepath: /lorattn' -d @- <<EOF
+    $ curl localhost:4061/iot/devices -s -S -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'fiware-service: atosioe' -H 'fiware-servicepath: /lorattn' -d @- <<EOF
     {
       "devices": [
         {
@@ -1116,7 +1116,8 @@ When these containers are properly deployed, it should be possible to send the H
               "dev_eui": "00EC51D264A6F8FD",
               "app_eui": "70B3D57ED0030B5D",
               "application_id": "dendrometer",
-              "application_key": "3736B21218C4443F639FAF4114B723A1"
+              "application_key": "3736B21218C4443F639FAF4114B723A1",
+              "data_model": "cayennelpp"
             }
           }
         }
@@ -1124,9 +1125,148 @@ When these containers are properly deployed, it should be possible to send the H
     }
     EOF
   \end{lstlisting}
+
+  As example \ref{ej:provisioning_devices} shows, is mandatory to provide a \cmd{"device\_id"}, which would be desirable to match with de TTN device ID, an \cmd{"entity\_name"} in order to make Orion Context Broker create that entity and also an \cmd{"username"} and \cmd{"application\_id"} that must match with the application ID in TTN. Besides It will be needed the \cmd{"password"}, which can be obtained from the Application Overview in TTN website and the \cmd{"dev\_eui"}, \cmd{"app\_eui"} and \cmd{"application\_key"}, all of these ---relative to the created device--- are available into TTN dashboard. This \cmd{POST} request is included in the \cmd{Postman} collection provided by this project repository; of course \myuline{the reader will need to replace the keys in the environment for their own}. 
+
+  When a new device is created, \textbf{IoTagent-LoRaWAN} causes that \textbf{Orion Context Broker} creates a new entity. In fact this can be checked by performing a \cmd{GET} HTTP request, 
+
+  \begin{lstlisting}[%
+    % float=ht,
+    language=json,
+    firstnumber=1,
+    caption={Querying OrionCB for entities list.},
+    label=ej:OrionCB_entities_Get
+    ]
+    $ curl localhost:1026/v2/entities \                                                                       
+       -H 'fiware-service: atosioe' \
+       -H 'fiware-servicepath: /lorattn' | python -mjson.tool
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    100   248  100   248    0     0   4275      0 --:--:-- --:--:-- --:--:--  4275
+    [
+        {
+            "id": "LORA-N-0",
+            "type": "LoraDevice",
+            "TimeInstant": {
+                "type": "DateTime",
+                "value": "2020-06-27T15:58:48.00Z",
+                "metadata": {}
+            },
+            "analog_in_1": {
+                "type": "Number",
+                "value": 55.03,
+                "metadata": {
+                    "TimeInstant": {
+                        "type": "DateTime",
+                        "value": "2020-06-27T15:58:48.00Z"
+                    }
+                }
+            }
+        }
+    ]
+  \end{lstlisting}
+
+  Example \ref{ej:OrionCB_entities_Get} shows the response of that \cmd{GET} request when a new entity is created by Orion Context Broker.
+
+  \item Secondly, after have created the device and therefore the entity, the next thing to do is to create a subscription in order to Orion Context Broker notifies somewhere ---QuantumLeap in this case. In a similar way, to create this subscription the reader can perform a \cmd{POST} request against Orion Context Broker, so as example \ref{ej:OrionCB_subscription} shows, 
+  
+  \begin{lstlisting}[%
+    % float=ht,
+    language=json,
+    firstnumber=1,
+    caption={Creating a subscription to notify QuantumLeap.},
+    label=ej:OrionCB_subscription
+    ]
+    $ curl localhost:1026/v2/subscriptions -s -S -H 'Content-Type: application/json' -H 'fiware-service: atosioe' -H 'fiware-servicepath: /lorattn' -d @- <<EOF
+    {
+      "description": "A subscription to get info about LORA-N-0",
+      "subject": {
+        "entities": [
+          {
+            "id": "LORA-N-0",
+            "type": "LoraDevice"
+          }
+        ],
+        "condition": {
+          "attrs": [
+            "analog_in_1"
+          ]
+        }
+      },
+      "notification": {
+        "http": {
+          "url": "http://quantumleap:8668/v2/notify"
+        },
+        "attrs": [
+          "analog_in_1"
+        ],
+        "metadata": ["dateCreated", "dateModified"]
+      },
+      "throttling": 5
+    }
+    EOF
+  \end{lstlisting}
+
+  As the reader can see, for this subscription has been setup the \cmd{"url": "http://quantumleap:8668/v2/notify"} i.e. QuantumLeap will be notified at any change in the entity with \cmd{"id": "LORA-N-0"}; also it's a good practice to check that all went as expected, so sending a \cmd{GET} request the response should be like example \ref{ej:OrionCB_subscriptions_get} 
+
+  \begin{lstlisting}[%
+    % float=ht,
+    language=json,
+    firstnumber=1,
+    caption={Querying for all existent subscriptions in OrionCB.},
+    label=ej:OrionCB_subscriptions_get
+    ]
+    $ curl localhost:1026/v2/subscriptions \
+    -H 'fiware-service: atosioe' \
+    -H 'fiware-servicepath: /lorattn' | python -mjson.tool
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    100   535  100   535    0     0   9067      0 --:--:-- --:--:-- --:--:--  9067
+    [
+        {
+            "id": "5ef772be8153f85ef485b5fd",
+            "description": "A subscription to get info about LORA-N-0",
+            "status": "active",
+            "subject": {
+                "entities": [
+                    {
+                        "id": "LORA-N-0",
+                        "type": "LoraDevice"
+                    }
+                ],
+                "condition": {
+                    "attrs": [
+                        "analog_in_1"
+                    ]
+                }
+            },
+            "notification": {
+                "timesSent": 17,
+                "lastNotification": "2020-06-27T16:40:56.00Z",
+                "attrs": [
+                    "analog_in_1"
+                ],
+                "onlyChangedAttrs": false,
+                "attrsFormat": "normalized",
+                "http": {
+                    "url": "http://quantumleap:8668/v2/notify"
+                },
+                "metadata": [
+                    "dateCreated",
+                    "dateModified"
+                ],
+                "lastSuccess": "2020-06-27T16:40:56.00Z",
+                "lastSuccessCode": 200
+            },
+            "throttling": 5
+        }
+    ]
+
+  \end{lstlisting}
+
 \end{itemize}
 
-
+Once these two steps have been performed successfully, the context data should be routed to the Crate database where will be persistent. 
 
 
 
