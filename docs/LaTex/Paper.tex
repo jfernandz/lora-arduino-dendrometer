@@ -797,7 +797,7 @@ It is also important to note that, as will be stated in \hyperlink{Raspi_HAT}{2.
   LMIC_setupChannel(8, 868800000, DR_RANGE_MAP(DR_FSK,  DR_FSK),  BAND_MILLI);  // g2-band
 \end{lstlisting}
 
-Because of explained above, the gateway will just receive one package per each $\approx$10 minutes ---at line 74 in the sketch the transmission interval is set at 60 seconds, so as there are 9 channels but the gateway is just listening the channel 0, the microcontroller is transmitting at this channel once in 9---
+Because of explained above, the gateway will just receive one package per each $\sim$10 minutes ---at line 74 in the sketch the transmission interval is set at 60 seconds, so as there are 9 channels but the gateway is just listening the channel 0, the microcontroller is transmitting at this channel once in 9---
 
 \begin{lstlisting}[%
   % float=ht,
@@ -1030,9 +1030,16 @@ This is a platform for the LoRaWAN protocol where is possible to manage gateways
   \item Register a device within added application; these devices will be ultimately the microcontrollers. Again the reader can find the relative documents in \cite{Device_reg}. 
 \end{itemize}
 
+Once these steps are completed, the TTN web interface will provide an overview with all data regarding to the device like figure \ref{fig:dev_overview} shows. 
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/TTN_dev_overview.png}
+  \caption{A device overview.}
+  \label{fig:dev_overview}
+\end{figure}
 
-
+Another important consideration inside TTN platform is to check which decoder is chosen for the receives payloads, this can be check in 
 
 
 
