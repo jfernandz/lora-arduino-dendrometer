@@ -82,6 +82,8 @@ services:
           - "3000:3000"
         depends_on:
           - crate
+        volumes:
+          - grafana-storage:/var/lib/grafana
     
     redis:
         image: redis
@@ -94,6 +96,7 @@ volumes:
     mongo-db:
     cratedata:
     redisdata:
+    grafana-storage:
 
 networks:
     default:
