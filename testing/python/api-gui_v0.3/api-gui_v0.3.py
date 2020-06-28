@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import requests
 import tkinter as tk
 from tkinter import ttk
@@ -48,11 +50,6 @@ def is_hex(string) -> bool:
 
 
 class Application(tk.Frame):
-    # entities = list()
-    # default_entity = 'LORA-N-0'
-
-    # devices = list()
-    # default_device = 'node_0'
 
     devices = entities = list()
     default_device = default_entity = 'node_0'
@@ -88,6 +85,39 @@ class Application(tk.Frame):
         self.notebook.tab(1, state='disabled')  # disabled by default until the app data is introduced
         self.notebook.pack(expand=1, fill="both")
 
+        # Labels
+        self.label_dev_ent_id = None
+        self.label_ttn_app_id = None
+        self.label_ttn_app_pw = None
+        self.label_ttn_app_eui = None
+        self.label_app_skey = None
+        self.label_dev_eui = None
+        self.label_title_devices = None
+        self.label_title_entities = None
+        self.label_title_subscriptions = None
+        self.label_devices = None
+        self.label_entities = None
+        self.label_subscriptions = None
+        self.label_orion_ver = None
+        self.label_iot_ver = None
+        self.label_quantumleap_ver = None
+
+        # Inputs
+        self.entry_dev_ent_id = None
+        self.entry_ttn_app_id = None
+        self.entry_ttn_app_pw = None
+        self.entry_ttn_app_eui = None
+        self.entry_app_skey = None
+        self.entry_dev_eui = None
+
+        # Buttons
+        self.set_app_keys = None
+        self.button_create_device = None
+        self.button_delete_device = None
+
+        # Listbox
+        self.listbox_devices = None
+
         # Widgets
         self.set_devices_management_widgets()
         self.set_about_widgets()
@@ -95,39 +125,6 @@ class Application(tk.Frame):
 
         # Initial get request
         self.api_get_devices_and_entities()
-
-        # # Labels
-        # self.label_dev_ent_id = tk.Label()
-        # self.label_ttn_app_id = tk.Label()
-        # self.label_ttn_app_pw = tk.Label()
-        # self.label_ttn_app_eui = tk.Label()
-        # self.label_app_skey = tk.Label()
-        # self.label_dev_eui = tk.Label()
-        # self.label_title_devices = tk.Label()
-        # self.label_title_entities = tk.Label()
-        # self.label_title_subscriptions = tk.Label()
-        # self.label_devices = tk.Label()
-        # self.label_entities = tk.Label()
-        # self.label_subscriptions = tk.Label()
-        # self.label_orion_ver = tk.Label()
-        # self.label_iot_ver = tk.Label()
-        # self.label_quantumleap_ver = tk.Label()
-        #
-        # # Inputs
-        # self.entry_dev_ent_id = tk.Entry()
-        # self.entry_ttn_app_id = tk.Entry()
-        # self.entry_ttn_app_pw = tk.Entry()
-        # self.entry_ttn_app_eui = tk.Entry()
-        # self.entry_app_skey = tk.Entry()
-        # self.entry_dev_eui = tk.Entry()
-        #
-        # # Buttons
-        # self.set_app_keys = tk.Button()
-        # self.button_create_device = tk.Button()
-        # self.button_delete_device = tk.Button()
-        #
-        # # Listbox
-        # self.listbox_devices = tk.Listbox()
 
     def set_about_widgets(self) -> None:
         """
@@ -388,29 +385,13 @@ class Application(tk.Frame):
             entity = Application.entities[index]
             subscription = Application.subscriptions[index]
 
-            use_api(f'http://localhost:1026/v2/entities/{entity}', requests.delete,
+            use_api(f'http://localhost:1026/v2/entities/{entity}', method=requests.delete,
                     header={"fiware-service": f"{fiware_service}", "fiware-servicepath": f"{fiware_servicepath}"})
             use_api(f'http://localhost:4061/iot/devices/{device}', method=requests.delete, header=header_iot_device)
             use_api(f'http://localhost:1026/v2/subscriptions/{subscription}', method=requests.delete,
                     header=header_orion)
         self.button_delete_device.config(state='disabled')
         self.api_get_devices_and_entities()
-
-    # @staticmethod
-    # def generate_next_device_name():
-    #     """
-    #     Static function to generate device names. It generates lacking names using an index.
-    #     :return:
-    #     """
-    #     if not Application.devices:
-    #         return Application.default_device, Application.default_entity
-    #     ids = [int(device.split('_')[-1]) for device in Application.devices]
-    #     for i in range(0, max(ids) + 1):
-    #         if i not in ids:
-    #             return f'device_{i}', f'LORA-N-{i}'
-    #
-    #     next_id = max(ids) + 1
-    #     return f'device_{next_id}', f'LORA-N-{next_id}'
 
     @staticmethod
     def get_iot_body():
@@ -421,8 +402,6 @@ class Application(tk.Frame):
         it's simpler.
         :return:
         """
-        # device, entity = Application.generate_next_device_name()
-        # device, entity = Application.devices() ???? <-------------------------------------
 
         if len(Application.devices) == 0:
             device = Application.default_device
