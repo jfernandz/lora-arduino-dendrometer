@@ -69,7 +69,7 @@ class Application(tk.Frame):
         self.notebook.add(self.tab_app_keys, text='Applications Keys')
         self.notebook.add(self.tab_devices_management, text='Devices Management')
         self.notebook.add(self.tab_about, text='About')
-        # self.notebook.tab(1, state='disabled')  # disabled by default until the app data is introduced
+        self.notebook.tab(1, state='disabled')  # disabled by default until the app data is introduced
         self.notebook.pack(expand=1, fill="both")
 
         # Widgets

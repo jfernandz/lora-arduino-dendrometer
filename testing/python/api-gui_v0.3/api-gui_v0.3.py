@@ -22,6 +22,14 @@ header_orion = {
 
 
 def use_api(url, method=requests.get, header=None, body=None):
+    """
+    Generic function to attack the FIWARE API
+    :param url:
+    :param method:
+    :param header:
+    :param body:
+    :return:
+    """
     body = json.dumps(body) if body else None
 
     response = method(url, headers=header, data=body)
@@ -31,12 +39,18 @@ def use_api(url, method=requests.get, header=None, body=None):
 
 
 def is_hex(string) -> bool:
+    """
+    Function to check whether a string is hexadecimal
+    :param string:
+    :return:
+    """
     return all([char in hexdigits for char in string])
 
 
 class Application(tk.Frame):
     entities = list()
-    default_entity = 'LORA-N-0'
+    # default_entity = 'LORA-N-0'
+    default_entity = 'node_0'
 
     devices = list()
     default_device = 'node_0'
@@ -92,6 +106,9 @@ class Application(tk.Frame):
         self.label_devices = tk.Label()
         self.label_entities = tk.Label()
         self.label_subscriptions = tk.Label()
+        self.label_orion_ver = tk.Label()
+        self.label_iot_ver = tk.Label()
+        self.label_quantumleap_ver = tk.Label()
 
         # Inputs
         self.entry_ttn_app_id = tk.Entry()
@@ -109,6 +126,10 @@ class Application(tk.Frame):
         self.listbox_devices = tk.Listbox()
 
     def set_about_widgets(self) -> None:
+        """
+        Sets up the About tab where versions are shown
+        :return:
+        """
         self.label_orion_ver = tk.Label(self.tab_about,
                                         text='Orion version: ' + use_api('http://localhost:1026/version')
                                         .json()['orion']['version'])
@@ -122,7 +143,10 @@ class Application(tk.Frame):
         self.label_quantumleap_ver.place(x=10, y=50)
 
     def set_applications_keys_widgets(self) -> None:
-
+        """
+        Set labals, entries and buttons for application keys tab
+        :return:
+        """
         # Labels
         self.label_ttn_app_id = tk.Label(self.tab_app_keys, text='TTN Application ID')
         self.label_ttn_app_pw = tk.Label(self.tab_app_keys, text='TTN Application Access Key')
@@ -131,7 +155,7 @@ class Application(tk.Frame):
         self.label_ttn_app_pw.place(x=10, y=50)
         self.label_ttn_app_eui.place(x=10, y=90)
 
-        # Inputs
+        # Entries
         self.entry_ttn_app_id = tk.Entry(self.tab_app_keys)
         self.entry_ttn_app_pw = tk.Entry(self.tab_app_keys, width=60)
         self.entry_ttn_app_eui = tk.Entry(self.tab_app_keys, width=17)
@@ -158,10 +182,11 @@ class Application(tk.Frame):
                                               command=self.api_create_device_and_entity)
         self.button_delete_device = tk.Button(self.tab_devices_management, text='Delete device and entities',
                                               command=self.api_delete_device_and_entity, state='disabled')
-        self.button_create_device.place(x=10, y=110)
-        self.button_delete_device.place(x=10, y=160)
+        self.button_create_device.place(x=10, y=160)
+        self.button_delete_device.place(x=10, y=210)
 
         # Labels
+        self.label_node_id = tk.Label(self.tab_devices_management)
         self.label_app_skey = tk.Label(self.tab_devices_management, text='Application Session Key')
         self.label_dev_eui = tk.Label(self.tab_devices_management, text='Device EUI')
         self.label_title_devices = tk.Label(self.tab_devices_management, text='DEVICES')
@@ -171,25 +196,36 @@ class Application(tk.Frame):
         self.label_entities = tk.Label(self.tab_devices_management)
         self.label_subscriptions = tk.Label(self.tab_devices_management)
 
-        self.label_app_skey.place(x=10, y=10)
-        self.label_dev_eui.place(x=10, y=50)
-        self.label_title_devices.place(x=10, y=210)
-        self.label_title_entities.place(x=100, y=210)
-        self.label_title_subscriptions.place(x=190, y=210)
-        self.label_devices.place(x=10, y=230)
-        self.label_entities.place(x=100, y=230)
-        self.label_subscriptions.place(x=190, y=230)
+        self.label_node_id.place(x=10, y=10)
+        self.label_app_skey.place(x=10, y=60)
+        self.label_dev_eui.place(x=10, y=100)
+        self.label_title_devices.place(x=10, y=260)
+        self.label_title_entities.place(x=100, y=260)
+        self.label_title_subscriptions.place(x=190, y=260)
+        self.label_devices.place(x=10, y=280)
+        self.label_entities.place(x=100, y=280)
+        self.label_subscriptions.place(x=190, y=280)
 
         # Inputs
         self.entry_app_skey = tk.Entry(self.tab_devices_management, width=33)
         self.entry_dev_eui = tk.Entry(self.tab_devices_management, width=17)
-        self.entry_app_skey.place(x=10, y=30)
-        self.entry_dev_eui.place(x=10, y=70)
+        self.entry_app_skey.place(x=10, y=80)
+        self.entry_dev_eui.place(x=10, y=120)
 
     def enable_delete_button(self, event) -> None:
+        """
+        Enables delete buton when any element is chosen in the Listbox
+        :param event:
+        :return:
+        """
         self.button_delete_device.config(state="normal")
 
     def update_app_keys(self) -> None:
+        """
+        Sets up the labels colors when there is not valid a key, stores these inside variables and enables
+        Devices management key
+        :return:
+        """
         # get the values
         app_id = self.entry_ttn_app_id.get()
         app_pw = self.entry_ttn_app_pw.get()
@@ -265,7 +301,6 @@ class Application(tk.Frame):
         a subscription to that device
         :return:
         """
-
         app_skey = self.entry_app_skey.get()
         dev_eui = self.entry_dev_eui.get()
         error = False
@@ -327,6 +362,10 @@ class Application(tk.Frame):
         self.api_get_devices_and_entities()
 
     def api_delete_device_and_entity(self) -> None:
+        """
+        Deletes the chosen devices in Listbox
+        :return:
+        """
         device = self.listbox_devices.get(tk.ACTIVE)
         if device:
             index = Application.devices.index(device)
@@ -343,7 +382,10 @@ class Application(tk.Frame):
 
     @staticmethod
     def generate_next_device_name():
-
+        """
+        Static function to generate device names. It generates lacking names using an index.
+        :return:
+        """
         if not Application.devices:
             return Application.default_device, Application.default_entity
         ids = [int(device.split('_')[-1]) for device in Application.devices]
@@ -356,6 +398,13 @@ class Application(tk.Frame):
 
     @staticmethod
     def get_iot_body():
+        """
+        It composes the body as a payload to send in creation device and entity process
+        Be careful!! This body is not used to create the subscription, the body to create
+        the subscription is declared in the api_create_device_and_entity() function because
+        it's simpler.
+        :return:
+        """
         device, entity = Application.generate_next_device_name()
 
         return {
