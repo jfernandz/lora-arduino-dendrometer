@@ -48,12 +48,14 @@ def is_hex(string) -> bool:
 
 
 class Application(tk.Frame):
-    entities = list()
+    # entities = list()
     # default_entity = 'LORA-N-0'
-    default_entity = 'node_0'
 
-    devices = list()
-    default_device = 'node_0'
+    # devices = list()
+    # default_device = 'node_0'
+
+    devices = entities = list()
+    default_device = default_entity = 'node_0'
 
     subscriptions = list()
 
@@ -83,7 +85,7 @@ class Application(tk.Frame):
         self.notebook.add(self.tab_app_keys, text='Applications Keys')
         self.notebook.add(self.tab_devices_management, text='Devices Management')
         self.notebook.add(self.tab_about, text='About')
-        # self.notebook.tab(1, state='disabled')  # disabled by default until the app data is introduced
+        self.notebook.tab(1, state='disabled')  # disabled by default until the app data is introduced
         self.notebook.pack(expand=1, fill="both")
 
         # Widgets
@@ -94,36 +96,38 @@ class Application(tk.Frame):
         # Initial get request
         self.api_get_devices_and_entities()
 
-        # Labels
-        self.label_ttn_app_id = tk.Label()
-        self.label_ttn_app_pw = tk.Label()
-        self.label_ttn_app_eui = tk.Label()
-        self.label_app_skey = tk.Label()
-        self.label_dev_eui = tk.Label()
-        self.label_title_devices = tk.Label()
-        self.label_title_entities = tk.Label()
-        self.label_title_subscriptions = tk.Label()
-        self.label_devices = tk.Label()
-        self.label_entities = tk.Label()
-        self.label_subscriptions = tk.Label()
-        self.label_orion_ver = tk.Label()
-        self.label_iot_ver = tk.Label()
-        self.label_quantumleap_ver = tk.Label()
-
-        # Inputs
-        self.entry_ttn_app_id = tk.Entry()
-        self.entry_ttn_app_pw = tk.Entry()
-        self.entry_ttn_app_eui = tk.Entry()
-        self.entry_app_skey = tk.Entry()
-        self.entry_dev_eui = tk.Entry()
-
-        # Buttons
-        self.set_app_keys = tk.Button()
-        self.button_create_device = tk.Button()
-        self.button_delete_device = tk.Button()
-
-        # Listbox
-        self.listbox_devices = tk.Listbox()
+        # # Labels
+        # self.label_dev_ent_id = tk.Label()
+        # self.label_ttn_app_id = tk.Label()
+        # self.label_ttn_app_pw = tk.Label()
+        # self.label_ttn_app_eui = tk.Label()
+        # self.label_app_skey = tk.Label()
+        # self.label_dev_eui = tk.Label()
+        # self.label_title_devices = tk.Label()
+        # self.label_title_entities = tk.Label()
+        # self.label_title_subscriptions = tk.Label()
+        # self.label_devices = tk.Label()
+        # self.label_entities = tk.Label()
+        # self.label_subscriptions = tk.Label()
+        # self.label_orion_ver = tk.Label()
+        # self.label_iot_ver = tk.Label()
+        # self.label_quantumleap_ver = tk.Label()
+        #
+        # # Inputs
+        # self.entry_dev_ent_id = tk.Entry()
+        # self.entry_ttn_app_id = tk.Entry()
+        # self.entry_ttn_app_pw = tk.Entry()
+        # self.entry_ttn_app_eui = tk.Entry()
+        # self.entry_app_skey = tk.Entry()
+        # self.entry_dev_eui = tk.Entry()
+        #
+        # # Buttons
+        # self.set_app_keys = tk.Button()
+        # self.button_create_device = tk.Button()
+        # self.button_delete_device = tk.Button()
+        #
+        # # Listbox
+        # self.listbox_devices = tk.Listbox()
 
     def set_about_widgets(self) -> None:
         """
@@ -173,8 +177,8 @@ class Application(tk.Frame):
         :return: None
         """
         # Listbox
-        self.listbox_devices = tk.Listbox(self.tab_devices_management, height=5, width=20)
-        self.listbox_devices.place(x=200, y=110)
+        self.listbox_devices = tk.Listbox(self.tab_devices_management, height=10, width=20)
+        self.listbox_devices.place(x=460, y=30)
         self.listbox_devices.bind('<<ListboxSelect>>', self.enable_delete_button)
 
         # Buttons
@@ -182,11 +186,11 @@ class Application(tk.Frame):
                                               command=self.api_create_device_and_entity)
         self.button_delete_device = tk.Button(self.tab_devices_management, text='Delete device and entities',
                                               command=self.api_delete_device_and_entity, state='disabled')
-        self.button_create_device.place(x=10, y=160)
-        self.button_delete_device.place(x=10, y=210)
+        self.button_create_device.place(x=10, y=150)
+        self.button_delete_device.place(x=10, y=200)
 
         # Labels
-        self.label_node_id = tk.Label(self.tab_devices_management)
+        self.label_dev_ent_id = tk.Label(self.tab_devices_management, text='Device and entity ID')
         self.label_app_skey = tk.Label(self.tab_devices_management, text='Application Session Key')
         self.label_dev_eui = tk.Label(self.tab_devices_management, text='Device EUI')
         self.label_title_devices = tk.Label(self.tab_devices_management, text='DEVICES')
@@ -196,21 +200,23 @@ class Application(tk.Frame):
         self.label_entities = tk.Label(self.tab_devices_management)
         self.label_subscriptions = tk.Label(self.tab_devices_management)
 
-        self.label_node_id.place(x=10, y=10)
-        self.label_app_skey.place(x=10, y=60)
-        self.label_dev_eui.place(x=10, y=100)
-        self.label_title_devices.place(x=10, y=260)
-        self.label_title_entities.place(x=100, y=260)
-        self.label_title_subscriptions.place(x=190, y=260)
-        self.label_devices.place(x=10, y=280)
-        self.label_entities.place(x=100, y=280)
-        self.label_subscriptions.place(x=190, y=280)
+        self.label_dev_ent_id.place(x=10, y=10)
+        self.label_app_skey.place(x=10, y=50)
+        self.label_dev_eui.place(x=10, y=90)
+        self.label_title_devices.place(x=10, y=250)
+        self.label_title_entities.place(x=100, y=250)
+        self.label_title_subscriptions.place(x=190, y=250)
+        self.label_devices.place(x=10, y=270)
+        self.label_entities.place(x=100, y=270)
+        self.label_subscriptions.place(x=190, y=270)
 
         # Inputs
+        self.entry_dev_ent_id = tk.Entry(self.tab_devices_management)
         self.entry_app_skey = tk.Entry(self.tab_devices_management, width=33)
         self.entry_dev_eui = tk.Entry(self.tab_devices_management, width=17)
-        self.entry_app_skey.place(x=10, y=80)
-        self.entry_dev_eui.place(x=10, y=120)
+        self.entry_dev_ent_id.place(x=10, y=30)
+        self.entry_app_skey.place(x=10, y=70)
+        self.entry_dev_eui.place(x=10, y=110)
 
     def enable_delete_button(self, event) -> None:
         """
@@ -236,7 +242,7 @@ class Application(tk.Frame):
             self.label_ttn_app_id.config(fg='red')
             error = True
         else:
-            # Update the label
+            # Update the labels
             self.label_ttn_app_id['text'] = self.label_ttn_app_id['text'].split('  ->  ')[0] + '  ->  ' + app_id
             self.label_ttn_app_id.config(fg='black')
         if not app_pw.startswith('ttn-account'):
@@ -301,9 +307,18 @@ class Application(tk.Frame):
         a subscription to that device
         :return:
         """
+        dev_ent_id = self.entry_dev_ent_id.get()
         app_skey = self.entry_app_skey.get()
         dev_eui = self.entry_dev_eui.get()
+
         error = False
+        if len(dev_ent_id) < 3:
+            self.label_dev_ent_id.config(fg='red')
+            error = True
+        else:
+            # Update label device entity ID
+            self.label_dev_ent_id['text'] = self.label_dev_ent_id['text'].split('  ->  ')[0] + '  ->  ' + dev_ent_id
+            self.label_dev_ent_id.config(fg='black')
         if len(app_skey) != 32 or not is_hex(app_skey):
             self.label_app_skey.config(fg='red')
             error = True
@@ -322,6 +337,7 @@ class Application(tk.Frame):
         if error:
             return
         # Update the vars
+        Application.devices = Application.entities = dev_ent_id
         Application.TTN_app_skey = app_skey
         Application.TTN_dev_eui = dev_eui
 
@@ -380,21 +396,21 @@ class Application(tk.Frame):
         self.button_delete_device.config(state='disabled')
         self.api_get_devices_and_entities()
 
-    @staticmethod
-    def generate_next_device_name():
-        """
-        Static function to generate device names. It generates lacking names using an index.
-        :return:
-        """
-        if not Application.devices:
-            return Application.default_device, Application.default_entity
-        ids = [int(device.split('_')[-1]) for device in Application.devices]
-        for i in range(0, max(ids) + 1):
-            if i not in ids:
-                return f'node_{i}', f'LORA-N-{i}'
-
-        next_id = max(ids) + 1
-        return f'node_{next_id}', f'LORA-N-{next_id}'
+    # @staticmethod
+    # def generate_next_device_name():
+    #     """
+    #     Static function to generate device names. It generates lacking names using an index.
+    #     :return:
+    #     """
+    #     if not Application.devices:
+    #         return Application.default_device, Application.default_entity
+    #     ids = [int(device.split('_')[-1]) for device in Application.devices]
+    #     for i in range(0, max(ids) + 1):
+    #         if i not in ids:
+    #             return f'device_{i}', f'LORA-N-{i}'
+    #
+    #     next_id = max(ids) + 1
+    #     return f'device_{next_id}', f'LORA-N-{next_id}'
 
     @staticmethod
     def get_iot_body():
@@ -405,13 +421,19 @@ class Application(tk.Frame):
         it's simpler.
         :return:
         """
-        device, entity = Application.generate_next_device_name()
+        # device, entity = Application.generate_next_device_name()
+        # device, entity = Application.devices() ???? <-------------------------------------
+
+        if len(Application.devices) == 0:
+            device = Application.default_device
+        else:
+            device = Application.devices
 
         return {
             "devices": [
                 {
                     "device_id": f"{device}",
-                    "entity_name": f"{entity}",
+                    "entity_name": f"{device}",
                     "entity_type": "LoraDevice",
                     "timezone": "Europe/Madrid",
                     "attributes": [
