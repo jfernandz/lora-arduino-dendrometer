@@ -1059,7 +1059,7 @@ Once this has been done, the microcontrollers has also been programmed and the g
 
 Then it should be possible to retrieve this data using the FIWARE IoTagent-LoRaWAN. The setup of this different FIWARE generic enablers will be explained in the next subsection, but essentially this IoTagent will use, as indicated previously, all those application and devices identifiers in order to manage the incoming context data from different microcontrollers (also called devices or end-nodes). 
 
-\subsubsection{FIWARE}
+\subsubsection{FIWARE}\label{sssec:FIWARE}
 As shown in figure \ref{fig:GenView}, this solution is being implemented using particularly three FIWARE generic enablers, the most important one, of course, \textbf{Orion Context Broker}, also a LoRaWAN agent called \textbf{IoTagent-LoRaWAN} and finally to make data persistent, \textbf{QuantumLeap}.
 
 The workflow is like picture \ref{fig:GenView} shows, first the IoTagent receives the context data from TTN, this IoTagent sends this context data to the Orion Context Broker and this latter notifies QuantumLeap the variations on the context data, thus QuantumLeap can proceed to store them into Crate database.
@@ -1331,10 +1331,32 @@ Grafana has a wide set of options intended to monitor different kind of systems,
 Of course, this context data could be acquired directly from CrateDB by means of some custom application developed specifically to this task, however this is beyond of the purpose of this project. Maybe in a future a feature like this could be implemented. 
 
 \subsubsection{FIWARE API Graphical User Interface}
-Finally, to make more friendly the FIWARE interaction this project also provide a simple and light \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/api-gui.py}{graphical user interface}. This graphical interface has been developed using the well-known tkinter library in python, it requires also a few python modules that are specified in \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/pip_requirements.txt}{\cmd{/src/api-gui/pip\_requirements.txt}}, in fact the user should be able to install them by performing in a terminal the following command \cmd{pip install -r pip\_requirements.txt}.
+Finally, to make more friendly the FIWARE interaction exposed in \hyperref[sssec:FIWARE]{FIWARE} subsection, this project also provide a simple and light \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/api-gui.py}{graphical user interface}. This graphical interface has been developed using the well-known tkinter library in python, it requires also a few python modules that are specified in \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/pip_requirements.txt}{\cmd{/src/api-gui/pip\_requirements.txt}}, in fact the user should be able to install them by performing in a terminal the following command \cmd{pip install -r pip\_requirements.txt}.
 
-When the requirements are satisfied and all docker containers are running properly\footnote{In a first place the GUI will retrieve the versions for Orion Context Broker, IoTagent-LoRaWAN and QuantumLeap, so if they are not running the GUI wont open.} the GUI can be run performing \cmd{./api-gui.py}
+When the requirements are satisfied and all docker containers are running properly\footnote{In a first place the GUI will retrieve the versions for Orion Context Broker, IoTagent-LoRaWAN and QuantumLeap, so if they are not running the GUI wont open.} the GUI can be run performing \cmd{./api-gui.py}; this should open the window shown by figure \ref{fig:GUI_app_keys}
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/GUI_app_keys.png}
+  \caption{First view of \cmd{api-gui.py}}
+  \label{fig:GUI_app_keys}
+\end{figure}
+
+To check Orion Context Broker, IoTagent-LoRaWAN and QuantumLeap versions running in the docker containers the reader has to click on \enquote{About} tab, however, this first shown tab ---\enquote{Application Keys}--- is the most important one because without complete all the required info won't be enabled the \enquote{Devices Management} tab. Actually this tab performs a series of checks regard in TTN keys. Following the same TTN requirements, 
+
+\begin{itemize}
+  \item TTN Application ID must be greater than 2 characters.
+  \item TTN Application Access Key must starts with \cmd{ttn-account} string.
+  \item TTN Application EUI must be 16 characters long and be hexadecimal. 
+\end{itemize}
+When any of this requirements are not fulfilled the related label will turn red as figure \ref{fig:GUI_app_keys_fail} shows
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/GUI_app_keys_fail.png}
+  \caption{TTN Application EUI must be hexadecimal} 
+  \label{fig:GUI_app_keys_fail}
+\end{figure}
 
 
 \newpage
