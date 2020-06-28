@@ -78,7 +78,7 @@ class Application(tk.Frame):
         self.set_about_widgets()
         self.set_applications_keys_widgets()
 
-        #
+        # Initial get request
         self.api_get_devices_and_entities()
 
     def set_about_widgets(self) -> None:
@@ -106,8 +106,8 @@ class Application(tk.Frame):
 
         # Inputs
         self.entry_ttn_app_id = tk.Entry(self.tab_app_keys)
-        self.entry_ttn_app_pw = tk.Entry(self.tab_app_keys)
-        self.entry_ttn_app_eui = tk.Entry(self.tab_app_keys)
+        self.entry_ttn_app_pw = tk.Entry(self.tab_app_keys, width=60)
+        self.entry_ttn_app_eui = tk.Entry(self.tab_app_keys, width=17)
         self.entry_ttn_app_id.place(x=10, y=30)
         self.entry_ttn_app_pw.place(x=10, y=70)
         self.entry_ttn_app_eui.place(x=10, y=110)
@@ -315,20 +315,21 @@ class Application(tk.Frame):
         self.api_get_devices_and_entities()
 
     @staticmethod
-    def get_iot_body() -> dict:
-        if len(Application.devices) == 0:
-            device = Application.default_device
-        else:
-            last_device = Application.devices[-1]
-            last_id = int(last_device.split('_')[-1])
-            device = last_device.split('_')[0] + '_' + str(last_id + 1)
+    def generate_next_device_name():
 
-        if len(Application.entities) == 0:
-            entity = Application.default_entity
-        else:
-            last_entity = Application.entities[-1]
-            last_id = int(last_entity.split('-')[-1])
-            entity = '-'.join(last_entity.split('-')[:-1]) + '-' + str(last_id + 1)
+        if not Application.devices:
+            return Application.default_device, Application.default_entity
+        ids = [int(device.split('_')[-1]) for device in Application.devices]
+        for i in range(0, max(ids) + 1):
+            if i not in ids:
+                return f'node_{i}', f'LORA-N-{i}'
+
+        next_id = max(ids) + 1
+        return f'node_{next_id}', f'LORA-N-{next_id}'
+
+    @staticmethod
+    def get_iot_body():
+        device, entity = Application.generate_next_device_name()
 
         return {
             "devices": [
