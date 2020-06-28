@@ -2,7 +2,6 @@ import requests
 import tkinter as tk
 from tkinter import ttk
 from string import hexdigits
-
 import json
 
 # These are customizable patterns, actually
@@ -62,7 +61,7 @@ class Application(tk.Frame):
         # self.gui.geometry("640x480")
         self.pack()
 
-        # TABS
+        # Tabs
         self.notebook = ttk.Notebook(self.gui)  # Tab controller
         self.tab_app_keys = ttk.Frame(self.notebook)
         self.tab_devices_management = ttk.Frame(self.notebook)
@@ -70,7 +69,7 @@ class Application(tk.Frame):
         self.notebook.add(self.tab_app_keys, text='Applications Keys')
         self.notebook.add(self.tab_devices_management, text='Devices Management')
         self.notebook.add(self.tab_about, text='About')
-        self.notebook.tab(1, state='disabled')  # disabled by default until the app data is introduced
+        # self.notebook.tab(1, state='disabled')  # disabled by default until the app data is introduced
         self.notebook.pack(expand=1, fill="both")
 
         # Widgets
@@ -80,6 +79,34 @@ class Application(tk.Frame):
 
         # Initial get request
         self.api_get_devices_and_entities()
+
+        # Labels
+        self.label_ttn_app_id = tk.Label()
+        self.label_ttn_app_pw = tk.Label()
+        self.label_ttn_app_eui = tk.Label()
+        self.label_app_skey = tk.Label()
+        self.label_dev_eui = tk.Label()
+        self.label_title_devices = tk.Label()
+        self.label_title_entities = tk.Label()
+        self.label_title_subscriptions = tk.Label()
+        self.label_devices = tk.Label()
+        self.label_entities = tk.Label()
+        self.label_subscriptions = tk.Label()
+
+        # Inputs
+        self.entry_ttn_app_id = tk.Entry()
+        self.entry_ttn_app_pw = tk.Entry()
+        self.entry_ttn_app_eui = tk.Entry()
+        self.entry_app_skey = tk.Entry()
+        self.entry_dev_eui = tk.Entry()
+
+        # Buttons
+        self.set_app_keys = tk.Button()
+        self.button_create_device = tk.Button()
+        self.button_delete_device = tk.Button()
+
+        # Listbox
+        self.listbox_devices = tk.Listbox()
 
     def set_about_widgets(self) -> None:
         self.label_orion_ver = tk.Label(self.tab_about,
