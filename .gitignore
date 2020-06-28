@@ -8,4 +8,6 @@ docs/LaTex/*.out
 docs/LaTex/*.run.xml
 docs/LaTex/*.synctex.gz
 docs/LaTex/*.toc
+testing/python/.idea/*
 testing/api-gui/.idea/*
+
