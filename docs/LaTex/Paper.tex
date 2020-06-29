@@ -669,7 +669,7 @@ By other hand, in order to this sketch takes advantage of the plugged LoRa Shiel
 
 There is an \textit{Arduino-like wrapper} library called \href{https://github.com/mcci-catena/arduino-lorawan}{\cmd{arduino-lorawan}} also developed by MCCI; this library provides apparently a higher abstraction level and it could be helpful in a future to keep growing this project, however, for now this project is implemented using the mentioned \cmd{arduino-lmic}.
 
-Basically the sketch is based on the \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino}{ttn-abp example}, as the reader can see in the first comment block; that example sends a LoRaWAN valid package with the payload \enquote{Hello World!}. Besides it uses the ABP (Activation-by-personalization) method ---in opposition to OTAA (Over-the-air-activation) method---, depending on the used method it is necessary to include different security keys provided by The Things Network stack (TTN stack) in the code. \cite{TTN_Security}
+Basically the sketch is based on the \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino}{ttn-abp example}, as the reader can see in the first comment block; that example sends a LoRaWAN valid package with the payload \enquote{Hello World!}. Besides it uses the ABP (Activation-by-personalization) method ---in opposition to OTAA (Over-the-air-activation) method---, depending on the used method it is necessary to include different security keys provided by The Things Network stack (TTN stack) in the code \cite{TTN_Security}. \textbf{It is important to note that frame counters in TTN console must be reset every time the device is reset, powered off or flashed again} \cite{TTN_frame_counters}.
 
 As commented \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino#L30}{lines 30 and 31} point, the most important thing before start working on the sketch is to configure the \cmd{arduino-lmic} library, so after install the library with the library manager ---in the Arduino IDE or any other chosen IDE---, the reader will need to go the library path and locate the \href{https://github.com/mcci-catena/arduino-lmic/blob/master/project_config/lmic_project_config.h}{\cmd{<lib\_path>/project\_config/lmic\_project\_config.h}} file to ensure the line 2 (\cmd{\#define CFG\_eu868 1}) is \textbf{uncommented} and the line 3 (\cmd{\#define CFG\_us915 1}) is \textbf{commented}. This is to enable specific functions in the library for Europe region (where the radio regulations are slightly different than in other regions); so this \cmd{lmic\_project\_config.h} must looks like in te example \ref{ej:lmic_project_config.h}
 
@@ -1421,6 +1421,7 @@ Finally there are a few considerations that could be done,
         \label{fig:times_gap}
       \end{figure}
     \end{itemize}
+    \item End-nodes are being activated using ABP method, this method could not be as effective as OTAA method in the case that downlinks packets were transmitted, this is why due some security implications frame counters must be reset for ABP devices every time they are shutdown for any circumstance; in particular when downlinks are transmitted, could be necessary to reset the frame counter in the devices, so in this situation would be interesting to consider swap to OTAA method. In fact, TTN offers the possibility to reset the frame counter in TTN console but this could be removed in a future.
     \item Maybe the developed GUI could have handle also the context data plots, however this project couldn't have covered in anyway this development with the available time, so this is not considered as part of the project because Grafana is complete enough to this task for now and perhaps for ever due it is extremely powerful handling databases.
     \item For a production environment it seems clear that arduino devices should be encapsulated and the sensor (potentiometer) part must be improved; however this is not hard because of the wide offer for cases and power supply systems, this would lead a very compact device which could be also improved adding more sensor due versatility of CayenneLPP encoding standard which allows to send multiple measurements of different sensors. 
     \item Finally this project is a good candidate to replace expensive commercial and proprietary systems; so it likely keeps developing, depending on the needs of the researchers.
@@ -1428,8 +1429,8 @@ Finally there are a few considerations that could be done,
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=.9\textwidth]{../pictures/2prototypes_1gateway.jpg}  
-  \caption{2 prototypes transmitting to the gateway}
+  \includegraphics[width=.8\textwidth]{../pictures/2prototypes_1gateway.jpg}  
+  \caption{Two prototypes transmitting through the gateway}
   \label{fig:2nodes_gateway}
 \end{figure}
 
