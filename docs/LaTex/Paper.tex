@@ -167,7 +167,7 @@
 % To include References and TOC in the TOC
 \usepackage[]{tocbibind}
 
-% To avoid 'underfull box' warning caused because bibliography line-break
+% To avoid 'underfull box' warning caused because of bibliography line-break
 \usepackage{etoolbox}
 \apptocmd{\thebibliography}{\raggedright}{}{}
 
@@ -1364,7 +1364,7 @@ When the keys are updated properly the labels over the text fields are also upda
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=.9\textwidth]{../pictures/GUI_decice_management.png}
+  \includegraphics[width=.9\textwidth]{../pictures/GUI_device_management.png}
   \caption{Device Management tab}
   \label{fig:device_management_tab}
 \end{figure}
@@ -1377,16 +1377,32 @@ This view allows the user to create and delete devices ---along with its entitie
   \item Device EUI has to be 16 characters long and again an hexadecimal string.
 \end{itemize}
 
-\begin{figure}[ht]
+These keys can be obtained from TTN as can be seen in screenshot \ref{fig:dev_overview} ---this screenshot shows info about \cmd{node\_0}, though. As can be seen in picture \ref{fig:adding_dev}, there was a problem with \enquote{Device EUI}, this was caused because of the final \cmd{Z} letter in the string which doesn't belong to hexadecimal characters set.
+
+\begin{figure}[htp]
   \centering
   \includegraphics[width=.9\textwidth]{../pictures/GUI_add_device.png}
   \caption{Trying to add a new device}
   \label{fig:adding_dev}
 \end{figure}
 
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/GUI_about_tab.png}
+  \caption{Running versions in About tab.}
+  \label{fig:about_tab}
+\end{figure}
 
+Finally, as indicated, the \enquote{About} tab shows the versions info as can be seen in \ref{fig:about_tab}. The QuantumLeap version is specified in \cmd{docker-compose.yml} file as well as the CrateDB version, this is to ensure compatibility between QuantumLeap and CrateDB; however, Orion Context Broker and IoTagent-LoRaWAN versions are not specified so they should be always the latests, this is why could be helpful to retrieve these. 
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/GUI_device_management_2nodes.png}
+  \caption{Graphical interface showing 2 created nodes}
+  \label{fig:GUI_2nodes}
+\end{figure}
 
+As figure \ref{fig:GUI_2nodes} shows, once a node is created is added to the list, subscription and entity ID are useful to remove manually just a subscription or an entity by performing a manual \cmd{DELETE} request, in fact have been also included several \cmd{DELETE} requests in the attached Postman collection, however, when a node is deleted using this graphical interface button is also being removed its entity and its subscription.
 
 
 \newpage
