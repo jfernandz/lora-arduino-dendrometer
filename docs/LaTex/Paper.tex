@@ -515,7 +515,7 @@
 
 \phantomsection\section*{Abstract}
 \addcontentsline{toc}{section}{Abstract}%
-This document gives a detailed description of this project, which is focused on researching possibles low-cost alternatives for wireless dendrometry systems. Currently there exist a lot of expensive and professional systems in the market, that's because this project is intended to reduce costs and increase the versatility, scalability and accessibility.
+This document gives a detailed description of this project, which is focused on researching possibles low-cost alternatives for wireless dendrometry systems. Currently there exist a lot of expensive and professional systems in the market, that's why this project is intended to reduce costs and increase the versatility, scalability and accessibility.
 
 In order to reach these objetives the project will be supported over free software such as FIWARE\cite{Fiware} or free hardware such as Arduino\cite{Arduino} and Raspberry Pi\cite{Raspberrypi}.
 
@@ -554,7 +554,7 @@ It's not difficult to justify the use of such an interesting platform as Arduino
 
 Due circumstances exposed in introduction section is needed an accessible and multipurpose platform to be the basis for the device design itself, this is to say the core part of the dendrometer is an Arduino microcontroller.  
 
-Since the idea is to produce a low-cost device in order to distribute a high number of them, it must be a simple design; that's because it consist only of three parts,
+Since the idea is to produce a low-cost device in order to distribute a high number of them, it must be a simple design; that's why it consist only of three parts,
 
 \begin{itemize}
   \item \href{https://es.rs-online.com/web/p/products/0317780/}{\doubt{Linear potentiometer:}} which is the sensor itself due is directly in contact with the stem. In order \doubt{to improve data acquisition it will be necessary to use a High Input Impedance Amplifier.}
@@ -564,7 +564,7 @@ Since the idea is to produce a low-cost device in order to distribute a high num
 
 % I need to use that \texorpdfstring{}{} for the left-side ToC in PDF viewers, because the ® cannot be rendered in there.
 \subsubsection{\texorpdfstring{LoRa\textsuperscript{\textregistered} (Lo{\normalfont\sffamily ng} Ra{\normalfont\sffamily nge})}{LoRa (Long Range)}}
-LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite[]{LoRaGeneral}. This is because some devices inside IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been pointed. So this low availability (of resources) along with their tendency to be distributed/scattered causes the necessity for a low-power consumption and a long-range telecommunication.
+LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite[]{LoRaGeneral}. This is why some devices inside IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been pointed. So this low availability (of resources) along with their tendency to be distributed/scattered causes the necessity for a low-power consumption and a long-range telecommunication.
 
 In a more general sense, there is a wider concept to include all these kind of technologies which fullfil the IoT communication requirements, this is the \enquote{Low-Power Wide Area Networks} (LPWAN), so as claimed by \cite[]{LoRaGeneral}
 
@@ -586,14 +586,14 @@ In comparison with other common telecommunication technologies, LoRa uses lower 
 \end{figure}
  
 \subsubsection{Raspberry Pi, a powerful microcomputer}
-As in the case of Arduino, Raspberry Pi provides a powerful platform, however in the case of a Raspberry Pi this platform is slightly more complex than for an Arduino.\footnote{There are a lot of Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware point of view, Raspberry Pi implements a better one than Arduino, this also has an impact on a higher cost; however, this hardware allows a Raspberry Pi to support a whole operating system; that's because this devices are usually called \textit{single-board computers}.
+As in the case of Arduino, Raspberry Pi provides a powerful platform, however in the case of a Raspberry Pi this platform is slightly more complex than for an Arduino.\footnote{There are a lot of Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware point of view, Raspberry Pi implements a better one than Arduino, this also has an impact on a higher cost; however, this hardware allows a Raspberry Pi to support a whole operating system; that's why this devices are usually called \textit{single-board computers}.
 
 A few of interesting hardware specs are for instance, a \textit{Broadcom BCM2837B0, Cortex-A53 (ARMv8) 64-bit SoC @ 1.4GHz} as its CPU, \textit{1GB LPDDR2 SDRAM}, \textit{Gigabit Ethernet over USB 2.0 (maximum throughput 300 Mbps)} or even an \textit{Extended 40-pin GPIO header} among others.\cite{RPiSpecs}
 
 The role for Raspberry Pi in this project is to act like a gateway, receiving all the data from different nodes. So in order to perform this task correctly it is necessary to provide a LoRa interface, which is also embebed (as in Arduino) in a separate pluggable shield/card/hat.
 
 \subsubsection{Dragino shields/hats}\label{sssec:DraginoShields}
-These shields/expansion cards are necessary because those devices (Arduino and Raspberry Pi) have not the ability to comunicate through LoRa physical layer, that's because they need a physical interface in order to manage those LoRa packages. Both shields are based on the SX1276/SX1278 transceiver. However the Raspberry Pi hat also has a L80 GPS interface (Base on MTK MT3339), meanwhile Arduino has not.
+These shields/expansion cards are necessary because those devices (Arduino and Raspberry Pi) have not the ability to comunicate through LoRa physical layer, that's why they need a physical interface in order to manage those LoRa packages. Both shields are based on the SX1276/SX1278 transceiver. However the Raspberry Pi hat also has a L80 GPS interface (Base on MTK MT3339), meanwhile Arduino has not.
 
 This project is using the following models: 
 
@@ -648,12 +648,12 @@ This diagram shows three different parts:
 \end{itemize}
 
 \subsubsubsection{Linear Potentiometer}
-As said, ideally this potentiometer should be a linear potentiometer with $5\ \si{\kilo\ohm}$ of maximum resistance, however, in order to improve its performance, it's recommended to use it as a voltage divider; also it would be convenient to buffer the resulting output with a high impedance amplifier, that's because the figure \ref{fig:NodeDiag} includes a signal conditioning stage, which will be described below.
+As said, ideally this potentiometer should be a linear potentiometer with $5\ \si{\kilo\ohm}$ of maximum resistance, however, in order to improve its performance, it's recommended to use it as a voltage divider; also it would be convenient to buffer the resulting output with a high impedance amplifier, that's why the figure \ref{fig:NodeDiag} includes a signal conditioning stage, which will be described below.
 
 \subsubsubsection{Signal conditioning}
 This stage is focused on improve the signal acquisition, according to this potentiometer specifications, the best way to achieve this objetive is using a high input amplifier, in fact, a single-supply, rail-to-rail operational amplifier is the best option. \doubt{Figure \ref{fig:SignalCond} shows a possible schematics for this stage.}
 
-It is also recommended by the manufacturer to use the potentiometer as a voltage divider instead a variable resistor, this is because taking advantage of the Arduino power source, particularly the 5 \si{\volt} and GND pins.
+It is also recommended by the manufacturer to use the potentiometer as a voltage divider instead a variable resistor, this is why taking advantage of the Arduino power source, particularly the 5 \si{\volt} and GND pins.
 
 \begin{figure}[htp]
   \centering
@@ -1015,7 +1015,7 @@ The core of the software part is deployed using Docker containers \cite{Docker_c
 \begin{itemize}
   \item \textbf{IoTagent-LoRaWAN}, which is in charge of forward the traffic from TTN stack to Orion Context Broker.
   \item \textbf{Orion Context Broker}, this is the \myuline{core generic enabler}, in fact as indicated, this is the only one required component to the solution can be considered as \enquote{powered by FIWARE}. Besides this generic enabler requires a \textbf{Mongo database} to store entities and subscriptions among other things. 
-  \item \textbf{QuantumLeap}, in order to make the context data persistent, this generic enabler is needed. Orion Context Broker works mainly with two elements; entities and subscriptions, however, for any created entity the context data does not persist in Mongo database, instead the context data will be replaced/updated; so creating a subscription which notifies to QuantumLeap, this generic enabler will store the context data in a \textbf{Crate database} to make it persistent. Also a \textbf{Redis database} is used for geocoding purposes, however this project will not deal with it ---this is because of this database is not even being included in the figure \ref{fig:GenView}.
+  \item \textbf{QuantumLeap}, in order to make the context data persistent, this generic enabler is needed. Orion Context Broker works mainly with two elements; entities and subscriptions, however, for any created entity the context data does not persist in Mongo database, instead the context data will be replaced/updated; so creating a subscription which notifies to QuantumLeap, this generic enabler will store the context data in a \textbf{Crate database} to make it persistent. Also a \textbf{Redis database} is used for geocoding purposes, however this project will not deal with it ---this is why of this database is not even being included in the figure \ref{fig:GenView}.
   \item \textbf{Grafana}, this container is intended to provide a web interface to visualize and manage the retrieved context data. It stores its configuration and customization values in an embebed sqlite3 database; so there is not necessity for a separate container. 
 \end{itemize}
 
@@ -1066,7 +1066,7 @@ The workflow is like picture \ref{fig:GenView} shows, first the IoTagent receive
 
 However this process does not happen out of the box, i.e. it is necessary to properly set up these generic enablers to get this workflow. This can be done following the FIWARE API documentation. These configuration can be donde using HTTP requests due FIWARE essentially provides a RESTful API \cite{FIWARE_RESTful}, these HTTP requests can be performed using multiple clients like \cmd{curl} or \cmd{Postman} among others. This project in fact also provides a \href{https://github.com/WyRe/lora-arduino-dendrometer/tree/master/src/postman}{\cmd{Postman} collection and environment} that can be imported to manage them using a confortable graphical interface.
 
-Anyway and after of this little introduction, the most important thing is to deploy all FIWARE generic enablers and its dependencies in a secure and stable way. This is because this project uses \cmd{docker} and \cmd{docker-compose} in order to ensure these modules deployment and execution. Again this project provides the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/fiware/docker-compose.yml}{\cmd{docker-compose.yml}} file to ensure a correct deployment. 
+Anyway and after of this little introduction, the most important thing is to deploy all FIWARE generic enablers and its dependencies in a secure and stable way. This is why this project uses \cmd{docker} and \cmd{docker-compose} in order to ensure these modules deployment and execution. Again this project provides the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/fiware/docker-compose.yml}{\cmd{docker-compose.yml}} file to ensure a correct deployment. 
 
 \begin{figure}[ht]
   \centering
@@ -1357,6 +1357,36 @@ When any of this requirements are not fulfilled the related label will turn red 
   \caption{TTN Application EUI must be hexadecimal} 
   \label{fig:GUI_app_keys_fail}
 \end{figure}
+
+This information of course must match exactly with information provided by TTN, actually the \enquote{TTN Application Acess Key} and \enquote{TTN Application EUI} are provided by TTN, however the \enquote{TTN Application ID} must be chosen by the user when a new application is created using the TTN web interface, but this ID must be unique and it must be at least 3 characters long, that is why the developed GUI follows the same criteria.
+
+When the keys are updated properly the labels over the text fields are also updated with the chosen values and the \enquote{Devices Management} tab is enabled. This tab provides also a more friendly interface to manage devices. In a similar way this info will must match with the info provided by TTN interface, so that as figure \ref{fig:device_management_tab}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/GUI_decice_management.png}
+  \caption{Device Management tab}
+  \label{fig:device_management_tab}
+\end{figure}
+
+This view allows the user to create and delete devices ---along with its entities and subscriptions--- nevertheless, the \enquote{Delete device and entities} button remains disabled until a device is chosen in the right list. In a similar way than \enquote{Applications Keys}, to add a new device to FIWARE deployed instance by docker, all keys must fullfil a set of minimum requirements; as can be seen in picture \ref{fig:adding_dev}
+
+\begin{itemize}
+  \item Device entity and ID must be also unique and it has to be at least 3 characters long. Moreover, this ID must match exactly with the ID chosen in TTN interface when the device is created,
+  \item Application Session Key must be 32 characters long and also an hexadecimal string.
+  \item Device EUI has to be 16 characters long and again an hexadecimal string.
+\end{itemize}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/GUI_add_device.png}
+  \caption{Trying to add a new device}
+  \label{fig:adding_dev}
+\end{figure}
+
+
+
+
 
 
 \newpage
