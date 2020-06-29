@@ -1413,7 +1413,7 @@ Finally there are a few considerations that could be done,
   \item The fact that the Raspberry Pi HAT uses a single channel chip (SX1276) has two important implications:
     \begin{itemize}
       \item In a first place, as indicated in its corresponding section, these kind of gateways are LoRaWAN compatible but not compliant. So it would be desirable to replace this HAT by another one, or simple to acquire a proper gateway for a production environment.
-      \item Nodes cannot comunicate simultaneously with the gateway because it is listening only one channel, so this is causing a time gap in data acquisition as can be seen in the picture \ref{fig:times_gap}
+      \item Secondly, Nodes cannot comunicate simultaneously with the gateway because it is listening only one channel, so this is causing a time gap in data acquisition as can be seen in the picture \ref{fig:times_gap}
       \begin{figure}[ht]
         \centering
         \includegraphics[width=.9\textwidth]{../pictures/Grafana_times_gap.png}
