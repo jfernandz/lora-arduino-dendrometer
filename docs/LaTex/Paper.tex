@@ -604,10 +604,36 @@ This project is using the following models:
 
 \subsection{Abstract layer}
 
+\subsubsection{The Things Network}
+TTN provides a backend system to route the traffic between devices and applications. It is basically a network server placed between gateways and applications servers. It is necessary because LoRaWAN is a non-IP protocol, but a MAC layer protocol and does need some for of routing and processing messages before they can reach the application side. TTN takes care of these steps.
+
+Moreover, this project is based on FIWARE (described in the next subsection) and the LoRaWAN agent in FIWARE is developed to interact with TTN infrastructure, 
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/TTN_overview.png}
+  \caption{TTN basic diagram.}
+  \label{fig:TTN_overview}
+\end{figure}
+
+End-node devices broadcast LoRaWAN packets over LoRa radio protocol to the gateways, this gateways will forward these packets to the TTN backend, where a software module called Router will manage the gateway status and schedule transmissions, these Routers are connected to another software modules called Brokers, that are responsible for map a device to an application ---into TTN environment--- allowing downlinks and uplinks transmissions. Once these uplinks transmission are inside TTN environment, the FIWARE LoRaWAN agent will retrieve them, however this is actually the application server shown in figure \ref{fig:TTN_overview}. \enquote{The goal of The Things Network is to be very flexible in terms of deployment options.} \cite{TTN_net_arch}. As can be read in the docs, TTN infrastructure provides different \enquote{core functions} divided in four main groups:
+
+\begin{itemize}
+  \item Gateway-related functions. In order to schedule and manage the gateways.
+  \item Device-related functions. To manage the state and received context data from specific devices.
+  \item Application-related functions, to group different devices used for similar purposes.
+  \item Service discovery functionality, which helps components to determine where traffic should be routed to. 
+\end{itemize}
+
+After this, the traffic is routed to FIWARE side, which is deployed locally and the user has total control over it.
+
 \subsubsection{FIWARE}
 It is defined as \enquote{The Open Source Platform for Our Smart Digital Future}\cite{Fiware}; in a deeper sense is \enquote{an open source initiative defending an universal set of standards for context data management}\cite{Fiware}, which basically means that \textit{FIWARE} is an open source platform where develop IoT and smart solutions. The platform provides a number of software modules called \textit{Generic Enablers}; among all those \textit{Generic Enablers} there is one particularly important called \textit{Orion Context Broker}. In fact, for a solution to be considered as \textit{Powered by FIWARE} it must to use the \textit{Orion Context Broker} at least. 
 
 This \textit{Context data} is just a way to name any kind of data coming from any kind of sensor. \textit{Orion Context Broker} is designed to manage this context data through concepts such as \textit{subscriptions} or \textit{entities}, to name but a few; however, all these \textit{Generics Enablers} communicate with each other using the \textit{FIWARE NGSI RESTful API}\cite{NGSI}.\footnote{\textit{RESTful} term comes from the software architectural style \textit{REST}, which stands for \textit{Representational State Transfer}}
+
+\subsubsection{Simple Graphical Interface}
+Despite FIWARE is a powerful platform, is not friendly enough regarding to final user. This is why a the end of this document is described a simple graphical interface developed to manage end-nodes in FIWARE side. As will be indicated, this graphical interface has been developed using python and its tkinter module intended to build graphical interfaces. 
 
 % \newpage
 % \section{Background}
