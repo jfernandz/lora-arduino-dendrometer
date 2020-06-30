@@ -633,7 +633,7 @@ It is defined as \enquote{The Open Source Platform for Our Smart Digital Future}
 This \textit{Context data} is just a way to name any kind of data coming from any kind of sensor. \textit{Orion Context Broker} is designed to manage this context data through concepts such as \textit{subscriptions} or \textit{entities}, to name but a few; however, all these \textit{Generics Enablers} communicate with each other using the \textit{FIWARE NGSI RESTful API}\cite{NGSI}.\footnote{\textit{RESTful} term comes from the software architectural style \textit{REST}, which stands for \textit{Representational State Transfer}}
 
 \subsubsection{Simple Graphical Interface}
-Despite FIWARE is a powerful platform, is not friendly enough regarding to final user. This is why a the end of this document is described a simple graphical interface developed to manage end-nodes in FIWARE side. As will be indicated, this graphical interface has been developed using python and its tkinter module intended to build graphical interfaces. 
+Despite FIWARE is a powerful platform, is not friendly enough regarding final user. This is why a the end of this document is described a simple graphical interface developed to manage end-nodes in FIWARE side. As will be indicated, this graphical interface has been developed using python and its tkinter module intended to build graphical interfaces. 
 
 % \newpage
 % \section{Background}
@@ -749,7 +749,7 @@ The reader can see the LoRa Chip reset pin is \cmd{D9} and as DIO pins ---Digita
 
 By other hand \enquote{Any pins that are not needed should be specified as \cmd{LMIC\_UNUSED\_PIN}} as can be also read in the \href{https://github.com/mcci-catena/arduino-lmic#pin-mapping}{Pin Mapping section} of the library \cmd{README.md}. As the reader can see, the example \ref{ej:pin_mapping} starts at line 76, that is because this is the line where the pin mapping is placed in the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L76}{written sketch}.
 
-Regarding to LoRaWAN and TTN security, as previously indicated, the chosen method is ABP, so are necessary the \cmd{NWKSKEY} (Network Session Key), \cmd{APPSKEY} (Application Session Key) and \cmd{DEVADDR} (End-Device Address); these constants placed at lines \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L48}{48}, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L52}{52} and \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L57}{57} must be obtained from TTN console as will be explained in \hyperref[sssec:TTN_Stack]{The Things Network Stack} subsection, so \textbf{pleas, refer to that subsection for further details}. The sketch also sets analog pin \cmd{A2} to acquire the sensor signal as can be seen in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L70}{70}.% as well as the payload to send through LoRa interface in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L65}{65}
+With regards to LoRaWAN and TTN security, as previously indicated, the chosen method is ABP, so are necessary the \cmd{NWKSKEY} (Network Session Key), \cmd{APPSKEY} (Application Session Key) and \cmd{DEVADDR} (End-Device Address); these constants placed at lines \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L48}{48}, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L52}{52} and \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L57}{57} must be obtained from TTN console as will be explained in \hyperref[sssec:TTN_Stack]{The Things Network Stack} subsection, so \textbf{pleas, refer to that subsection for further details}. The sketch also sets analog pin \cmd{A2} to acquire the sensor signal as can be seen in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L70}{70}.% as well as the payload to send through LoRa interface in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L65}{65}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -1048,7 +1048,7 @@ The core of the software part is deployed using Docker containers \cite{Docker_c
 These bold highlighted are the deployed containers that will be detailed later, many of them are not even part of FIWARE platform, though. First this document will expose how to set up the gateway, create an application and add devices inside The Things Network stack. 
 
 \subsubsection{The Things Network Stack}\label{sssec:TTN_Stack}
-This is a platform for the LoRaWAN protocol where is possible to manage gateways, devices and applications. It provides a centralized way to manage these kind of things regard in security too, generating several keys to tight the end-devices to the chosen server cloud solution (FIWARE in this case). There are three fundamental process the reader must follow to include nodes and gateways in the platform, those are luckily pretty well documented. 
+This is a platform for the LoRaWAN protocol where is possible to manage gateways, devices and applications. It provides a centralized way to manage these kind of things regarding security too, generating several keys to tight the end-devices to the chosen server cloud solution (FIWARE in this case). There are three fundamental process the reader must follow to include nodes and gateways in the platform, those are luckily pretty well documented. 
 
 \begin{itemize}
   \item \textbf{Register a gateway}; this is the process where \cmd{Gateway ID} shown in example \ref{ej:Running_DualChann_Controller} is needed; this process is, as indicated, well documented in \cite{Gateway_reg}.
@@ -1056,7 +1056,7 @@ This is a platform for the LoRaWAN protocol where is possible to manage gateways
   \item \textbf{Register a device} within added application; these devices will be ultimately the microcontrollers. Again the reader can find the relative documents in \cite{Device_reg}. 
 \end{itemize}
 
-Once these steps are completed, the TTN web interface will provide an overview with all data regarding to the device like figure \ref{fig:dev_overview} shows. 
+Once these steps are completed, the TTN web interface will provide an overview with all data regarding the device like figure \ref{fig:dev_overview} shows. 
 
 \begin{figure}[ht]
   \centering
@@ -1368,7 +1368,7 @@ When the requirements are satisfied and all docker containers are running proper
   \label{fig:GUI_app_keys}
 \end{figure}
 
-To check Orion Context Broker, IoTagent-LoRaWAN and QuantumLeap versions running in the docker containers the reader has to click on \enquote{About} tab, however, this first shown tab ---\enquote{Application Keys}--- is the most important one because without complete all the required info won't be enabled the \enquote{Devices Management} tab. Actually this tab performs a series of checks regard in TTN keys. Following the same TTN requirements, 
+To check Orion Context Broker, IoTagent-LoRaWAN and QuantumLeap versions running in the docker containers the reader has to click on \enquote{About} tab, however, this first shown tab ---\enquote{Application Keys}--- is the most important one because without complete all the required info won't be enabled the \enquote{Devices Management} tab. Actually this tab performs a series of checks regarding TTN keys. Following the same TTN requirements, 
 
 \begin{itemize}
   \item TTN Application ID must be greater than 2 characters.
