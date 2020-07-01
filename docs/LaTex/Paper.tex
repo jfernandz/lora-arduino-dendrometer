@@ -585,8 +585,18 @@ Forests are remote and large surface areas which will require long-range communi
 
 \newpage\thispagestyle{plain}
 \section{System Architecture}
-\doubt{COMPLETE}
+A simple block diagram is shown in figure \ref{fig:block_diagram}, this diagram intends to emphasize the difference between two big layers, a physical layer that should be placed ---IoT dendrometers at least--- close to the sample, and another one called abstract layer which can be deployed locally ---TTN stack is a cloud server, although.
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../schemes/simple_scheme_tbg.png}
+  \caption{Block diagram overview}
+  \label{fig:block_diagram}
+\end{figure}
+
+The following subsections will detail each of one. As can be seen in \ref{fig:block_diagram}, the physical layer is made up of two main modules, the first one is an Arduino microcontroller with its LoRa interface and a linear potentiometer acting as a sensor ---this whole set is the IoT dendrometer--- and the second one; a Raspberry Pi 3b+ with its LoRa interface to act as a gateway.
+
+Meanwhile, the abstract layer is made up of three software modules. TTN stack is a cloud server to retrieve LoRa packets from all existent gateways, FIWARE is a local application server to gather all this context data; and finally Grafana to plot the context data.
 \subsection{Physical Layer}
 
 \subsubsection{Arduino, multipurpose microcontroller}
@@ -597,7 +607,7 @@ Due circumstances exposed in introduction section is needed an accessible and mu
 Since the idea is to produce a low-cost device in order to distribute a high number of them, it must be a simple design; that's why it consist only of three parts,
 
 \begin{itemize}
-  \item \href{https://es.rs-online.com/web/p/products/0317780/}{\doubt{Linear potentiometer:}} which is the sensor itself due is directly in contact with the stem. In order \doubt{to improve data acquisition it will be necessary to use a High Input Impedance Amplifier.}
+  \item \href{https://es.rs-online.com/web/p/products/0317780/}{Linear potentiometer:} which is the sensor itself due is directly in contact with the stem. In order to improve data acquisition it will be necessary to use a High Input Impedance Amplifier.
   \item Arduino microcontroller: this is the core part for the device, it will be responsible for acquire linear potentiometer data and send it to a gateway through LoRa interface. 
   \item LoRa interface: similar to other existing wireless interfaces, it is necessary to forward the sensor data to a concentrator (gateway). Usually and due its complexity these kind of interfaces are integrated circuits which are mounted on a PCB in order to obtain a pluggable card/shield. 
 \end{itemize}
@@ -616,14 +626,14 @@ It is important to note that when talking about \enquote{low-power consumption},
 
 By other hand, LoRa can commonly refer to two distinct layers; a physical layer (LoRa itself) and a MAC layer protocol (LoRaWAN). The former one (the physical layer), is a proprietary technology developed by Semtech. So this does mean this layer is not fully open; LoRaWAN, however, is a protocol built to use LoRa physical layer,  It is intended to sensor networks, wherein those sensors exchange packages with some server with a \enquote{low data rate and relatively long time intervals (one transmission per hour or even days).}\cite[p.~9]{LoRaGeneral}. This particularly means that LoRaWAN protocol is perfect for the purpose of this project.  
 
-In comparison with other common telecommunication technologies, LoRa uses lower bandwidth, but it reaches longer distances; a comparative diagram shows different wireless technologies in figure \ref{fig:LoraComparison}
-
 \begin{figure}[htp]
   \centering
   \includegraphics[width=.9\textwidth]{../pictures/LoRa_Why_Range.png}
   \caption{Bandwidth vs range plot for two of the most used telecommunication systems and LoRa.}
   \label{fig:LoraComparison}
 \end{figure}
+
+In comparison with other common telecommunication technologies, LoRa uses lower bandwidth, but it reaches longer distances; a comparative diagram shows different wireless technologies in figure \ref{fig:LoraComparison}
  
 \subsubsection{Raspberry Pi, a powerful microcomputer}
 As in the case of Arduino, Raspberry Pi provides a powerful platform, however in the case of a Raspberry Pi this platform is slightly more complex than for an Arduino.\footnote{There are a lot of Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware point of view, Raspberry Pi implements a better one than Arduino, this also has an impact on a higher cost; however, this hardware allows a Raspberry Pi to support a whole operating system; that's why this devices are usually called \textit{single-board computers}.
@@ -673,10 +683,12 @@ It is defined as \enquote{The Open Source Platform for Our Smart Digital Future}
 This \textit{Context data} is just a way to name any kind of data coming from any kind of sensor. \textit{Orion Context Broker} is designed to manage this context data through concepts such as \textit{subscriptions} or \textit{entities}, to name but a few; however, all these \textit{Generics Enablers} communicate with each other using the \textit{FIWARE NGSI RESTful API}\cite{NGSI}.\footnote{\textit{RESTful} term comes from the software architectural style \textit{REST}, which stands for \textit{Representational State Transfer}}
 
 \subsubsection{Simple Graphical Interface}
-Despite FIWARE is a powerful platform, is not friendly enough regarding final user. This is why a the end of this document is described a simple graphical interface developed to manage end-nodes in FIWARE side. As will be indicated, this graphical interface has been developed using python and its tkinter module intended to build graphical interfaces. 
+Despite FIWARE is a powerful platform, is not friendly enough regarding final user. This is why a the end of this document is described a simple graphical interface developed to manage end-nodes in FIWARE side. As will be indicated, this graphical interface has been developed using python and its tkinter module intended to build graphical interfaces.
 
-% \newpage
-% \section{Background}
+There are a lot of HTTP clients available, however the reader would be still forced to make manually these HTTP requests, these could result a little complex for a non advanced user, that's why this graphical interface has been developed.
+
+It's not perfect, it has a few deficiencies in fact, but is by the moment an appropriate way to manage devices, entities and subscriptions in locally deployed FIWARE instance. \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/api-gui.py}{The code} of this graphical interface is available in the project repository at GitHub.
+
 \newpage
 \section{Design}\thispagestyle{plain}
 Like in the Introduction, the most proper way to present this technical description is to difference between software and hardware parts. However, is still interesting to present a simple and general diagram for whole designed solution. So as the reader can see in the figure \ref{fig:GenView} is shown the general diagram. 
@@ -708,8 +720,8 @@ This diagram shows three different parts:
 
 \begin{itemize}
   \item A linear potentiometer, ideally an \href{https://docs.rs-online.com/37bf/0900766b814f0bd0.pdf}{RS Pro Conductive Polymer
-  Potentiometer for Automotive Applications}, however, by circumstances is not possible to use it and in order to perform a kind of proof of concept, \doubt{this project will implement a regular rotary potentiometer.}
-  \item \doubt{A signal conditioning stage, which is needed in order to improve the quality of the voltage signal produced by the potentiometer.}
+  Potentiometer for Automotive Applications}, however, by circumstances is not possible to use it and in order to perform a kind of proof of concept, this project will implement a regular rotary potentiometer.
+  \item A signal conditioning stage, which is needed in order to improve the quality of the voltage signal produced by the potentiometer.
   \item Arduino + Dragino LoRa Shield; of course it is necessary to schedule data transmission and acquisition, as well as transmit them using the LoRa physical layer and LoRaWAN protocol. For this purpose an Arduino-like microcontroller is perfect.
 \end{itemize}
 
