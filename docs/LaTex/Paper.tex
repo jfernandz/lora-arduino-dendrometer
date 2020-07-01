@@ -72,29 +72,6 @@
 % \usepackage{titling}
 % \renewcommand{\maketitlehooka}{\headingfont}
 
-% To change TOC appearance; see 2.1 section in tocloft.pdf for info about 'titles' option
-% it does not mention fancyhdr package but it do the work to flushright page numbers for 
-% table of contents pages. see: https://tex.stackexchange.com/a/137301/83189
-% \usepackage[titles]{tocloft}
-\usepackage{tocloft}
-\renewcommand{\cftsecfont}{\headingfont\bfseries}
-\renewcommand{\cftsecpagefont}{\headingfont\bfseries}
-\renewcommand{\cftsubsecfont}{\headingfont}
-\renewcommand{\cftsubsecpagefont}{\headingfont}
-\renewcommand{\cftsubsubsecfont}{\headingfont}
-\renewcommand{\cftsubsubsecpagefont}{\headingfont}
-\tocloftpagestyle{fancy} % However, I find better this way bc 'titles' option does not 
-% produce a compact TOC, it does expand bc probably it uses the same spacing rules in 
-% the TOC than in (subsub)(sub)sections titles at the rest of the text.
-% -------------------
-% Remove the TOC title (it is redundant if you have included a TOC section inside TOC)
-\makeatletter
-\renewcommand{\@cftmaketoctitle}{}
-\makeatother
-% But in the case you still want to print the TOC title, this other one modifies TOC title font
-\renewcommand{\cfttoctitlefont}{\Large\headingfont\bfseries}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %   8888888b.                   888
@@ -165,7 +142,7 @@
 \usepackage{mdframed}
 
 % To include References and TOC in the TOC
-\usepackage[]{tocbibind}
+\usepackage[nottoc]{tocbibind}
 
 % To avoid 'underfull box' warning caused because of bibliography line-break
 \usepackage{etoolbox}
@@ -237,7 +214,34 @@
 \fancyfoot[R]{\thepage} % Set the right side of the footer to be the page number
 \fancyhead[R]{\rightmark}
 \setlength{\headheight}{14pt}% ...at least 51.60004pt
+\fancypagestyle{plain}{%
+  \fancyhf{}% clear all header and footer fields
+  \fancyfoot[R]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
 
+% To change TOC appearance; see 2.1 section in tocloft.pdf for info about 'titles' option
+% it does not mention fancyhdr package but it do the work to flushright page numbers for 
+% table of contents pages. see: https://tex.stackexchange.com/a/137301/83189
+% \usepackage[titles]{tocloft}
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\headingfont\bfseries}
+\renewcommand{\cftsecpagefont}{\headingfont\bfseries}
+\renewcommand{\cftsubsecfont}{\headingfont}
+\renewcommand{\cftsubsecpagefont}{\headingfont}
+\renewcommand{\cftsubsubsecfont}{\headingfont}
+\renewcommand{\cftsubsubsecpagefont}{\headingfont}
+\tocloftpagestyle{empty} % However, I find better this way bc 'titles' option does not 
+% produce a compact TOC, it does expand bc probably it uses the same spacing rules in 
+% the TOC than in (subsub)(sub)sections titles at the rest of the text.
+% -------------------
+% Remove the TOC title (it is redundant if you have included a TOC section inside TOC)
+\makeatletter
+\renewcommand{\@cftmaketoctitle}{}
+\makeatother
+% But in the case you still want to print the TOC title, this other one modifies TOC title font
+% \renewcommand{\cfttoctitlefont}{\Large\headingfont\bfseries}
 
 % To insert json snippets
 \usepackage{listings}
@@ -443,11 +447,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{\headingfont%
-  University of Extremadura\\
-  Faculty of Science\\[1cm]
+  UNIVERSIDAD DE EXTREMADURA\\
+  FACULTAD DE CIENCIAS\\[1cm]
   \textbf{%
-  	Physics degree\\
-    Degree Final Project\\[3cm]
+  	Grado en Física\\
+    TRABAJO DE FIN DE GRADO\\[3cm]
     \flushleft{\large{Developement of a FIWARE-based application for tree species monitoring (dendrometry)}}\\[3cm]
     %\flushleft{\large{About implementation of LoRa-based wireless monitoring systems for tree species dendrometry.}}\\[3cm]
   }
@@ -487,6 +491,7 @@
 \hyphenation{Tellink}
 
 \begin{document}
+\pagenumbering{Roman} 
 \noindent % to prevent the indentation before first minipage and be able to expand minipages
 \begin{minipage}[t]{.28\textwidth}
     \centering
@@ -495,7 +500,7 @@
       \end{mdframed}
 \end{minipage}
 \hskip 30pt minus 5pt % It is a dynamic space (glue) that starts on 30pt and is 5pt shrinkable
-\begin{minipage}[t]{.6\textwidth}
+\begin{minipage}[t]{.65\textwidth}
   \centering
   \vspace{1cm}
   \maketitle
@@ -507,22 +512,50 @@
   \null%
 \endgroup
 \newpage
-% \pagenumbering{arabic}% Arabic page numbers (and reset to 1)
-\setcounter{page}{1}
-\tableofcontents
+
+\newpage\thispagestyle{empty}
+\vspace*{\fill}
+Fernando Javier Álvarez Franco, profesor del Departamento de Ingeniería Eléctrica, Electrónica y Automática de la Universidad de Extremadura.
+
+Informa:\\ Que D. Javier Fernández Aparicio ha realizado bajo su dirección el Trabajo de Fin de Grado. Considera que la memoria reúne los requisitos necesarios para su evaluación
+
+\begin{center}
+  Badajoz, 8 de julio de 2020
+\end{center}
+\vspace{2cm}
+\begin{center}
+  Fdo. Fernando J. Álvarez Franco.
+\end{center}
+\vspace*{\fill}
+%
+
+\newpage\thispagestyle{empty}
+\vspace*{.5cm}
 
 \newpage
+\pagestyle{empty}\tableofcontents\clearpage\pagestyle{fancy} % set the pagestyle as empty for all toc pages
+
+\newpage\thispagestyle{plain}\setcounter{page}{1}
+\pagenumbering{arabic}% Arabic page numbers (and reset to 1)
+\phantomsection\section*{Resumen}
+Este documento proporciona una descripción detallada del proyecto, el cual está centrado en la investigación de posibles alternativas de bajo coste para sistemas de dendrometría inalámbricos. Actualmente existen una amplia gama de sistemas profesionales en el mercado, sin embargo debido a su elevado coste, este proyecto pretende abordar la reducción en el mismo, incrementando la versatilidad, accesibilidad y escalabilidad de este tipo de sistemas.
+
+Para conseguir estos objetivos el proyecto se apoyará en tecnologías de hardware libre como Arduino \cite{Arduino} o Raspberry Pi \cite{Raspberrypi}, y en sistemas de software libre o código abierto, como FIWARE \cite{FIWARE}, The Things Network \cite{TTN} y Python \cite{Python}.
 
 \phantomsection\section*{Abstract}
 \addcontentsline{toc}{section}{Abstract}%
 This document gives a detailed description of this project, which is focused on researching possibles low-cost alternatives for wireless dendrometry systems. Currently there exist a lot of expensive and professional systems in the market, that's why this project is intended to reduce costs and increase the versatility, scalability and accessibility.
 
-In order to reach these objetives the project will be supported over free software such as FIWARE\cite{Fiware} or free hardware such as Arduino\cite{Arduino} and Raspberry Pi\cite{Raspberrypi}.
+In order to reach these objetives the project will be supported with free software technologies such as FIWARE\cite{FIWARE}, The Things Network\cite{TTN} and Python\cite{Python} or free hardware systems such as Arduino\cite{Arduino} and Raspberry Pi\cite{Raspberrypi}.
 
-\section{Introduction}
-This project arises itself from a direct interaction with professionals inside forestal sector. The original idea was to give technical coverage for particular necessities which professionals in this sector had to face off with. At this point is easy to notice this solution will need to be a distributed solution, due high samples dispersion. As indicated, there are even remote techniques to predict this sample density/dispersion using remote methods which predicts \doubt{between $157$-$170$ indviduals per hectare}\cite{ForestStandVol} (depending on the used model). So according to this and sample size determination theories, to get a great resolution could be necessary a big size for samples and the necessity of a big wireless network of distributed devices, since each device will correspond with an individual.
+\newpage
+\section{Introduction}\thispagestyle{plain}
+This project arises itself from a direct interaction with professionals inside forestry sector. The original idea was to give technical coverage for particular necessities which professionals in this sector had to face off with. At this point is easy to notice this solution will need to be a distributed solution, due high samples dispersion. As indicated, there are even remote techniques to predict this sample density/dispersion using remote methods which predicts between $157$-$170$ individuals per hectare\cite{ForestStandVol} (depending on the used model). 
 
-This is more or less, the definition of the IoT (Internet of Things) concept; according to the abstract in \cite{IoTOverview} IoT concept comes from an earlier concept called M2M (Machine-to-Machine) communications. However, also according to \cite[p.~1(71)]{IoTOverview} there is not an official definition for IoT concept, but according to \cite[p.~2(920)]{IoTObjetives}
+So according to indicated above and these sample size determination theories, to get a great resolution could be necessary a big size for samples and the need for a big wireless network of distributed devices, since each device will correspond with an individual.
+
+\subsection{Internet of Things}
+This previously exposed is, more or less, the definition of the IoT (Internet of Things) concept; according to the abstract in \cite{IoTOverview} IoT concept comes from an earlier concept called M2M (Machine-to-Machine) communications. However, also according to \cite[p.~1(71)]{IoTOverview} there is not an official definition for IoT concept yet, but according to \cite[p.~2(920)]{IoTObjetives}
 
 \begin{quoting}
   based on the traditional information carriers including the Internet, telecommunication  network  and  so  on,  Internet  of Things (IoT) is a network that interconnects ordinary physical  objects  with  the identifiable addresses  so that provides intelligent services.
@@ -530,8 +563,7 @@ This is more or less, the definition of the IoT (Internet of Things) concept; ac
 
 This, at least, covers a little part what this project is intended to do: \enquote{Interconnect ordinary physical objects with the identifiable adresses} to provide intelligent services. These physical objects are in this case ordinary dendrometers.
 
-Over the years there have existed analog and manual dendrometers, thus data acquisition had to follow a manual process in the same way. This could turn out bothering because the big size for this statistical population, as previously stated. So it was traditionally necessary to go there and as part of the field work, take individual by individual the whole sample data.
-
+Over the years there have existed analog and handled by hand dendrometers, thus data acquisition had to follow a manual process in the same way. This could turn out bothering because of the big size for this statistical population, as previously stated. So it was traditionally necessary to go there and as part of the field work, take individual by individual the whole sample data.
 
 \subsection{Dendrometry, a formal definition}
 The GEMET (General Multilingual Environmental Thesaurus) adopts the definition for \textit{dendrometry} from \cite{DictNaturalRes}:
@@ -540,12 +572,20 @@ The GEMET (General Multilingual Environmental Thesaurus) adopts the definition f
   The measuring of the diameter of standing trees from the ground with a dendrometer that can also be used to measure tree heights.
 \end{quoting}
 
-This one is a bit wide definition because nowadays most dendrometry researches are focused on stem diameter; however, at this point could be interesting to extend this project to include also a sensor to heights measurement.\footnote{This project is already considered extensive enough.} 
+This one is a bit wide definition because nowadays most dendrometry researches are focused on stem diameter; however, at this point could be interesting to extend this project to include also a sensor to heights measurement; however, this project is already considered extensive enough.
 
 A lot of comercial dendrometry systems are available in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems, consequently as stated, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, because those professional systems are still expensive. So this is intended to get a cheaper system and make it accessible to everyone who wants to monitor one or more trees growth. 
 
 There are quite a few types of dendrometers but according to \cite{DendroResearch} \enquote{It is possible to define two broad categories of dendrometer: those that contact the stem and those that do not}. This project is focused on the former kind, so for this project is being developed a \enquote{contact dendrometer} based on a linear potentiometer.
 
+\subsection{Objectives}
+As previously stated the Abstract section, the most important objective for this project is to research about the possibility of make this dendrometry system cheaper and more scalable and accessible.
+
+Forests are remote and large surface areas which will require long-range communication technologies to be controlled. That's why LoRa is the perfect wireless technology to achieve this and these kind of automatic systems seem to be the proper solution to this hard and slow process. Hence IoT has much to contribute to this task. Forestry professionals could take advantage of this technologies to make this in an easier, cheaper and automated way; being this the main purpose of this project.
+
+\newpage\thispagestyle{plain}
+\section{System Architecture}
+\doubt{COMPLETE}
 
 \subsection{Physical Layer}
 
@@ -564,7 +604,7 @@ Since the idea is to produce a low-cost device in order to distribute a high num
 
 % I need to use that \texorpdfstring{}{} for the left-side ToC in PDF viewers, because the ® cannot be rendered in there.
 \subsubsection{\texorpdfstring{LoRa\textsuperscript{\textregistered} (Lo{\normalfont\sffamily ng} Ra{\normalfont\sffamily nge})}{LoRa (Long Range)}}
-LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite[]{LoRaGeneral}. This is why some devices inside IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been pointed. So this low availability (of resources) along with their tendency to be distributed/scattered causes the necessity for a low-power consumption and a long-range telecommunication.
+LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite[]{LoRaGeneral}. This is why some devices inside IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been pointed. So this low availability (of resources) along with their tendency to be distributed/scattered causes the need for a low-power consumption and a long-range telecommunication.
 
 In a more general sense, there is a wider concept to include all these kind of technologies which fullfil the IoT communication requirements, this is the \enquote{Low-Power Wide Area Networks} (LPWAN), so as claimed by \cite[]{LoRaGeneral}
 
@@ -576,7 +616,7 @@ It is important to note that when talking about \enquote{low-power consumption},
 
 By other hand, LoRa can commonly refer to two distinct layers; a physical layer (LoRa itself) and a MAC layer protocol (LoRaWAN). The former one (the physical layer), is a proprietary technology developed by Semtech. So this does mean this layer is not fully open; LoRaWAN, however, is a protocol built to use LoRa physical layer,  It is intended to sensor networks, wherein those sensors exchange packages with some server with a \enquote{low data rate and relatively long time intervals (one transmission per hour or even days).}\cite[p.~9]{LoRaGeneral}. This particularly means that LoRaWAN protocol is perfect for the purpose of this project.  
 
-In comparison with other common telecommunication technologies, LoRa uses lower bandwidth, but it reaches longer distances:
+In comparison with other common telecommunication technologies, LoRa uses lower bandwidth, but it reaches longer distances; a comparative diagram shows different wireless technologies in figure \ref{fig:LoraComparison}
 
 \begin{figure}[htp]
   \centering
@@ -628,7 +668,7 @@ End-node devices broadcast LoRaWAN packets over LoRa radio protocol to the gatew
 After this, the traffic is routed to FIWARE side, which is deployed locally and the user has total control over it.
 
 \subsubsection{FIWARE}
-It is defined as \enquote{The Open Source Platform for Our Smart Digital Future}\cite{Fiware}; in a deeper sense is \enquote{an open source initiative defending an universal set of standards for context data management}\cite{Fiware}, which basically means that \textit{FIWARE} is an open source platform where develop IoT and smart solutions. The platform provides a number of software modules called \textit{Generic Enablers}; among all those \textit{Generic Enablers} there is one particularly important called \textit{Orion Context Broker}. In fact, for a solution to be considered as \textit{Powered by FIWARE} it must to use the \textit{Orion Context Broker} at least. 
+It is defined as \enquote{The Open Source Platform for Our Smart Digital Future}\cite{FIWARE}; in a deeper sense is \enquote{an open source initiative defending an universal set of standards for context data management}\cite{FIWARE}, which basically means that \textit{FIWARE} is an open source platform where develop IoT and smart solutions. The platform provides a number of software modules called \textit{Generic Enablers}; among all those \textit{Generic Enablers} there is one particularly important called \textit{Orion Context Broker}. In fact, for a solution to be considered as \textit{Powered by FIWARE} it must to use the \textit{Orion Context Broker} at least. 
 
 This \textit{Context data} is just a way to name any kind of data coming from any kind of sensor. \textit{Orion Context Broker} is designed to manage this context data through concepts such as \textit{subscriptions} or \textit{entities}, to name but a few; however, all these \textit{Generics Enablers} communicate with each other using the \textit{FIWARE NGSI RESTful API}\cite{NGSI}.\footnote{\textit{RESTful} term comes from the software architectural style \textit{REST}, which stands for \textit{Representational State Transfer}}
 
@@ -638,7 +678,7 @@ Despite FIWARE is a powerful platform, is not friendly enough regarding final us
 % \newpage
 % \section{Background}
 \newpage
-\section{Technical description}
+\section{Design}\thispagestyle{plain}
 Like in the Introduction, the most proper way to present this technical description is to difference between software and hardware parts. However, is still interesting to present a simple and general diagram for whole designed solution. So as the reader can see in the figure \ref{fig:GenView} is shown the general diagram. 
 
 Firstly the TTN stack send through MQTT protocol the payload to FIWARE IoTagent-LoRaWAN generic enabler. Secondly, FIWARE generic enablers process that payload and store the contained information (also called \textit{context data}) along with a timestamp in the persisting data base (CrateDB), after this, the context data can be visualized in a web view provided by Grafena. 
@@ -688,7 +728,7 @@ It is also recommended by the manufacturer to use the potentiometer as a voltage
   \label{fig:SignalCond}
 \end{figure}
 
-\subsubsubsection{Arduino sketch}
+\subsubsubsection{Arduino}
 In a first place, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino}{the sketch} can be found in \cmd{src/dendro/dendro.ino} path. This is the sketch that must be uploaded to arduino microcontroller. MEGA 2560 in this case.
 
 By other hand, in order to this sketch takes advantage of the plugged LoRa Shield, is required to base it on the LoRaMAC-in-C library \cite{MCCI_lmic} (\cmd{arduino-lmic})\footnote{Dragino has its own \href{https://github.com/dragino/arduino-lmic}{fork of this library} but has been considered less upgraded than the MCCI version, which is a fork itself from the first port of LMIC library by \href{https://github.com/matthijskooijman}{Matthijs Kooijman}.} implemented by \href{https://mcci.com/}{MCCI}, whose technical documentation can be found in \cite{MCCI_lmic_docs}. The \cmd{arduino-lmic} library is, as its description in the README.md says, a port from the IBM LoRaWAN MAC in C, but \enquote{slightly modified to run in the Arduino environment allowing using the SX1272, SX1276 transceivers and compatible modules} \cite{MCCI_lmic}. The original IBM LoRaWAN MAC in C library was developed for microcontrollers in general, their examples and HAL ---Hardware Abstraction Layer or rather Hardware Annotation Library--- were only for STM32 MCUs (but bare-metal, so no Arduino on top). 
@@ -874,7 +914,7 @@ One of the first and most important configurations is the internet access; this 
     \end{itemize}
 \end{itemize}
 
-It is important to note the necessity of a relatively stable internet connection; those gateways will forward the traffic to the cloud server, so they are receiving LoRa packets through its LoRa interface and then forwarding them to the specified server. 
+It is important to note the need for a relatively stable internet connection; those gateways will forward the traffic to the cloud server, so they are receiving LoRa packets through its LoRa interface and then forwarding them to the specified server. 
 
 Another configuration which must be done is the Secure Shell (\cmd{ssh}) service; which according to Raspberry Pi documentation can be done from terminal using \cmd{systemd} \cite{RaspiSSH}. 
 
@@ -1042,7 +1082,7 @@ The core of the software part is deployed using Docker containers \cite{Docker_c
   \item \textbf{IoTagent-LoRaWAN}, which is in charge of forward the traffic from TTN stack to Orion Context Broker.
   \item \textbf{Orion Context Broker}, this is the \myuline{core generic enabler}, in fact as indicated, this is the only one required component to the solution can be considered as \enquote{powered by FIWARE}. Besides this generic enabler requires a \textbf{Mongo database} to store entities and subscriptions among other things. 
   \item \textbf{QuantumLeap}, in order to make the context data persistent, this generic enabler is needed. Orion Context Broker works mainly with two elements; entities and subscriptions, however, for any created entity the context data does not persist in Mongo database, instead the context data will be replaced/updated; so creating a subscription which notifies to QuantumLeap, this generic enabler will store the context data in a \textbf{Crate database} to make it persistent. Also a \textbf{Redis database} is used for geocoding purposes, however this project will not deal with it ---this is why of this database is not even being included in the figure \ref{fig:GenView}.
-  \item \textbf{Grafana}, this container is intended to provide a web interface to visualize and manage the retrieved context data. It stores its configuration and customization values in an embebed sqlite3 database; so there is not necessity for a separate container. 
+  \item \textbf{Grafana}, this container is intended to provide a web interface to visualize and manage the retrieved context data. It stores its configuration and customization values in an embebed sqlite3 database; so there is not need for a separate container. 
 \end{itemize}
 
 These bold highlighted are the deployed containers that will be detailed later, many of them are not even part of FIWARE platform, though. First this document will expose how to set up the gateway, create an application and add devices inside The Things Network stack. 
@@ -1430,7 +1470,18 @@ Finally, as indicated, the \enquote{About} tab shows the versions info as can be
 
 As figure \ref{fig:GUI_2nodes} shows, once a node is created is added to the list, subscription and entity ID are useful to remove manually just a subscription or an entity by performing a manual \cmd{DELETE} request, in fact have been also included several \cmd{DELETE} requests in the attached Postman collection, however, when a node is deleted using this graphical interface button is also being removed its entity and its subscription.
 
-\newpage
+\newpage\thispagestyle{plain}
+\section{Proof of concept}
+\doubt{COMPLETE}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.8\textwidth]{../pictures/2prototypes_1gateway.jpg}  
+  \caption{Two prototypes transmitting through the gateway}
+  \label{fig:2nodes_gateway}
+\end{figure}
+
+\newpage\thispagestyle{plain}
 \section{Conclusions}
 Finally there are a few considerations that could be done, 
 
@@ -1452,32 +1503,6 @@ Finally there are a few considerations that could be done,
     \item For a production environment it seems clear that arduino devices should be encapsulated and the sensor (potentiometer) part must be improved; however this is not hard because of the wide offer for cases and power supply systems, this would lead a very compact device which could be also improved adding more sensor due versatility of CayenneLPP encoding standard which allows to send multiple measurements of different sensors. 
     \item Finally this project is a good candidate to replace expensive commercial and proprietary systems; so it likely keeps developing, depending on the needs of the researchers.
 \end{itemize}
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=.8\textwidth]{../pictures/2prototypes_1gateway.jpg}  
-  \caption{Two prototypes transmitting through the gateway}
-  \label{fig:2nodes_gateway}
-\end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \newpage
 \phantomsection
