@@ -145,8 +145,8 @@
 \usepackage[nottoc]{tocbibind}
 
 % To avoid 'underfull box' warning caused because of bibliography line-break
-\usepackage{etoolbox}
-\apptocmd{\thebibliography}{\raggedright}{}{}
+% \usepackage{etoolbox}
+% \apptocmd{\thebibliography}{\raggedright}{}{}
 
 % To use \begin{markdown}\end{markdown} environment and be able to type markdown mode
 % IMPORTANT: do not use indent inside \begin{markdown}\end{markdown} environment in the code! 
@@ -207,19 +207,22 @@
 
 % To improve headers an footers (I'm using to set page number at right)
 \usepackage{fancyhdr}
-% Turn on the style
-\pagestyle{fancy}
-\fancyhf{} % Start with clearing everything in the header and footer
-\renewcommand{\headrulewidth}{1pt} % Removes the horizontal rule in header by default
-\fancyfoot[R]{\thepage} % Set the right side of the footer to be the page number
-\fancyhead[R]{\rightmark}
-\setlength{\headheight}{14pt}% ...at least 51.60004pt
+% Plain style that removes headers but keeps page numbers
 \fancypagestyle{plain}{%
-  \fancyhf{}% clear all header and footer fields
+  \fancyhf{} % Clears all header and footer fields
   \fancyfoot[R]{\thepage}%
   \renewcommand{\headrulewidth}{0pt}%
   \renewcommand{\footrulewidth}{0pt}%
 }
+% This style is my custom style
+\fancypagestyle{myfancy}{%
+	\fancyhf{} % Start with clearing everything in the header and footer
+	\renewcommand{\headrulewidth}{1pt} % Makes 1pt width the horizontal rule in header by default
+	\fancyfoot[R]{\thepage} % Set the right side of the footer to be the page number
+	\fancyhead[R]{\rightmark}
+	\setlength{\headheight}{14pt}% ...at least 51.60004pt
+}
+\pagestyle{myfancy} % Enables by default the custom style.
 
 % To change TOC appearance; see 2.1 section in tocloft.pdf for info about 'titles' option
 % it does not mention fancyhdr package but it do the work to flushright page numbers for 
@@ -511,9 +514,8 @@
   \thispagestyle{empty}
   \null%
 \endgroup
-\newpage
 
-\newpage\thispagestyle{empty}
+\clearpage{\pagestyle{empty}\cleardoublepage}\thispagestyle{empty}
 \vspace*{\fill}
 Fernando Javier Álvarez Franco, profesor del Departamento de Ingeniería Eléctrica, Electrónica y Automática de la Universidad de Extremadura.
 
@@ -529,14 +531,11 @@ Informa:\\ Que D. Javier Fernández Aparicio ha realizado bajo su dirección el 
 \vspace*{\fill}
 %
 
-\newpage\thispagestyle{empty}
-\vspace*{.5cm}
+\clearpage{\pagestyle{empty}\cleardoublepage}\pagestyle{empty}
 
-\newpage
-\pagestyle{empty}\tableofcontents\clearpage\pagestyle{fancy} % set the pagestyle as empty for all toc pages
+\tableofcontents\cleardoublepage\pagestyle{myfancy} % set the pagestyle as empty for all toc pages
 
-\newpage\thispagestyle{plain}\setcounter{page}{1}
-\pagenumbering{arabic}% Arabic page numbers (and reset to 1)
+\newpage\thispagestyle{plain}\pagenumbering{arabic}% Arabic page numbers (and reset to 1)
 \phantomsection\section*{Resumen}
 Este documento proporciona una descripción detallada del proyecto, el cual está centrado en la investigación de posibles alternativas de bajo coste para sistemas de dendrometría inalámbricos. Actualmente existen una amplia gama de sistemas profesionales en el mercado, sin embargo debido a su elevado coste, este proyecto pretende abordar la reducción en el mismo, incrementando la versatilidad, accesibilidad y escalabilidad de este tipo de sistemas.
 
@@ -548,7 +547,7 @@ This document gives a detailed description of this project, which is focused on 
 
 In order to reach these objetives the project will be supported with free software technologies such as FIWARE\cite{FIWARE}, The Things Network\cite{TTN} and Python\cite{Python} or free hardware systems such as Arduino\cite{Arduino} and Raspberry Pi\cite{Raspberrypi}.
 
-\newpage
+\clearpage{\pagestyle{empty}\cleardoublepage}
 \section{Introduction}\thispagestyle{plain}
 This project arises itself from a direct interaction with professionals inside forestry sector. The original idea was to give technical coverage for particular necessities which professionals in this sector had to face off with. At this point is easy to notice this solution will need to be a distributed solution, due high samples dispersion. As indicated, there are even remote techniques to predict this sample density/dispersion using remote methods which predicts between $157$-$170$ individuals per hectare\cite{ForestStandVol} (depending on the used model). 
 
@@ -583,7 +582,7 @@ As previously stated the Abstract section, the most important objective for this
 
 Forests are remote and large surface areas which will require long-range communication technologies to be controlled. That's why LoRa is the perfect wireless technology to achieve this and these kind of automatic systems seem to be the proper solution to this hard and slow process. Hence IoT has much to contribute to this task. Forestry professionals could take advantage of this technologies to make this in an easier, cheaper and automated way; being this the main purpose of this project.
 
-\newpage\thispagestyle{plain}
+\clearpage{\pagestyle{empty}\cleardoublepage}\thispagestyle{plain}
 \section{System Architecture}
 A simple block diagram is shown in figure \ref{fig:block_diagram}, this diagram intends to emphasize the difference between two big layers, a physical layer that should be placed ---IoT dendrometers at least--- close to the sample, and another one called abstract layer which can be deployed locally ---TTN stack is a cloud server, although.
 
@@ -633,7 +632,7 @@ By other hand, LoRa can commonly refer to two distinct layers; a physical layer 
   \label{fig:LoraComparison}
 \end{figure}
 
-In comparison with other common telecommunication technologies, LoRa uses lower bandwidth, but it reaches longer distances; a comparative diagram shows different wireless technologies in figure \ref{fig:LoraComparison}
+In comparison with other common telecommunication technologies, LoRa uses lower bandwidth, but it reaches longer distances; a comparative diagram shows different wireless technologies in figure \ref{fig:LoraComparison}.
  
 \subsubsection{Raspberry Pi, a powerful microcomputer}
 As in the case of Arduino, Raspberry Pi provides a powerful platform, however in the case of a Raspberry Pi this platform is slightly more complex than for an Arduino.\footnote{There are a lot of Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware point of view, Raspberry Pi implements a better one than Arduino, this also has an impact on a higher cost; however, this hardware allows a Raspberry Pi to support a whole operating system; that's why this devices are usually called \textit{single-board computers}.
@@ -689,7 +688,7 @@ There are a lot of HTTP clients available, however the reader would be still for
 
 It's not perfect, it has a few deficiencies in fact, but is by the moment an appropriate way to manage devices, entities and subscriptions in locally deployed FIWARE instance. \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/api-gui.py}{The code} of this graphical interface is available in the project repository at GitHub.
 
-\newpage
+\clearpage{\pagestyle{empty}\cleardoublepage}\thispagestyle{plain}
 \section{Design}\thispagestyle{plain}
 Like in the Introduction, the most proper way to present this technical description is to difference between software and hardware parts. However, is still interesting to present a simple and general diagram for whole designed solution. So as the reader can see in the figure \ref{fig:GenView} is shown the general diagram. 
 
@@ -1482,7 +1481,7 @@ Finally, as indicated, the \enquote{About} tab shows the versions info as can be
 
 As figure \ref{fig:GUI_2nodes} shows, once a node is created is added to the list, subscription and entity ID are useful to remove manually just a subscription or an entity by performing a manual \cmd{DELETE} request, in fact have been also included several \cmd{DELETE} requests in the attached Postman collection, however, when a node is deleted using this graphical interface button is also being removed its entity and its subscription.
 
-\newpage\thispagestyle{plain}
+\clearpage{\pagestyle{empty}\cleardoublepage}\thispagestyle{plain}
 \section{Proof of concept}
 \doubt{COMPLETE}
 
@@ -1493,7 +1492,7 @@ As figure \ref{fig:GUI_2nodes} shows, once a node is created is added to the lis
   \label{fig:2nodes_gateway}
 \end{figure}
 
-\newpage\thispagestyle{plain}
+\clearpage{\pagestyle{empty}\cleardoublepage}\pagestyle{plain}
 \section{Conclusions}
 Finally there are a few considerations that could be done, 
 
@@ -1516,8 +1515,7 @@ Finally there are a few considerations that could be done,
     \item Finally this project is a good candidate to replace expensive commercial and proprietary systems; so it likely keeps developing, depending on the needs of the researchers.
 \end{itemize}
 
-\newpage
-\phantomsection
-\addcontentsline{toc}{section}{References}
+\clearpage{\pagestyle{empty}\cleardoublepage}\pagestyle{myfancy}
+\phantomsection\addcontentsline{toc}{section}{References}
 \printbibliography
 \end{document}
