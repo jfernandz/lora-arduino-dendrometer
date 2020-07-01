@@ -1,0 +1,84 @@
+<mxfile host="" modified="2020-07-01T16:46:09.602Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) code-oss/1.46.1 Chrome/78.0.3904.130 Electron/7.1.14 Safari/537.36" etag="W0EA-_HCX2hH77i1irlv" version="13.1.3">
+    <diagram id="6hGFLwfOUW9BJ-s0fimq" name="Page-1">
+        <mxGraphModel dx="1973" dy="2350" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="5" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="-75.5" y="-47" width="999" height="1105.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="&lt;font color=&quot;#000000&quot; style=&quot;font-size: 25px;&quot;&gt;Physical Layer&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#D5E8D4;align=left;verticalAlign=top;fontSize=25;spacingLeft=5;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="11" y="36" width="826" height="434" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="&lt;font color=&quot;#000000&quot; style=&quot;font-size: 25px;&quot;&gt;Abstract Layer&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fontSize=25;spacingLeft=5;fillColor=#D4E1F5;strokeColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="11" y="546" width="826" height="434" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="LoRa" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=25;strokeColor=#000000;dashed=1;dashPattern=1 4;verticalAlign=bottom;labelBackgroundColor=none;fontColor=#000000;" parent="1" source="12" target="14" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="IoT Dendrometer" style="whiteSpace=wrap;html=1;aspect=fixed;strokeColor=#000000;fillColor=none;fontSize=20;align=left;fontColor=#000000;verticalAlign=top;spacingLeft=5;" parent="1" vertex="1">
+                    <mxGeometry x="48" y="102" width="323.5" height="323.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fontSize=20;fontColor=#000000;" parent="1" source="14" target="20" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="TCP/IP" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontColor=#000000;labelBackgroundColor=none;spacingTop=10;spacingLeft=5;" parent="23" vertex="1" connectable="0">
+                    <mxGeometry x="-0.2282" relative="1" as="geometry">
+                        <mxPoint y="1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="LoRa Gateway" style="whiteSpace=wrap;html=1;aspect=fixed;strokeColor=#000000;fillColor=none;fontSize=25;align=left;fontColor=#000000;verticalAlign=top;spacingLeft=5;" parent="1" vertex="1">
+                    <mxGeometry x="481" y="102" width="323.5" height="323.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;fontSize=20;fontColor=#000000;" parent="1" source="16" target="17" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="&lt;font color=&quot;#000000&quot; style=&quot;font-size: 15px&quot;&gt;Linear potentiometer + Signal conditioning stage&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;fontSize=15;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="103.25" y="160.75" width="213" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="&lt;font color=&quot;#000000&quot; style=&quot;font-size: 15px;&quot;&gt;Arduino + LoRa Shield&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;fontSize=15;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="103.25" y="300.75" width="213" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="Rraspberry Pi + LoRa HAT" style="whiteSpace=wrap;html=1;aspect=fixed;strokeColor=#000000;fillColor=none;fontSize=15;fontColor=#000000;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="546.25" y="167.25" width="193" height="193" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;fontSize=15;fontColor=#000000;" parent="1" source="20" target="24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="TTN Stack" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;fontSize=20;fontColor=#000000;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="481" y="623" width="323.5" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="Gafana" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;fontSize=20;fontColor=#000000;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="481" y="800" width="323.5" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#000000;fontSize=15;fontColor=#000000;" parent="1" source="32" target="21" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="HTTP Requests" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;fontSize=20;fontColor=#000000;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="48" y="877" width="323.5" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="FIWARE" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;fontSize=20;fontColor=#000000;align=left;verticalAlign=top;spacingLeft=5;" parent="1" vertex="1">
+                    <mxGeometry x="48" y="612" width="323.5" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fontSize=20;fontColor=#000000;" parent="1" source="24" target="25" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="IoTagent LoRaWAN" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;fontSize=15;fontColor=#000000;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="231.5" y="629" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;fontSize=20;fontColor=#000000;" parent="1" source="25" target="27" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="Orion Context Broker" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;fontSize=15;fontColor=#000000;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="66.5" y="687" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fontSize=15;fontColor=#000000;" parent="1" source="27" target="35" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="QuantumLeap" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;fontSize=15;fontColor=#000000;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="231.5" y="740" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
