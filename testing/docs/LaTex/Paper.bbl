@@ -1,0 +1,1059 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{Fiware}{online}{}
+      \name{author}{1}{}{%
+        {{hash=2e1d68fd78b36ff31c265b74ba4a4692}{%
+           family={{FIWARE Foundation, e.V.}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{2e1d68fd78b36ff31c265b74ba4a4692}
+      \strng{fullhash}{2e1d68fd78b36ff31c265b74ba4a4692}
+      \strng{bibnamehash}{2e1d68fd78b36ff31c265b74ba4a4692}
+      \strng{authorbibnamehash}{2e1d68fd78b36ff31c265b74ba4a4692}
+      \strng{authornamehash}{2e1d68fd78b36ff31c265b74ba4a4692}
+      \strng{authorfullhash}{2e1d68fd78b36ff31c265b74ba4a4692}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{FIWARE Home}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.fiware.org/
+      \endverb
+      \verb{url}
+      \verb https://www.fiware.org/
+      \endverb
+    \endentry
+    \entry{Arduino}{online}{}
+      \name{author}{1}{}{%
+        {{hash=b31dda31280cd55241483a25d945b25a}{%
+           family={{Arduino Company}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{b31dda31280cd55241483a25d945b25a}
+      \strng{fullhash}{b31dda31280cd55241483a25d945b25a}
+      \strng{bibnamehash}{b31dda31280cd55241483a25d945b25a}
+      \strng{authorbibnamehash}{b31dda31280cd55241483a25d945b25a}
+      \strng{authornamehash}{b31dda31280cd55241483a25d945b25a}
+      \strng{authorfullhash}{b31dda31280cd55241483a25d945b25a}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Arduino}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.arduino.cc/
+      \endverb
+      \verb{url}
+      \verb https://www.arduino.cc/
+      \endverb
+    \endentry
+    \entry{Raspberrypi}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0dac029e46904a2d35a186cfa0c1303c}{%
+           family={{Raspberry Pi Foundation}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{fullhash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{bibnamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authorbibnamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authornamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authorfullhash}{0dac029e46904a2d35a186cfa0c1303c}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Raspberry Pi}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.raspberrypi.org/
+      \endverb
+      \verb{url}
+      \verb https://www.raspberrypi.org/
+      \endverb
+    \endentry
+    \entry{ForestStandVol}{article}{}
+      \name{author}{3}{}{%
+        {{hash=d35607b99fb4932cdbdeaa500d3b5360}{%
+           family={Mohammadi},
+           familyi={M\bibinitperiod},
+           given={Jahangir},
+           giveni={J\bibinitperiod}}}%
+        {{hash=cd257c959dc614f29c80e893eeb57548}{%
+           family={Shataee},
+           familyi={S\bibinitperiod},
+           given={Shaban},
+           giveni={S\bibinitperiod}}}%
+        {{hash=07c921d28486f95986ce6fcb39c44c0a}{%
+           family={Babanezhad},
+           familyi={B\bibinitperiod},
+           given={Manoocher},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{2059e26ef986ad7306193065ed192a5d}
+      \strng{fullhash}{2059e26ef986ad7306193065ed192a5d}
+      \strng{bibnamehash}{2059e26ef986ad7306193065ed192a5d}
+      \strng{authorbibnamehash}{2059e26ef986ad7306193065ed192a5d}
+      \strng{authornamehash}{2059e26ef986ad7306193065ed192a5d}
+      \strng{authorfullhash}{2059e26ef986ad7306193065ed192a5d}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Biophysical Chemistry - BIOPHYS CHEM}
+      \field{month}{12}
+      \field{title}{{Estimation of forest stand volume, tree density and biodiversity using Landsat ETM + Data, comparison of linear and regression tree analyses}}
+      \field{volume}{7}
+      \field{year}{2011}
+      \field{pages}{299\bibrangedash 304}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1016/j.proenv.2011.07.052
+      \endverb
+    \endentry
+    \entry{IoTOverview}{online}{}
+      \name{author}{3}{}{%
+        {{hash=239d437d8ade5f598413d89e0af4fca2}{%
+           family={Abdul-Qawy},
+           familyi={A\bibinithyphendelim Q\bibinitperiod},
+           given={Antar},
+           giveni={A\bibinitperiod}}}%
+        {{hash=6c9e0e6b45a182cca9b4b6156c6f8a0b}{%
+           family={Magesh},
+           familyi={M\bibinitperiod},
+           given={E},
+           giveni={E\bibinitperiod}}}%
+        {{hash=a7b52f30ddb242f43a37ea8fc0e8c2c2}{%
+           family={Tadisetty},
+           familyi={T\bibinitperiod},
+           given={Srinivasulu},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{2f1893f9cf793ec6406ea640395e297a}
+      \strng{fullhash}{2f1893f9cf793ec6406ea640395e297a}
+      \strng{bibnamehash}{2f1893f9cf793ec6406ea640395e297a}
+      \strng{authorbibnamehash}{2f1893f9cf793ec6406ea640395e297a}
+      \strng{authornamehash}{2f1893f9cf793ec6406ea640395e297a}
+      \strng{authorfullhash}{2f1893f9cf793ec6406ea640395e297a}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{12}
+      \field{title}{{The Internet of Things (IoT): An Overview}}
+      \field{volume}{5}
+      \field{year}{2015}
+      \field{pages}{71\bibrangedash 82}
+      \range{pages}{12}
+      \verb{urlraw}
+      \verb https://www.researchgate.net/publication/323834996_The_Internet_of_Things_IoT_An_Overview
+      \endverb
+      \verb{url}
+      \verb https://www.researchgate.net/publication/323834996_The_Internet_of_Things_IoT_An_Overview
+      \endverb
+    \endentry
+    \entry{IoTObjetives}{article}{}
+      \name{author}{1}{}{%
+        {{hash=0d42ca1e05c570fd1e123812df7cb47b}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Hua-Dong},
+           giveni={H\bibinithyphendelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{0d42ca1e05c570fd1e123812df7cb47b}
+      \strng{fullhash}{0d42ca1e05c570fd1e123812df7cb47b}
+      \strng{bibnamehash}{0d42ca1e05c570fd1e123812df7cb47b}
+      \strng{authorbibnamehash}{0d42ca1e05c570fd1e123812df7cb47b}
+      \strng{authornamehash}{0d42ca1e05c570fd1e123812df7cb47b}
+      \strng{authorfullhash}{0d42ca1e05c570fd1e123812df7cb47b}
+      \field{sortinit}{7}
+      \field{sortinithash}{f615fb9c6fba11c6f962fb3fd599810e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{J. Comput. Sci. Technol.}
+      \field{month}{11}
+      \field{title}{Internet of Things: Objectives and Scientific Challenges}
+      \field{volume}{26}
+      \field{year}{2011}
+      \field{pages}{919\bibrangedash 924}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1007/s11390-011-1189-5
+      \endverb
+    \endentry
+    \entry{DictNaturalRes}{book}{}
+      \name{author}{1}{}{%
+        {{hash=83d4cd2f0dacf9e572f43a7a555560c1}{%
+           family={A.\bibnamedelimi Dunster},
+           familyi={A\bibinitperiod\bibinitdelim D\bibinitperiod},
+           given={Julian},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{83d4cd2f0dacf9e572f43a7a555560c1}
+      \strng{fullhash}{83d4cd2f0dacf9e572f43a7a555560c1}
+      \strng{bibnamehash}{83d4cd2f0dacf9e572f43a7a555560c1}
+      \strng{authorbibnamehash}{83d4cd2f0dacf9e572f43a7a555560c1}
+      \strng{authornamehash}{83d4cd2f0dacf9e572f43a7a555560c1}
+      \strng{authorfullhash}{83d4cd2f0dacf9e572f43a7a555560c1}
+      \field{sortinit}{8}
+      \field{sortinithash}{1b24cab5087933ef0826a7cd3b99e994}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780851991481}
+      \field{title}{Dictionary of natural resource management}
+      \field{year}{1996}
+    \endentry
+    \entry{DendroResearch}{article}{}
+      \name{author}{3}{}{%
+        {{hash=bba59c1f36ee3d44240dfdb35bd30978}{%
+           family={Clark},
+           familyi={C\bibinitperiod},
+           given={N.A.},
+           giveni={N\bibinitperiod}}}%
+        {{hash=99217c46e40d1395d99a34b867069e31}{%
+           family={Wynne},
+           familyi={W\bibinitperiod},
+           given={Randolph},
+           giveni={R\bibinitperiod}}}%
+        {{hash=dfdb62d55f476752ba7aa5c9b759fa78}{%
+           family={Schmoldt},
+           familyi={S\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{2d60bb2126f6f109a0d1c2b74a8bc287}
+      \strng{fullhash}{2d60bb2126f6f109a0d1c2b74a8bc287}
+      \strng{bibnamehash}{2d60bb2126f6f109a0d1c2b74a8bc287}
+      \strng{authorbibnamehash}{2d60bb2126f6f109a0d1c2b74a8bc287}
+      \strng{authornamehash}{2d60bb2126f6f109a0d1c2b74a8bc287}
+      \strng{authorfullhash}{2d60bb2126f6f109a0d1c2b74a8bc287}
+      \field{sortinit}{9}
+      \field{sortinithash}{54047ffb55bdefa0694bbd554c1b11a0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0015-749X}
+      \field{journaltitle}{Forest Science}
+      \field{month}{11}
+      \field{title}{A review of past research on dendrometers}
+      \field{volume}{46}
+      \field{year}{1999}
+      \field{pages}{570\bibrangedash 576}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1016/j.dendro.2009.06.008
+      \endverb
+    \endentry
+    \entry{LoRaGeneral}{article}{}
+      \name{author}{1}{}{%
+        {{hash=470fc135d2192509afe29609a9727b8e}{%
+           family={{Augustin, Aloÿs and Yi, Jiazi and Clausen, Thomas Heide and Townsley, William}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{470fc135d2192509afe29609a9727b8e}
+      \strng{fullhash}{470fc135d2192509afe29609a9727b8e}
+      \strng{bibnamehash}{470fc135d2192509afe29609a9727b8e}
+      \strng{authorbibnamehash}{470fc135d2192509afe29609a9727b8e}
+      \strng{authornamehash}{470fc135d2192509afe29609a9727b8e}
+      \strng{authorfullhash}{470fc135d2192509afe29609a9727b8e}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sensors}
+      \field{month}{10}
+      \field{title}{{A Study of LoRa: Long Range \& Low Power Networks for the Internet of Things}}
+      \field{volume}{16}
+      \field{year}{2016}
+      \field{pages}{1466}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/s16091466
+      \endverb
+    \endentry
+    \entry{RPiSpecs}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0dac029e46904a2d35a186cfa0c1303c}{%
+           family={{Raspberry Pi Foundation}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{fullhash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{bibnamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authorbibnamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authornamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authorfullhash}{0dac029e46904a2d35a186cfa0c1303c}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Raspberry Pi 3 B+ Specs}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/
+      \endverb
+      \verb{url}
+      \verb https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/
+      \endverb
+    \endentry
+    \entry{DraginoRpiHat}{online}{}
+      \name{author}{1}{}{%
+        {{hash=1558724ce5031d12da7cb0512eb7611c}{%
+           family={{Dragino Technology Co., LTD.}},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{fullhash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{bibnamehash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{authorbibnamehash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{authornamehash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{authorfullhash}{1558724ce5031d12da7cb0512eb7611c}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{LoRa GPS HAT for Raspberry Pi}}
+      \field{urlmonth}{6}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.dragino.com/products/lora/item/106-lora-gps-hat.html
+      \endverb
+      \verb{url}
+      \verb https://www.dragino.com/products/lora/item/106-lora-gps-hat.html
+      \endverb
+    \endentry
+    \entry{RpiHatHack}{online}{}
+      \name{author}{1}{}{%
+        {{hash=ac0b75e28670301c63a34fb5c0cf509a}{%
+           family={{The Things Industries}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{fullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{bibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorbibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authornamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorfullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{The Things Network Forum}}
+      \field{urlmonth}{6}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.thethingsnetwork.org/forum/t/application-is-not-showing-any-data-but-gateway-shows-traffic/36855/2
+      \endverb
+      \verb{url}
+      \verb https://www.thethingsnetwork.org/forum/t/application-is-not-showing-any-data-but-gateway-shows-traffic/36855/2
+      \endverb
+    \endentry
+    \entry{DraginoArdShield}{online}{}
+      \name{author}{1}{}{%
+        {{hash=1558724ce5031d12da7cb0512eb7611c}{%
+           family={{Dragino Technology Co., LTD.}},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{fullhash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{bibnamehash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{authorbibnamehash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{authornamehash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{authorfullhash}{1558724ce5031d12da7cb0512eb7611c}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{LoRa Shield for Arduino}}
+      \field{urlmonth}{6}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.dragino.com/products/lora/item/102-lora-shield.html
+      \endverb
+      \verb{url}
+      \verb https://www.dragino.com/products/lora/item/102-lora-shield.html
+      \endverb
+    \endentry
+    \entry{TTN_net_arch}{online}{}
+      \name{author}{1}{}{%
+        {{hash=ac0b75e28670301c63a34fb5c0cf509a}{%
+           family={{The Things Industries}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{fullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{bibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorbibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authornamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorfullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Network Architecture}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.thethingsnetwork.org/docs/network/architecture.html
+      \endverb
+      \verb{url}
+      \verb https://www.thethingsnetwork.org/docs/network/architecture.html
+      \endverb
+    \endentry
+    \entry{NGSI}{online}{}
+      \name{author}{1}{}{%
+        {{hash=2e1d68fd78b36ff31c265b74ba4a4692}{%
+           family={{FIWARE Foundation, e.V.}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{2e1d68fd78b36ff31c265b74ba4a4692}
+      \strng{fullhash}{2e1d68fd78b36ff31c265b74ba4a4692}
+      \strng{bibnamehash}{2e1d68fd78b36ff31c265b74ba4a4692}
+      \strng{authorbibnamehash}{2e1d68fd78b36ff31c265b74ba4a4692}
+      \strng{authornamehash}{2e1d68fd78b36ff31c265b74ba4a4692}
+      \strng{authorfullhash}{2e1d68fd78b36ff31c265b74ba4a4692}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{FIWARE NGSI RESTful API}}
+      \field{urlmonth}{6}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://fiware.github.io/specifications/ngsiv2/stable/
+      \endverb
+      \verb{url}
+      \verb http://fiware.github.io/specifications/ngsiv2/stable/
+      \endverb
+    \endentry
+    \entry{MCCI_lmic}{online}{}
+      \name{author}{1}{}{%
+        {{hash=f9e5ba2bf69f0f868f14ca7784b0efc8}{%
+           family={{MCCI Corporation}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{f9e5ba2bf69f0f868f14ca7784b0efc8}
+      \strng{fullhash}{f9e5ba2bf69f0f868f14ca7784b0efc8}
+      \strng{bibnamehash}{f9e5ba2bf69f0f868f14ca7784b0efc8}
+      \strng{authorbibnamehash}{f9e5ba2bf69f0f868f14ca7784b0efc8}
+      \strng{authornamehash}{f9e5ba2bf69f0f868f14ca7784b0efc8}
+      \strng{authorfullhash}{f9e5ba2bf69f0f868f14ca7784b0efc8}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Arduino LoRaWAN MAC in C}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/mcci-catena/arduino-lmic
+      \endverb
+      \verb{url}
+      \verb https://github.com/mcci-catena/arduino-lmic
+      \endverb
+    \endentry
+    \entry{MCCI_lmic_docs}{online}{}
+      \name{author}{1}{}{%
+        {{hash=f9e5ba2bf69f0f868f14ca7784b0efc8}{%
+           family={{MCCI Corporation}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{f9e5ba2bf69f0f868f14ca7784b0efc8}
+      \strng{fullhash}{f9e5ba2bf69f0f868f14ca7784b0efc8}
+      \strng{bibnamehash}{f9e5ba2bf69f0f868f14ca7784b0efc8}
+      \strng{authorbibnamehash}{f9e5ba2bf69f0f868f14ca7784b0efc8}
+      \strng{authornamehash}{f9e5ba2bf69f0f868f14ca7784b0efc8}
+      \strng{authorfullhash}{f9e5ba2bf69f0f868f14ca7784b0efc8}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Arduino LoRaWAN MAC in C}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/mcci-catena/arduino-lmic/blob/master/doc/LMIC-v3.0.99.pdf
+      \endverb
+      \verb{url}
+      \verb https://github.com/mcci-catena/arduino-lmic/blob/master/doc/LMIC-v3.0.99.pdf
+      \endverb
+    \endentry
+    \entry{TTN_Security}{online}{}
+      \name{author}{1}{}{%
+        {{hash=ac0b75e28670301c63a34fb5c0cf509a}{%
+           family={{The Things Industries}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{fullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{bibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorbibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authornamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorfullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \field{extraname}{3}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{LoRaWAN Security}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.thethingsnetwork.org/docs/lorawan/security.html
+      \endverb
+      \verb{url}
+      \verb https://www.thethingsnetwork.org/docs/lorawan/security.html
+      \endverb
+    \endentry
+    \entry{TTN_frame_counters}{online}{}
+      \name{author}{1}{}{%
+        {{hash=ac0b75e28670301c63a34fb5c0cf509a}{%
+           family={{The Things Industries}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{fullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{bibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorbibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authornamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorfullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \field{extraname}{4}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{LoRaWAN Security, Frame Counters}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.thethingsnetwork.org/docs/lorawan/security.html#frame-counters
+      \endverb
+      \verb{url}
+      \verb https://www.thethingsnetwork.org/docs/lorawan/security.html#frame-counters
+      \endverb
+    \endentry
+    \entry{Ard_double_type}{online}{}
+      \name{author}{1}{}{%
+        {{hash=b31dda31280cd55241483a25d945b25a}{%
+           family={{Arduino Company}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{b31dda31280cd55241483a25d945b25a}
+      \strng{fullhash}{b31dda31280cd55241483a25d945b25a}
+      \strng{bibnamehash}{b31dda31280cd55241483a25d945b25a}
+      \strng{authorbibnamehash}{b31dda31280cd55241483a25d945b25a}
+      \strng{authornamehash}{b31dda31280cd55241483a25d945b25a}
+      \strng{authorfullhash}{b31dda31280cd55241483a25d945b25a}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Double (Data types)}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.arduino.cc/reference/en/language/variables/data-types/double/
+      \endverb
+      \verb{url}
+      \verb https://www.arduino.cc/reference/en/language/variables/data-types/double/
+      \endverb
+    \endentry
+    \entry{CayenneLPP_lib}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0a65eea954f50236a58d63ed40a1b8ee}{%
+           family={{myDevices, Inc.}},
+           familyi={m\bibinitperiod}}}%
+      }
+      \strng{namehash}{0a65eea954f50236a58d63ed40a1b8ee}
+      \strng{fullhash}{0a65eea954f50236a58d63ed40a1b8ee}
+      \strng{bibnamehash}{0a65eea954f50236a58d63ed40a1b8ee}
+      \strng{authorbibnamehash}{0a65eea954f50236a58d63ed40a1b8ee}
+      \strng{authornamehash}{0a65eea954f50236a58d63ed40a1b8ee}
+      \strng{authorfullhash}{0a65eea954f50236a58d63ed40a1b8ee}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{CayenneLPP arduino library}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/ElectronicCats/CayenneLPP
+      \endverb
+      \verb{url}
+      \verb https://github.com/ElectronicCats/CayenneLPP
+      \endverb
+    \endentry
+    \entry{ArduinoJson_lib}{online}{}
+      \name{author}{1}{}{%
+        {{hash=557762f52437d6e4dd4783ff31473a27}{%
+           family={{Benoît Blanchon, among others.}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{557762f52437d6e4dd4783ff31473a27}
+      \strng{fullhash}{557762f52437d6e4dd4783ff31473a27}
+      \strng{bibnamehash}{557762f52437d6e4dd4783ff31473a27}
+      \strng{authorbibnamehash}{557762f52437d6e4dd4783ff31473a27}
+      \strng{authornamehash}{557762f52437d6e4dd4783ff31473a27}
+      \strng{authorfullhash}{557762f52437d6e4dd4783ff31473a27}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{ArduinoJson library}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/bblanchon/ArduinoJson
+      \endverb
+      \verb{url}
+      \verb https://github.com/bblanchon/ArduinoJson
+      \endverb
+    \endentry
+    \entry{Dragino_DualChannelController_Rpi}{online}{}
+      \name{author}{1}{}{%
+        {{hash=1558724ce5031d12da7cb0512eb7611c}{%
+           family={{Dragino Technology Co., LTD.}},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{fullhash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{bibnamehash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{authorbibnamehash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{authornamehash}{1558724ce5031d12da7cb0512eb7611c}
+      \strng{authorfullhash}{1558724ce5031d12da7cb0512eb7611c}
+      \field{extraname}{3}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Dual Channel LoRaWAN Gateway}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/dragino/dual_chan_pkt_fwd
+      \endverb
+      \verb{url}
+      \verb https://github.com/dragino/dual_chan_pkt_fwd
+      \endverb
+    \endentry
+    \entry{RaspberryPiOs}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0dac029e46904a2d35a186cfa0c1303c}{%
+           family={{Raspberry Pi Foundation}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{fullhash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{bibnamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authorbibnamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authornamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authorfullhash}{0dac029e46904a2d35a186cfa0c1303c}
+      \field{extraname}{3}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Raspberry Pi OS}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.raspberrypi.org/downloads/raspberry-pi-os/
+      \endverb
+      \verb{url}
+      \verb https://www.raspberrypi.org/downloads/raspberry-pi-os/
+      \endverb
+    \endentry
+    \entry{RaspiConf}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0dac029e46904a2d35a186cfa0c1303c}{%
+           family={{Raspberry Pi Foundation}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{fullhash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{bibnamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authorbibnamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authornamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authorfullhash}{0dac029e46904a2d35a186cfa0c1303c}
+      \field{extraname}{4}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Raspberry Pi OS}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.raspberrypi.org/documentation/configuration/raspi-config.md
+      \endverb
+      \verb{url}
+      \verb https://www.raspberrypi.org/documentation/configuration/raspi-config.md
+      \endverb
+    \endentry
+    \entry{RaspiWIFIcli}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0dac029e46904a2d35a186cfa0c1303c}{%
+           family={{Raspberry Pi Foundation}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{fullhash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{bibnamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authorbibnamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authornamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authorfullhash}{0dac029e46904a2d35a186cfa0c1303c}
+      \field{extraname}{5}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Setting up a wireless LAN via the command line}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
+      \endverb
+      \verb{url}
+      \verb https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
+      \endverb
+    \endentry
+    \entry{RaspiPoEHack}{online}{}
+      \name{author}{1}{}{%
+        {{hash=964cdbc3ddc0330ae533d8bc74d954e7}{%
+           family={{Albert David's blog}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{964cdbc3ddc0330ae533d8bc74d954e7}
+      \strng{fullhash}{964cdbc3ddc0330ae533d8bc74d954e7}
+      \strng{bibnamehash}{964cdbc3ddc0330ae533d8bc74d954e7}
+      \strng{authorbibnamehash}{964cdbc3ddc0330ae533d8bc74d954e7}
+      \strng{authornamehash}{964cdbc3ddc0330ae533d8bc74d954e7}
+      \strng{authorfullhash}{964cdbc3ddc0330ae533d8bc74d954e7}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Poor man's PoE for Raspberry Pi$-$3/4 under $\sim$\$2}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://albert-david.blogspot.com/2019/09/poor-mans-poe-for-raspberry-pi-3-under-2.html
+      \endverb
+      \verb{url}
+      \verb http://albert-david.blogspot.com/2019/09/poor-mans-poe-for-raspberry-pi-3-under-2.html
+      \endverb
+    \endentry
+    \entry{RaspiSSH}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0dac029e46904a2d35a186cfa0c1303c}{%
+           family={{Raspberry Pi Foundation}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{fullhash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{bibnamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authorbibnamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authornamehash}{0dac029e46904a2d35a186cfa0c1303c}
+      \strng{authorfullhash}{0dac029e46904a2d35a186cfa0c1303c}
+      \field{extraname}{6}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Raspberry Pi Remote Access, Documentation}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.raspberrypi.org/documentation/remote-access/ssh/
+      \endverb
+      \verb{url}
+      \verb https://www.raspberrypi.org/documentation/remote-access/ssh/
+      \endverb
+    \endentry
+    \entry{SX1276}{online}{}
+      \name{author}{1}{}{%
+        {{hash=67acbf46d69b1786f1e74c2c40da1104}{%
+           family={Corporation},
+           familyi={C\bibinitperiod},
+           given={Semtech},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{67acbf46d69b1786f1e74c2c40da1104}
+      \strng{fullhash}{67acbf46d69b1786f1e74c2c40da1104}
+      \strng{bibnamehash}{67acbf46d69b1786f1e74c2c40da1104}
+      \strng{authorbibnamehash}{67acbf46d69b1786f1e74c2c40da1104}
+      \strng{authornamehash}{67acbf46d69b1786f1e74c2c40da1104}
+      \strng{authorfullhash}{67acbf46d69b1786f1e74c2c40da1104}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Semtech SX1276, 137 MHz to 1020 MHz Long Range Low Power Transceiver}}
+      \field{urlmonth}{6}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.semtech.com/products/wireless-rf/lora-transceivers/sx1276
+      \endverb
+      \verb{url}
+      \verb https://www.semtech.com/products/wireless-rf/lora-transceivers/sx1276
+      \endverb
+    \endentry
+    \entry{LoRaWANspec}{online}{}
+      \name{author}{1}{}{%
+        {{hash=728f43e4074fb1df6b47be77a15f9604}{%
+           family={{LoRa Alliance}},
+           familyi={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{728f43e4074fb1df6b47be77a15f9604}
+      \strng{fullhash}{728f43e4074fb1df6b47be77a15f9604}
+      \strng{bibnamehash}{728f43e4074fb1df6b47be77a15f9604}
+      \strng{authorbibnamehash}{728f43e4074fb1df6b47be77a15f9604}
+      \strng{authornamehash}{728f43e4074fb1df6b47be77a15f9604}
+      \strng{authorfullhash}{728f43e4074fb1df6b47be77a15f9604}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{LoRaWAN\texttrademark{}, What is it?}}
+      \field{urlmonth}{6}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf
+      \endverb
+      \verb{url}
+      \verb https://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf
+      \endverb
+    \endentry
+    \entry{Docker_container}{online}{}
+      \name{author}{1}{}{%
+        {{hash=e6f3d214228cc5933c1a82019f7dc0e0}{%
+           family={{Docker, Inc.}},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \strng{fullhash}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \strng{bibnamehash}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \strng{authorbibnamehash}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \strng{authornamehash}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \strng{authorfullhash}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{What is a Docker container?}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.docker.com/resources/what-container
+      \endverb
+      \verb{url}
+      \verb https://www.docker.com/resources/what-container
+      \endverb
+    \endentry
+    \entry{Gateway_reg}{online}{}
+      \name{author}{1}{}{%
+        {{hash=ac0b75e28670301c63a34fb5c0cf509a}{%
+           family={{The Things Industries}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{fullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{bibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorbibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authornamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorfullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \field{extraname}{5}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Gateway Registration}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.thethingsnetwork.org/docs/gateways/registration.html
+      \endverb
+      \verb{url}
+      \verb https://www.thethingsnetwork.org/docs/gateways/registration.html
+      \endverb
+    \endentry
+    \entry{Add_application}{online}{}
+      \name{author}{1}{}{%
+        {{hash=ac0b75e28670301c63a34fb5c0cf509a}{%
+           family={{The Things Industries}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{fullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{bibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorbibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authornamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorfullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \field{extraname}{6}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Add an Application}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.thethingsnetwork.org/docs/gateways/registration.html
+      \endverb
+      \verb{url}
+      \verb https://www.thethingsnetwork.org/docs/gateways/registration.html
+      \endverb
+    \endentry
+    \entry{Device_reg}{online}{}
+      \name{author}{1}{}{%
+        {{hash=ac0b75e28670301c63a34fb5c0cf509a}{%
+           family={{The Things Industries}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{fullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{bibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorbibnamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authornamehash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \strng{authorfullhash}{ac0b75e28670301c63a34fb5c0cf509a}
+      \field{extraname}{7}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Device Registration}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.thethingsnetwork.org/docs/devices/registration.html
+      \endverb
+      \verb{url}
+      \verb https://www.thethingsnetwork.org/docs/devices/registration.html
+      \endverb
+    \endentry
+    \entry{FIWARE_RESTful}{online}{}
+      \name{author}{1}{}{%
+        {{hash=7aec16d1bffc426a9d7c8ea464b89cc3}{%
+           family={{FIWARE Foundation e.V.}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{7aec16d1bffc426a9d7c8ea464b89cc3}
+      \strng{fullhash}{7aec16d1bffc426a9d7c8ea464b89cc3}
+      \strng{bibnamehash}{7aec16d1bffc426a9d7c8ea464b89cc3}
+      \strng{authorbibnamehash}{7aec16d1bffc426a9d7c8ea464b89cc3}
+      \strng{authornamehash}{7aec16d1bffc426a9d7c8ea464b89cc3}
+      \strng{authorfullhash}{7aec16d1bffc426a9d7c8ea464b89cc3}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{FIWARE-NGSI v2 Specification}}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://fiware.github.io/specifications/ngsiv2/stable/
+      \endverb
+      \verb{url}
+      \verb http://fiware.github.io/specifications/ngsiv2/stable/
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
