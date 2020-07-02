@@ -178,7 +178,7 @@ void do_send(osjob_t* j){
     if (LMIC.opmode & OP_TXRXPEND) {
         Serial.println(F("OP_TXRXPEND, not sending"));
     } else {
-        // Prepare upstream data transmission at the next possible time.
+        // Prepare upstream data transmission.
         
         // Read the analog value of the potmeter (0-1023)
         potVal = analogRead(potPin);
