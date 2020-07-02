@@ -890,7 +890,7 @@ Because of explained above, the gateway will just receive one package per each $
 
 Of course this parameter can be adjusted, but for the final purpose of this project 60 seconds are even too many, in order to monitor changes in stem diameter of a tree, a more appropriate value would be 3600 seconds (1 hour) or even greater.  
 
-\subsubsection{Gateway}
+\subsubsection{Gateway}\label{sssec:Gateway}
 
 \subsubsubsection{Raspberry Pi 3 B+}
 This model of Raspberry Pi is able to run almost every GNU/Linux distribution ported to ARM architecture, Raspberry Pi OS, formerly known as Raspbian, \cite{RaspberryPiOs} is in fact a Debian port to ARM architecture. After a little researching, it is possible to conclude that there is not other operative system which improves the performance of Raspberry Pi OS in a Raspberry Pi. Due this former argument this project is going to use Raspberry Pi OS.
@@ -1345,7 +1345,7 @@ When these containers are properly deployed, it should be possible to send the H
 
 Once these two steps have been performed successfully, the context data should be routed to the Crate database where will be persistent. 
 
-\subsubsection{Grafana}
+\subsubsection{Grafana}\label{sssec:Grafana}
 Grafana is a powerful dashboard used at many scenarios in the software industry, it allows to monitor almost everything the reader can imagine; due it's actually capable to acquire the data from multiple sources. In this project will be used in order to monitor the context data along the time.
 
 This web application can be accessed via \cmd{http://localhost:3000} in the web browser ---the file \cmd{docker-compose.yml} is already setup to expose that port and allow the user to connect Grafana in that way. The default credentials for the first access are \cmd{username: admin} and \cmd{password: admin}. Once the reader has accessed for a first time is possible to modify those credentials or even create new users with different privileges.
@@ -1407,7 +1407,7 @@ Grafana has a wide set of options intended to monitor different kind of systems,
 
 Of course, this context data could be acquired directly from CrateDB by means of some custom application developed specifically to this task, however this is beyond of the purpose of this project. Maybe in a future a feature like this could be implemented. 
 
-\subsubsection{FIWARE API Graphical User Interface}
+\subsubsection{FIWARE API Graphical User Interface}\label{sssec:API_GUI}
 Finally, to make more friendly the FIWARE interaction exposed in \hyperref[sssec:FIWARE]{FIWARE} subsection, this project also provide a simple and light \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/api-gui.py}{graphical user interface}. This graphical interface has been developed using the well-known tkinter library in python, it requires also a few python modules that are specified in \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/pip_requirements.txt}{\cmd{/src/api-gui/pip\_requirements.txt}}, in fact the user should be able to install them by performing in a terminal the following command \cmd{pip install -r pip\_requirements.txt}.
 
 When the requirements are satisfied and all docker containers are running properly\footnote{In a first place the GUI will retrieve the versions for Orion Context Broker, IoTagent-LoRaWAN and QuantumLeap, so if they are not running the GUI wont open.} the GUI can be run performing \cmd{./api-gui.py}; this should open the window shown by figure \ref{fig:GUI_app_keys}
@@ -1482,15 +1482,62 @@ Finally, as indicated, the \enquote{About} tab shows the versions info as can be
 As figure \ref{fig:GUI_2nodes} shows, once a node is created is added to the list, subscription and entity ID are useful to remove manually just a subscription or an entity by performing a manual \cmd{DELETE} request, in fact have been also included several \cmd{DELETE} requests in the attached Postman collection, however, when a node is deleted using this graphical interface button is also being removed its entity and its subscription.
 
 \clearpage{\pagestyle{empty}\cleardoublepage}\thispagestyle{plain}  % Forces the next section to start in an odd page.
-\section{Proof of concept}
-\doubt{COMPLETE}
+\section{Proof of concept, deployment}
+Due circumstances at early 2020, this section has been reduced, instead of test the system in a real production environment, this section will focus on summarize needed steps/stages to deploy the system properly. Although these steps are already detailed separately, this section tries to put them together to give a consistent and practical point of view.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=.8\textwidth]{../pictures/2prototypes_1gateway.jpg}  
+  \includegraphics[width=.9\textwidth]{../pictures/2prototypes_1gateway.jpg}  
   \caption{Two prototypes transmitting through the gateway}
   \label{fig:2nodes_gateway}
 \end{figure}
+
+\subsection{Set up the gateway}
+This process has been widely detailed in \ref{sssec:Gateway} subsection. The most important point on this stage is to ensure the systemd service is working properly and to retrieve the Gateway ID, which will be needed in the next stage.
+
+\subsection{TTN Stack}
+The first thing that must be done is to follow the three steps described in subsection \ref{sssec:TTN_Stack} ---Register a Gateway using its \enquote{Gateway ID}, Add an application and register a device for that application; this is the first step because the reader will need the security keys to two following stages:
+
+\begin{itemize}
+  \item Embebe these keys in Arduino sketch. This sketch will require the \enquote{Application Session Key}, \enquote{Network Session Key} and \enquote{Device Address}.
+  \item Use them to create devices, and subscriptions in FIWARE. To create the device ---and also its corresponding entity and subscription when using the designed graphical interface shown in \ref{sssec:API_GUI} subsection--- the IoTagent will require the \enquote{Application ID}, \enquote{Application Access Key}, \enquote{Device ID}, \enquote{Application EUI} and again \enquote{Application Session Key}.
+\end{itemize}
+
+Once these keys are available in TTN platform, the process can continue.
+
+\subsection{Customize the Arduino sketch for a specific device}
+As indicated, this sketch will need the \enquote{Application Session Key}, the \enquote{Network Session Key} and \textbf{\enquote{Device Address}}, this latter is the most important key, because several nodes chan use the same \enquote{Application Session Key} and \enquote{Network Session Key}, but \enquote{Device Address} must be unique ---it is in fact also provided by TTN and the reader can check those are different for every node created in TTN platform. 
+
+Of course, to be able to compile the sketch some dependencies must be satisfied, such as CayenneLPP ArduinoJson and lmic-arduino libraries. Moreover, the \textbf{linear potentiometer has been replaced for a rotary potentiometer}, due circumstances again. 
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\textwidth]{../pictures/prototype.jpg}
+  \caption{Prototype broadcasting LoRa packets.}
+  \label{fig:prototype}
+\end{figure}
+
+It's important to note that has been chosen the analog pin 2 for analog signal acquisition. Besides the reader can check the status of the device in serial monitor, however, the reader must also note that serial monitor is setup at 115200 bits per second.
+
+\subsection{Deploy Docker containers}
+Once the hardware has been properly setup, the next step is deploy locally all Docker containers, so as indicated in \ref{sssec:FIWARE} subsection, using \cmd{docker-compose} is possible to do this easily. 
+
+This will deploy essentially the IoTagent-LoRaWAN, Orion CB, QuantumLeap and Grafana. The status of these containers can be checked by performing \cmd{docker ps -a}.
+
+\subsection{Devices, entities and subscriptions}
+When Docker containers are deployed, it should be possible to send HTTP requests to create a device (with its entity) and a subscription to notify QuantumLeap at any change for a particular entity. This process can be don by two different ways as indicated previously, 
+
+\begin{itemize}
+  \item Using developed graphical user interface (recommended, see \ref{sssec:API_GUI} subsection)
+  \item Using \cmd{curl} or Postman to perform directly the HTTP requests
+\end{itemize}
+
+\subsection{Grafana}
+Once any device (with an entity) and particularly its subscription are properly created, CrateDB should start journaling the context data, therefore next step is to add CrateDB as a data source in Grafana. 
+
+So if the data source is properly added, it should be possible to create a new panel into a new dashboard, setting up the proper query for that panel, Grafana should start to plot the context data. (see \ref{sssec:Grafana} subsection for further details)
+
+Finally the system it would be completely deployed and journaling the context data, as can be seen in figure \ref{fig:final_panel}.
 
 \clearpage{\pagestyle{empty}\cleardoublepage}\pagestyle{plain}  % Forces the next section to start in an odd page.
 \section{Conclusions}
