@@ -543,26 +543,26 @@ Para conseguir estos objetivos el proyecto se apoyará en tecnologías de hardwa
 
 \phantomsection\section*{Abstract}
 \addcontentsline{toc}{section}{Abstract}%
-This document gives a detailed description of this project, which is focused on researching possibles low-cost alternatives for wireless dendrometry systems. Currently there exist a lot of expensive and professional systems in the market, that's why this project is intended to reduce costs and increase the versatility, scalability and accessibility.
+This document gives a detailed description of this project, which is focused on researching possible low-cost alternatives for wireless dendrometry systems. Currently there are a lot of expensive and professional systems in the market, that's why this project is intended to reduce costs and increase the versatility, scalability and accessibility.
 
 In order to reach these objetives the project will be supported with free software technologies such as FIWARE\cite{FIWARE}, The Things Network\cite{TTN} and Python\cite{Python} or free hardware systems such as Arduino\cite{Arduino} and Raspberry Pi\cite{Raspberrypi}.
 
 \clearpage{\pagestyle{empty}\cleardoublepage}
 \section{Introduction}\thispagestyle{plain}
-This project arises itself from a direct interaction with professionals inside forestry sector. The original idea was to give technical coverage for particular necessities which professionals in this sector had to face off with. At this point is easy to notice this solution will need to be a distributed solution, due high samples dispersion. As indicated, there are even remote techniques to predict this sample density/dispersion using remote methods which predicts between $157$-$170$ individuals per hectare\cite{ForestStandVol} (depending on the used model). 
+This project arises itself from a direct interaction with professionals inside forestry sector. The original idea was to give technical coverage for particular needs that professionals in this sector had to face off with. At this point it is easy to notice this solution will need to be a distributed one, due to high samples dispersion. As we can see, there are even remote techniques to predict this sample density/dispersion using remote methods which predicts between $157$-$170$ individuals per hectare\cite{ForestStandVol} (depending on the model used). 
 
-So according to indicated above and these sample size determination theories, to get a great resolution could be necessary a big size for samples and the need for a big wireless network of distributed devices, since each device will correspond with an individual.
+So according to these sample size determination theories, a big size for samples and the need for a big wireless network of distributed devices is essential for a great resolution, since each device will correspond with an individual.
 
 \subsection{Internet of Things}
-This previously exposed is, more or less, the definition of the IoT (Internet of Things) concept; according to the abstract in \cite{IoTOverview} IoT concept comes from an earlier concept called M2M (Machine-to-Machine) communications. However, also according to \cite[p.~1(71)]{IoTOverview} there is not an official definition for IoT concept yet, but according to \cite[p.~2(920)]{IoTObjetives}
+This big wireless network of distributed devices, more or less, the definition of the IoT (Internet of Things) concept; according to the abstract in \cite{IoTOverview} IoT concept comes from an earlier one called M2M (Machine-to-Machine) communications. Although according to \cite[p.~1(71)]{IoTOverview} there is not an official definition for IoT concept yet, \cite[p.~2(920)]{IoTObjetives} defined it as:
 
 \begin{quoting}
   based on the traditional information carriers including the Internet, telecommunication  network  and  so  on,  Internet  of Things (IoT) is a network that interconnects ordinary physical  objects  with  the identifiable addresses  so that provides intelligent services.
 \end{quoting}
 
-This, at least, covers a little part what this project is intended to do: \enquote{Interconnect ordinary physical objects with the identifiable adresses} to provide intelligent services. These physical objects are in this case ordinary dendrometers.
+This, at least, covers a small part of what this project is intended to do: \enquote{Interconnect ordinary physical objects with the identifiable addresses} to provide intelligent services. These physical objects are in this case ordinary dendrometers.
 
-Over the years there have existed analog and handled by hand dendrometers, thus data acquisition had to follow a manual process in the same way. This could turn out bothering because of the big size for this statistical population, as previously stated. So it was traditionally necessary to go there and as part of the field work, take individual by individual the whole sample data.
+Over the years there have been analog and handled by hand dendrometers, thus data acquisition had to follow a manual process in the same way. This could become a time-intensive task because of the big size for this statistical population, as previously stated. Traditionally, one would need to go there and as part of the field work, take the whole sample data individual by individual.
 
 \subsection{Dendrometry, a formal definition}
 The GEMET (General Multilingual Environmental Thesaurus) adopts the definition for \textit{dendrometry} from \cite{DictNaturalRes}:
@@ -571,20 +571,20 @@ The GEMET (General Multilingual Environmental Thesaurus) adopts the definition f
   The measuring of the diameter of standing trees from the ground with a dendrometer that can also be used to measure tree heights.
 \end{quoting}
 
-This one is a bit wide definition because nowadays most dendrometry researches are focused on stem diameter; however, at this point could be interesting to extend this project to include also a sensor to heights measurement; however, this project is already considered extensive enough.
+This one is a bit wide definition because nowadays most dendrometry researches are focused on stem diameter; however, at this point extending the project could be interesting to include also a heights measurement sensor; however, this could be addressed in future projects.
 
-A lot of comercial dendrometry systems are available in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems, consequently as stated, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, because those professional systems are still expensive. So this is intended to get a cheaper system and make it accessible to everyone who wants to monitor one or more trees growth. 
+Many comercial dendrometry systems are available in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems. Consequently as stated, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system; since those professional systems are still expensive. This research is intended to get a cheaper system and make it accessible to everyone who wants to monitor the growth of one or more trees. 
 
-There are quite a few types of dendrometers but according to \cite{DendroResearch} \enquote{It is possible to define two broad categories of dendrometer: those that contact the stem and those that do not}. This project is focused on the former kind, so for this project is being developed a \enquote{contact dendrometer} based on a linear potentiometer.
+There are quite a few types of dendrometers but according to \cite{DendroResearch} \enquote{It is possible to define two broad categories of dendrometer: those that contact the stem and those that do not}. This project is focused on the former kind, so we are developing a \enquote{contact dendrometer} based on a linear potentiometer.
 
 \subsection{Objectives}
-As previously stated the Abstract section, the most important objective for this project is to research about the possibility of make this dendrometry system cheaper and more scalable and accessible.
+As previously stated in the Abstract, the most important objective for this project is to research about the possibility to make this dendrometry system cheaper, more scalable and accessible.
 
-Forests are remote and large surface areas which will require long-range communication technologies to be controlled. That's why LoRa is the perfect wireless technology to achieve this and these kind of automatic systems seem to be the proper solution to this hard and slow process. Hence IoT has much to contribute to this task. Forestry professionals could take advantage of this technologies to make this in an easier, cheaper and automated way; being this the main purpose of this project.
+Forests are remote and large surface areas which will require long-range communication technologies to be controlled. That's why LoRa is the perfect wireless technology to achieve this, and these kind of automatic systems seem to be the proper solution to this hard and slow process. Hence IoT has much to contribute to this task. Forestry professionals could take advantage of these technologies to make this in an easier, cheaper and automated way. Hence this is the main purpose of this project.
 
 \clearpage{\pagestyle{empty}\cleardoublepage}\thispagestyle{plain} % Forces the next section to start in an odd page.
 \section{System Architecture}
-A simple block diagram is shown in figure \ref{fig:block_diagram}, this diagram intends to emphasize the difference between two big layers, a physical layer that should be placed ---IoT dendrometers at least--- close to the sample, and another one called abstract layer which can be deployed locally ---TTN stack is a cloud server, although.
+A simple block diagram is shown in figure \ref{fig:block_diagram}, this diagram intends to emphasize the difference between two big layers, a physical layer that should be placed ---IoT dendrometers at least--- close to the sample, and another one called abstract layer which can be deployed locally ---TTN stack is a cloud server, though.
 
 \begin{figure}[ht]
   \centering
@@ -593,22 +593,22 @@ A simple block diagram is shown in figure \ref{fig:block_diagram}, this diagram 
   \label{fig:block_diagram}
 \end{figure}
 
-The following subsections will detail each of one. As can be seen in \ref{fig:block_diagram}, the physical layer is made up of two main modules, the first one is an Arduino microcontroller with its LoRa interface and a linear potentiometer acting as a sensor ---this whole set is the IoT dendrometer--- and the second one; a Raspberry Pi 3b+ with its LoRa interface to act as a gateway.
+The following subsections will detail each of one. As we can see in figure \ref{fig:block_diagram}, the physical layer is made up of two main modules: the first one is an Arduino microcontroller with its LoRa interface and a linear potentiometer acting as a sensor ---this whole set is the IoT dendrometer--- and a second one consisting of a Raspberry Pi 3b+ with its LoRa interface to act as a gateway.
 
 Meanwhile, the abstract layer is made up of three software modules. TTN stack is a cloud server to retrieve LoRa packets from all existent gateways, FIWARE is a local application server to gather all this context data; and finally Grafana to plot the context data.
 \subsection{Physical Layer}
 
 \subsubsection{Arduino, multipurpose microcontroller}
-It's not difficult to justify the use of such an interesting platform as Arduino. The adaptability is one of its strengths, therefore; it is able to acquire and process certain data coming from a set of sensors and manage it to send this via any plugged wireless network interface.
+Justifying the use of such an interesting platform as Arduino is not difficult. The adaptability is one of its strengths, therefore; it is able to acquire and process certain data coming from a set of sensors and manage it to send this via any plugged wireless network interface.
 
-Due circumstances exposed in introduction section is needed an accessible and multipurpose platform to be the basis for the device design itself, this is to say the core part of the dendrometer is an Arduino microcontroller.  
+Due to circumstances above, an accessible and multipurpose platform to be the basis for the device design itself is needed; i.e. the core part of the dendrometer is an Arduino microcontroller.
 
 Since the idea is to produce a low-cost device in order to distribute a high number of them, it must be a simple design; that's why it consist only of three parts,
 
 \begin{itemize}
-  \item \href{https://es.rs-online.com/web/p/products/0317780/}{Linear potentiometer:} which is the sensor itself due is directly in contact with the stem. In order to improve data acquisition it will be necessary to use a High Input Impedance Amplifier.
-  \item Arduino microcontroller: this is the core part for the device, it will be responsible for acquire linear potentiometer data and send it to a gateway through LoRa interface. 
-  \item LoRa interface: similar to other existing wireless interfaces, it is necessary to forward the sensor data to a concentrator (gateway). Usually and due its complexity these kind of interfaces are integrated circuits which are mounted on a PCB in order to obtain a pluggable card/shield. 
+  \item \href{https://es.rs-online.com/web/p/products/0317780/}{Linear potentiometer:} which is the sensor itself due it is directly in contact with the stem. In order to improve data acquisition it will be necessary to use a High Input Impedance Amplifier.
+  \item Arduino microcontroller: this is the core part for the device, it will be responsible to acquire linear potentiometer data and send it to a gateway through LoRa interface. 
+  \item LoRa interface: similar to other existing wireless interfaces, it is necessary to forward the sensor data to a concentrator (gateway). Usually and due to its complexity these kind of interfaces are integrated circuits which are mounted on a PCB in order to obtain a pluggable card/shield. 
 \end{itemize}
 
 % I need to use that \texorpdfstring{}{} for the left-side ToC in PDF viewers, because the ® cannot be rendered in there.
@@ -623,7 +623,7 @@ In a more general sense, there is a wider concept to include all these kind of t
 
 It is important to note that when talking about \enquote{low-power consumption}, in many cases it is actually meaning battery-powered devices.
 
-By other hand, LoRa can commonly refer to two distinct layers; a physical layer (LoRa itself) and a MAC layer protocol (LoRaWAN). The former one (the physical layer), is a proprietary technology developed by Semtech. So this does mean this layer is not fully open; LoRaWAN, however, is a protocol built to use LoRa physical layer,  It is intended to sensor networks, wherein those sensors exchange packages with some server with a \enquote{low data rate and relatively long time intervals (one transmission per hour or even days).}\cite[p.~9]{LoRaGeneral}. This particularly means that LoRaWAN protocol is perfect for the purpose of this project.  
+In the other hand, LoRa can commonly refer to two distinct layers; a physical layer (LoRa itself) and a MAC layer protocol (LoRaWAN). The physical layer, is a proprietary technology developed by Semtech. So it is not fully open; LoRaWAN, however, is a protocol built to use LoRa physical layer, it is intended for sensor networks, wherein those sensors exchange packages with some server with a \enquote{low data rate and relatively long time intervals (one transmission per hour or even days).}\cite[p.~9]{LoRaGeneral}. This particularly means that LoRaWAN protocol is perfect for the purpose of this project.  
 
 \begin{figure}[htp]
   \centering
@@ -635,14 +635,14 @@ By other hand, LoRa can commonly refer to two distinct layers; a physical layer 
 In comparison with other common telecommunication technologies, LoRa uses lower bandwidth, but it reaches longer distances; a comparative diagram shows different wireless technologies in figure \ref{fig:LoraComparison}.
  
 \subsubsection{Raspberry Pi, a powerful microcomputer}
-As in the case of Arduino, Raspberry Pi provides a powerful platform, however in the case of a Raspberry Pi this platform is slightly more complex than for an Arduino.\footnote{There are a lot of Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware point of view, Raspberry Pi implements a better one than Arduino, this also has an impact on a higher cost; however, this hardware allows a Raspberry Pi to support a whole operating system; that's why this devices are usually called \textit{single-board computers}.
+As in the case of Arduino, Raspberry Pi provides a powerful platform, however in the case of a Raspberry Pi this platform is slightly more complex than for an Arduino.\footnote{There are a lot of Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware perspective, Raspberry Pi implements a better one than Arduino, this also results on a higher cost; however, this hardware allows a Raspberry Pi to support a whole operating system; that's why these devices are usually called \textit{single-board computers}.
 
 A few of interesting hardware specs are for instance, a \textit{Broadcom BCM2837B0, Cortex-A53 (ARMv8) 64-bit SoC @ 1.4GHz} as its CPU, \textit{1GB LPDDR2 SDRAM}, \textit{Gigabit Ethernet over USB 2.0 (maximum throughput 300 Mbps)} or even an \textit{Extended 40-pin GPIO header} among others.\cite{RPiSpecs}
 
-The role for Raspberry Pi in this project is to act like a gateway, receiving all the data from different nodes. So in order to perform this task correctly it is necessary to provide a LoRa interface, which is also embebed (as in Arduino) in a separate pluggable shield/card/hat.
+The role for Raspberry Pi in this project is to act like a gateway, receiving all the data from different nodes. So in order to perform this task correctly it is necessary to provide a LoRa interface, which is also embedded (as in Arduino) in a separate pluggable shield/card/hat.
 
 \subsubsection{Dragino shields/hats}\label{sssec:DraginoShields}
-These shields/expansion cards are necessary because those devices (Arduino and Raspberry Pi) have not the ability to comunicate through LoRa physical layer, that's why they need a physical interface in order to manage those LoRa packages. Both shields are based on the SX1276/SX1278 transceiver. However the Raspberry Pi hat also has a L80 GPS interface (Base on MTK MT3339), meanwhile Arduino has not.
+These shields/expansion cards are necessary because those devices (Arduino and Raspberry Pi) do not have the ability to comunicate through LoRa physical layer, that's why they need a physical interface in order to manage those LoRa packages. Both shields are based on the SX1276/SX1278 transceiver. However the Raspberry Pi hat also has a L80 GPS interface (Base on MTK MT3339), while Arduino does not.
 
 This project is using the following models: 
 
@@ -654,7 +654,7 @@ This project is using the following models:
 \subsection{Abstract layer}
 
 \subsubsection{The Things Network}
-TTN provides a backend system to route the traffic between devices and applications. It is basically a network server placed between gateways and applications servers. It is necessary because LoRaWAN is a non-IP protocol, but a MAC layer protocol and does need some for of routing and processing messages before they can reach the application side. TTN takes care of these steps.
+TTN provides a backend system to route the traffic between devices and applications. It is basically a network server placed between gateways and applications servers. It is necessary because LoRaWAN is a non-IP protocol, but a MAC layer protocol and does need some form of routing and processing messages before they can reach the application side. TTN takes care of these steps.
 
 Moreover, this project is based on FIWARE (described in the next subsection) and the LoRaWAN agent in FIWARE is developed to interact with TTN infrastructure, 
 
@@ -665,11 +665,11 @@ Moreover, this project is based on FIWARE (described in the next subsection) and
   \label{fig:TTN_overview}
 \end{figure}
 
-End-node devices broadcast LoRaWAN packets over LoRa radio protocol to the gateways, this gateways will forward these packets to the TTN backend, where a software module called Router will manage the gateway status and schedule transmissions, these Routers are connected to another software modules called Brokers, that are responsible for map a device to an application ---into TTN environment--- allowing downlinks and uplinks transmissions. Once these uplinks transmission are inside TTN environment, the FIWARE LoRaWAN agent will retrieve them, however this is actually the application server shown in figure \ref{fig:TTN_overview}. \enquote{The goal of The Things Network is to be very flexible in terms of deployment options.} \cite{TTN_net_arch}. As can be read in the docs, TTN infrastructure provides different \enquote{core functions} divided in four main groups:
+End-node devices broadcast LoRaWAN packets over LoRa radio protocol to the gateways, these gateways will forward these packets to the TTN backend, where a software module called Router will manage the gateway status and schedule transmissions. These routers are connected to other software modules called Brokers, that are responsible for mapping a device to an application ---into TTN environment--- allowing downlink and uplink transmissions. Once these uplink transmissions are inside TTN environment, the FIWARE LoRaWAN agent will retrieve them, however this is actually the application server shown in figure \ref{fig:TTN_overview}. \enquote{The goal of The Things Network is to be very flexible in terms of deployment options.} \cite{TTN_net_arch}. As explained in the docs, TTN infrastructure provides different \enquote{core functions} divided in four main groups:
 
 \begin{itemize}
-  \item Gateway-related functions. In order to schedule and manage the gateways.
-  \item Device-related functions. To manage the state and received context data from specific devices.
+  \item Gateway-related functions, in order to schedule and manage the gateways.
+  \item Device-related functions, to manage the state and received context data from specific devices.
   \item Application-related functions, to group different devices used for similar purposes.
   \item Service discovery functionality, which helps components to determine where traffic should be routed to. 
 \end{itemize}
@@ -677,7 +677,7 @@ End-node devices broadcast LoRaWAN packets over LoRa radio protocol to the gatew
 After this, the traffic is routed to FIWARE side, which is deployed locally and the user has total control over it.
 
 \subsubsection{FIWARE}
-It is defined as \enquote{The Open Source Platform for Our Smart Digital Future}\cite{FIWARE}; in a deeper sense is \enquote{an open source initiative defending an universal set of standards for context data management}\cite{FIWARE}, which basically means that \textit{FIWARE} is an open source platform where develop IoT and smart solutions. The platform provides a number of software modules called \textit{Generic Enablers}; among all those \textit{Generic Enablers} there is one particularly important called \textit{Orion Context Broker}. In fact, for a solution to be considered as \textit{Powered by FIWARE} it must to use the \textit{Orion Context Broker} at least. 
+FIWARE is defined as \enquote{The Open Source Platform for Our Smart Digital Future}\cite{FIWARE}; in a deeper sense it is \enquote{an open source initiative defending an universal set of standards for context data management}\cite{FIWARE}, which basically means that \textit{FIWARE} is an open source platform where IoT and smart solutions can be developed. The platform provides a number of software modules called \textit{Generic Enablers}; among all those \textit{Generic Enablers} there is one particularly important called \textit{Orion Context Broker}. In fact, for a solution to be considered as \textit{Powered by FIWARE} it must to use the \textit{Orion Context Broker} at least. 
 
 This \textit{Context data} is just a way to name any kind of data coming from any kind of sensor. \textit{Orion Context Broker} is designed to manage this context data through concepts such as \textit{subscriptions} or \textit{entities}, to name but a few; however, all these \textit{Generics Enablers} communicate with each other using the \textit{FIWARE NGSI RESTful API}\cite{NGSI}.\footnote{\textit{RESTful} term comes from the software architectural style \textit{REST}, which stands for \textit{Representational State Transfer}}
 
