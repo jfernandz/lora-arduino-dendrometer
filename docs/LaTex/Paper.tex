@@ -519,7 +519,7 @@
 \vspace*{\fill}
 Fernando Javier Álvarez Franco, profesor del Departamento de Ingeniería Eléctrica, Electrónica y Automática de la Universidad de Extremadura.
 
-Informa:\\ Que D. Javier Fernández Aparicio ha realizado bajo su dirección el Trabajo de Fin de Grado. Considera que la memoria reúne los requisitos necesarios para su evaluación
+Informa:\\ Que D. Javier Fernández Aparicio ha realizado bajo su dirección el Trabajo de Fin de Grado. Considera que la memoria reúne los requisitos necesarios para su evaluación.
 
 \begin{center}
   Badajoz, 8 de julio de 2020
@@ -606,7 +606,7 @@ Due to circumstances above, an accessible and multipurpose platform to be the ba
 Since the idea is to produce a low-cost device in order to distribute a high number of them, it must be a simple design; that's why it consist only of three parts,
 
 \begin{itemize}
-  \item \href{https://es.rs-online.com/web/p/products/0317780/}{Linear potentiometer:} which is the sensor itself due it is directly in contact with the stem. In order to improve data acquisition it will be necessary to use a High Input Impedance Amplifier.
+  \item \href{https://es.rs-online.com/web/p/products/0317780/}{Linear potentiometer:} which is the sensor itself due to it is directly in contact with the stem. In order to improve data acquisition it will be necessary to use a High Input Impedance Amplifier.
   \item Arduino microcontroller: this is the core part for the device, it will be responsible to acquire linear potentiometer data and send it to a gateway through LoRa interface. 
   \item LoRa interface: similar to other existing wireless interfaces, it is necessary to forward the sensor data to a concentrator (gateway). Usually and due to its complexity these kind of interfaces are integrated circuits which are mounted on a PCB in order to obtain a pluggable card/shield. 
 \end{itemize}
@@ -798,9 +798,9 @@ The reader can see the LoRa Chip reset pin is \cmd{D9} and as DIO pins ---Digita
   };
 \end{lstlisting}
 
-By other hand \enquote{Any pins that are not needed should be specified as \cmd{LMIC\_UNUSED\_PIN}} as can be also read in the \href{https://github.com/mcci-catena/arduino-lmic#pin-mapping}{Pin Mapping section} of the library \cmd{README.md}. As the reader can see, the example \ref{ej:pin_mapping} starts at line 76, that is because this is the line where the pin mapping is placed in the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L76}{written sketch}.
+By other hand \enquote{Any pins that are not needed should be specified as \cmd{LMIC\_UNUSED\_PIN}} as it can be also read in the \href{https://github.com/mcci-catena/arduino-lmic#pin-mapping}{Pin Mapping section} of the library \cmd{README.md}. As the reader can see, the example \ref{ej:pin_mapping} starts at line 76, that is because this is the line where the pin mapping is placed in the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L76}{written sketch}.
 
-With regards to LoRaWAN and TTN security, as previously indicated, the chosen method is ABP, so are necessary the \cmd{NWKSKEY} (Network Session Key), \cmd{APPSKEY} (Application Session Key) and \cmd{DEVADDR} (End-Device Address); these constants placed at lines \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L48}{48}, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L52}{52} and \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L57}{57} must be obtained from TTN console as will be explained in \hyperref[sssec:TTN_Stack]{The Things Network Stack} subsection, so \textbf{pleas, refer to that subsection for further details}. The sketch also sets analog pin \cmd{A2} to acquire the sensor signal as can be seen in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L70}{70}.% as well as the payload to send through LoRa interface in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L65}{65}
+With regards to LoRaWAN and TTN security, as previously indicated, the chosen method is ABP, so are necessary the \cmd{NWKSKEY} (Network Session Key), \cmd{APPSKEY} (Application Session Key) and \cmd{DEVADDR} (End-Device Address); these constants placed at lines \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L48}{48}, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L52}{52} and \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L57}{57} must be obtained from TTN console as will be explained in \hyperref[sssec:TTN_Stack]{The Things Network Stack} subsection, so \textbf{pleas, refer to that subsection for further details}. The sketch also sets analog pin \cmd{A2} to acquire the sensor signal as it can be seen in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L70}{70}.% as well as the payload to send through LoRa interface in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L65}{65}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -846,7 +846,7 @@ Finally, the reader can find the core of this sketch inside \cmd{void do\_send(o
   Serial.println(F("Packet queued"));
 \end{lstlisting}
 
-So, as can be seen, in order to prepare the payload firstly the sketch reads the analog pin and stores the read value in \cmd{potVal} variable ---which is a \cmd{double} type and this makes no difference with \cmd{float} type \enquote{On the Uno and other ATMEGA based boards} but it makes \enquote{On the Arduino Due} \cite{Ard_double_type}; after this the function \cmd{lpp.reset()} is used to reset the CayenneLPP buffer, then the measure \cmd{potVal} is added to the CayenneLPP buffer in the first channel using the function \cmd{lpp.addAnalogInput()}, finally the buffer content is prepared to be transmitted at the next possible time using the function \cmd{LMIC\_setTxData2()}. 
+So, as it can be seen, in order to prepare the payload firstly the sketch reads the analog pin and stores the read value in \cmd{potVal} variable ---which is a \cmd{double} type and this makes no difference with \cmd{float} type \enquote{On the Uno and other ATMEGA based boards} but it makes \enquote{On the Arduino Due} \cite{Ard_double_type}; after this the function \cmd{lpp.reset()} is used to reset the CayenneLPP buffer, then the measure \cmd{potVal} is added to the CayenneLPP buffer in the first channel using the function \cmd{lpp.addAnalogInput()}, finally the buffer content is prepared to be transmitted at the next possible time using the function \cmd{LMIC\_setTxData2()}. 
 
 These \cmd{lpp.*()} functions are part of the CayenneLPP library \cite{CayenneLPP_lib} ---which is also dependent of ArduinoJson library \cite{ArduinoJson_lib}; in particular, the \cmd{lpp.addAnalogInput()} function encodes the raw value as a number encoded in 2 bytes (16 bits signed) with a unit of 0.01. In 16 bits signed is possible to represent numbers from -32768 until 32767, so with a unit of 0.01, that amounts to a range from -327.68 to +327.67; that is because the sketch includes the line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L185}{185}, where the raw value \cmd{potVal} is scaled to a [0, 100.0] range. This range will fit in the range that can be encoded in CayenneLPP. 
 
@@ -891,7 +891,7 @@ Of course this parameter can be adjusted, but for the final purpose of this proj
 \subsubsection{Gateway}\label{sssec:Gateway}
 
 \subsubsubsection{Raspberry Pi 3 B+}
-This model of Raspberry Pi is able to run almost every GNU/Linux distribution ported to ARM architecture, Raspberry Pi OS, formerly known as Raspbian, \cite{RaspberryPiOs} is in fact a Debian port to ARM architecture. After a little researching, it is possible to conclude that there is not other operative system which improves the performance of Raspberry Pi OS in a Raspberry Pi. Due this former argument this project is going to use Raspberry Pi OS.
+This model of Raspberry Pi is able to run almost every GNU/Linux distribution ported to ARM architecture, Raspberry Pi OS, formerly known as Raspbian, \cite{RaspberryPiOs} is in fact a Debian port to ARM architecture. After a little researching, it is possible to conclude that there is not other operative system which improves the performance of Raspberry Pi OS in a Raspberry Pi. Due to this former argument this project is going to use Raspberry Pi OS.
 
 One of the most interesting features of Raspberry Pi is precisely that OS is installed and run from a microSD card, so the hardware is loading the operative system from this microSD card to the RAM directly, which improves notably the system load times, and increments its portability.
 
@@ -964,7 +964,7 @@ Once is available the remote control for Raspberry Pi through ssh, is possible t
 At this point and depending on the type of access point used to provide internet service to the Raspberry, the reader will be able even to remote control the Raspberry over internet. For this purpose could be useful to read the access point documentation in order to perform port forwarding or alternatively \href{http://www.thirdway.ch/En/projects/raspberry_pi_3g/index.php}{a reverse tunnel over ssh} ---in the case the ISP does not allow ssh when using a GSM module, also the reader may find that IPv6 works but IPv4 does not. Anyway, as said the internet access point could be variable and it is not determined by this project.\footnote{The most important thing is to work comfortably with the Raspberry Pi with no HDMI, keyboard and mouse plugged, and this can be done locally in a LAN to configure it in a first place.}  
 
 \subsubsubsection{Dragino GPS and LoRa HAT}
-Gateways doesn't need actually a diagram or detailed description because there are multiple devices which could play this role. These usually are generic devices due LoRaWAN protocol versatility. LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but actually acts as a network layer protocol for managing communication between gateways and nodes, similar to a routing protocol. So it is possible for any device which implements hardware for a LoRa physical layer, to act as a gateway.
+Gateways doesn't need actually a diagram or detailed description because there are multiple devices which could play this role. These usually are generic devices due to LoRaWAN protocol versatility. LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but actually acts as a network layer protocol for managing communication between gateways and nodes, similar to a routing protocol. So it is possible for any device which implements hardware for a LoRa physical layer, to act as a gateway.
 
 Nevertheless, there are important considerations about the said above, for example, nodes are not actually associated with an specific gateway. Instead, data transmitted by a node is typically received by multiple gateways. Each gateway will forward the received packets from the end-node to de cloud-based network server. Besides, this project is using a Raspberry Pi 3B+ with a Dragino Hat which mounts a SX1276 LoRa \textbf{transceiver}\cite{SX1276}; this is so important because means, according to Semtech, this transceiver is not intended to play a gateway role, but a end-node role.
 
@@ -1010,7 +1010,7 @@ After this, the reader will be in position to clone the controller from the gith
   make
 \end{lstlisting}
 
-Once the controller is compiled, the reader must check the contents of \cmd{global\_conf.json}, for this projects, due it is using the LoRa GPS HAT Single Channel LoRa \cite{DraginoRpiHat}, the pins configuration in \cmd{global\_conf.json} must be the following as stated by \cite{Dragino_DualChannelController_Rpi}
+Once the controller is compiled, the reader must check the contents of \cmd{global\_conf.json}, for this projects, due to it is using the LoRa GPS HAT Single Channel LoRa \cite{DraginoRpiHat}, the pins configuration in \cmd{global\_conf.json} must be the following as stated by \cite{Dragino_DualChannelController_Rpi}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -1078,7 +1078,7 @@ These last two instructions show information about service status and \cmd{dual\
   \label{fig:dual_chan_pkt_fwd-status}
 \end{figure}
 
-As can be seen, this service was modified in order to reach properly the \cmd{dual\_chan\_pkt\_fwd} binary, which is not located in \cmd{/home/pi/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd} (the default location defined for the binary in the \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/dual_chan_pkt_fwd.service#L9}{GitHub repository}); mainly because the user is not called \cmd{pi} anymore but \cmd{wyre}, the path needs to be modified to that path containing the binary (\cmd{/home/wyre/TFG/LoRa/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd})\footnote{This is a personal setup and is completely optional, the reader can choose their own path or even set up as suggested with \cmd{pi} user.}
+As it can be seen, this service was modified in order to reach properly the \cmd{dual\_chan\_pkt\_fwd} binary, which is not located in \cmd{/home/pi/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd} (the default location defined for the binary in the \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/dual_chan_pkt_fwd.service#L9}{GitHub repository}); mainly because the user is not called \cmd{pi} anymore but \cmd{wyre}, the path needs to be modified to that path containing the binary (\cmd{/home/wyre/TFG/LoRa/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd})\footnote{This is a personal setup and is completely optional, the reader can choose their own path or even set up as suggested with \cmd{pi} user.}
 
 
 After this the Raspberry Pi is ready to forward LoRa packets to the \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/global_conf.json#L33}{specified server at line 33 in \cmd{global\_conf.json}}. Besides, the reader will be able to manage the Raspberry Pi through ssh service, so the Raspberry only precises any kind of internet access point and electrical power supply.
@@ -1114,7 +1114,7 @@ Once these steps are completed, the TTN web interface will provide an overview w
   \label{fig:dev_overview}
 \end{figure}
 
-Another important consideration inside TTN platform is to check which decoder is chosen for the received payloads, this can be checked by clicking on \cmd{Payload Formats} tab inside Application Overview. As can be seen in figure \ref{fig:CayenneLPP_decoder}, it is so importan to choose the \cmd{CayenneLPP} decoder, because as indicated, \myuline{the payload is being encoded in the end-nodes using the CayenneLPP standard}. 
+Another important consideration inside TTN platform is to check which decoder is chosen for the received payloads, this can be checked by clicking on \cmd{Payload Formats} tab inside Application Overview. As it can be seen in figure \ref{fig:CayenneLPP_decoder}, it is so importan to choose the \cmd{CayenneLPP} decoder, because as indicated, \myuline{the payload is being encoded in the end-nodes using the CayenneLPP standard}. 
 
 \begin{figure}[ht]
   \centering
@@ -1139,7 +1139,7 @@ As shown in figure \ref{fig:GenView}, this solution is being implemented using p
 
 The workflow is like picture \ref{fig:GenView} shows, first the IoTagent receives the context data from TTN, this IoTagent sends this context data to the Orion Context Broker and this latter notifies QuantumLeap the variations on the context data, thus QuantumLeap can proceed to store them into Crate database.
 
-However this process does not happen out of the box, i.e. it is necessary to properly set up these generic enablers to get this workflow. This can be done following the FIWARE API documentation. These configuration can be donde using HTTP requests due FIWARE essentially provides a RESTful API \cite{FIWARE_RESTful}, these HTTP requests can be performed using multiple clients like \cmd{curl} or \cmd{Postman} among others. This project in fact also provides a \href{https://github.com/WyRe/lora-arduino-dendrometer/tree/master/src/postman}{\cmd{Postman} collection and environment} that can be imported to manage them using a confortable graphical interface.
+However this process does not happen out of the box, i.e. it is necessary to properly set up these generic enablers to get this workflow. This can be done following the FIWARE API documentation. These configuration can be donde using HTTP requests due to FIWARE essentially provides a RESTful API \cite{FIWARE_RESTful}, these HTTP requests can be performed using multiple clients like \cmd{curl} or \cmd{Postman} among others. This project in fact also provides a \href{https://github.com/WyRe/lora-arduino-dendrometer/tree/master/src/postman}{\cmd{Postman} collection and environment} that can be imported to manage them using a confortable graphical interface.
 
 Anyway and after of this little introduction, the most important thing is to deploy all FIWARE generic enablers and its dependencies in a secure and stable way. This is why this project uses \cmd{docker} and \cmd{docker-compose} in order to ensure these modules deployment and execution. Again this project provides the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/fiware/docker-compose.yml}{\cmd{docker-compose.yml}} file to ensure a correct deployment. 
 
@@ -1344,7 +1344,7 @@ When these containers are properly deployed, it should be possible to send the H
 Once these two steps have been performed successfully, the context data should be routed to the Crate database where will be persistent. 
 
 \subsubsection{Grafana}\label{sssec:Grafana}
-Grafana is a powerful dashboard used at many scenarios in the software industry, it allows to monitor almost everything the reader can imagine; due it's actually capable to acquire the data from multiple sources. In this project will be used in order to monitor the context data along the time.
+Grafana is a powerful dashboard used at many scenarios in the software industry, it allows to monitor almost everything the reader can imagine; due to it is actually capable to acquire the data from multiple sources. In this project will be used in order to monitor the context data along the time.
 
 This web application can be accessed via \cmd{http://localhost:3000} in the web browser ---the file \cmd{docker-compose.yml} is already setup to expose that port and allow the user to connect Grafana in that way. The default credentials for the first access are \cmd{username: admin} and \cmd{password: admin}. Once the reader has accessed for a first time is possible to modify those credentials or even create new users with different privileges.
 
@@ -1444,7 +1444,7 @@ When the keys are updated properly the labels over the text fields are also upda
   \label{fig:device_management_tab}
 \end{figure}
 
-This view allows the user to create and delete devices ---along with its entities and subscriptions--- nevertheless, the \enquote{Delete device and entities} button remains disabled until a device is chosen in the right list. In a similar way than \enquote{Applications Keys}, to add a new device to FIWARE deployed instance by docker, all keys must fullfil a set of minimum requirements; as can be seen in picture \ref{fig:adding_dev}
+This view allows the user to create and delete devices ---along with its entities and subscriptions--- nevertheless, the \enquote{Delete device and entities} button remains disabled until a device is chosen in the right list. In a similar way than \enquote{Applications Keys}, to add a new device to FIWARE deployed instance by docker, all keys must fullfil a set of minimum requirements; as it can be seen in picture \ref{fig:adding_dev}
 
 \begin{itemize}
   \item Device entity and ID must be also unique and it has to be at least 3 characters long. Moreover, this ID must match exactly with the ID chosen in TTN interface when the device is created,
@@ -1452,7 +1452,7 @@ This view allows the user to create and delete devices ---along with its entitie
   \item Device EUI has to be 16 characters long and again an hexadecimal string.
 \end{itemize}
 
-These keys can be obtained from TTN as can be seen in screenshot \ref{fig:dev_overview} ---this screenshot shows info about \cmd{node\_0}, though. As can be seen in picture \ref{fig:adding_dev}, there was a problem with \enquote{Device EUI}, this was caused because of the final \cmd{Z} letter in the string which doesn't belong to hexadecimal characters set.
+These keys can be obtained from TTN as it can be seen in screenshot \ref{fig:dev_overview} ---this screenshot shows info about \cmd{node\_0}, though. We can see in picture \ref{fig:adding_dev}, that there was a problem with \enquote{Device EUI}, this was caused because of the final \cmd{Z} letter in the string which doesn't belong to hexadecimal characters set.
 
 \begin{figure}[htp]
   \centering
@@ -1468,7 +1468,7 @@ These keys can be obtained from TTN as can be seen in screenshot \ref{fig:dev_ov
   \label{fig:about_tab}
 \end{figure}
 
-Finally, as indicated, the \enquote{About} tab shows the versions info as can be seen in \ref{fig:about_tab}. The QuantumLeap version is specified in \cmd{docker-compose.yml} file as well as the CrateDB version, this is to ensure compatibility between QuantumLeap and CrateDB; however, Orion Context Broker and IoTagent-LoRaWAN versions are not specified so they should be always the latests, this is why could be helpful to retrieve these. 
+Finally, as indicated, the \enquote{About} tab shows the versions info as it can be seen in \ref{fig:about_tab}. The QuantumLeap version is specified in \cmd{docker-compose.yml} file as well as the CrateDB version, this is to ensure compatibility between QuantumLeap and CrateDB; however, Orion Context Broker and IoTagent-LoRaWAN versions are not specified so they should be always the latests, this is why could be helpful to retrieve these. 
 
 \begin{figure}[ht]
   \centering
@@ -1481,7 +1481,7 @@ As figure \ref{fig:GUI_2nodes} shows, once a node is created is added to the lis
 
 \clearpage{\pagestyle{empty}\cleardoublepage}\thispagestyle{plain}  % Forces the next section to start in an odd page.
 \section{Proof of concept, deployment}
-Due circumstances at early 2020, this section has been reduced, instead of test the system in a real production environment, this section will focus on summarize needed steps/stages to deploy the system properly. Although these steps are already detailed separately, this section tries to put them together to give a consistent and practical point of view.
+Due to circumstances at early 2020, this section has been reduced, instead of test the system in a real production environment, this section will focus on summarize needed steps/stages to deploy the system properly. Although these steps are already detailed separately, this section tries to put them together to give a consistent and practical point of view.
 
 \begin{figure}[ht]
   \centering
@@ -1506,7 +1506,7 @@ Once these keys are available in TTN platform, the process can continue.
 \subsection{Customize the Arduino sketch for a specific device}
 As indicated, this sketch will need the \enquote{Application Session Key}, the \enquote{Network Session Key} and \textbf{\enquote{Device Address}}, this latter is the most important key, because several nodes chan use the same \enquote{Application Session Key} and \enquote{Network Session Key}, but \enquote{Device Address} must be unique ---it is in fact also provided by TTN and the reader can check those are different for every node created in TTN platform. 
 
-Of course, to be able to compile the sketch some dependencies must be satisfied, such as CayenneLPP ArduinoJson and lmic-arduino libraries. Moreover, the \textbf{linear potentiometer has been replaced for a rotary potentiometer}, due circumstances again. 
+Of course, to be able to compile the sketch some dependencies must be satisfied, such as CayenneLPP ArduinoJson and lmic-arduino libraries. Moreover, the \textbf{linear potentiometer has been replaced for a rotary potentiometer}, again due to circumstances in the moment when the project is developed.
 
 \begin{figure}[ht]
   \centering
@@ -1535,7 +1535,7 @@ Once any device (with an entity) and particularly its subscription are properly 
 
 So if the data source is properly added, it should be possible to create a new panel into a new dashboard, setting up the proper query for that panel, Grafana should start to plot the context data. (see \ref{sssec:Grafana} subsection for further details)
 
-Finally the system it would be completely deployed and journaling the context data, as can be seen in figure \ref{fig:final_panel}.
+Finally the system it would be completely deployed and journaling the context data, as it can be seen in figure \ref{fig:final_panel}.
 
 \clearpage{\pagestyle{empty}\cleardoublepage}\pagestyle{plain}  % Forces the next section to start in an odd page.
 \section{Conclusions}
@@ -1546,7 +1546,7 @@ Finally there are a few considerations that could be done,
   \item The fact that the Raspberry Pi HAT uses a single channel chip (SX1276) has two important implications:
     \begin{itemize}
       \item In a first place, as indicated in its corresponding section, these kind of gateways are LoRaWAN compatible but not compliant. So it would be desirable to replace this HAT by another one, or simple to acquire a proper gateway for a production environment.
-      \item Secondly, Nodes cannot comunicate simultaneously with the gateway because it is listening only one channel, so this is causing a time gap in data acquisition as can be seen in the picture \ref{fig:times_gap}
+      \item Secondly, Nodes cannot comunicate simultaneously with the gateway because it is listening only one channel, so this is causing a time gap in data acquisition as it can be seen in the picture \ref{fig:times_gap}
       \begin{figure}[ht]
         \centering
         \includegraphics[width=.9\textwidth]{../pictures/Grafana_times_gap.png}
@@ -1554,9 +1554,9 @@ Finally there are a few considerations that could be done,
         \label{fig:times_gap}
       \end{figure}
     \end{itemize}
-    \item End-nodes are being activated using ABP method, this method could not be as effective as OTAA method in the case that downlinks packets were transmitted, this is why due some security implications frame counters must be reset for ABP devices every time they are shutdown for any circumstance; in particular when downlinks are transmitted, could be necessary to reset the frame counter in the devices, so in this situation would be interesting to consider swap to OTAA method. In fact, TTN offers the possibility to reset the frame counter in TTN console but this could be removed in a future.
-    \item Maybe the developed GUI could have handle also the context data plots, however this project couldn't have covered in anyway this development with the available time, so this is not considered as part of the project because Grafana is complete enough to this task for now and perhaps for ever due it is extremely powerful handling databases.
-    \item For a production environment it seems clear that arduino devices should be encapsulated and the sensor (potentiometer) part must be improved; however this is not hard because of the wide offer for cases and power supply systems, this would lead a very compact device which could be also improved adding more sensor due versatility of CayenneLPP encoding standard which allows to send multiple measurements of different sensors. 
+    \item End-nodes are being activated using ABP method, this method could not be as effective as OTAA method in the case that downlinks packets were transmitted, this is why due to some security implications frame counters must be reset for ABP devices every time they are shutdown for any circumstance; in particular when downlinks are transmitted, could be necessary to reset the frame counter in the devices, so in this situation would be interesting to consider swap to OTAA method. In fact, TTN offers the possibility to reset the frame counter in TTN console but this could be removed in a future.
+    \item Maybe the developed GUI could have handle also the context data plots, however this project couldn't have covered in anyway this development with the available time, so this is not considered as part of the project because Grafana is complete enough to this task for now and perhaps for ever due to it is extremely powerful handling databases.
+    \item For a production environment it seems clear that arduino devices should be encapsulated and the sensor (potentiometer) part must be improved; however this is not hard because of the wide offer for cases and power supply systems, this would lead a very compact device which could be also improved adding more sensor due to versatility of CayenneLPP encoding standard which allows to send multiple measurements of different sensors. 
     \item Finally this project is a good candidate to replace expensive commercial and proprietary systems; so it likely keeps developing, depending on the needs of the researchers.
 \end{itemize}
 
