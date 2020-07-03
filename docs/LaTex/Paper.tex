@@ -1499,7 +1499,7 @@ The first thing that must be done is to follow the three steps described in subs
   \item Use them to create devices, and subscriptions in FIWARE. To create the device ---and also its corresponding entity and subscription when using the designed graphical interface shown in \ref{sssec:API_GUI} subsection--- the IoTagent will require the \enquote{Application ID}, \enquote{Application Access Key}, \enquote{Device ID}, \enquote{Application EUI} and again \enquote{Application Session Key}.
 \end{itemize}
 
-Once these keys are available in TTN platform, the process can continue.
+We must remember also it is so important to choose the CayenneLPP as the payload decoder. Once these keys are available in TTN platform, the process can continue.
 
 \subsection{Customize the Arduino sketch for a specific device}
 As indicated, this sketch will need the \enquote{Application Session Key}, the \enquote{Network Session Key} and \textbf{\enquote{Device Address}}, this latter is the most important key, because several nodes chan use the same \enquote{Application Session Key} and \enquote{Network Session Key}, but \enquote{Device Address} must be unique ---it is in fact also provided by TTN and the reader can check those are different for every node created in TTN platform. 
