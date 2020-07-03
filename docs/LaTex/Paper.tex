@@ -492,7 +492,8 @@
 \hyphenation{Tellink}
 
 \begin{document}
-\pagenumbering{Roman} 
+% \pagenumbering{Roman}  % To use upper case roman numerals in page numbering.
+\pagenumbering{roman}  % To use lower case roman numerals in page numbering.
 \noindent % to prevent the indentation before first minipage and be able to expand minipages
 \begin{minipage}[t]{.28\textwidth}
     \centering
@@ -621,7 +622,7 @@ In a more general sense, there is a wider concept to include all these kind of t
 
 It is important to note that when talking about \enquote{low-power consumption}, in many cases it is actually meaning battery-powered devices.
 
-On the other hand, LoRa can commonly refer to two distinct layers; a physical layer (LoRa itself) and a MAC layer protocol (LoRaWAN). The physical layer, is a proprietary technology developed by Semtech. So it is not fully open; LoRaWAN, however, is a protocol built to use LoRa physical layer, it is intended for sensor networks, wherein those sensors exchange packages with some server with a \enquote{low data rate and relatively long time intervals (one transmission per hour or even days).}\cite[p.~9]{LoRaGeneral}. This particularly means that LoRaWAN protocol is perfect for the purpose of this project.  
+On the other hand, LoRa can commonly refer to two distinct layers; a physical layer (LoRa itself) and a MAC layer protocol (LoRaWAN). The physical layer, is a proprietary technology developed by Semtech, so it is not fully open. LoRaWAN, however, is a protocol built to use LoRa physical layer, it is intended for sensor networks, wherein those sensors exchange packets with some server with a \enquote{low data rate and relatively long time intervals (one transmission per hour or even days).}\cite[p.~9]{LoRaGeneral}. This particularly means that LoRaWAN protocol is perfect for the purpose of this project.  
 
 \begin{figure}[htp]
   \centering
@@ -640,7 +641,7 @@ A few of interesting hardware specs are for instance, a \textit{Broadcom BCM2837
 The role for Raspberry Pi in this project is to act like a gateway, receiving all the data from different nodes. So in order to perform this task correctly it is necessary to provide a LoRa interface, which is also embedded (as in Arduino) in a separate pluggable shield/card/hat.
 
 \subsubsection{Dragino shields/hats}\label{sssec:DraginoShields}
-These shields/expansion cards are necessary because those devices (Arduino and Raspberry Pi) do not have the ability to comunicate through LoRa physical layer, that's why they need a physical interface in order to manage those LoRa packages. Both shields are based on the SX1276/SX1278 transceiver. However the Raspberry Pi hat also has a L80 GPS interface (Base on MTK MT3339), while Arduino does not.
+These shields/expansion cards are necessary because those devices (Arduino and Raspberry Pi) do not have the ability to comunicate through LoRa physical layer, that's why they need a physical interface in order to manage those LoRa packets. Both shields are based on the SX1276/SX1278 transceiver. However the Raspberry Pi hat also has a L80 GPS interface (Base on MTK MT3339), while Arduino does not.
 
 This project is using the following models: 
 
