@@ -570,9 +570,9 @@ The GEMET (General Multilingual Environmental Thesaurus) adopts the definition f
   The measuring of the diameter of standing trees from the ground with a dendrometer that can also be used to measure tree heights.
 \end{quoting}
 
-This one is a bit wide definition because nowadays most dendrometry researches are focused on stem diameter; however, at this point extending the project could be interesting to include also a heights measurement sensor; however, this could be addressed in future projects.
+This one is a bit wide definition because nowadays most dendrometry researches are focused on stem diameter; however, at this point extending this project could be interesting to include also a heights measurement sensor; however, this could be an interesting research premise for future projects.
 
-Many comercial dendrometry systems are available in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems. Consequently as stated, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system; since those professional systems are still expensive. This research is intended to get a cheaper system and make it accessible to everyone who wants to monitor the growth of one or more trees. 
+Many comercial dendrometry systems are available in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems. Consequently, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, since those professional systems are still expensive. This research is intended to get a cheaper system and make it accessible to everyone who wants to monitor the growth of one or more trees. 
 
 There are quite a few types of dendrometers but according to \cite{DendroResearch} \enquote{It is possible to define two broad categories of dendrometer: those that contact the stem and those that do not}. This project is focused on the former kind, so we are developing a \enquote{contact dendrometer} based on a linear potentiometer.
 
@@ -600,7 +600,7 @@ Meanwhile, the abstract layer is made up of three software modules. TTN stack is
 \subsubsection{Arduino, multipurpose microcontroller}
 Justifying the use of such an interesting platform as Arduino is not difficult. The adaptability is one of its strengths, therefore; it is able to acquire and process certain data coming from a set of sensors and manage it to send this via any plugged wireless network interface.
 
-Due to circumstances above, an accessible and multipurpose platform to be the basis for the device design itself is needed; i.e. the core part of the dendrometer is an Arduino microcontroller.
+With these constraints, an accessible and multipurpose platform to be the basis for the device design itself is needed; i.e. the core part of the dendrometer is an Arduino microcontroller.
 
 Since the idea is to produce a low-cost device in order to distribute a high number of them, it must be a simple design; that's why it consist only of three parts,
 
@@ -634,7 +634,7 @@ On the other hand, LoRa can commonly refer to two distinct layers; a physical la
 In comparison with other common telecommunication technologies, LoRa uses lower bandwidth, but it reaches longer distances; a comparative diagram shows different wireless technologies in figure \ref{fig:LoraComparison}.
  
 \subsubsection{Raspberry Pi, a powerful microcomputer}
-As in the case of Arduino, Raspberry Pi provides a powerful platform, however in the case of a Raspberry Pi this platform is slightly more complex than for an Arduino.\footnote{There are a lot of Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware perspective, Raspberry Pi implements a better one than Arduino, this also results on a higher cost; however, this hardware allows a Raspberry Pi to support a whole operating system; that's why these devices are usually called \textit{single-board computers}.
+As in the case of Arduino, Raspberry Pi provides a powerful platform, however in the case of a Raspberry Pi this platform is slightly more complex than for an Arduino.\footnote{There are various Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware perspective, Raspberry Pi implements a better one than Arduino, this also results on a higher cost; however, this hardware allows a Raspberry Pi to support a whole operating system; that's why these devices are usually called \textit{single-board computers}.
 
 A few of interesting hardware specs are for instance, a \textit{Broadcom BCM2837B0, Cortex-A53 (ARMv8) 64-bit SoC @ 1.4GHz} as its CPU, \textit{1GB LPDDR2 SDRAM}, \textit{Gigabit Ethernet over USB 2.0 (maximum throughput 300 Mbps)} or even an \textit{Extended 40-pin GPIO header} among others.\cite{RPiSpecs}
 
@@ -646,7 +646,7 @@ These shields/expansion cards are necessary because those devices (Arduino and R
 This project is using the following models: 
 
 \begin{itemize}
-  \item \textit{LoRa GPS HAT for Raspberry Pi,}\cite{DraginoRpiHat} which makes use of the extended 40-pin GPIO header to be plugged\footnote{It is important to note this LoRa HAT is not actually designed to play a gateway role, in fact, this is considered a \enquote{Hack where a node-class radio tries to impersonate a gateway}\cite{RpiHatHack}, so this means this hat is designed to be a node-class radio, not a gateway.}
+  \item \textit{LoRa GPS HAT for Raspberry Pi,}\cite{DraginoRpiHat} which makes use of the extended 40-pin GPIO header to be plugged\footnote{It is important to note that this LoRa HAT is not actually designed to play a gateway role, in fact, this is considered a \enquote{Hack where a node-class radio tries to impersonate a gateway}\cite{RpiHatHack}, so this means this hat is designed to be a node-class radio, not a gateway.}
   \item \textit{LoRa Shield for Arduino}\cite{DraginoArdShield}, which is plugged through analog and digital pins.
 \end{itemize}
 
