@@ -1142,11 +1142,11 @@ Once this has been done, the microcontrollers have also been programmed and the 
 Then it should be possible to retrieve this data using the FIWARE IoTagent-LoRaWAN. The setup of this different FIWARE generic enablers will be explained in the next subsection, but essentially this IoTagent will use, as indicated previously, all those application and devices identifiers in order to manage the incoming context data from different microcontrollers (also called devices or end-nodes). 
 
 \subsubsection{FIWARE}\label{sssec:FIWARE}
-As it is shown in figure \ref{fig:GenView}, this solution is being implemented using particularly three FIWARE generic enablers, the most important one, of course is \textbf{Orion Context Broker}, also a LoRaWAN agent called \textbf{IoTagent-LoRaWAN} and finally to make data persistent, \textbf{QuantumLeap}.
+As it is shown in figure \ref{fig:GenView}, this solution is being implemented using particularly three FIWARE generic enablers, the most important one, of course, is the \textbf{Orion Context Broker}, also a LoRaWAN agent called \textbf{IoTagent-LoRaWAN} and finally to make data persistent, \textbf{QuantumLeap}.
 
 The workflow is like picture \ref{fig:GenView} shows, first the IoTagent receives the context data from TTN, this IoTagent sends this context data to the Orion Context Broker and this latter notifies QuantumLeap any variation on the context data, thus QuantumLeap can proceed to store them into Crate database.
 
-However this process does not happen out of the box, i.e. it is necessary to properly set up these generic enablers to get this workflow. This can be done following the FIWARE API documentation. This setup can be donde using HTTP requests because FIWARE essentially provides a RESTful API \cite{FIWARE_RESTful}, these HTTP requests can be performed using multiple clients like \cmd{curl} or \cmd{Postman} among others. This project in fact also provides a \href{https://github.com/WyRe/lora-arduino-dendrometer/tree/master/src/postman}{\cmd{Postman} collection and environment} that can be imported to manage them using a confortable graphical interface. Also a graphical user interface has been developed to interact with FIWARE, it is described in \ref{sssec:API_GUI} subsection.
+However this process does not happen out of the box, i.e. it is necessary to properly set up these generic enablers to get this workflow. This can be done following the FIWARE API documentation. This setup can be donde using HTTP requests because FIWARE essentially provides a RESTful API \cite{FIWARE_RESTful}, these HTTP requests can be performed using multiple clients like \cmd{curl} or \cmd{Postman} among others. This project in fact also provides a \href{https://github.com/WyRe/lora-arduino-dendrometer/tree/master/src/postman}{\cmd{Postman} collection and environment} that can be imported to manage them using a comfortable graphical interface. Also a graphical user interface has been developed to interact with FIWARE, it is described in \ref{sssec:API_GUI} subsection.
 
 Anyway and after this little introduction, the most important thing is to deploy all FIWARE generic enablers and its dependencies in a secure and stable way. This is why this project uses \cmd{docker} and \cmd{docker-compose} in order to ensure the deployment and execution of these modules. Again this project provides the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/fiware/docker-compose.yml}{\cmd{docker-compose.yml}} file to ease this deployment.
 
@@ -1157,7 +1157,7 @@ Anyway and after this little introduction, the most important thing is to deploy
   \label{fig:docker_containers}
 \end{figure}
 
-So cloning the project and navigating to \cmd{src/fiware/} folder in the terminal, the reader will must perform \cmd{docker-compose up -d} to deploy all containers and keep detached from the logs output. Once this has been done, performing \cmd{docker ps -a} will show the status of deployed containers, as figure \ref{fig:docker_containers} shows. In a similar way, to check these logs the reader could perform \cmd{docker-compose logs -f <NAME>} where the argument \cmd{<NAME>} is optional and when is not provided \cmd{docker-compose} will show these logs for all containers; this is also shown in picture \ref{fig:docker_containers}.
+So cloning the project and navigating to \cmd{src/fiware/} folder in the terminal, the reader will have to perform \cmd{docker-compose up -d} to deploy all containers and stay detached from the logs output. Once this has been done, performing \cmd{docker ps -a} will show the status of deployed containers, as figure \ref{fig:docker_containers} shows. In a similar way, to check these logs the reader could perform \cmd{docker-compose logs -f <NAME>} where the argument \cmd{<NAME>} is optional and when it is not provided, \cmd{docker-compose} will show these logs for all containers; this is also shown in picture \ref{fig:docker_containers}.
 
 When these containers are properly deployed, it should be possible to send the HTTP requests, however, these must follow a precise order; 
 
@@ -1207,7 +1207,7 @@ When these containers are properly deployed, it should be possible to send the H
     EOF
   \end{lstlisting}
 
-  As example \ref{ej:provisioning_devices} shows, is mandatory to provide a \cmd{"device\_id"}, which must match the TTN device ID, an \cmd{"entity\_name"}\footnote{\cmd{LORA-N-0} is just a FIWARE internal identifier for the entity, so it can be chosen by the reader. In fact, When nodes, entities and subscriptions are created using the developed graphical user interface described in \ref{sssec:API_GUI} subsection, the \cmd{"entity\_name"} is the same than \cmd{"device\_id"}.} that will be used by Orion Context Broker to create the entity and also an \cmd{"username"} and \cmd{"application\_id"} that must match the application ID in TTN. Besides It will be needed the \cmd{"password"}, which can be obtained from the Application Overview in TTN website and the \cmd{"dev\_eui"}, \cmd{"app\_eui"} and \cmd{"application\_key"}, all of these ---related with the created device--- are available into TTN dashboard. This \cmd{POST} request is included in the \cmd{Postman} collection stored in this project repository; of course \myuline{the reader will need to replace the keys in the environment with their own}. 
+  As example \ref{ej:provisioning_devices} shows, is mandatory to provide a \cmd{"device\_id"}, which must match the TTN device ID, an \cmd{"entity\_name"}\footnote{\cmd{LORA-N-0} is just a FIWARE internal identifier for the entity, so it can be chosen by the reader. In fact, when nodes, entities and subscriptions are created using the developed graphical user interface described in \ref{sssec:API_GUI} subsection, the \cmd{"entity\_name"} is the same than \cmd{"device\_id"}.} that will be used by Orion Context Broker to create the entity and also an \cmd{"username"} and \cmd{"application\_id"} that must match the application ID in TTN. Besides, it will need the \cmd{"password"}, which can be obtained from the Application Overview in TTN website and the \cmd{"dev\_eui"}, \cmd{"app\_eui"} and \cmd{"application\_key"}, all of these ---related with the created device--- are available inside the TTN dashboard. This \cmd{POST} request is included in the \cmd{Postman} collection stored in this project repository; of course \myuline{the reader will need to replace the keys in the environment with their own}. 
 
   When a new device is created, \textbf{IoTagent-LoRaWAN} causes that \textbf{Orion Context Broker} creates a new entity. In fact this can be checked performing a \cmd{GET} HTTP request, 
 
@@ -1249,7 +1249,7 @@ When these containers are properly deployed, it should be possible to send the H
 
   Example \ref{ej:OrionCB_entities_Get} shows the response of that \cmd{GET} request when a new entity is created by Orion Context Broker.
 
-  \item Secondly, after having created the device and therefore the entity, the next thing to do is to create a subscription in order to Orion Context Broker notifies somewhere ---QuantumLeap in this case. In a similar way, to create this subscription the reader must perform a \cmd{POST} request against Orion Context Broker, as it is shown in example \ref{ej:OrionCB_subscription}, 
+  \item Secondly, after having created the device and therefore the entity, the next thing to do is to create a subscription so that the Orion Context Broker notifies somewhere ---QuantumLeap in this case. In a similar way, to create this subscription the reader must perform a \cmd{POST} request against Orion Context Broker, as it is shown in example \ref{ej:OrionCB_subscription}, 
   
   \begin{lstlisting}[%
     % float=ht,
@@ -1288,7 +1288,7 @@ When these containers are properly deployed, it should be possible to send the H
     EOF
   \end{lstlisting}
 
-  As the reader can see, for this subscription has been set up the \cmd{"url": "http://quantumleap:8668/v2/notify"} i.e. QuantumLeap will be notified at any change in the entity with \cmd{"id": "LORA-N-0"}. It is a good practice to check that all went as expected, so sending a \cmd{GET} request the response should be like example \ref{ej:OrionCB_subscriptions_get} 
+  As we can see, for this subscription the \cmd{"url": "http://quantumleap:8668/v2/notify"} has been set up, i.e. QuantumLeap will be notified at any change in the entity with \cmd{"id": "LORA-N-0"}. It is a good practice to check that all went as expected, so sending a \cmd{GET} request the response should be like example \ref{ej:OrionCB_subscriptions_get} 
 
   \begin{lstlisting}[%
     % float=ht,
@@ -1350,7 +1350,7 @@ When these containers are properly deployed, it should be possible to send the H
 Once these two steps have been successfully performed, the context data should be routed to the Crate database where it will persist. 
 
 \subsubsection{Grafana}\label{sssec:Grafana}
-Grafana is a powerful dashboard used at many scenarios in the software industry, it allows to monitor almost everything the reader can imagine; because of this, it is capable of acquiring the data from multiple sources. In this project will be used in order to monitor the context data along the time.
+Grafana is a powerful dashboard used at many scenarios in the software industry, it allows monitoring almost everything the reader can imagine; because of this, it is capable of acquiring the data from multiple sources. In this project it will be used in order to monitor the context data along the time.
 
 This web application can be accessed via \cmd{http://localhost:3000} in the web browser ---the file \cmd{docker-compose.yml} is already setup to expose that port and allow the user to connect Grafana in that way. The default credentials for the first access are \cmd{username: admin} and \cmd{password: admin}. Once the reader has accessed for a first time it is possible to modify those credentials or even create new users with different privileges.
 
@@ -1361,9 +1361,9 @@ This web application can be accessed via \cmd{http://localhost:3000} in the web 
   \label{fig:grafana_home}
 \end{figure}
 
-As the central panel in the home view indicates, there are two fundamental task that must be performed to get a detailed view of our context data: add a data source and set up a new dashboard.
+As the central panel in the home view indicates, there are two fundamental tasks that must be performed to get a detailed view of our context data: adding a data source and setting up a new dashboard.
 
-To add a new data source the reader can use the left sidebar or click where says \enquote{Add your first dada source} in the home view. CrateDB is PostgreSQL compatible, so it must be chosen a PostgreSQL database and fill the form with the data shown in figure \ref{fig:Grafana_add_datasource}
+To add a new data source the reader can use the left sidebar or click on \enquote{Add your first dada source} in the home view. CrateDB is PostgreSQL compatible, so a PostgreSQL database must be chosen, and the form filled with the data shown in figure \ref{fig:Grafana_add_datasource}
 
 \begin{figure}[ht]
   \centering
@@ -1372,7 +1372,7 @@ To add a new data source the reader can use the left sidebar or click where says
   \label{fig:Grafana_add_datasource}
 \end{figure}
 
-\enquote{Host} must be \cmd{crate:5432} because this is the port which grafana uses to queries under postgres protocol, this can be seen also in figure \ref{fig:docker_containers} another important credential is the \enquote{User} that must be \cmd{crate} with no password because CrateDB does not set anyone by default, \enquote{Database} can be set arbitrarily, and finally the \enquote{SSL} has to be disabled.
+\enquote{Host} must be \cmd{crate:5432} because this is the port which grafana uses to query under postgres protocol, this can be seen also in figure \ref{fig:docker_containers}, another important credential is the \enquote{User} that must be \cmd{crate} with no password because CrateDB does not set anyone by default, \enquote{Database} can be set arbitrarily, and finally the \enquote{SSL} has to be disabled.
 
 \begin{figure}[ht]
   \centering
@@ -1381,7 +1381,7 @@ To add a new data source the reader can use the left sidebar or click where says
   \label{fig:panel_setup}
 \end{figure}
 
-To get the panel plotting the context data stored in CrateDB, the reader must specify a query to retrieve the data from the database. This can be done in the \enquote{Query} tab below the graph shown in picture \ref{fig:panel_setup}, here the user could use the graphical interface or write the query manually by clicking on the pencil button at the right, so essentially the query should look as follows in example \ref{ej:CrateDB_query}
+To get the panel plotting the context data stored in CrateDB, the reader must specify a query to retrieve the data from the database. This can be done in the \enquote{Query} tab below the graph shown in picture \ref{fig:panel_setup}: here the user could use the graphical interface or write the query manually by clicking on the pencil button at the right, so essentially the query should look as follows in example \ref{ej:CrateDB_query}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -1398,7 +1398,7 @@ To get the panel plotting the context data stored in CrateDB, the reader must sp
   ORDER BY 1
 \end{lstlisting}
 
-The table name \cmd{mtatosioe.etloradevice} can be found inside CrateDB admin panel, which can be accessed in \cmd{http://localhost:4200/\#!/tables} from the web browser. So after clicking on \enquote{Apply} button on top right corner, the reader should have something similar to figure \ref{fig:final_panel}
+The table name \cmd{mtatosioe.etloradevice} can be found inside CrateDB admin panel, which can be accessed in \cmd{http://localhost:4200/\#!/tables} from the web browser. So after clicking on \enquote{Apply} at the top right corner, the reader should have something similar to figure \ref{fig:final_panel}
 
 \begin{figure}[ht]
   \centering
@@ -1407,12 +1407,12 @@ The table name \cmd{mtatosioe.etloradevice} can be found inside CrateDB admin pa
   \label{fig:final_panel}
 \end{figure}
 
-Grafana has a wide options set intended to monitor different kind of systems, it can plot data in variety of graphics and it allows export to csv format even, this can be useful for a more deep analysis using other technologies like, for instance, R, a well-known language widely used for statistical analysis.
+Grafana has a wide options set intended to monitor different kind of systems, it can plot data in a variety of graphics and it even allows exporting to csv format, this can be useful for a more deep analysis using other technologies like, for instance, R, a well-known language widely used for statistical analysis.
 
-Of course, this context data could have been acquired directly from CrateDB through some custom application developed specifically to this task, however this is beyond of the purpose of this project. Perhaps in a future, a feature like this could be implemented.
+Of course, this context data could have been acquired directly from CrateDB through some custom application developed specifically for this task, however this is beyond the purpose of this project. Perhaps in a future, a feature like this could be implemented.
 
 \subsubsection{FIWARE API Graphical User Interface}\label{sssec:API_GUI}
-Finally, to make user-friendly the FIWARE interaction seen in \hyperref[sssec:FIWARE]{FIWARE} subsection, this project also provide a simple and light \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/api-gui.py}{graphical user interface}. This graphical interface has been developed using the \cmd{tkinter} module in python, it requires also a few python modules that are specified in \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/pip_requirements.txt}{\cmd{/src/api-gui/pip\_requirements.txt}}, in fact the user should be able to install them by performing in a terminal the following command: \cmd{pip install -r pip\_requirements.txt}.
+Finally, to make the FIWARE interaction seen in \hyperref[sssec:FIWARE]{FIWARE} subsection user-friendly, this project also provides a simple and light \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/api-gui.py}{graphical user interface}. This graphical interface has been developed using the \cmd{tkinter} module in python, it requires also a few python modules that are specified in \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/pip_requirements.txt}{\cmd{/src/api-gui/pip\_requirements.txt}}. In fact the user should be able to install them by performing the following command in a terminal: \cmd{pip install -r pip\_requirements.txt}.
 
 When the requirements are satisfied and all docker containers are properly running\footnote{In a first place the GUI will retrieve the versions for Orion Context Broker, IoTagent-LoRaWAN and QuantumLeap, so if they are not running the GUI will not open.} the GUI can be run performing \cmd{./api-gui.py}; this should open the window shown by figure \ref{fig:GUI_app_keys}
 
@@ -1423,15 +1423,15 @@ When the requirements are satisfied and all docker containers are properly runni
   \label{fig:GUI_app_keys}
 \end{figure}
 
-To check Orion Context Broker, IoTagent-LoRaWAN and QuantumLeap versions running in the docker containers the reader has to click on \enquote{About} tab, however, this first shown tab ---\enquote{Application Keys}--- is the most important one because without complete all the required info won't be enabled the \enquote{Devices Management} tab. Actually this tab performs a series of checks regarding TTN keys. Following the same TTN requirements, 
+To check Orion Context Broker, IoTagent-LoRaWAN and QuantumLeap versions running in the docker containers the reader has to click on \enquote{About} tab, however, this first shown tab ---\enquote{Application Keys}--- is the most important one because without completing all the required info the \enquote{Devices Management} tab won't be enabled. Actually this tab performs a series of checks regarding TTN keys. Following the same TTN requirements, 
 
 \begin{itemize}
   \item TTN Application ID must be greater than 2 characters.
   \item TTN Application Access Key must starts with \cmd{ttn-account} string.
-  \item TTN Application EUI must be 16 characters long and be hexadecimal. 
+  \item TTN Application EUI must be 16 characters long and hexadecimal. 
 \end{itemize}
 
-When any of this requirements are not fulfilled the related label will turn red as figure \ref{fig:GUI_app_keys_fail} shows
+When any of these requirements are not fulfilled the related label will turn red as figure \ref{fig:GUI_app_keys_fail} shows
 
 \begin{figure}[ht]
   \centering
@@ -1440,9 +1440,9 @@ When any of this requirements are not fulfilled the related label will turn red 
   \label{fig:GUI_app_keys_fail}
 \end{figure}
 
-This information of course must match the one provided by TTN, actually the \enquote{TTN Application Acess Key} and \enquote{TTN Application EUI} are provided by TTN, however the \enquote{TTN Application ID} must be chosen by the user when a new application is created using the TTN web interface, but this ID must be unique and it must be at least 3 characters long, this is why the developed GUI follows the same criteria.
+This information of course must match the one provided by TTN. Actually the \enquote{TTN Application Acess Key} and \enquote{TTN Application EUI} are provided by TTN, however the \enquote{TTN Application ID} must be chosen by the user when a new application is created using the TTN web interface, but this ID must be unique and it must be at least 3 characters long. This is why the developed GUI follows the same criteria.
 
-When the keys are updated properly the labels over the text fields are also updated with the chosen values and the \enquote{Devices Management} tab is enabled. This tab provides a friendly-user interface to manage devices. In a similar way, this info will must be the same than info provided by TTN interface, so that as figure \ref{fig:device_management_tab}
+When the keys are updated properly the labels over the text fields are also updated with the chosen values and the \enquote{Devices Management} tab is enabled. This tab provides a user-friendly interface to manage devices. In a similar way, this info will must be the same than the info provided by TTN interface, so as in figure \ref{fig:device_management_tab}
 
 \begin{figure}[ht]
   \centering
@@ -1451,10 +1451,10 @@ When the keys are updated properly the labels over the text fields are also upda
   \label{fig:device_management_tab}
 \end{figure}
 
-This view allows the user to create and delete devices ---along with its entities and subscriptions--- nevertheless, the \enquote{Delete device and entities} button remains disabled until a device is chosen in the right list. In a similar way than \enquote{Applications Keys}, to add a new device to FIWARE deployed instance by docker, all keys must fullfil a set of minimum requirements; as it can be seen in picture \ref{fig:adding_dev}
+This view allows the user to create and delete devices ---along with its entities and subscriptions--- nevertheless, the \enquote{Delete device and entities} button remains disabled until a device is chosen in the right list. In a similar way than \enquote{Applications Keys}, to add a new device to the FIWARE instance deployed by docker, all keys must fullfil a set of minimum requirements; as it can be seen in picture \ref{fig:adding_dev}
 
 \begin{itemize}
-  \item Device entity and ID must be also unique and it has to be at least 3 characters long. Moreover, this ID must match the chosen ID in TTN interface when the device is created,
+  \item Device entity and ID must be also unique and it has to be at least 3 characters long. In fact, this ID must match the chosen ID in TTN interface when the device is created,
   \item Application Session Key must be 32 characters long and also an hexadecimal string.
   \item Device EUI has to be 16 characters long and again an hexadecimal string.
 \end{itemize}
@@ -1475,7 +1475,7 @@ These keys can be obtained from TTN as it can be seen in screenshot \ref{fig:dev
   \label{fig:about_tab}
 \end{figure}
 
-Finally, as indicated, the \enquote{About} tab shows the versions info as it can be seen in \ref{fig:about_tab}. The QuantumLeap version is specified in \cmd{docker-compose.yml} file as well as the CrateDB version, this is to ensure compatibility between QuantumLeap and CrateDB; however, Orion Context Broker and IoTagent-LoRaWAN versions are not specified so they should be always the latests, this is why could be helpful to retrieve them. 
+Finally, as indicated, the \enquote{About} tab shows the versions info as it can be seen in \ref{fig:about_tab}. The QuantumLeap version is specified in \cmd{docker-compose.yml} file as well as the CrateDB version, this is to ensure compatibility between QuantumLeap and CrateDB; however, Orion Context Broker and IoTagent-LoRaWAN versions are not specified so they should be always the latests, this is why retrieving them could be helpful. 
 
 \begin{figure}[ht]
   \centering
@@ -1484,11 +1484,11 @@ Finally, as indicated, the \enquote{About} tab shows the versions info as it can
   \label{fig:GUI_2nodes}
 \end{figure}
 
-As figure \ref{fig:GUI_2nodes} shows, once a node is created is added to the list, subscription and entity ID are useful to remove manually only a subscription or an entity by performing a manual \cmd{DELETE} request, in fact have been also included several \cmd{DELETE} requests in the attached Postman collection, however, when a node is deleted using this graphical interface button is also being removed its entity and its subscription.
+As figure \ref{fig:GUI_2nodes} shows, once a node is created it is added to the list, subscription and entity IDs are useful to remove manually only a subscription or an entity ---by performing a manual \cmd{DELETE} request, in fact several \cmd{DELETE} requests have been also included in the attached Postman collection, however, when a node is deleted using this graphical interface button its entity and its subscription are also being removed.
 
 \clearpage{\pagestyle{empty}\cleardoublepage}\thispagestyle{plain}  % Forces the next section to start in an odd page.
 \section{Proof of concept, deployment}
-Due to circumstances at early 2020, this section has been reduced, instead of test the system in a real production environment, this section will focus on summarize needed steps/stages to properly deploy the system. Although these steps are already separately detailed, this section tries to put them together to give a consistent and practical point of view.
+Due to inconvenient circumstances at early 2020, this section is not as long as initially planted, instead of testing the system in a real production environment, this section will focus on summarizing needed steps/stages to properly deploy the system. Although these steps are already separately detailed, this section tries to put them together to give a consistent and practical point of view.
 
 \begin{figure}[ht]
   \centering
@@ -1501,17 +1501,17 @@ Due to circumstances at early 2020, this section has been reduced, instead of te
 This process has been widely detailed in \ref{sssec:Gateway} subsection. The most important point on this stage is to ensure the systemd service is working properly and to retrieve the Gateway ID, which will be needed in the next stage.
 
 \subsection{TTN Stack}
-Then, the reader should follow the three steps described in subsection \ref{sssec:TTN_Stack}: Register a Gateway using its \enquote{Gateway ID}, Add an application and register a device for that application. This is the first step because the reader will need the security keys to two following stages:
+Then, the reader should follow the three steps described in subsection \ref{sssec:TTN_Stack}: register a Gateway using its \enquote{Gateway ID}, add an application and register a device for that application. This is the first step because the reader will need the security keys for the two following stages:
 
 \begin{itemize}
   \item Embed these keys in Arduino sketch. This sketch will require the \enquote{Application Session Key}, \enquote{Network Session Key} and \enquote{Device Address}.
   \item Use them to create devices, and subscriptions in FIWARE. To create the device ---and also its corresponding entity and subscription when using the designed graphical interface shown in \ref{sssec:API_GUI} subsection--- the IoTagent will require the \enquote{Application ID}, \enquote{Application Access Key}, \enquote{Device ID}, \enquote{Application EUI} and again \enquote{Application Session Key}.
 \end{itemize}
 
-We must remember also it is so important to choose the CayenneLPP as the payload decoder. So whether these keys are available in TTN platform, the process can continue.
+We must remember also that it is very important to choose the CayenneLPP as the payload decoder. So if these keys are available in TTN platform, the process can continue.
 
 \subsection{Customize the Arduino sketch for a specific device}
-As indicated, this sketch will need the \enquote{Application Session Key}, the \enquote{Network Session Key} and \textbf{\enquote{Device Address}}, this latter is the most important one, because several nodes chan use the same \enquote{Application Session Key} and \enquote{Network Session Key}, but \enquote{Device Address} must be unique ---it is in fact also provided by TTN and the reader can check that all newly created node has a different one in TTN platform. 
+As indicated, this sketch will need the \enquote{Application Session Key}, the \enquote{Network Session Key} and \textbf{\enquote{Device Address}}, this latter is the most important one, because several nodes can use the same \enquote{Application Session Key} and \enquote{Network Session Key}, but \enquote{Device Address} must be unique ---it is in fact also provided by TTN and the reader can check that every newly created node has a different one in TTN platform. 
 
 Of course, to be able to compile the sketch some dependencies must be satisfied, such as CayenneLPP, ArduinoJson and lmic-arduino libraries. Moreover, the \textbf{linear potentiometer has been replaced for a rotary potentiometer}, again due to circumstances in the moment when the project is developed.
 
@@ -1522,10 +1522,10 @@ Of course, to be able to compile the sketch some dependencies must be satisfied,
   \label{fig:prototype}
 \end{figure}
 
-It is important to note that analog pin 2 has been chosen the for analog signal acquisition. Besides the reader can check the status of the device in serial monitor, however, the reader may also note that serial monitor is setup at 115200 bits per second.
+It is important to note that analog pin 2 has been chosen the for analog signal acquisition. Besides, the reader can check the status of the device in the serial monitor, however, the reader may also note that serial monitor is setup at 115200 bits per second.
 
 \subsection{Deploy Docker containers}
-Once the hardware has been properly setup, the next step is deploy locally all Docker containers, so as indicated in \ref{sssec:FIWARE} subsection, using \cmd{docker-compose} is possible to do this easily. 
+Once the hardware has been properly setup, the next step is to deploy locally all Docker containers, as indicated in \ref{sssec:FIWARE} subsection. Using \cmd{docker-compose} this becomes an easy task. 
 
 This will deploy essentially the IoTagent-LoRaWAN, Orion CB, QuantumLeap and Grafana. The status of these containers can be checked performing \cmd{docker ps -a}.
 
@@ -1540,31 +1540,31 @@ When Docker containers are deployed, it should be possible to send HTTP requests
 \subsection{Grafana}
 Once any device (along its entity) and particularly its subscription are properly created, CrateDB should start journaling the context data, therefore next step is to add CrateDB as a data source in Grafana. 
 
-So if the data source is properly added, it should be possible to create a new panel into a new dashboard, setting up the proper query for that panel. Then, Grafana should start to plot the context data. (see \ref{sssec:Grafana} subsection for further details)
+So if the data source is properly added, it should be possible to create a new panel into a new dashboard, setting up the proper query for that panel. Then, Grafana should start to plot the context data (see \ref{sssec:Grafana} subsection for further details)
 
-Finally the system it would be completely deployed and journaling the context data, as it can be seen in figure \ref{fig:final_panel}.
+Finally the system would be completely deployed and journaling the context data, as it can be seen in figure \ref{fig:final_panel}.
 
 \clearpage{\pagestyle{empty}\cleardoublepage}\pagestyle{plain}  % Forces the next section to start in an odd page.
 \section{Conclusions}
 Finally there are a few considerations that could be done, 
 
 \begin{itemize}
-  \item A rotary potentiometer does work well enough as a proof of concept, but would have been more appropriate to have the expected linear potentiometer to try its sensibility, which is a good point in order to measure such little variations as produced in the stem diameter in a tree.
+  \item A rotary potentiometer does work well enough as a proof of concept, but it would have been more appropriate to have the expected linear potentiometer to try its sensitivity, which is a good point in order to measure such little variations as those produced in the stem diameter in a tree.
   \item The fact that the Raspberry Pi HAT uses a single channel chip (SX1276) has two important implications:
     \begin{itemize}
       \item In a first place, as indicated in its corresponding section, these kind of gateways are LoRaWAN compatible but not compliant. So it would be desirable to replace this HAT by another one, or simply to acquire a proper gateway for a production environment.
-      \item Secondly, Nodes cannot comunicate simultaneously with the gateway because it is listening to only one channel, so this is causing a time gap in data acquisition as it can be seen in the picture \ref{fig:times_gap}
+      \item Secondly, nodes cannot comunicate simultaneously with the gateway because it is listening to only one channel, so this is causing a time gap in data acquisition as it can be seen in picture \ref{fig:times_gap}
       \begin{figure}[ht]
         \centering
         \includegraphics[width=.9\textwidth]{../pictures/Grafana_times_gap.png}
-        \caption{Little gap between times caused by the single channel chip.}
+        \caption{Small gap between times caused by the single channel chip.}
         \label{fig:times_gap}
       \end{figure}
     \end{itemize}
-    \item End-nodes are being activated using ABP method, this method could not be as effective as OTAA method in the case that downlink packets were transmitted. This is why due to some security implications, frame counters must be reset for ABP devices every time they are shutdown for any circumstance. In particular when downlink packets are transmitted, could be necessary to reset the frame counter in the devices, so in this situation it would be interesting to consider swap to OTAA method. In fact, TTN offers the possibility to reset the frame counter in TTN console but this could be removed in a future.
-    \item Maybe the developed GUI could have handle also the context data plots, however this task is left as an objective to be addressed in future researches, so this is not considered as part of the project because Grafana is complete capable to handle this for now and perhaps forever because it is extremely powerful handling databases.
-    \item For a production environment it seems clear that Arduino devices should be encapsulated and the sensor (potentiometer) part must be improved; however this is not hard because of the wide offer for cases and power supply systems, this would lead a very compact device which could be also improved adding more sensor due to versatility of CayenneLPP encoding standard which allows to send multiple measurements of different sensors. 
-    \item Finally this project is a good candidate to replace expensive commercial and proprietary systems; so it likely keeps developing, depending on the needs of the researchers.
+    \item End-nodes are being activated using ABP method, this method could not be as effective as OTAA method in case that downlink packets were transmitted. This is why due to some security implications, frame counters must be reset for ABP devices every time they are shutdown for any circumstance. In particular when downlink packets are transmitted, reset the frame counter in the devices could be necessary, so in this situation swapping to OTAA method might be worth considering. In fact, TTN offers the possibility to reset the frame counter in TTN console but this could be removed in the future.
+    \item Maybe the developed GUI could have handled also the context data plots, however this task is left as an objective to be addressed in future researches, so this is not considered as part of the project because Grafana is completely capable to handle this for now and perhaps forever because it is extremely powerful handling databases.
+    \item For a production environment it seems clear that Arduino devices should be encapsulated and the sensor (potentiometer) part must be improved; however this is not hard because of the wide offer for cases and power supply systems. This would lead to a very compact device which could be also improved adding more sensors due to CayenneLPP encoding standard's versatility which allows sending multiple measurements of different sensors. 
+    \item Finally this project is a good candidate to replace expensive commercial and proprietary systems; it has potential to be developed further, depending on the needs of the researches.
 \end{itemize}
 
 \clearpage{\pagestyle{empty}\cleardoublepage}\pagestyle{myfancy} % Forces the next section to start in an odd page.
