@@ -2,10 +2,7 @@
 
 = LoRa-Arduino dendrometer
 
-[NOTE]
-====
-Main document can be found in link:docs/LaTex/Paper.pdf[Paper.pdf]
-====
+NOTE: Main document can be found in link:docs/LaTex/Paper.pdf[Paper.pdf]
 
 WARNING: WIP: At this moment I'm working on this project so you could find it incomplete.
 
