@@ -550,18 +550,18 @@ Para conseguir estos objetivos el proyecto se apoyará en tecnologías de hardwa
 
 \phantomsection\section*{Abstract}
 \addcontentsline{toc}{section}{Abstract}%
-This document gives a detailed description of this project, which is focused on researching possible low-cost alternatives for wireless dendrometry systems. Currently there are a lot of expensive and professional systems in the market, that's why this project is intended to reduce costs and increase the versatility, scalability and accessibility.
+This document gives a detailed description of this project, which is focused on researching possible low-cost alternatives for wireless dendrometry systems. Currently there are a lot of expensive and professional systems in the market, that is why this project is intended to reduce costs and increase the versatility, scalability and accessibility.
 
-In order to reach these objetives the project will be supported with free software technologies such as FIWARE\cite{FIWARE}, The Things Network\cite{TTN} and Python\cite{Python} or free hardware systems such as Arduino\cite{Arduino} and Raspberry Pi\cite{Raspberrypi}.
+In order to reach these objetives the project will be supported with free hardware technologies such as Arduino\cite{Arduino} and Raspberry Pi\cite{Raspberrypi} and free software or open source systems such as FIWARE\cite{FIWARE}, The Things Network\cite{TTN} and Python\cite{Python}.
 
 \clearpage{\pagestyle{empty}\cleardoublepage}
 \section{Introduction}\thispagestyle{plain}
-This project arises itself from a direct interaction with professionals inside forestry sector. The original idea was to give technical coverage for particular needs that professionals in this sector had to face off with. At this point it is easy to notice this solution will need to be a distributed one, due to high samples dispersion. As we can see, there are even remote techniques to predict this sample density/dispersion using remote methods which predicts between $157$-$170$ individuals per hectare\cite{ForestStandVol} (depending on the model used). 
+This project arises from a direct interaction with professionals inside forestry sector. The original idea was to give technical coverage for particular needs that professionals in this sector had to tackle with. At this point it is easy to notice this solution will need to be a distributed one, due to high samples dispersion. As we can see, there are even remote techniques to predict this sample density/dispersion using remote methods which predicts between $157$-$170$ individuals per hectare\cite{ForestStandVol} (depending on the model used). 
 
 So according to these sample size determination theories, a big size for samples and the need for a big wireless network of distributed devices is essential for a great resolution, since each device will correspond with an individual.
 
 \subsection{Internet of Things}
-This big wireless network of distributed devices, more or less, the definition of the IoT (Internet of Things) concept; according to the abstract in \cite{IoTOverview} IoT concept comes from an earlier one called M2M (Machine-to-Machine) communications. Although according to \cite[p.~1(71)]{IoTOverview} there is not an official definition for IoT concept yet, \cite[p.~2(920)]{IoTObjetives} defined it as:
+This big wireless network of distributed devices, more or less, the definition of the IoT (Internet of Things) concept; according to the abstract in \cite{IoTOverview} IoT concept comes from an earlier one called M2M (Machine-to-Machine) communications. Although according to \cite[p.~1(71)]{IoTOverview} there is not an official definition for the IoT concept yet, \cite[p.~2(920)]{IoTObjetives} defined it as:
 
 \begin{quoting}
   based on the traditional information carriers including the Internet, telecommunication  network  and  so  on,  Internet  of Things (IoT) is a network that interconnects ordinary physical  objects  with  the identifiable addresses  so that provides intelligent services.
@@ -569,7 +569,7 @@ This big wireless network of distributed devices, more or less, the definition o
 
 This, at least, covers a small part of what this project is intended to do: \enquote{Interconnect ordinary physical objects with the identifiable addresses} to provide intelligent services. These physical objects are in this case ordinary dendrometers.
 
-Over the years there have been analog and handled by hand dendrometers, thus data acquisition had to follow a manual process in the same way. This could become a time-intensive task because of the big size for this statistical population, as previously stated. Traditionally, one would need to go there and as part of the field work, take the whole sample data individual by individual.
+Over the years there have been analog and manual dendrometers, thus data acquisition had to follow a manual process in the same way. This could become a time-intensive task because of the big size for this statistical population, as previously stated. Traditionally, one would need to go there and as part of the field work, take the whole sample data individual by individual.
 
 \subsection{Dendrometry, a formal definition}
 The GEMET (General Multilingual Environmental Thesaurus) adopts the definition for \textit{dendrometry} from \cite{DictNaturalRes}:
@@ -578,16 +578,16 @@ The GEMET (General Multilingual Environmental Thesaurus) adopts the definition f
   The measuring of the diameter of standing trees from the ground with a dendrometer that can also be used to measure tree heights.
 \end{quoting}
 
-This one is a bit wide definition because nowadays most dendrometry researches are focused on stem diameter; however, at this point extending this project could be interesting to include also a heights measurement sensor; however, this could be an interesting research premise for future projects.
+This one is a rather wide definition because nowadays most dendrometry researches are focused on stem diameter; however, at this point extending this project could be interesting to include also a heights measurement sensor; however, this could be an interesting starting point for future projects.
 
-Many comercial dendrometry systems are available in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems. Consequently, one of the most important objectives in this project is to research about the possibility to get lower the costs of the whole system, since those professional systems are still expensive. This research is intended to get a cheaper system and make it accessible to everyone who wants to monitor the growth of one or more trees. 
+Many comercial dendrometry systems are available in the market, nevertheless more than single and manual dendrometers those are complex and professional distributed systems. Consequently, one of the most important objectives in this project is to research about the possibility to lower the costs of the whole system, since those professional systems are still expensive. This research is intended to get a cheaper system and make it accessible to everyone who wants to monitor the growth of one or more trees. 
 
 There are quite a few types of dendrometers but according to \cite{DendroResearch} \enquote{It is possible to define two broad categories of dendrometer: those that contact the stem and those that do not}. This project is focused on the former kind, so we are developing a \enquote{contact dendrometer} based on a linear potentiometer.
 
 \subsection{Objectives}
 As previously stated in the Abstract, the most important objective for this project is to research about the possibility to make this dendrometry system cheaper, more scalable and accessible.
 
-Forests are remote and large surface areas which will require long-range communication technologies to be controlled. That's why LoRa is the perfect wireless technology to achieve this, and these kind of automatic systems seem to be the proper solution to this hard and slow process. Hence IoT has much to contribute to this task. Forestry professionals could take advantage of these technologies to make this in an easier, cheaper and automated way. Hence this is the main purpose of this project.
+Forests are remote and large surface areas which will require long-range communication technologies to be controlled. That is why LoRa is the perfect wireless technology to achieve this, and this kind of automatic systems seems to be the proper solution to this hard and slow process. Hence IoT has much to contribute to this task. Forestry professionals could take advantage of these technologies to make this in an easier, cheaper and automated way. This is the main purpose of this project.
 
 \clearpage{\pagestyle{empty}\cleardoublepage}\thispagestyle{plain} % Forces the next section to start in an odd page.
 \section{System Architecture}
@@ -600,35 +600,35 @@ A simple block diagram is shown in figure \ref{fig:block_diagram}, this diagram 
   \label{fig:block_diagram}
 \end{figure}
 
-The following subsections will detail each of one. As we can see in figure \ref{fig:block_diagram}, the physical layer is made up of two main modules: the first one is an Arduino microcontroller with its LoRa interface and a linear potentiometer acting as a sensor ---this whole set is the IoT dendrometer--- and a second one consisting of a Raspberry Pi 3b+ with its LoRa interface to act as a gateway.
+The following subsections will detail each one. As we can see in figure \ref{fig:block_diagram}, the physical layer is made up of two main modules: the first one is an Arduino microcontroller with its LoRa interface and a linear potentiometer acting as a sensor ---this whole set is the IoT dendrometer--- and a second one consisting of a Raspberry Pi 3b+ with its LoRa interface to act as a gateway.
 
-Meanwhile, the abstract layer is made up of three software modules. TTN stack is a cloud server to retrieve LoRa packets from all existent gateways, FIWARE is a local application server to gather all this context data; and finally Grafana to plot the context data.
+On the other hand, the abstract layer is made up of three software modules. TTN stack is a cloud server to retrieve LoRa packets from all existing gateways, FIWARE is a local application server to gather all these context data; and finally Grafana to plot the context data.
 \subsection{Physical Layer}
 
 \subsubsection{Arduino, multipurpose microcontroller}
-Justifying the use of such an interesting platform as Arduino is not difficult. The adaptability is one of its strengths, therefore; it is able to acquire and process certain data coming from a set of sensors and manage it to send this via any plugged wireless network interface.
+Justifying the use of such an interesting platform as Arduino is not difficult. The adaptability is one of its strengths, therefore; it is able to acquire and process certain data coming from a set of sensors and manage it to send them via any plugged wireless network interface.
 
 With these constraints, an accessible and multipurpose platform to be the basis for the device design itself is needed; i.e. the core part of the dendrometer is an Arduino microcontroller.
 
-Since the idea is to produce a low-cost device in order to distribute a high number of them, it must be a simple design; that's why it consist only of three parts,
+Since the idea is to produce a low-cost device in order to distribute a high number of them, it must be a simple design; that is why it consist only of three parts,
 
 \begin{itemize}
-  \item \href{https://es.rs-online.com/web/p/products/0317780/}{Linear potentiometer:} which is the sensor itself due to it is directly in contact with the stem. In order to improve data acquisition it will be necessary to use a High Input Impedance Amplifier.
-  \item Arduino microcontroller: this is the core part for the device, it will be responsible to acquire linear potentiometer data and send it to a gateway through LoRa interface. 
-  \item LoRa interface: similar to other existing wireless interfaces, it is necessary to forward the sensor data to a concentrator (gateway). Usually and due to its complexity these kind of interfaces are integrated circuits which are mounted on a PCB in order to obtain a pluggable card/shield. 
+  \item \href{https://es.rs-online.com/web/p/products/0317780/}{Linear potentiometer:} which is the sensor itself since it is directly in contact with the stem. In order to improve data acquisition it will be necessary to use a High Input Impedance Amplifier.
+  \item Arduino microcontroller: this is the core part for the device, it will be responsible for acquiring the linear potentiometer data and sending it to a gateway through a LoRa interface.
+  \item LoRa interface: similar to other existing wireless interfaces, it is necessary to forward the sensor data to a concentrator (gateway). Usually and due to its complexity this kind of interfaces are integrated circuits which are mounted on a PCB in order to obtain a pluggable card/shield. 
 \end{itemize}
 
 % I need to use that \texorpdfstring{}{} for the left-side ToC in PDF viewers, because the ® cannot be rendered in there.
 \subsubsection{\texorpdfstring{LoRa\textsuperscript{\textregistered} (Lo{\normalfont\sffamily ng} Ra{\normalfont\sffamily nge})}{LoRa (Long Range)}}
-LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite[]{LoRaGeneral}. This is why some devices inside IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been pointed. So this low availability (of resources) along with their tendency to be distributed/scattered causes the need for a low-power consumption and a long-range telecommunication.
+LoRa is a \enquote{long-range, low-power, low-bitrate, wireless telecommunications system}\cite[]{LoRaGeneral}. This is why some devices inside the IoT paradigm tend to be economical and low-resources devices, in order to get them distributed/scattered, as it has been already pointed. So this low availability (of resources) along with their tendency to be distributed/scattered causes the need for a low-power consumption and a long-range telecommunication.
 
-In a more general sense, there is a wider concept to include all these kind of technologies which fullfil the IoT communication requirements, this is the \enquote{Low-Power Wide Area Networks} (LPWAN), so as claimed by \cite[]{LoRaGeneral}
+In a more general sense, there is a wider concept to include all these kind of technologies which fullfil the IoT communication requirements, this is the \enquote{Low-Power Wide Area Networks} (LPWAN), as claimed by \cite[]{LoRaGeneral}
 
 \begin{quoting}
   Colloquially  speaking,  an LPWAN is supposed to be to the IoT what WiFi was to consumer networking: offering radio coverage over a (very) large area by way of base stations and adapting transmission rates, transmission power, modulation, duty cycles, etc., such that end-devices incur a very low energy consumption due to their being connected.
 \end{quoting}
 
-It is important to note that when talking about \enquote{low-power consumption}, in many cases it is actually meaning battery-powered devices.
+It is important to note that when talking about \enquote{low-power consumption}, in many cases it actually means battery-powered devices.
 
 On the other hand, LoRa can commonly refer to two distinct layers; a physical layer (LoRa itself) and a MAC layer protocol (LoRaWAN). The physical layer, is a proprietary technology developed by Semtech, so it is not fully open. LoRaWAN, however, is a protocol built to use LoRa physical layer, it is intended for sensor networks, wherein those sensors exchange packets with some server with a \enquote{low data rate and relatively long time intervals (one transmission per hour or even days).}\cite[p.~9]{LoRaGeneral}. This particularly means that LoRaWAN protocol is perfect for the purpose of this project.  
 
@@ -642,14 +642,14 @@ On the other hand, LoRa can commonly refer to two distinct layers; a physical la
 In comparison with other common telecommunication technologies, LoRa uses lower bandwidth, but it reaches longer distances; a comparative diagram shows different wireless technologies in figure \ref{fig:LoraComparison}.
  
 \subsubsection{Raspberry Pi, a powerful microcomputer}
-As in the case of Arduino, Raspberry Pi provides a powerful platform, however in the case of a Raspberry Pi this platform is slightly more complex than for an Arduino.\footnote{There are various Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware perspective, Raspberry Pi implements a better one than Arduino, this also results on a higher cost; however, this hardware allows a Raspberry Pi to support a whole operating system; that's why these devices are usually called \textit{single-board computers}.
+As in the case of Arduino, Raspberry Pi provides a powerful platform, however in the case of a Raspberry Pi this platform is slightly more complex than for an Arduino.\footnote{There are various Arduino models, and maybe some of them could be able to support, for example, multiple kind of Real Time Operative Systems, but it is not the case of this project, wherein the Arduino role is just to act as a core for the nodes.} From the hardware perspective, Raspberry Pi implements a better one than Arduino, this also results on a higher cost; however, this hardware allows a Raspberry Pi to support a whole operating system; that is why these devices are usually called \textit{single-board computers}.
 
-A few of interesting hardware specs are for instance, a \textit{Broadcom BCM2837B0, Cortex-A53 (ARMv8) 64-bit SoC @ 1.4GHz} as its CPU, \textit{1GB LPDDR2 SDRAM}, \textit{Gigabit Ethernet over USB 2.0 (maximum throughput 300 Mbps)} or even an \textit{Extended 40-pin GPIO header} among others.\cite{RPiSpecs}
+A few interesting hardware specs are for instance, a \textit{Broadcom BCM2837B0, Cortex-A53 (ARMv8) 64-bit SoC @ 1.4GHz} as its CPU, \textit{1GB LPDDR2 SDRAM}, \textit{Gigabit Ethernet over USB 2.0 (maximum throughput 300 Mbps)} or even an \textit{Extended 40-pin GPIO header} among others.\cite{RPiSpecs}
 
-The role for Raspberry Pi in this project is to act like a gateway, receiving all the data from different nodes. So in order to perform this task correctly it is necessary to provide a LoRa interface, which is also embedded (as in Arduino) in a separate pluggable shield/card/hat.
+The role of the Raspberry Pi in this project is to act like a gateway, receiving all data from different nodes. So in order to perform this task correctly it is necessary to provide a LoRa interface, which is also embedded (as in Arduino) in a separate pluggable shield/card/hat.
 
 \subsubsection{Dragino shields/hats}\label{sssec:DraginoShields}
-These shields/expansion cards are necessary because those devices (Arduino and Raspberry Pi) do not have the ability to comunicate through LoRa physical layer, that's why they need a physical interface in order to manage those LoRa packets. Both shields are based on the SX1276/SX1278 transceiver. However the Raspberry Pi hat also has a L80 GPS interface (Base on MTK MT3339), while Arduino does not.
+These shields/expansion cards are necessary because those devices (Arduino and Raspberry Pi) do not have the ability to comunicate through LoRa physical layer, that is why they need a physical interface in order to manage those LoRa packets. Both shields are based on the SX1276/SX1278 transceiver. However the Raspberry Pi hat also has a L80 GPS interface (Base on MTK MT3339), while Arduino does not.
 
 This project is using the following models: 
 
@@ -663,7 +663,7 @@ This project is using the following models:
 \subsubsection{The Things Network}
 TTN provides a backend system to route the traffic between devices and applications. It is basically a network server placed between gateways and applications servers. It is necessary because LoRaWAN is a non-IP protocol, but a MAC layer protocol and does need some form of routing and processing messages before they can reach the application side. TTN takes care of these steps.
 
-Moreover, this project is based on FIWARE (described in the next subsection) and the LoRaWAN agent in FIWARE is developed to interact with TTN infrastructure, 
+Moreover, this project is based on FIWARE (described in the next subsection) and the LoRaWAN agent in FIWARE is developed to interact with the TTN infrastructure, 
 
 \begin{figure}[ht]
   \centering
@@ -672,7 +672,7 @@ Moreover, this project is based on FIWARE (described in the next subsection) and
   \label{fig:TTN_overview}
 \end{figure}
 
-End-node devices broadcast LoRaWAN packets over LoRa radio protocol to the gateways, these gateways will forward these packets to the TTN backend, where a software module called Router will manage the gateway status and schedule transmissions. These routers are connected to other software modules called Brokers, that are responsible for mapping a device to an application ---into TTN environment--- allowing downlink and uplink transmissions. Once these uplink transmissions are inside TTN environment, the FIWARE LoRaWAN agent will retrieve them, however this is actually the application server shown in figure \ref{fig:TTN_overview}. \enquote{The goal of The Things Network is to be very flexible in terms of deployment options.} \cite{TTN_net_arch}. As explained in the docs, TTN infrastructure provides different \enquote{core functions} divided in four main groups:
+End-node devices broadcast LoRaWAN packets over LoRa radio protocol to the gateways, these gateways will forward these packets to the TTN backend, where a software module called Router will manage the gateway status and schedule transmissions. These routers are connected to other software modules called Brokers, that are responsible for mapping a device to an application ---into TTN environment--- allowing downlink and uplink transmissions. Once these uplink transmissions are inside TTN environment, the FIWARE LoRaWAN agent will retrieve them, however this is actually the application server shown in figure \ref{fig:TTN_overview}. \enquote{The goal of The Things Network is to be very flexible in terms of deployment options.} \cite{TTN_net_arch}. As explained in the documentation, TTN infrastructure provides different \enquote{core functions} divided in four main groups:
 
 \begin{itemize}
   \item Gateway-related functions, in order to schedule and manage the gateways.
@@ -681,27 +681,27 @@ End-node devices broadcast LoRaWAN packets over LoRa radio protocol to the gatew
   \item Service discovery functionality, which helps components to determine where traffic should be routed to. 
 \end{itemize}
 
-After this, the traffic is routed to FIWARE side, which is deployed locally and the user has total control over it.
+After this, the traffic is routed to the FIWARE side, which is deployed locally and the user has total control over it.
 
 \subsubsection{FIWARE}
-FIWARE is defined as \enquote{The Open Source Platform for Our Smart Digital Future}\cite{FIWARE}; in a deeper sense it is \enquote{an open source initiative defending an universal set of standards for context data management}\cite{FIWARE}, which basically means that \textit{FIWARE} is an open source platform where IoT and smart solutions can be developed. The platform provides a number of software modules called \textit{Generic Enablers}; among all those \textit{Generic Enablers} there is one particularly important called \textit{Orion Context Broker}. In fact, for a solution to be considered as \textit{Powered by FIWARE} it must to use the \textit{Orion Context Broker} at least. 
+FIWARE is defined as \enquote{The Open Source Platform for Our Smart Digital Future}\cite{FIWARE}; in a deeper sense it is \enquote{an open source initiative defending an universal set of standards for context data management}\cite{FIWARE}, which basically means that \textit{FIWARE} is an open source platform where IoT and smart solutions can be developed. The platform provides a number of software modules called \textit{Generic Enablers}; among all those \textit{Generic Enablers} there is one particularly important called \textit{Orion Context Broker}. In fact, for a solution to be considered as \textit{Powered by FIWARE} it must at least use the \textit{Orion Context Broker}. 
 
-This \textit{Context data} is just a way to name any kind of data coming from any kind of sensor. \textit{Orion Context Broker} is designed to manage this context data through concepts such as \textit{subscriptions} or \textit{entities}, to name but a few; however, all these \textit{Generics Enablers} communicate with each other using the \textit{FIWARE NGSI RESTful API}\cite{NGSI}.\footnote{\textit{RESTful} term comes from the software architectural style \textit{REST}, which stands for \textit{Representational State Transfer}}
+This \textit{Context data} is just a way to name any kind of data coming from any kind of sensor. \textit{Orion Context Broker} is designed to manage this context data through concepts such as \textit{subscriptions} or \textit{entities}, to name a few; however, all these \textit{Generics Enablers} communicate with each other using the \textit{FIWARE NGSI RESTful API}\cite{NGSI}.\footnote{\textit{RESTful} term comes from the software architectural style \textit{REST}, which stands for \textit{Representational State Transfer}}
 
 \subsubsection{Simple Graphical Interface}
 Despite FIWARE is a powerful platform, we cannot consider it to be user-friendly. This is why at the end of this document ---\ref{sssec:API_GUI} subsection--- a simple graphical interface developed to manage end-nodes in FIWARE side is described. As it will be indicated, this graphical interface has been developed using python and its \cmd{tkinter} module intended to build graphical interfaces.
 
 There are a lot of HTTP clients available, however the reader would still be forced to make these HTTP requests manually, and these could add complexity for a non advanced user, hence the need to develop a graphical interface.
 
-It's not perfect, it could be improved in a future, but is by the moment an appropriate way to manage devices, entities and subscriptions in locally deployed FIWARE instance. \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/api-gui.py}{The code} of this graphical interface is available in the project repository at GitHub.
+This graphical interface is a simple solution that could be clearly improved in the future, but is by the moment an appropriate way to manage devices, entities and subscriptions in locally deployed FIWARE instance. \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/api-gui/api-gui.py}{The code} of this graphical interface is available in the project repository at GitHub.
 
 \clearpage{\pagestyle{empty}\cleardoublepage}\thispagestyle{plain} % Forces the next section to start in an odd page.
 \section{Design}\thispagestyle{plain}
-Like in the Introduction, the most proper way to present this technical description is to differentiate between software and hardware parts. However, it is still interesting to present a simple and general diagram for the designed solution. This can be seen at figure \ref{fig:GenView}. 
+As in the Introduction, the most proper way to present this technical description is to differentiate between software and hardware parts. However, it is still interesting to present a simple and general diagram for the designed solution. This diagram can be seen in figure \ref{fig:GenView}. 
 
-Firstly the TTN stack send through MQTT protocol the payload to FIWARE IoTagent-LoRaWAN generic enabler. Secondly, FIWARE generic enablers process that payload and store the contained information (also called \textit{context data}) along with a timestamp in the persisting data base (CrateDB). After this, the context data can be visualized in a web view provided by Grafena. 
+Firstly the TTN stack sends through MQTT protocol the payload to the FIWARE IoTagent-LoRaWAN generic enabler. Secondly, FIWARE generic enablers process that payload and store the contained information (also called \textit{context data}) along with a timestamp in the persisting data base (CrateDB). After this, the context data can be visualized in a web view provided by Grafana. 
 
-At this moment this solution requires to send manually the HTTP requests in order to communicate with FIWARE generic enablers manually. The ideal situation would be to develop a desktop or web application capable to provide any kind of graphical user interface to easily set up the two most important requirements to get the solution working as intended ---create a new device using the IoTagent-LoRaWAN, create a subscription in Orion Context Broker which sends notifications to QuantumLeap.
+Out of the box, this solution requires to manually send the HTTP requests in order to communicate with FIWARE generic enablers. However, the ideal situation would be to develop a desktop or web application capable of providing any kind of graphical user interface to easily set up the two most important requirements to get the solution working as intended: create a new device in the IoTagent-LoRaWAN and create a subscription in Orion Context Broker which sends notifications to QuantumLeap. This graphical interface will be described later.
 
 \begin{figure}[htp]
   \centering
@@ -713,7 +713,7 @@ At this moment this solution requires to send manually the HTTP requests in orde
 \subsection{Hardware}
 
 \subsubsection{Nodes}
-Nodes are the parts of the system in direct contact with trees themselves (one node per tree). Some essential features in those devices are: low-cost, low-powered, wireless communication and small size. Figure \ref{fig:NodeDiag} shows a diagram of its most relevant parts:
+Nodes are the parts of the system in direct contact with trees themselves (one node per tree). Some essential features of those devices are: low-cost, low-powered, wireless communication and small size. Figure \ref{fig:NodeDiag} shows a diagram of their most relevant parts:
 
 \begin{figure}[htp]
   \centering
@@ -728,16 +728,16 @@ This diagram shows three different parts:
   \item A linear potentiometer, ideally an \href{https://docs.rs-online.com/37bf/0900766b814f0bd0.pdf}{RS Pro Conductive Polymer
   Potentiometer for Automotive Applications}%, however, by circumstances is not possible to use it and in order to perform a kind of proof of concept, this project will implement a regular rotary potentiometer.
   \item A signal conditioning stage, which is needed in order to improve the quality of the voltage signal produced by the potentiometer.
-  \item Arduino + Dragino LoRa Shield; of course it is necessary to schedule data transmission and acquisition, as well as transmitting them using the LoRa physical layer and LoRaWAN protocol. An Arduino-like microcontroller is perfect for this purpose.
+  \item Arduino + Dragino LoRa Shield; of course it is necessary to schedule data transmission and acquisition, as well as to transmit them using the LoRa physical layer and LoRaWAN protocol. An Arduino-like microcontroller is perfect for this purpose.
 \end{itemize}
 
 \subsubsubsection{Linear Potentiometer}
-As said, ideally this potentiometer should be linear with $5\ \si{\kilo\ohm}$ of maximum resistance, however, in order to improve its performance, it's recommended to use it as a voltage divider; also it would be convenient to buffer the resulting output with a high impedance amplifier, that's why the figure \ref{fig:NodeDiag} includes a signal conditioning stage, which will be described below.
+As said, ideally this potentiometer should be linear with $5\ \si{\kilo\ohm}$ of maximum resistance, however, in order to improve its performance, it is recommended to use it as a voltage divider; also it would be convenient to buffer the resulting output with a high impedance amplifier, that is why figure \ref{fig:NodeDiag} includes a signal conditioning stage, which will be described below.
 
 \subsubsubsection{Signal conditioning}
-This stage is focused on improving the signal acquisition. According to this potentiometer specifications, the best way to achieve this objetive is using a high input amplifier, in fact, a single-supply, rail-to-rail operational amplifier is the best option. \doubt{Figure \ref{fig:SignalCond} shows a possible schematics for this stage.}
+This stage is focused on improving the signal acquisition. According to this potentiometer specifications, the best way to achieve this objetive is using a high input amplifier, in fact, a single-supply, rail-to-rail operational amplifier is the best option. Figure \ref{fig:SignalCond} shows a possible schematics for this stage.
 
-It is also recommended by the manufacturer to use the potentiometer as a voltage divider instead of a variable resistor, this is we use the Arduino power source, particularly the 5 \si{\volt} and GND pins.
+It is also recommended by the manufacturer to use the potentiometer as a voltage divider instead of a variable resistor, this is the reason why we use the Arduino power source, particularly the 5 \si{\volt} and GND pins.
 
 \begin{figure}[htp]
   \centering
@@ -747,7 +747,7 @@ It is also recommended by the manufacturer to use the potentiometer as a voltage
 \end{figure}
 
 \subsubsubsection{Arduino}
-In a first place, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino}{the sketch} can be found in \cmd{src/dendro/dendro.ino} path. This is the sketch that must be uploaded to Arduino microcontroller. MEGA 2560 in this case.
+In a first place, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino}{the sketch} can be found in \cmd{src/dendro/dendro.ino} path. This is the sketch that must be uploaded to the Arduino microcontroller. A MEGA 2560 in this case.
 
 On the other hand, for this sketch to use the plugged LoRa Shield, it is required to base it on the LoRaMAC-in-C library \cite{MCCI_lmic} (\cmd{arduino-lmic})\footnote{Dragino has its own \href{https://github.com/dragino/arduino-lmic}{fork of this library} but has been considered less upgraded than the MCCI version, which is a fork itself from the first port of LMIC library by \href{https://github.com/matthijskooijman}{Matthijs Kooijman}.} implemented by \href{https://mcci.com/}{MCCI}, whose technical documentation can be found in \cite{MCCI_lmic_docs}. The \cmd{arduino-lmic} library is, as its description in the README.md says, a port from the IBM LoRaWAN MAC in C, but \enquote{slightly modified to run in the Arduino environment allowing using the SX1272, SX1276 transceivers and compatible modules} \cite{MCCI_lmic}. The original IBM LoRaWAN MAC in C library was developed for microcontrollers in general, their examples and HAL ---Hardware Abstraction Layer or rather Hardware Annotation Library--- were only for STM32 MCUs (but bare-metal, so no Arduino on top). 
 
@@ -755,7 +755,7 @@ There is an \textit{Arduino-like wrapper} library called \href{https://github.co
 
 Basically the sketch is based on the \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino}{ttn-abp example}, as the reader can see in the first comment block; that example sends a LoRaWAN valid package with the payload \enquote{Hello World!}. Besides it uses the ABP (Activation-by-personalization) method ---in opposition to OTAA (Over-the-air-activation) method---, depending on the used method it is necessary to include different security keys provided by The Things Network stack (TTN stack) in the code \cite{TTN_Security}. \textbf{It is important to note that frame counters in TTN console must be reset every time the device is reset, powered off or flashed again} \cite{TTN_frame_counters}.
 
-As commented \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino#L29}{lines 29 and 30} point, the most important thing before start working on the sketch is to configure the \cmd{arduino-lmic} library, so after installing the library with the library manager ---in the Arduino IDE or any other chosen IDE, the reader will need go to the library path and locate the \href{https://github.com/mcci-catena/arduino-lmic/blob/master/project_config/lmic_project_config.h}{\cmd{<lib\_path>/project\_config/lmic\_project\_config.h}} file to ensure the line 2 (\cmd{\#define CFG\_eu868 1}) is \textbf{uncommented} and the line 3 (\cmd{\#define CFG\_us915 1}) is \textbf{commented}. This is to enable specific functions in the library for Europe region (where the radio regulations are slightly different than in other regions); so this \cmd{lmic\_project\_config.h} must look like in the example \ref{ej:lmic_project_config.h}
+As commented \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino#L29}{lines 29 and 30} point out, the most important thing before start working on the sketch is to configure the \cmd{arduino-lmic} library, so after installing the library with the library manager ---in the Arduino IDE or any other chosen IDE, the reader will need go to the library path and locate the \href{https://github.com/mcci-catena/arduino-lmic/blob/master/project_config/lmic_project_config.h}{\cmd{<lib\_path>/project\_config/lmic\_project\_config.h}} file to ensure the line 2 (\cmd{\#define CFG\_eu868 1}) is \textbf{uncommented} and line 3 (\cmd{\#define CFG\_us915 1}) is \textbf{commented}. This is necessary to enable specific functions in the library for the Europe region (where radio regulations are slightly different than in other regions); so this \cmd{lmic\_project\_config.h} must look like as in example \ref{ej:lmic_project_config.h}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -776,9 +776,9 @@ As commented \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examp
   //#define LMIC_USE_INTERRUPTS
 \end{lstlisting}
 
-After this, the sketch may use specific functions to perform radio transmissions in Europe region. This in fact, will have an impact in the \cmd{void setup()\{\}} function ---in the example sketch ttn-abp--- so lines between \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino#L232}{line 232} and line 254 will be executed when the library is configured for Europe region.
+After this, the sketch may use specific functions to perform radio transmissions in the Europe region. This in fact, will have an impact in the \cmd{void setup()\{\}} function ---in the example sketch ttn-abp--- so lines between \href{https://github.com/mcci-catena/arduino-lmic/blob/master/examples/ttn-abp/ttn-abp.ino#L232}{line 232} and line 254 will be executed when the library is configured for the Europe region.
 
-Once the library has been properly configured, the second most important thing is setting the pin mapping for the chip. According to the \href{https://github.com/mcci-catena/arduino-lmic#pin-mapping}{Pin Mapping section} in the \cmd{README.md}, \enquote{a variety of configurations are possible}. Then, the most appropriate way to make the pin mapping is following the Dragino indications, so following the figure \ref{fig:Ard_LoRa_Shield_pin_mapping} ---which can also be found in \href{http://wiki.dragino.com/index.php?title=Lora_Shield#Pin_Mapping_and_Unused_Pins}{Dragino documentation}.
+Once the library has been properly configured, the second most important thing is setting the pin mapping for the chip. According to the \href{https://github.com/mcci-catena/arduino-lmic#pin-mapping}{Pin Mapping section} in the \cmd{README.md}, \enquote{a variety of configurations are possible}. Then, the most appropriate way to make the pin mapping is following the Dragino indications, so following figure \ref{fig:Ard_LoRa_Shield_pin_mapping} ---which can also be found in the \href{http://wiki.dragino.com/index.php?title=Lora_Shield#Pin_Mapping_and_Unused_Pins}{Dragino documentation}.
 
 \begin{figure}[ht]
   \centering
@@ -787,7 +787,7 @@ Once the library has been properly configured, the second most important thing i
   \label{fig:Ard_LoRa_Shield_pin_mapping}
 \end{figure}
 
-The reader can see the LoRa Chip reset pin is \cmd{D9} and as DIO pins ---Digital Input/Output--- the board has assigned \cmd{D2} to DIO0, \cmd{D6} to DIO1, \cmd{D7} to DIO2. Besides, a brand new board will only have loaded the \cmd{R9} resistor, this means the LoRa CS pin will be the \cmd{D10}. This leads to set the pin mapping shown in example \ref{ej:pin_mapping}
+The reader can see the LoRa Chip reset pin is \cmd{D9} and as DIO pins ---Digital Input/Output--- the board has assigned \cmd{D2} to DIO0, \cmd{D6} to DIO1, \cmd{D7} to DIO2. Besides, a brand new board will only have loaded the \cmd{R9} resistor, this means the LoRa CS pin will be the \cmd{D10}. This leads to the pin mapping shown in example \ref{ej:pin_mapping}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -805,9 +805,9 @@ The reader can see the LoRa Chip reset pin is \cmd{D9} and as DIO pins ---Digita
   };
 \end{lstlisting}
 
-On the other hand \enquote{Any pins that are not needed should be specified as \cmd{LMIC\_UNUSED\_PIN}} as it can be also read in the \href{https://github.com/mcci-catena/arduino-lmic#pin-mapping}{Pin Mapping section} of the library \cmd{README.md}. As the reader can see, the example \ref{ej:pin_mapping} starts at line 76, that is because this is the line where the pin mapping is placed in the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L76}{written sketch}.
+On the other hand \enquote{Any pins that are not needed should be specified as \cmd{LMIC\_UNUSED\_PIN}} as it can be also read in the \href{https://github.com/mcci-catena/arduino-lmic#pin-mapping}{Pin Mapping section} of the library \cmd{README.md}. As the reader can see, example \ref{ej:pin_mapping} starts at line 76, that is because this is the line where the pin mapping is placed in the \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L76}{written sketch}.
 
-With regards to LoRaWAN and TTN security, as previously indicated, the chosen method is ABP, so the \cmd{NWKSKEY} (Network Session Key), \cmd{APPSKEY} (Application Session Key) and \cmd{DEVADDR} (End-Device Address) are necessary; these constants placed at lines \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L48}{48}, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L52}{52} and \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L57}{57} must be obtained from TTN console as will be explained in \hyperref[sssec:TTN_Stack]{The Things Network Stack} subsection, so \textbf{please, refer to that subsection for further details}. The sketch also sets analog pin \cmd{A2} to acquire the sensor signal as it can be seen in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L70}{70}.% as well as the payload to send through LoRa interface in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L65}{65}
+With regards to LoRaWAN and TTN security, as previously indicated, the chosen method is ABP, so the \cmd{NWKSKEY} (Network Session Key), \cmd{APPSKEY} (Application Session Key) and \cmd{DEVADDR} (End-Device Address) are necessary; these constants placed at lines \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L48}{48}, \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L52}{52} and \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L57}{57} must be obtained from TTN console as will be explained in \hyperref[sssec:TTN_Stack]{The Things Network Stack} subsection, \textbf{Please, refer to that subsection for further details}. The sketch also sets analog pin \cmd{A2} to acquire the sensor signal as it can be seen in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L70}{70}.% as well as the payload to send through LoRa interface in line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L65}{65}
 
 \begin{lstlisting}[%
   % float=ht,
@@ -853,7 +853,7 @@ Finally, the reader can find the core of this sketch inside \cmd{void do\_send(o
   Serial.println(F("Packet queued"));
 \end{lstlisting}
 
-So, as it can be seen, in order to prepare the payload, firstly the sketch reads the analog pin and stores the read value in \cmd{potVal} variable ---which is a \cmd{double} type and this makes no difference with \cmd{float} type \enquote{On the Uno and other ATMEGA based boards} but it makes \enquote{On the Arduino Due} \cite{Ard_double_type}; after this, the function \cmd{lpp.reset()} is used to reset the CayenneLPP buffer, then the measure \cmd{potVal} is added to the CayenneLPP buffer in the first channel using the function \cmd{lpp.addAnalogInput()}. Finally the buffer content is prepared to be transmitted at the next possible time using the function \cmd{LMIC\_setTxData2()}. 
+So, as it can be seen, in order to prepare the payload, firstly the sketch reads the analog pin and stores the read value in \cmd{potVal} variable ---which is a \cmd{double} type and this makes no difference with \cmd{float} type \enquote{On the Uno and other ATMEGA based boards} but it does make \enquote{On the Arduino Due} \cite{Ard_double_type}; after this, the function \cmd{lpp.reset()} is used to reset the CayenneLPP buffer, then the measure \cmd{potVal} is added to the CayenneLPP buffer in the first channel using the function \cmd{lpp.addAnalogInput()}. Finally the buffer content is prepared to be transmitted at the next possible time using the function \cmd{LMIC\_setTxData2()}. 
 
 These \cmd{lpp.*()} functions are part of the CayenneLPP library \cite{CayenneLPP_lib} ---which is also dependent of ArduinoJson library \cite{ArduinoJson_lib}; in particular, the \cmd{lpp.addAnalogInput()} function encodes the raw value as a number encoded in 2 bytes (16 bits signed) with a unit of 0.01. In 16 bits signed it is possible to represent numbers from -32768 to 32767, so with a unit of 0.01, that amounts to a range from -327.68 to +327.67; that is because the sketch includes the line \href{https://github.com/WyRe/lora-arduino-dendrometer/blob/master/src/arduino/dendro/dendro.ino#L185}{185}, where the raw value \cmd{potVal} is scaled to a [0, 100.0] range. This range will fit in the range that can be encoded in CayenneLPP. 
 
@@ -879,7 +879,7 @@ It is also important to note that, as we will see in \hyperlink{Raspi_HAT}{2.1.2
   LMIC_setupChannel(8, 868800000, DR_RANGE_MAP(DR_FSK,  DR_FSK),  BAND_MILLI);  // g2-band
 \end{lstlisting}
 
-Because of what's been explained above, the gateway will just receive one package per each $\sim$10 minutes ---at line 74 in the sketch the transmission interval is set at 60 seconds, so as there are 9 channels but the gateway is just listening to channel 0, the microcontroller is transmitting at this channel once in 9 times---
+Because of what has been explained above, the gateway will just receive one package every $\sim$10 minutes ---at line 74 in the sketch the transmission interval is set at 60 seconds, so as there are 9 channels but the gateway is just listening to channel 0, the microcontroller is transmitting at this channel once in 9 times---
 
 \begin{lstlisting}[%
   % float=ht,
@@ -893,7 +893,7 @@ Because of what's been explained above, the gateway will just receive one packag
   const unsigned TX_INTERVAL = 60;
 \end{lstlisting}
 
-Of course this parameter can be adjusted, but for the final purpose of this project 60 seconds are even too many, in order to monitor changes in stem diameter of a tree, a more appropriate value would be 3600 seconds (1 hour) or even greater.  
+Of course this parameter can be adjusted, but for the final purpose of this project 60 seconds are even too little, in order to monitor changes in the stem diameter of a tree, and a more appropriate value would be 3600 seconds (1 hour) or even greater.  
 
 \subsubsection{Gateway}\label{sssec:Gateway}
 
@@ -913,20 +913,20 @@ This project is using the Recommended version for Raspberry Pi OS, nevertheless,
   \label{fig:RpiImager}
 \end{figure}
 
-Even so, independently of the installed version, the reader will be able to disable the graphical environment using the console based \cmd{raspi-config} application \cite{RaspiConf}. 
+Even so, regardless of the installed version, the reader will be able to disable the graphical environment using the console based \cmd{raspi-config} application \cite{RaspiConf}. 
 
 One of the first and most important configurations is the internet access; this can be done via two different ways, using the ethernet port (which does not require any extra configuration, just to plug the cable) or using the WiFi interface, which can be configured using also \cmd{raspi-config} \cite{RaspiWIFIcli}. Due to its versatility, there are multiple setup that could fulfil the requirements of this projects:
 
 \begin{itemize}
   \item \textbf{PoE} (Power-over-Ethernet); this is not actually a suitable option because Raspberry Pi does not support PoE by itself, it needs a \href{https://www.raspberrypi.org/products/poe-hat/}{separate HAT} using the GPIO connector, so this makes it impossible to use it along the LoRa HAT. Apparently there are hacks to reduce this HAT size, but they also use pins in the GPIO connector \cite{RaspiPoEHack}. Besides, this method only works with up to 100m cables, so it would be necessary to have a power source and internet access point within a 100m radius.\footnote{The \href{https://github.com/hallard/LoRasPI}{LoRasPI HAT} is more suitable for this option because does not cover whole GPIO connector, leaving free the GPIO pins used in \cite{RaspiPoEHack}.}
   \item \textbf{WiFi} and battery powered; this setup implies also the existence of a relatively close power source, because the access point used to provide that wireless network connection should work also with mains power. Probably the WiFi radio is not enough to make it the difference between this setup and the next one suggested.
-  \item Simple \textbf{ethernet} and mains power, this setup is similar to the previous one exposed, but omitting the WiFi limitations/configurations, the access point and the Raspberry Pi should be practically both at the same location.
-  \item \textbf{GSM module} and battery or mains powered; this document considers this as the ideal setup. This setup doesn't require a conventional access point because the internet access is granted through a GSM module, in a similar way than a mobile phone. This would be the ideal way because it minimizes the resources needed, which is crucial in an environment where those probably won't be available ---in the middle of the forest.
+  \item Simple \textbf{ethernet} and mains power, this setup is similar to the previous one, but omitting the WiFi limitations/configurations, the access point and the Raspberry Pi should be practically both at the same location.
+  \item \textbf{GSM module} and battery or mains powered; this document considers this as the ideal setup. This setup does not require a conventional access point because the internet access is granted through a GSM module, in a similar way than a mobile phone. This would be the ideal way because it minimizes the resources needed, which is crucial in an environment where those probably will not be available ---in the middle of the forest.
   
   Furthermore, this is apparently possible through two different options:
     \begin{itemize}
-      \item \href{https://www.itead.cc/wiki/RPI_SIM800_GSM/GPRS_ADD-ON_V2.0}{Itead Raspberry Pi GSM Board (SIM800)}. This is not the most interesting way, because although GPIO pins comes through, this does not mean the HAT supports \href{http://www.pi-in-the-sky.com/index.php?id=stacking-guide}{stacking}, and even if that does, it doesn't mean every other HAT would.
-      \item \href{https://tutorials-raspberrypi.com/raspberry-pi-gsm-module-mobile-internet-lte-3g-umts/}{USB GSM module}. This is apparently the most promising option. These kind of GSM modules are in general compliant with GNU/Linux systems and using a regular SIM card, they would be eventually able to provide an internet access point. Of course, this will also increment the size of the whole device.
+      \item \href{https://www.itead.cc/wiki/RPI_SIM800_GSM/GPRS_ADD-ON_V2.0}{Itead Raspberry Pi GSM Board (SIM800)}. This is not the most interesting way, because although GPIO pins comes through, this does not mean the HAT supports \href{http://www.pi-in-the-sky.com/index.php?id=stacking-guide}{stacking}, and even if that does, it does not mean every other HAT would.
+      \item \href{https://tutorials-raspberrypi.com/raspberry-pi-gsm-module-mobile-internet-lte-3g-umts/}{USB GSM module}. This is apparently the most promising option. This kind of GSM modules are in general compliant with GNU/Linux systems and using a regular SIM card, they would be eventually able to provide an internet access point. Of course, this will also increment the size of the whole device.
     \end{itemize}
 \end{itemize}
 
@@ -971,9 +971,9 @@ Once the remote control for Raspberry Pi through ssh is available, is possible t
 At this point and depending on the type of access point used to provide internet service to the Raspberry, the reader will be able to even remote control the Raspberry over internet. For this purpose it could be useful to read the access point documentation in order to perform port forwarding or alternatively \href{http://www.thirdway.ch/En/projects/raspberry_pi_3g/index.php}{a reverse tunnel over ssh} ---in the case the ISP does not allow ssh when using a GSM module, also the reader may find that IPv6 works but IPv4 does not. Anyway, as said the internet access point could be variable and it is not determined by this project.\footnote{The most important thing is to work comfortably with the Raspberry Pi with no HDMI, keyboard and mouse plugged, and this can be done locally in a LAN to configure it in a first place.}  
 
 \subsubsubsection{Dragino GPS and LoRa HAT}
-Gateways don't actually need a diagram or detailed description because there are multiple devices which could play this role. These usually are generic devices due to LoRaWAN protocol versatility. LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but actually acts as a network layer protocol for managing communication between gateways and nodes, similar to a routing protocol. So it is possible for any device which implements hardware for a LoRa physical layer, to act as a gateway.
+Gateways do not actually need a diagram or detailed description because there are multiple devices which could play this role. These are usually generic devices due to the LoRaWAN protocol versatility. LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but actually acts as a network layer protocol for managing communication between gateways and nodes, similar to a routing protocol. So it is possible for any device which implements hardware for a LoRa physical layer, to act as a gateway.
 
-Nevertheless, there are important considerations about the said above, for example, nodes are not actually associated with an specific gateway. Instead, data transmitted by a node is typically received by multiple gateways. Each gateway will forward the received packets from the end-node to the cloud-based network server. Besides, this project is using a Raspberry Pi 3B+ with a Dragino Hat which mounts a SX1276 LoRa \textbf{transceiver}\cite{SX1276}; this is so important because it means that, according to \textit{Semtech}, this transceiver is not intended to play a gateway role, but a end-node role.
+Nevertheless, there are important considerations about all this, for example, nodes are not actually associated with an specific gateway. Instead, data transmitted by a node is typically received by multiple gateways. Each gateway will forward the received packets from the end-node to the cloud-based network server. Besides, this project is using a Raspberry Pi 3B+ with a Dragino Hat which mounts a SX1276 LoRa \textbf{transceiver}\cite{SX1276}; this is so important because it means that, according to \textit{Semtech}, this transceiver is not intended to play a gateway role, but a end-node role.
 
 A transceiver, by definition, is a device that is able to both, transmit and receive (in fact, the word itself is a mix between both, \textbf{trans}miter and re\textbf{ceiver}) that is what a node must be able to do; i.e. transmit the sensor data (context) and receive data to perform operations with its actuators.
 
@@ -986,7 +986,7 @@ LoRaWAN defines ten channels, eight of which are multi data rate from 250bps to
 at 50kbps.
 \end{quoting}
 
-\hypertarget{Raspi_HAT}{Here} is the important point. This Dragino HAT for the Raspberry Pi, mounts an SX1276 transceiver, which is known as node-class transceiver, so in conclusion, \textbf{this Dragino LoRa GPS HAT is LoRaWAN compatible but isn't LoRaWAN compliant}. The main reason the SX1276 transceiver is not suitable to work as a gateway is that \textbf{it is actually a single channel transceiver}. Despite all of this, there still exists the possibility of using it as a gateway, because it is technically possible.
+\hypertarget{Raspi_HAT}{Here} is the important point. This Dragino HAT for the Raspberry Pi, mounts an SX1276 transceiver, which is known as node-class transceiver, so in conclusion, \textbf{this Dragino LoRa GPS HAT is LoRaWAN compatible but is not LoRaWAN compliant}. The main reason the SX1276 transceiver is not suitable to work as a gateway is that \textbf{it is actually a single channel transceiver}. Despite all of this, there still exists the possibility of using it as a gateway, because it is technically possible.
 
 
 Dragino foresees this and provides a dual channel controller \cite{Dragino_DualChannelController_Rpi}. The most important thing about this dual channel controller, is not the possibility to use the transceiver in a dual channel mode, but to use it as a gateway in the physical sense.
@@ -1063,11 +1063,11 @@ In order to obtain the gateway ID the reader will need to perform the following 
 
 So at the line 15 in the previous example \ref{ej:Running_DualChann_Controller}, the reader can see the Gateway ID, which wil be needed to connect this gateway to The Things Network stack. This ID is unique and it depends on the hardware.
 
-After having obtained the gateway ID (\cmd{b8:27:eb:ff:ff:1b:14:9b} for this Dragino HAT), the reader can proceed then to install the system service by performing \cmd{sudo make install}. As the content of \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/Makefile#L22}{\cmd{Makefile}} shows at the line 22, \cmd{sudo make install} will copy the system service \cmd{dual\_chan\_pkt\_fwd.service} to the path \cmd{/lib/systemd/system/} and it will enable it in order to start the service ---the service will start the controller as the reader can see at line 9 in \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/dual_chan_pkt_fwd.service#L9}{\cmd{dual\_chan\_pkt\_fwd.service}}--- at every system startup.\footnote{These kind of services are the way in which \cmd{systemd} manages the daemons running in background.} 
+After having obtained the gateway ID (\cmd{b8:27:eb:ff:ff:1b:14:9b} for this Dragino HAT), the reader can proceed to install the system service by performing \cmd{sudo make install}. As the content of \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/Makefile#L22}{\cmd{Makefile}} shows at the line 22, \cmd{sudo make install} will copy the system service \cmd{dual\_chan\_pkt\_fwd.service} to the path \cmd{/lib/systemd/system/} and it will enable it in order to start the service ---the service will start the controller as the reader can see at line 9 in \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/dual_chan_pkt_fwd.service#L9}{\cmd{dual\_chan\_pkt\_fwd.service}}--- at every system startup.\footnote{These kind of services are the way in which \cmd{systemd} manages the daemons running in background.} 
 
-The reader must be aware of the path where the \cmd{dual\_chan\_pkt\_fwd} binary is located, this is so important because the service \cmd{dual\_chan\_pkt\_fwd.service} is using the absolute path to run the \cmd{dual\_chan\_pkt\_fwd} binary; So this could result in an error if the binary is not properly located or service is not properly modified.
+The reader must be aware of the path where the \cmd{dual\_chan\_pkt\_fwd} binary is located, this is so important because the service \cmd{dual\_chan\_pkt\_fwd.service} is using the absolute path to run the \cmd{dual\_chan\_pkt\_fwd} binary. So this could result in an error if the binary is not properly located or the service is not properly modified.
 
-Once the service is installed and all these points have been checked, the reader will be able to manage the service to
+Once the service is installed and all these points have been checked, the reader will be able to manage the service to:
 
 \begin{itemize}
   \item start it with \cmd{sudo systemctl start dual\_chan\_pkt\_fwd.service}
@@ -1085,7 +1085,7 @@ These last two instructions show information about service status and \cmd{dual\
   \label{fig:dual_chan_pkt_fwd-status}
 \end{figure}
 
-As it can be seen, this service was modified in order to reach properly the \cmd{dual\_chan\_pkt\_fwd} binary, which is not located in \cmd{/home/pi/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd} (the default location defined for the binary in the \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/dual_chan_pkt_fwd.service#L9}{GitHub repository}); mainly because the user is not called \cmd{pi} anymore but \cmd{wyre}, the path needs to be modified to that path containing the binary (\cmd{/home/wyre/TFG/LoRa/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd})\footnote{This is a personal setup and is completely optional, the reader can choose their own path or even set up as suggested with \cmd{pi} user.}
+As it can be seen, this service was modified in order to properly reach the \cmd{dual\_chan\_pkt\_fwd} binary, which is not located in \cmd{/home/pi/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd} (the default location defined for the binary in the \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/dual_chan_pkt_fwd.service#L9}{GitHub repository}); mainly because the user is not called \cmd{pi} anymore but \cmd{wyre}, the path needs to be modified to that path containing the binary (\cmd{/home/wyre/TFG/LoRa/dual\_chan\_pkt\_fwd/dual\_chan\_pkt\_fwd})\footnote{This is a personal setup and is completely optional, the reader can choose their own path or even set up as suggested with \cmd{pi} user.}
 
 
 After this the Raspberry Pi is ready to forward LoRa packets to the \href{https://github.com/dragino/dual_chan_pkt_fwd/blob/master/global_conf.json#L33}{specified server at line 33 in \cmd{global\_conf.json}}. Besides, the reader will be able to manage the Raspberry Pi through ssh service, so the Raspberry only precises any kind of internet access point and electrical power supply.
@@ -1423,7 +1423,7 @@ When the requirements are satisfied and all docker containers are properly runni
   \label{fig:GUI_app_keys}
 \end{figure}
 
-To check Orion Context Broker, IoTagent-LoRaWAN and QuantumLeap versions running in the docker containers the reader has to click on \enquote{About} tab, however, this first shown tab ---\enquote{Application Keys}--- is the most important one because without completing all the required info the \enquote{Devices Management} tab won't be enabled. Actually this tab performs a series of checks regarding TTN keys. Following the same TTN requirements, 
+To check Orion Context Broker, IoTagent-LoRaWAN and QuantumLeap versions running in the docker containers the reader has to click on \enquote{About} tab, however, this first shown tab ---\enquote{Application Keys}--- is the most important one because without completing all the required info the \enquote{Devices Management} tab will not be enabled. Actually this tab performs a series of checks regarding TTN keys. Following the same TTN requirements, 
 
 \begin{itemize}
   \item TTN Application ID must be greater than 2 characters.
@@ -1459,7 +1459,7 @@ This view allows the user to create and delete devices ---along with its entitie
   \item Device EUI has to be 16 characters long and again an hexadecimal string.
 \end{itemize}
 
-These keys can be obtained from TTN as it can be seen in screenshot \ref{fig:dev_overview} ---this screenshot shows info about \cmd{node\_0}, though. We can see in picture \ref{fig:adding_dev}, that there was a problem with \enquote{Device EUI}, this was caused because the final \cmd{Z} letter in the string doesn't belong to hexadecimal characters set.
+These keys can be obtained from TTN as it can be seen in screenshot \ref{fig:dev_overview} ---this screenshot shows info about \cmd{node\_0}, though. We can see in picture \ref{fig:adding_dev}, that there was a problem with \enquote{Device EUI}, this was caused because the final \cmd{Z} letter in the string does not belong to hexadecimal characters set.
 
 \begin{figure}[htp]
   \centering
